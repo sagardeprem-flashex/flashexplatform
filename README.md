@@ -1,1 +1,3 @@
 # FlashEx-Platform
+
+Checking alerts
