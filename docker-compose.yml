@@ -1,0 +1,181 @@
+version: '3'
+services:
+  discovery-server:
+    build: common-ms/discovery-server
+    image: discovery-server:latest
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    env_file: 
+      - ./env-files/common.env
+
+  config-server:
+    build: common-ms/config-server
+    image: config-server:latest
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
+    env_file:
+      - ./env-files/common.env
+    depends_on:
+      - discovery-server
+
+  gateway:
+    build: common-ms/gateway
+    image: gateway:latest
+    expose:
+      - 8090
+    ports:
+      - 8090:8090
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  flashex-webapp:
+    build: common-ms/flashex-webapp
+    image: flashex-webapp:latest
+    expose:
+      - 4200
+    ports:
+      - 4200:4200
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  user-ms:
+    build: user-ms
+    image: user-ms:latest
+    expose:
+      - 6000
+    ports:
+      - 6000:6000
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  order-loadbalancer:
+    build: order-ms/order-loadbalancer
+    image: order-loadbalancer:latest
+    expose:
+      - 7010
+    ports:
+      - 7010:7010
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  order-webservice:
+    build: order-ms/order-web-service
+    image: order-webservice:latest
+    expose:
+      - 6010
+    ports:
+      - 6010:6010
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  order-workerservice:
+    build: order-ms/order-worker-service
+    image: order-workerservice:latest
+    expose:
+      - 5010
+    ports:
+      - 5010:5010
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  
+  tripplanning-loadbalancer:
+    build: tripplanning-ms/tripplanning-loadbalancer
+    image: tripplanning-loadbalancer:latest
+    expose:
+      - 7020
+    ports:
+      - 7020:7020
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  tripplanning-webservice:
+    build: tripplanning-ms/tripplanning-web-service
+    image: tripplanning-webservice:latest
+    expose:
+      - 6020
+    ports:
+      - 6020:6020
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  tripplanning-workerservice:
+    build: tripplanning-ms/tripplanning-worker-service
+    image: tripplanning-workerservice:latest
+    expose:
+      - 5020
+    ports:
+      - 5020:5020
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  
+  triptracking-loadbalancer:
+    build: triptracking-ms/triptracking-loadbalancer
+    image: triptracking-loadbalancer:latest
+    expose:
+      - 7030
+    ports:
+      - 7030:7030
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  triptracking-webservice:
+    build: triptracking-ms/triptracking-web-service
+    image: triptracking-webservice:latest
+    expose:
+      - 6030
+    ports:
+      - 6030:6030
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+
+  triptracking-workerservice:
+    build: triptracking-ms/triptracking-worker-service
+    image: triptracking-workerservice:latest
+    expose:
+      - 5030
+    ports:
+      - 5030:5030
+    env_file: 
+      - ./env-files/common.env
+    depends_on:
+      - config-server
+      - discovery-server

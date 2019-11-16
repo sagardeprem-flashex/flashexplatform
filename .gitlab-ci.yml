@@ -1,0 +1,113 @@
+variables:
+ KARMA: "
+  let defaultConfFile = './karma.conf';
+  const karmaConfig = require(defaultConfFile);
+  module.exports = function(overridedConfig) {
+    reporters = ['progress', 'junit'];
+    browsers = ['ChromeHeadless'];
+    customLaunchers = {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--remote-debugging-port=9222',
+          '--no-sandbox'
+        ],
+      }
+    };
+    junitReporter = {
+      outputDir:  'reports/karma/',
+      outputFile: 'karma-test-result.xml',
+      suite: '',
+      useBrowserName: false,
+    };
+    let mycfg = {
+      set(val) {
+        val.plugins = [
+          require('karma-jasmine'),
+          require('karma-chrome-launcher'),
+          require('karma-jasmine-html-reporter'),
+          require('karma-coverage-istanbul-reporter'),
+          require('@angular-devkit/build-angular/plugins/karma'),
+          require('karma-junit-reporter')
+        ];
+        val.reporters = reporters;
+        val.junitReporter = junitReporter;
+        val.browsers = browsers;
+        val.customLaunchers = customLaunchers;
+        val.singleRun = true;
+        val.browserDisconnectTolerance = 1;
+        val.browserNoActivityTimeout = 50000;
+        overridedConfig.set(val);
+      }
+    };
+    karmaConfig(mycfg);
+  }
+  "    
+stages:
+  - stage::build
+  - test
+  - lint
+
+build_mvn:
+  image: maven:3-jdk-11
+  stage: stage::build
+  script:
+    - cd common-ms
+    - mvn clean package
+  
+junit_java:
+  image: maven:3-jdk-11
+  stage: test
+  when: always
+  script:
+  - cd common-ms
+  - mvn test
+
+pmd_maven:
+  image: maven:3-jdk-11
+  stage: lint
+  when: always
+  script:
+  - cd common-ms
+  - mvn pmd:check
+#---------Angular Build
+build_app:
+  image: circleci/node:11-browsers
+  stage: stage::build
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - npm install
+#-----------Angular Test
+karma_unit_tests:
+  image: circleci/node:11-browsers
+  stage: test
+  when: always
+  before_script:
+    - echo $KARMA > ./karma.config.js
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - npm install
+    - npm install --save @angular/material @angular/cdk @angular/animations
+    - npm install --save karma-junit-reporter jasmine-reporters
+    - npm run test -- --watch=false --karma-config=karma.conf.js
+#--------Angular Lint
+tslint_app:
+  image: circleci/node:11-browsers
+  stage: lint
+  when: always
+  tags:
+    - flashex-ci-jobs
+  script:
+  #------go to the path
+    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - npm install
+    - npm run lint -- --format json
+
+
+
