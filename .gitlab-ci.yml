@@ -132,7 +132,7 @@ release_deploy:
         - ls -ltr
         - /bin/sh .gitlab-deploy.sh   
     environment:     
-        name: production     
+        name: release     
         url: http:/flashex-dev.stackroute.io
     when: on_success
     only: 
