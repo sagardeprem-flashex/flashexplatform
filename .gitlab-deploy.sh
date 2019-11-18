@@ -15,7 +15,7 @@ apt-get update && apt-get install -y openssh-client
 ## Rolling Update
 
 command="ls -ltr && \
- cd /home/devuser/flashexplatform && \
+ mkdir -p /home/devuser/flashexplatform && \
  cd /home/devuser && \
  rm -rf /home/devuser/flashexplatform && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
