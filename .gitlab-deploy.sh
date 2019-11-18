@@ -12,6 +12,7 @@ echo "Deploying project on server ${server} as ${user} from branch ${branch}"
 
 apt-get update && apt-get install -y openssh-client
 
+apt-get install -y gnupg2
 apt-get install \
     apt-transport-https \
     ca-certificates \
