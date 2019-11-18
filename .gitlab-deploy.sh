@@ -30,6 +30,7 @@ apt-get update && apt-get install -y openssh-client
 ## Rolling Update
 
 command="ls -ltr && \
+ service docker restart && \
  cd /home/ubuntu/flashexplatform && \
  cd /home/ubuntu && \
  rm -rf /home/ubuntu/flashexplatform && \
