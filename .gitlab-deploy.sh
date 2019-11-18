@@ -31,6 +31,7 @@ apt-get install docker-ce docker-ce-cli containerd.io
 ## Rolling Update
 
 command="ls -ltr && \
+ cd sm-user && \
  rm -rf flashexplatform && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
  cd flashexplatform && \
