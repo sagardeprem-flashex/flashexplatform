@@ -122,12 +122,12 @@ release_deploy:
     image: ubuntu:latest
     stage: release
     tags:
-        - flashex-ci-jobs
+      - flashex-ci-jobs
     services:
       - docker:dind
     before_script:
-      - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
-      - pip install docker-compose 
+        - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
+        - pip install docker-compose 
     #generate ssh key   
         - mkdir -p ~/.ssh     
         - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
