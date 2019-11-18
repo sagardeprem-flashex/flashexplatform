@@ -19,7 +19,7 @@ command="ls -ltr && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
  cd flashexplatform && \
  echo 'Deploying the Application' && \
- /usr/bin/docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
+ docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
  echo 'DONE DEPLOYING'"
 
 # command="ls -ltr && \
