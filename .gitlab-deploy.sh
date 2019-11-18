@@ -16,9 +16,21 @@ apt-get update && apt-get install -y openssh-client
 
 command="ls -ltr && \
  cd /home/devuser/flashexplatform && \
- git pull origin ${branch} && \
- docker-compose up --build -d --remove-orphans && \
+ cd /home/devuser && \
+ rm -rf /home/devuser/flashexplatform && \
+ git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
+ cd /home/devuser/flashexplatform && \
+ echo 'Deploying the Application' && \
+ docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
  echo 'DONE DEPLOYING'"
+
+# command="ls -ltr && \
+#  cd /home/devuser/flashexplatform && \
+#  git pull origin ${branch} && \
+#  docker-compose up --build -d --remove-orphans && \
+#  echo 'DONE DEPLOYING'"
+
+
 
 echo "About to run the command: " $command
 
