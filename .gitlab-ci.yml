@@ -45,10 +45,17 @@ variables:
     karmaConfig(mycfg);
   }
   "    
+
+cache:
+  paths:
+    - .m2/repository
+    - node_modules/
+
 stages:
   - stage::build
   - test
   - lint
+  - release
 
 build_mvn:
   image: maven:3-jdk-11
@@ -108,6 +115,24 @@ tslint_app:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
     - npm run lint -- --format json
-
-
-
+#--- Deployment on Release branch    
+release_deploy:
+    image: ubuntu:latest
+    stage: release
+    tags:
+        - flashex-ci-jobs
+    before_script: 
+    #generate ssh key   
+        - mkdir -p ~/.ssh     
+        - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
+        - chmod 600 ~/.ssh/id_rsa     
+        - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
+    script:     
+        - ls -ltr
+        - /bin/sh .gitlab-deploy.sh   
+    environment:     
+        name: production     
+        url: http:/flashex-dev.stackroute.io
+    when: on_success
+    only: 
+        - release_v0.1.0
