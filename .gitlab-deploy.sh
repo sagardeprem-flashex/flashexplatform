@@ -14,7 +14,7 @@ apt-get update && apt-get install -y openssh-client
 
 apt-get install -y gnupg2
 apt-get install -y curl
-apt-get install -y add-apt-repository
+dpkg -S add-apt-repository
 
 apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
