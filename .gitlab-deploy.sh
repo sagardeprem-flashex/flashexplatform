@@ -25,14 +25,17 @@ chmod +x /usr/local/bin/docker-compose
 
 ## Rolling Update
 
-command="ls -ltr /home && \
+command="ls -ltr && \
+ cd /home/ubuntu/flashexplatform && \
  cd /home/ubuntu && \
- rm -rf flashexplatform && \
+ rm -rf /home/ubuntu/flashexplatform && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
- cd flashexplatform && \
- echo 'Deploying the Application' && \
+ cd /home/ubuntu/flashexplatform && \
+ echo 'Deploying the Application' && ls && \
  docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
  echo 'DONE DEPLOYING'"
+
+
 
 # command="ls -ltr && \
 #  cd /home/devuser/flashexplatform && \
