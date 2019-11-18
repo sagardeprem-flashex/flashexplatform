@@ -15,6 +15,7 @@ apt-get update && apt-get install -y openssh-client
 ## Rolling Update
 
 command="ls -ltr && \
+ chmod u+w ~ && \
  mkdir -p /home/devuser/flashexplatform && \
  cd /home/devuser && \
  rm -rf /home/devuser/flashexplatform && \
