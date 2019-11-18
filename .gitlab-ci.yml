@@ -62,6 +62,8 @@ stages:
 build_mvn:
   image: maven:3-jdk-11
   stage: stage::build
+  tags:
+    - flashex-ci-jobs
   script:
     - cd common-ms
     - mvn clean package
@@ -69,6 +71,8 @@ build_mvn:
 junit_java:
   image: maven:3-jdk-11
   stage: test
+  tags:
+    - flashex-ci-jobs
   when: always
   script:
   - cd common-ms
@@ -77,6 +81,8 @@ junit_java:
 pmd_maven:
   image: maven:3-jdk-11
   stage: lint
+  tags:
+    - flashex-ci-jobs
   when: always
   script:
   - cd common-ms
