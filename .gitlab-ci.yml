@@ -56,6 +56,7 @@ stages:
   - test
   - lint
   - release
+  - production
 
 build_mvn:
   image: maven:3-jdk-11
