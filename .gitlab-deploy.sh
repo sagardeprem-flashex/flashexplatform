@@ -15,12 +15,9 @@ apt-get update && apt-get install -y openssh-client
 ## Rolling Update
 
 command="ls -ltr && \
- chmod u+w ~ && \
- mkdir -p /home/devuser/flashexplatform && \
- cd /home/devuser && \
- rm -rf /home/devuser/flashexplatform && \
+ rm -rf flashexplatform && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
- cd /home/devuser/flashexplatform && \
+ cd flashexplatform && \
  echo 'Deploying the Application' && \
  docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
  echo 'DONE DEPLOYING'"
