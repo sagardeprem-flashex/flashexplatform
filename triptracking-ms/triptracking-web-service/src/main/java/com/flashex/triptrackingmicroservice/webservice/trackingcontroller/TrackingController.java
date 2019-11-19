@@ -1,8 +1,6 @@
 package com.flashex.triptrackingmicroservice.webservice.trackingcontroller;
 
 import com.flashex.triptrackingmicroservice.lib.services.TrackingService;
-import com.flashex.triptrackingmicroservice.lib.model.TripsDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
