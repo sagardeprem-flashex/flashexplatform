@@ -1,6 +1,6 @@
 package com.flashex.triptrackingmicroservice.webservice.trackingcontroller;
 
-import com.flashex.triptrackingmicroservice.lib.services.TrackingService;
+import com.flashex.triptrackingmicroservice.lib.services.SampleService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("")
 public class TrackingController {
 
-    private TrackingService trackingService;
+    private SampleService sampleService;
 
-    public TrackingController(TrackingService trackingService) {
-        this.trackingService = trackingService;
+    public TrackingController(SampleService sampleService) {
+        this.sampleService = sampleService;
     }
 
 }
