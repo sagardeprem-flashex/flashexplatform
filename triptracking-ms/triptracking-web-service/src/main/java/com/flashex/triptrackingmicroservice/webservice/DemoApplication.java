@@ -1,6 +1,6 @@
 package com.flashex.triptrackingmicroservice.webservice;
 
-import com.flashex.triptrackingmicroservice.lib.services.SampleService;
+import com.flashex.triptrackingmicroservice.lib.services.TrackingService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DemoApplication {
 
-    private final SampleService sampleService;
+    private final TrackingService trackingService;
 
-    public DemoApplication(SampleService sampleService) {
-        this.sampleService = sampleService;
+    public DemoApplication(TrackingService trackingService) {
+        this.trackingService = trackingService;
     }
 
     @GetMapping("/home")
     public String home() {
-        return sampleService.message();
+        return trackingService.message();
     }
     @GetMapping("/")
     public String home1() {
