@@ -1,0 +1,85 @@
+[{
+        "tripItineraryId": 1,
+        "orders": [{
+                "orderId": 1,
+                "deliveryAddress": "Kormangala",
+                "deliveryLocation": {
+                    "lat": 12.9354504,
+                    "lng": 77.6146828
+                }
+            },
+            {
+                "orderId": 2,
+                "deliveryAddress": "Jayanagar",
+                "deliveryLocation": {
+                    "lat": 12.9292117,
+                    "lng": 77.5696453
+                }
+            },
+            {
+                "orderId": 3,
+                "deliveryAddress": "Silk Board",
+                "deliveryLocation": {
+                    "lat": 12.9344832,
+                    "lng": 77.5929685
+                }
+            }
+        ]
+    },
+    {
+        "tripItineraryId": 2,
+        "orders": [{
+                "orderId": 1,
+                "deliveryAddress": "Marathalli",
+                "deliveryLocation": {
+                    "lat": 12.9577129,
+                    "lng": 77.6764937
+                }
+            },
+            {
+                "orderId": 2,
+                "deliveryAddress": "Kadubeesanahalli",
+                "deliveryLocation": {
+                    "lat": 12.9393442,
+                    "lng": 77.6880849
+                }
+            },
+            {
+                "orderId": 3,
+                "deliveryAddress": "Bellandur",
+                "deliveryLocation": {
+                    "lat": 12.9322784,
+                    "lng": 77.6573238
+                }
+            }
+        ]
+    },
+    {
+        "tripItineraryId": 3,
+        "orders": [{
+                "orderId": 1,
+                "deliveryAddress": "Balagere",
+                "deliveryLocation": {
+                    "lat": 12.9384993,
+                    "lng": 77.7109698
+                }
+            },
+            {
+                "orderId": 2,
+                "deliveryAddress": "Jcr Layout",
+                "deliveryLocation": {
+                    "lat": 12.9325895,
+                    "lng": 77.7023506
+                }
+            },
+            {
+                "orderId": 3,
+                "deliveryAddress": "Silk Board",
+                "deliveryLocation": {
+                    "lat": 12.9344832,
+                    "lng": 77.5929685
+                }
+            }
+        ]
+    }
+]

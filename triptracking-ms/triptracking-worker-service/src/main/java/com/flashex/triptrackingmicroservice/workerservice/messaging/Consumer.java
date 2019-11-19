@@ -2,7 +2,7 @@ package com.flashex.triptrackingmicroservice.workerservice.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.triptrackingmicroservice.lib.model.TestClass;
+import com.flashex.triptrackingmicroservice.lib.model.TripsDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,6 +15,6 @@ public class Consumer {
     @KafkaListener(topics = "TripItinerary", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
-        logger.info(String.format("$$ -> Consumed Message -> %s",new ObjectMapper().readValue(message, TestClass.class)));
+        logger.info(String.format("$$ -> Consumed Message -> %s",new ObjectMapper().readValue(message, TripsDetails.class)));
     }
 }

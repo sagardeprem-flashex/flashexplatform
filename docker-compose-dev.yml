@@ -8,7 +8,7 @@ services:
     ports:
       - 8761:8761
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
 
   config-server:
     build: common-ms/config-server
@@ -18,7 +18,7 @@ services:
     ports:
       - 8888:8888
     env_file:
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - discovery-server
 
@@ -30,7 +30,7 @@ services:
     ports:
       - 8080:8080
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -43,7 +43,7 @@ services:
     ports:
       - 4200:4200
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -56,7 +56,7 @@ services:
     ports:
       - 6000:6000
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -69,7 +69,7 @@ services:
     ports:
       - 7010:7010
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -82,7 +82,7 @@ services:
     ports:
       - 6010:6010
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -95,7 +95,7 @@ services:
     ports:
       - 5010:5010
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -108,7 +108,7 @@ services:
     ports:
       - 7020:7020
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -121,7 +121,7 @@ services:
     ports:
       - 6020:6020
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -134,7 +134,7 @@ services:
     ports:
       - 5020:5020
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -148,7 +148,7 @@ services:
     ports:
       - 7030:7030
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -161,7 +161,7 @@ services:
     ports:
       - 6030:6030
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server
@@ -174,7 +174,7 @@ services:
     ports:
       - 5030:5030
     env_file: 
-      - ./env-files/production/common.env
+      - ./env-files/local/common.env
     depends_on:
       - config-server
       - discovery-server

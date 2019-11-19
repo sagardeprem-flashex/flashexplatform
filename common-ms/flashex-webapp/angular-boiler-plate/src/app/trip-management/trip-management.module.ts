@@ -6,6 +6,10 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { LiveTrackingComponent } from './components/live-tracking/live-tracking.component';
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { TripManagementRoutingModule } from './trip-management-routing.module';
+import { AgmCoreModule } from '@agm/core';
+import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../material/material.module';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 
@@ -13,7 +17,14 @@ import { TripManagementRoutingModule } from './trip-management-routing.module';
   declarations: [HomeComponent, TripDetailsComponent, OrderDetailsComponent, LiveTrackingComponent, VehicleDetailsComponent],
   imports: [
     CommonModule,
-    TripManagementRoutingModule
+    TripManagementRoutingModule,
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY'
+    }),
+    MaterialModule,
+    AgmDirectionModule
+
   ],
   exports: [HomeComponent, TripDetailsComponent, OrderDetailsComponent, LiveTrackingComponent, VehicleDetailsComponent]
 })
