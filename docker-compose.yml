@@ -100,7 +100,6 @@ services:
       - config-server
       - discovery-server
 
-  
   tripplanning-loadbalancer:
     build: tripplanning-ms/tripplanning-loadbalancer
     image: tripplanning-loadbalancer:latest
