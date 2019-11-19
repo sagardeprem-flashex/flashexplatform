@@ -1,15 +1,14 @@
 package com.flashex.triptrackingmicroservice.lib.services;
 
-import com.flashex.triptrackingmicroservice.lib.model.TripsDetails;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 @Service
 @EnableConfigurationProperties(ServiceProperties.class)
-public class TrackingService {
+public class SampleService {
     private final ServiceProperties serviceProperties;
 
-    public TrackingService(ServiceProperties serviceProperties) {
+    public SampleService(ServiceProperties serviceProperties) {
         this.serviceProperties = serviceProperties;
     }
 
