@@ -1,7 +1,7 @@
 package com.flashex.triptrackingmicroservice.workerservice.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.flashex.triptrackingmicroservice.lib.model.TestClass;
+import com.flashex.triptrackingmicroservice.lib.model.TripsDetails;
 import com.flashex.triptrackingmicroservice.workerservice.messaging.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +22,7 @@ public class SampleController {
     }
 
     @PostMapping(value = "/publishJSON")
-    public void sendMessageToKafkaTopicJSON(@RequestBody TestClass message) throws JsonProcessingException {
+    public void sendMessageToKafkaTopicJSON(@RequestBody TripsDetails message) throws JsonProcessingException {
         this.producer.sendMessageJSON(message);
     }
 }

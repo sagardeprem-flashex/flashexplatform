@@ -1,0 +1,58 @@
+[
+  {
+    "tripItineraryId": 1,
+    "orders": [{
+      "orderId": 1,
+      "deliveryAddress": "Kormangala",
+      "deliveryLocation": {
+        "lat": 12.9354504,
+        "lng": 77.6146828
+      }
+    },
+      {
+        "orderId": 2,
+        "deliveryAddress": "Jayanagar",
+        "deliveryLocation": {
+          "lat": 12.9292117,
+          "lng": 77.5696453
+        }
+      },
+      {
+        "orderId": 3,
+        "deliveryAddress": "Silk Board",
+        "deliveryLocation": {
+          "lat": 12.9292105,
+          "lng": 77.5696453
+        }
+      }
+    ]
+  },
+  {
+    "tripItineraryId": 2,
+    "orders": [{
+      "orderId": 1,
+      "deliveryAddress": "Kormangala",
+      "deliveryLocation": {
+        "lat": 12.9354504,
+        "lng": 77.6146828
+      }
+    },
+      {
+        "orderId": 2,
+        "deliveryAddress": "Jayanagar",
+        "deliveryLocation": {
+          "lat": 12.9292117,
+          "lng": 77.5696453
+        }
+      },
+      {
+        "orderId": 3,
+        "deliveryAddress": "Silk Board",
+        "deliveryLocation": {
+          "lat": 12.9292105,
+          "lng": 77.5696453
+        }
+      }
+    ]
+  }
+]

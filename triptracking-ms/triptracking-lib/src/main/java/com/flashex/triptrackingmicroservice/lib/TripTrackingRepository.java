@@ -1,4 +1,9 @@
 package com.flashex.triptrackingmicroservice.lib;
 
-public interface TripTrackingRepository {
-}
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface TripTrackingRepository extends CrudRepository {
+
+    }
