@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
-import { MarkerLabel } from '../../interfaces/markerlabel';
 
 
 @Component({
