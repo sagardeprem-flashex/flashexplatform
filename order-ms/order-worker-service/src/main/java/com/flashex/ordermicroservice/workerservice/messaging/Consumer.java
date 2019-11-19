@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class Consumer {
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
-    @KafkaListener(topics = "users", groupId = "group_id")
+    @KafkaListener(topics = "Order", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         logger.info(String.format("$$ -> Consumed Message -> %s",new ObjectMapper().readValue(message, TestClass.class)));

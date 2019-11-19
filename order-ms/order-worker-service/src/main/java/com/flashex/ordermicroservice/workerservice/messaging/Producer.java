@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Producer {
 
-    private static final String TOPIC = "users";
+    private static final String TOPIC = "Batches";
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);
 
     @Autowired
