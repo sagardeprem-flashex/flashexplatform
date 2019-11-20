@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication(scanBasePackages = "com.flashex.ordermicroservice")
+@SpringBootApplication(scanBasePackages = "com.flashex.shipmentmicroservice")
 @RestController
 @EnableDiscoveryClient
 public class DemoApplication {
