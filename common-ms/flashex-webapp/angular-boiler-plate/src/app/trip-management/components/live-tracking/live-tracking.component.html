@@ -2,7 +2,9 @@
 
 <mat-sidenav-container class="example-container">
 
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
+    <mat-sidenav #sidenav opened mode="side">
+        <p><button mat-raised-button (click)="sidenav.toggle()">Hide Trips</button></p>
+
         <div *ngFor="let id of dataSource, let i=index">
             <mat-expansion-panel>
 

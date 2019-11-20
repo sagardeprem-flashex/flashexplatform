@@ -19,13 +19,12 @@ export class LiveTrackingComponent implements OnInit {
   public dir;
   public origin: any;
   public destination: any;
-  public renderOptions = {
-    suppressMarkers: true,
-  };
+  public renderOptions;
   public markerColor = [];
   public color;
   public storedColor = [];
   public url;
+  public routeColor = [];
 
   constructor(private tripService: TripItineraryService) { }
   public routes = [];
@@ -56,7 +55,13 @@ export class LiveTrackingComponent implements OnInit {
 
   trip(value) {
     const location = this.dataSource[value];
+    const rotColor = this.colors;
+
     if (location && location.orders) {
+      // tslint:disable-next-line: prefer-for-of
+      for (let k = 0; k < location.orders.length - 1; k++) {
+        this.routeColor.push(rotColor[value]);
+      }
       this.markers = location.orders;
       this.lat = location.orders[0].deliveryLocation.lat;
       this.lng = location.orders[0].deliveryLocation.lng;
@@ -66,8 +71,13 @@ export class LiveTrackingComponent implements OnInit {
         this.origin = { lat: location.orders[j].deliveryLocation.lat, lng: location.orders[j].deliveryLocation.lng };
         this.destination = { lat: location.orders[j + 1].deliveryLocation.lat, lng: location.orders[j + 1].deliveryLocation.lng };
         this.routes.push({ origin: this.origin, dest: this.destination });
-      }
+        this.renderOptions = {
+          suppressMarkers: true,
+          polylineOptions: { strokeColor: this.routeColor[j] }
 
+        };
+      }
+      this.routeColor = [];
     }
   }
   getRandomColor() {
