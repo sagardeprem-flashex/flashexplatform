@@ -106,7 +106,7 @@ services:
     expose:
       - 5010
     ports:
-      - 5010:5010
+      - 5050:5050
     env_file:
       - ./env-files/production/common.env
     depends_on:
