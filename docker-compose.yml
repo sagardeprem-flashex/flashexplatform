@@ -62,7 +62,7 @@ services:
       - discovery-server
 
   shipment-loadbalancer:
-    build: shipment/shipment-loadbalancer
+    build: shipment-ms/shipment-loadbalancer
     image: shipment-loadbalancer:latest
     expose:
       - 7010
