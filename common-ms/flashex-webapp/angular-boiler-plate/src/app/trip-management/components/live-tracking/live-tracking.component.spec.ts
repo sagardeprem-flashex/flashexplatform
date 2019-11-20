@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
+import { AgmDirectionModule } from 'agm-direction';
 
 
 describe('LiveTrackingComponent', () => {
@@ -22,7 +23,8 @@ describe('LiveTrackingComponent', () => {
         }),
         HttpClientModule,
         BrowserAnimationsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        AgmDirectionModule
       ],
       providers: [TripItineraryService ]
     })
