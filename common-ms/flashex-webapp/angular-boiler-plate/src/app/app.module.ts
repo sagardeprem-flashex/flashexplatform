@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
 
 @NgModule({
@@ -25,7 +27,13 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
     TripManagementModule,
     DeliveryExecutiveModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

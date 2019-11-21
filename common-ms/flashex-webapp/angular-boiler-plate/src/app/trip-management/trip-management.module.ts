@@ -10,11 +10,20 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 import { AgmDirectionModule } from 'agm-direction';
+import { TripPlanningPropertiesComponent } from './components/trip-planning-properties/trip-planning-properties.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [HomeComponent, TripDetailsComponent, OrderDetailsComponent, LiveTrackingComponent, VehicleDetailsComponent],
+  declarations: [
+      HomeComponent,
+      TripDetailsComponent,
+      OrderDetailsComponent,
+      LiveTrackingComponent,
+      VehicleDetailsComponent,
+      TripPlanningPropertiesComponent
+    ],
   imports: [
     CommonModule,
     TripManagementRoutingModule,
@@ -23,9 +32,19 @@ import { AgmDirectionModule } from 'agm-direction';
       apiKey: 'AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY'
     }),
     MaterialModule,
-    AgmDirectionModule
-
+    AgmDirectionModule,
+    ReactiveFormsModule
   ],
-  exports: [HomeComponent, TripDetailsComponent, OrderDetailsComponent, LiveTrackingComponent, VehicleDetailsComponent]
+  entryComponents: [
+    TripPlanningPropertiesComponent
+  ],
+  exports: [
+    HomeComponent,
+    TripDetailsComponent,
+    OrderDetailsComponent,
+    LiveTrackingComponent,
+    VehicleDetailsComponent,
+    TripPlanningPropertiesComponent
+  ]
 })
 export class TripManagementModule { }
