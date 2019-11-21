@@ -12,7 +12,6 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +31,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false }
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ],
   bootstrap: [AppComponent]
 })

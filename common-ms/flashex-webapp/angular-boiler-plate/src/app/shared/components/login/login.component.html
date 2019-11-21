@@ -1,1 +1,18 @@
-<button mat-fab color="warn">Manager Login</button>
+<!-- <button mat-fab color="warn">Manager Login</button> -->
+<div class="login">
+  <form [formGroup]="login" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Username" formControlName="userName"> <br>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" formControlName="password"> <br>
+    </mat-form-field>
+    <br>
+    <mat-dialog-actions>
+      <button type="submit" color="primary" mat-raised-button (click)="tryLogin()">Login</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+
+<!-- <router-outlet></router-outlet> -->

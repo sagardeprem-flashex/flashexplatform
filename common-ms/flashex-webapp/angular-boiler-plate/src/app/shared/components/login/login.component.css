@@ -1,0 +1,12 @@
+.login{
+  margin: 10% 35% auto 35%;
+}
+mat-form-field{
+  margin:auto;
+  width: 80%;
+}
+
+button{
+  width: 40%;
+  padding: auto;
+}

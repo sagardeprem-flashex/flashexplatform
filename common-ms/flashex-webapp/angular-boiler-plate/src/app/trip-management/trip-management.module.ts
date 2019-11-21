@@ -12,6 +12,7 @@ import { MaterialModule } from '../material/material.module';
 import { AgmDirectionModule } from 'agm-direction';
 import { TripPlanningPropertiesComponent } from './components/trip-planning-properties/trip-planning-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TripItineraryService } from './services/trip-itinerary.service';
 
 
 
@@ -45,6 +46,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LiveTrackingComponent,
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent
-  ]
+  ],
+  providers: [TripItineraryService],
+
 })
 export class TripManagementModule { }

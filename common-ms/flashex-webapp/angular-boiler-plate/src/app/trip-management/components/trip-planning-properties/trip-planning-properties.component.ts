@@ -16,7 +16,7 @@ export class TripPlanningPropertiesComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private tripService: TripItineraryService,
               private router: Router) { }
 
- addProperties = this.fb.group({
+  public addProperties = this.fb.group({
     apiKey: ['', Validators.required],
     maxElementsForDistanceMatrix: ['', Validators.required],
     searchTimeLimit: ['', Validators.required],
