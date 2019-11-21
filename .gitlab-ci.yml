@@ -112,17 +112,17 @@ stages:
 #     - npm install --save karma-junit-reporter jasmine-reporters
 #     - npm run test -- --watch=false --karma-config=karma.conf.js
 #--------Angular Lint
-tslint_app:
-  image: circleci/node:11-browsers
-  stage: lint
-  when: always
-  tags:
-    - flashex-ci-jobs
-  script:
-  #------go to the path
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
-    - npm run lint -- --format json
+# tslint_app:
+#   image: circleci/node:11-browsers
+#   stage: lint
+#   when: always
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   #------go to the path
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install
+#     - npm run lint -- --format json
 # --- Deployment on Release branch
 release_deploy:
     image: ubuntu:latest
