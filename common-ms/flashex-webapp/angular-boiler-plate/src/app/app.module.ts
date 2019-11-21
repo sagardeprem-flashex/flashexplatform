@@ -33,6 +33,9 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     },
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ],
+  exports: [
+    LandingPageComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

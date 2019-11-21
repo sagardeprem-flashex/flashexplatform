@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripPlanningPropertiesComponent } from './trip-planning-properties.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MaterialModule } from 'src/app/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TripPlanningPropertiesComponent', () => {
   let component: TripPlanningPropertiesComponent;
@@ -8,7 +13,14 @@ describe('TripPlanningPropertiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripPlanningPropertiesComponent ]
+      declarations: [ TripPlanningPropertiesComponent ],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule
+      ]
     })
     .compileComponents();
   }));

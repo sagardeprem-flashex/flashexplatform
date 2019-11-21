@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
 })
 export class TripPlanningPropertiesComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<TripPlanningPropertiesComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private tripService: TripItineraryService,
+  constructor(private fb: FormBuilder, private tripService: TripItineraryService,
               private router: Router) { }
 
   public addProperties = this.fb.group({
@@ -32,11 +31,11 @@ export class TripPlanningPropertiesComponent implements OnInit {
     this.tripService.planningProperties = this.addProperties.value;
     console.log(this.tripService.planningProperties);
     // this.router.navigate(['trips']);
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 
 }

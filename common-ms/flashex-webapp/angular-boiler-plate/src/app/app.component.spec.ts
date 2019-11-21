@@ -3,13 +3,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { AgmCoreModule } from '@agm/core';
+import { SharedRoutingModule } from './shared/shared-routing.module';
+import { SharedModule } from './shared/shared.module';
+import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MaterialModule
+        MaterialModule,
+        SharedModule,
+        AppModule
       ],
       declarations: [
         AppComponent
