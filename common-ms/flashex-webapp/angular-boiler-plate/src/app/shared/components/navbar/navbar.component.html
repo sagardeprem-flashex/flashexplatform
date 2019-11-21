@@ -1,1 +1,9 @@
-<p>navbar works</p>
+<mat-toolbar color="primary">
+    <img src="../assets/images/logo.png">
+    <div class='routes-container'>
+      <button mat-icon-button (click)='goToHome()'><mat-icon color='accent'>home</mat-icon></button>
+      <button mat-icon-button (click)='goToTrips()'><mat-icon color='accent'>local_shipping</mat-icon></button>
+      <button mat-icon-button (click)='goToTrack()'><mat-icon color='accent'>my_location</mat-icon></button>
+      <button mat-icon-button (click)='goToLogin()'><mat-icon color='accent'>person</mat-icon></button>
+    </div>
+</mat-toolbar>
