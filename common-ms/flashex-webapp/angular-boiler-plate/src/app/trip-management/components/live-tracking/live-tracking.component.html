@@ -1,22 +1,49 @@
 <h1>Trips Details</h1>
 
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened">
-        <div *ngFor="let id of dataSource">
-            <button mat-raised-button color="primary" (click)="trip(id.tripItineraryId - 1)">Trip {{id.tripItineraryId}}</button><br>
+
+    <mat-sidenav #sidenav opened mode="side">
+        <p><button mat-raised-button (click)="sidenav.toggle()">Hide Trips</button></p>
+
+        <div *ngFor="let id of dataSource, let i=index">
+            <mat-expansion-panel>
+
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <button mat-raised-button [ngStyle]="{'background-color': colors[i]}" (click)="trip(id.tripItineraryId - 1)">Trip {{id.tripItineraryId}}</button>
+                        <br>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <p *ngFor="let order of id.orders; let i = index"> Order - {{i+1}} Delivery Address: {{order.deliveryAddress}}</p>
+
+            </mat-expansion-panel>
         </div>
+
     </mat-sidenav>
+
     <mat-sidenav-content>
         <p><button mat-raised-button (click)="sidenav.toggle()">Show Trips</button></p>
 
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-            <agm-marker *ngFor="let marker of markers" [latitude]="marker.deliveryLocation.lat" [longitude]="marker.deliveryLocation.lng" [label]="marker.orderId.toString()">
-                <agm-info-window [disableAutoPan]="false" #infoWindow>
-                    <div>
-                        Order Id: {{marker.orderId}} <br> Delivery Address: {{marker.deliveryAddress}}
-                    </div>
-                </agm-info-window>
-            </agm-marker>
+            <agm-marker [latitude]="warehouse.latitude" [longitude]="warehouse.longitude" [label]="'0'"></agm-marker>
+            <agm-direction *ngFor="let route of routes" [origin]="route.origin" [destination]="route.dest" [renderOptions]="renderOptions">
+            </agm-direction>
+            <div *ngFor="let id of dataSource, let j=index">
+
+                <agm-marker *ngFor="let marker of markers, let j =index" [latitude]="marker.deliveryLocation.lat" [longitude]="marker.deliveryLocation.lng" [label]="{
+                    color: markerColor[j],
+                    fontWeight: 'bold',
+                    text: marker.orderId.toString()}">
+
+                    <agm-info-window [disableAutoPan]="false" #infoWindow>
+                        <div>
+                            Order Id: {{marker.orderId}} <br> Delivery Address: {{marker.deliveryAddress}}
+                        </div>
+                    </agm-info-window>
+
+                </agm-marker>
+            </div>
         </agm-map>
     </mat-sidenav-content>
 </mat-sidenav-container>
