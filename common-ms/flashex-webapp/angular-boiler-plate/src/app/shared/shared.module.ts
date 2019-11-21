@@ -7,12 +7,13 @@ import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './auth/auth-guard';
+import { AuthenticationService } from './services/authentication.service';
 
 
 @NgModule({
   declarations: [NavbarComponent, LoginComponent],
   imports: [
-  CommonModule,
+    CommonModule,
     MaterialModule,
     SharedRoutingModule,
     AppRoutingModule,
@@ -20,7 +21,7 @@ import { AuthGuard } from './auth/auth-guard';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AuthenticationService],
   exports: [ NavbarComponent, LoginComponent]
 })
 export  class SharedModule { }
