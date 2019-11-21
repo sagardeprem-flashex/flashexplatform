@@ -24,7 +24,7 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
     MaterialModule,
     TripManagementModule,
     DeliveryExecutiveModule
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
