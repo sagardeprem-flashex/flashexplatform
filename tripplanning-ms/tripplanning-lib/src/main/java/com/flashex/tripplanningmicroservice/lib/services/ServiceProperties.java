@@ -7,6 +7,7 @@ public class ServiceProperties {
 
     private String message;
 
+
     public String getMessage() {
         return message;
     }

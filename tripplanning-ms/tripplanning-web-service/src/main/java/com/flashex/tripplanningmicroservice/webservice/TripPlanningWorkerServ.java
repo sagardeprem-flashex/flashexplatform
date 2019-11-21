@@ -1,5 +1,6 @@
 package com.flashex.tripplanningmicroservice.webservice;
 
+import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import com.flashex.tripplanningmicroservice.lib.services.SampleService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,24 +11,38 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = "com.flashex.tripplanningmicroservice")
 @RestController
-public class DemoApplication {
+public class TripPlanningWorkerServ {
 
     private final SampleService sampleService;
+    private final ORService orService;
 
-    public DemoApplication(SampleService sampleService) {
+    public TripPlanningWorkerServ(SampleService sampleService, ORService orService) {
         this.sampleService = sampleService;
+        this.orService = orService;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home() {
         return sampleService.message();
     }
-    @GetMapping("/")
-    public String home1() {
-        return "BLANK";
+
+    @GetMapping("/VRPCapCons")
+    public void VrpCapCons() throws Exception {
+         orService.VrpfunctionWithCapCons();
     }
 
+    @GetMapping("/VRPNodeDrop")
+    public void VrpNodeDrop() throws Exception {
+        orService.VrpfuncWithDropNode();
+    }
+
+    @GetMapping("/VRPTimeWindow")
+    public void VrpTimeWindow() throws Exception {
+        orService.TimeWindowConsFunction();
+    }
+
+
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(TripPlanningWorkerServ.class, args);
     }
 }
