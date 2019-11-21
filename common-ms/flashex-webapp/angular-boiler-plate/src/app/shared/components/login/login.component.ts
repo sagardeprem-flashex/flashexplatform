@@ -17,14 +17,12 @@ export class LoginComponent implements OnInit {
     private loginStateService: LoginStateService,
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
-
   login = new FormGroup({
     userName: new FormControl('', [Validators.minLength(8), Validators.required]),
     password: new FormControl('', [Validators.minLength(8), Validators.required])}
   );
+  ngOnInit() {
+  }
 
   tryLogin(){
     console.log(this.login.value.userName);
@@ -39,9 +37,6 @@ export class LoginComponent implements OnInit {
       }}
     )
   }
-  // onSubmit() {
-  //   // TODO: Use EventEmitter with form value
-  //   console.warn(this.login.value);
-  // }
+
 
 }

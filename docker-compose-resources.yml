@@ -1,15 +1,15 @@
 version: '3'
 services:
-  
+
   mongodb:
     image: mongo:latest
     container_name: mongo
     restart: on-failure
     volumes:
       - $HOME/mongo_data/flashexDB:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: flashex
-      MONGO_INITDB_ROOT_PASSWORD: flashex
+    # environment:
+      # MONGO_INITDB_ROOT_USERNAME: flashex
+      # MONGO_INITDB_ROOT_PASSWORD: flashex
     ports:
       - 27017:27017
 
@@ -25,7 +25,7 @@ services:
     ports:
       - 9042:9042
 
-  kafka: 
+  kafka:
     image: wurstmeister/kafka:2.11-2.0.0
     container_name: kafka
     restart: on-failure
@@ -51,7 +51,7 @@ services:
     ports:
       - 9092:9092
     depends_on:
-      - zookeeper  
+      - zookeeper
 
   zookeeper:
     image: wurstmeister/zookeeper
@@ -63,10 +63,10 @@ services:
       ZOO_SERVER_PASSWORDS: flashex
     ports:
       - 2181:2181
-    
 
 
 
-      
+
+
 
 
