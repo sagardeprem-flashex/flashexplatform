@@ -31,11 +31,11 @@ export class LoginComponent implements OnInit {
       this.login.value.userName,
       this.login.value.password
     ).subscribe(
-      response => {if (response.token){
+      response => {if (response.token) {
         this.loginStateService.setToken(response.token);
-        this.router.navigateByUrl('/home')
+        this.router.navigateByUrl('/home');
       }}
-    )
+    );
   }
 
 

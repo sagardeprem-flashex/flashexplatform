@@ -59,58 +59,58 @@ stages:
   - release
   - production
 
-build_mvn:
-  image: maven:3-jdk-11
-  stage: stage::build
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms
-    - mvn clean package
+# build_mvn:
+#   image: maven:3-jdk-11
+#   stage: stage::build
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms
+#     - mvn clean package
 
-junit_java:
-  image: maven:3-jdk-11
-  stage: test
-  tags:
-    - flashex-ci-jobs
-  when: always
-  script:
-  - cd common-ms
-  - mvn test
+# junit_java:
+#   image: maven:3-jdk-11
+#   stage: test
+#   tags:
+#     - flashex-ci-jobs
+#   when: always
+#   script:
+#   - cd common-ms
+#   - mvn test
 
-pmd_maven:
-  image: maven:3-jdk-11
-  stage: lint
-  tags:
-    - flashex-ci-jobs
-  when: always
-  script:
-  - cd common-ms
-  - mvn pmd:check
+# pmd_maven:
+#   image: maven:3-jdk-11
+#   stage: lint
+#   tags:
+#     - flashex-ci-jobs
+#   when: always
+#   script:
+#   - cd common-ms
+#   - mvn pmd:check
 #---------Angular Build
-build_app:
-  image: circleci/node:11-browsers
-  stage: stage::build
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
+# build_app:
+#   image: circleci/node:11-browsers
+#   stage: stage::build
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install
 #-----------Angular Test
-karma_unit_tests:
-  image: circleci/node:11-browsers
-  stage: test
-  when: always
-  before_script:
-    - echo $KARMA > ./karma.config.js
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
-    - npm install --save @angular/material @angular/cdk @angular/animations
-    - npm install --save karma-junit-reporter jasmine-reporters
-    - npm run test -- --watch=false --karma-config=karma.conf.js
+# karma_unit_tests:
+#   image: circleci/node:11-browsers
+#   stage: test
+#   when: always
+#   before_script:
+#     - echo $KARMA > ./karma.config.js
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install
+#     - npm install --save @angular/material @angular/cdk @angular/animations
+#     - npm install --save karma-junit-reporter jasmine-reporters
+#     - npm run test -- --watch=false --karma-config=karma.conf.js
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers

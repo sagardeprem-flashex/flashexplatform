@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { LoginStateService } from '../services/login-state.service';
 
@@ -7,7 +7,7 @@ export class AuthGuard implements CanActivate {
   constructor(private loginStateService: LoginStateService, private router: Router){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    const redirectUrl = route['_routerState']['url'];
+    // const redirectUrl = route['routerState']['url'];
 
     if (this.loginStateService.isLogged()) {
       return true;
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       this.router.createUrlTree(
         ['/login'], {
           queryParams: {
-            redirectUrl
+            // redirectUrl
           }
         }
       )

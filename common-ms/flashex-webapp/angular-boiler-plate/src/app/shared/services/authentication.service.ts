@@ -9,15 +9,15 @@ import { ILoginResponse } from '../interfaces/LoginResponse';
 export class AuthenticationService {
 
   constructor(
-    private http:HttpClient,
+    private http: HttpClient
   ) { }
 
-  LOGIN_URL = "https://flashex-dev.stackroute.io/login"
+  LOGIN_URL = 'https://flashex-dev.stackroute.io/login'
 
   login(userName: string, password: string): Observable<ILoginResponse>{
     return this.http.post<ILoginResponse>(this.LOGIN_URL, {
-      userName: userName,
-      password: password
-    })
+      userName,
+      password
+    });
   }
 }
