@@ -12,9 +12,9 @@ export class AuthenticationService {
     private http: HttpClient
   ) { }
 
-  LOGIN_URL = 'https://flashex-dev.stackroute.io/login'
+  LOGIN_URL = 'https://flashex-dev.stackroute.io/login';
 
-  login(userName: string, password: string): Observable<ILoginResponse>{
+  login(userName: string, password: string): Observable<ILoginResponse> {
     return this.http.post<ILoginResponse>(this.LOGIN_URL, {
       userName,
       password

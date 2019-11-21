@@ -19,22 +19,25 @@ export class LoginComponent implements OnInit {
   ) { }
   login = new FormGroup({
     userName: new FormControl('', [Validators.minLength(8), Validators.required]),
-    password: new FormControl('', [Validators.minLength(8), Validators.required])}
+    password: new FormControl('', [Validators.minLength(8), Validators.required])
+  }
   );
   ngOnInit() {
   }
 
-  tryLogin(){
+  tryLogin() {
     console.log(this.login.value.userName);
     console.log(this.login.value.password);
     this.authenticationService.login(
       this.login.value.userName,
       this.login.value.password
     ).subscribe(
-      response => {if (response.token) {
-        this.loginStateService.setToken(response.token);
-        this.router.navigateByUrl('/home');
-      }}
+      response => {
+        if (response.token) {
+          this.loginStateService.setToken(response.token);
+          this.router.navigateByUrl('/home');
+        }
+      }
     );
   }
 

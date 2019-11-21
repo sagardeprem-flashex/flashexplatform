@@ -4,9 +4,9 @@ import { LoginStateService } from '../services/login-state.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private loginStateService: LoginStateService, private router: Router){}
+  constructor(private loginStateService: LoginStateService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // const redirectUrl = route['routerState']['url'];
 
     if (this.loginStateService.isLogged()) {
