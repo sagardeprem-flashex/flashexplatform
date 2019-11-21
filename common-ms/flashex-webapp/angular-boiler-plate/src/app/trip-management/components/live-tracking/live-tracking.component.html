@@ -26,7 +26,7 @@
         <p><button mat-raised-button (click)="sidenav.toggle()">Show Trips</button></p>
 
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-
+            <agm-marker [latitude]="warehouse.latitude" [longitude]="warehouse.longitude" [label]="'0'"></agm-marker>
             <agm-direction *ngFor="let route of routes" [origin]="route.origin" [destination]="route.dest" [renderOptions]="renderOptions">
             </agm-direction>
             <div *ngFor="let id of dataSource, let j=index">

@@ -19,13 +19,18 @@ export class LiveTrackingComponent implements OnInit {
   public dir;
   public origin: any;
   public destination: any;
-  public renderOptions;
+  public renderOptions = {
+    suppressMarkers: true,
+  };
   public markerColor = [];
   public color;
   public storedColor = [];
   public url;
   public routeColor = [];
-
+  public warehouse = {
+    latitude: 12.95381,
+    longitude: 77.6375593
+  };
   constructor(private tripService: TripItineraryService) { }
   public routes = [];
 
@@ -58,26 +63,21 @@ export class LiveTrackingComponent implements OnInit {
     const rotColor = this.colors;
 
     if (location && location.orders) {
-      // tslint:disable-next-line: prefer-for-of
-      for (let k = 0; k < location.orders.length - 1; k++) {
-        this.routeColor.push(rotColor[value]);
-      }
       this.markers = location.orders;
-      this.lat = location.orders[0].deliveryLocation.lat;
-      this.lng = location.orders[0].deliveryLocation.lng;
+      this.lat = location.orders[2].deliveryLocation.lat;
+      this.lng = location.orders[2].deliveryLocation.lng;
       this.zoom = 12;
-
+      this.origin = { lat: this.warehouse.latitude, lng: this.warehouse.longitude };
+      this.destination = { lat: location.orders[0].deliveryLocation.lat, lng: location.orders[0].deliveryLocation.lng };
+      this.routes.push({ origin: this.origin, dest: this.destination });
       for (let j = 0; j < location.orders.length - 1; j++) {
         this.origin = { lat: location.orders[j].deliveryLocation.lat, lng: location.orders[j].deliveryLocation.lng };
         this.destination = { lat: location.orders[j + 1].deliveryLocation.lat, lng: location.orders[j + 1].deliveryLocation.lng };
         this.routes.push({ origin: this.origin, dest: this.destination });
-        this.renderOptions = {
-          suppressMarkers: true,
-          polylineOptions: { strokeColor: this.routeColor[j] }
+        this.routeColor.push(rotColor[value]);
 
-        };
       }
-      this.routeColor = [];
+
     }
   }
   getRandomColor() {
