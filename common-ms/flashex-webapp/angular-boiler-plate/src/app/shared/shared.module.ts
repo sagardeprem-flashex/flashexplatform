@@ -4,6 +4,10 @@ import { MaterialModule } from '../material/material.module';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './auth/auth-guard';
+import { AuthenticationService } from './services/authentication.service';
 
 
 @NgModule({
@@ -12,7 +16,12 @@ import { LoginComponent } from './components/login/login.component';
     CommonModule,
     MaterialModule,
     SharedRoutingModule,
+    AppRoutingModule,
+    SharedRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  providers: [AuthGuard, AuthenticationService],
   exports: [ NavbarComponent, LoginComponent]
 })
 export  class SharedModule { }

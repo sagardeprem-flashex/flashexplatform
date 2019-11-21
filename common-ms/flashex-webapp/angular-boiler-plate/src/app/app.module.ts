@@ -10,7 +10,6 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,8 +22,8 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
     BrowserAnimationsModule,
     MaterialModule,
     TripManagementModule,
-    DeliveryExecutiveModule
-  ],
+    DeliveryExecutiveModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

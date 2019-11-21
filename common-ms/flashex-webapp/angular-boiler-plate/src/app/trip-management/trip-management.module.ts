@@ -10,6 +10,7 @@ import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 import { AgmDirectionModule } from 'agm-direction';
+import { TripItineraryService } from './services/trip-itinerary.service';
 
 
 
@@ -26,6 +27,7 @@ import { AgmDirectionModule } from 'agm-direction';
     AgmDirectionModule
 
   ],
+  providers: [TripItineraryService],
   exports: [HomeComponent, TripDetailsComponent, OrderDetailsComponent, LiveTrackingComponent, VehicleDetailsComponent]
 })
 export class TripManagementModule { }
