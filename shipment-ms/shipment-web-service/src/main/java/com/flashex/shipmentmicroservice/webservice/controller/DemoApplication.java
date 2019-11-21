@@ -1,4 +1,4 @@
-package com.flashex.shipmentmicroservice.webservice;
+package com.flashex.shipmentmicroservice.webservice.controller;
 
 
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @EnableDiscoveryClient
-@SpringBootApplication(scanBasePackages = "com.flashex.ordermicroservice")
+@SpringBootApplication(scanBasePackages = "com.flashex.shipmentmicroservice")
 @RestController
 public class DemoApplication {
 
