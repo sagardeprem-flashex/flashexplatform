@@ -1,0 +1,87 @@
+#mainBody h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 90px;
+    letter-spacing: 10px;
+    text-align: center;
+    color: rgb(94, 93, 91);
+    font-weight: 400;
+    text-transform: uppercase;
+    z-index: 10;
+    opacity: 1;
+}
+
+​ #mainBody h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 24px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #212121;
+    text-align: center;
+    font-weight: bold;
+}
+
+​ #mainBody p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+​ #mainBody .block {
+    background: white;
+    padding: 60px;
+    width: 900px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+​ #mainBody .parallax-one {
+    padding-top: 280px;
+    z-index: -5;
+    padding-bottom: 250px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background-image: url("../../assets/images/landingpageimage1.jpg");
+    background-size: 90% 75%;
+    background-attachment: fixed;
+    background-size: cover;
+    /* -moz-background-size: cover; */
+    /* -webkit-background-size: cover; */
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+​ @media screen and (max-width: 959px) and (min-width: 768px) {
+    #mainBody .block {
+        padding: 40px;
+        width: 620px;
+    }
+}
+
+​ @media screen and (max-width: 767px) {
+    #mainBody .block {
+        padding: 30px;
+        width: 420px;
+    }
+    #mainBody h2 {
+        font-size: 30px;
+    }
+    #mainBody .block {
+        padding: 30px;
+    }
+    #mainBody .parallax-one {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+}
+
+​ @media screen and (max-width: 479px) {
+    #mainBody .block {
+        padding: 30px 15px;
+        width: 290px;
+    }
+}

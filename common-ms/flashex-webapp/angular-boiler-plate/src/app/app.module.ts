@@ -11,6 +11,7 @@ import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
     BrowserAnimationsModule,
     MaterialModule,
     TripManagementModule,
-    DeliveryExecutiveModule
+    DeliveryExecutiveModule,
+    FlexLayoutModule
   ],
   providers: [
     {
