@@ -26,7 +26,6 @@ export class LiveTrackingComponent implements OnInit {
   public color;
   public storedColor = [];
   public url;
-  public routeColor = [];
   public warehouse = {
     latitude: 12.95381,
     longitude: 77.6375593
@@ -59,8 +58,8 @@ export class LiveTrackingComponent implements OnInit {
   }
 
   trip(value) {
+    this.routes = [];
     const location = this.dataSource[value];
-    const rotColor = this.colors;
 
     if (location && location.orders) {
       this.markers = location.orders;
@@ -74,10 +73,7 @@ export class LiveTrackingComponent implements OnInit {
         this.origin = { lat: location.orders[j].deliveryLocation.lat, lng: location.orders[j].deliveryLocation.lng };
         this.destination = { lat: location.orders[j + 1].deliveryLocation.lat, lng: location.orders[j + 1].deliveryLocation.lng };
         this.routes.push({ origin: this.origin, dest: this.destination });
-        this.routeColor.push(rotColor[value]);
-
       }
-
     }
   }
   getRandomColor() {
