@@ -19,6 +19,7 @@ public class OrderController {
 
     @GetMapping("/orders")
     public List<Packet> getAllOrders() {
+        System.out.println("in get All orders");
         return orderService.getAllOrders();
     }
 

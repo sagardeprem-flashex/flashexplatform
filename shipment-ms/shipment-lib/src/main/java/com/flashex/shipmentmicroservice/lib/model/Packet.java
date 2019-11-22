@@ -1,16 +1,23 @@
 package com.flashex.shipmentmicroservice.lib.model;
 
+import com.datastax.driver.core.DataType;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.Date;
 import java.util.UUID;
 
+@Table("Packet")
 public class Packet {
 
     /** String variables **/
-    @Id
-    private UUID orderId;
-    private UUID productId;
+
+    @PrimaryKey
+
+    private String orderId;
+    private String productId;
     private String orderDescription;
     private String deliveryDescription;
     private String orderType;
@@ -38,23 +45,23 @@ public class Packet {
 
 
     /** Objects of same package**/
-    private DeliveryAddress deliveryAddress = new DeliveryAddress();
-    private Customer customer = new Customer();
+//    private DeliveryAddress deliveryAddress;
+//    private Customer customer;
 
 
-    public UUID getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(UUID orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
-    public UUID getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(UUID productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
@@ -154,21 +161,21 @@ public class Packet {
         this.status = status;
     }
 
-    public DeliveryAddress getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public void setDeliveryAddress(DeliveryAddress deliveryAddress) {
-        this.deliveryAddress = deliveryAddress;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    public DeliveryAddress getDeliveryAddress() {
+//        return deliveryAddress;
+//    }
+//
+//    public void setDeliveryAddress(DeliveryAddress deliveryAddress) {
+//        this.deliveryAddress = deliveryAddress;
+//    }
+//
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 
 
     public float getCostOfOrder() {
