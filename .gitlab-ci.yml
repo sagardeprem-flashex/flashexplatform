@@ -62,8 +62,8 @@ stages:
 build_mvn:
   image: maven:3-jdk-11
   stage: stage::build
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms
     - mvn clean package
@@ -71,8 +71,8 @@ build_mvn:
 junit_java:
   image: maven:3-jdk-11
   stage: test
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   when: always
   script:
   - cd common-ms
@@ -89,8 +89,8 @@ pmd_maven:
 build_app:
   image: circleci/node:11-browsers
   stage: stage::build
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
@@ -101,8 +101,8 @@ karma_unit_tests:
   when: always
   before_script:
     - echo $KARMA > ./karma.config.js
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
@@ -114,8 +114,8 @@ tslint_app:
   image: circleci/node:11-browsers
   stage: lint
   when: always
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
   #------go to the path
     - cd common-ms/flashex-webapp/angular-boiler-plate/
@@ -125,8 +125,8 @@ tslint_app:
 release_deploy:
     image: ubuntu:latest
     stage: release
-    tags:
-      - flashex-ci-jobs
+    # tags:
+    #   - flashex-ci-jobs
     before_script:
     #generate ssh key
         - mkdir -p ~/.ssh
