@@ -3,6 +3,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {  MatSidenavModule,
           MatProgressBarModule,
+          MatListModule,
           MatExpansionModule,
           MatButtonToggleModule,
           MatDialogModule,
@@ -28,7 +29,8 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatTabsModule,
-  FlexLayoutModule
+  FlexLayoutModule,
+  MatListModule
 ];
 
 @NgModule({
@@ -45,7 +47,8 @@ const MaterialComponents = [
               MatFormFieldModule,
               MatInputModule,
               MatTabsModule,
-              FlexLayoutModule
+              FlexLayoutModule,
+              MatListModule
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -60,7 +63,8 @@ const MaterialComponents = [
               MatFormFieldModule,
               MatInputModule,
               MatTabsModule,
-              FlexLayoutModule
+              FlexLayoutModule,
+              MatListModule
             ]
 })
 export class MaterialModule { }

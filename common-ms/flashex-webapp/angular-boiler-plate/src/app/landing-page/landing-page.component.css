@@ -48,7 +48,7 @@
     background-image: url("../../assets/images/landingpageimage1.jpg");
     background-size: 90% 75%;
     background-attachment: fixed;
-    background-size: cover;
+    /* background-size: cover; */
     /* -moz-background-size: cover; */
     /* -webkit-background-size: cover; */
     background-repeat: no-repeat;
