@@ -60,7 +60,8 @@ karma_unit_tests:
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
-    - npm run test --no-sandbox  --disable-gpu
+    # - npm run test --no-sandbox  --disable-gpu
+    - npm run test
     # - npm install --save @angular/material @angular/cdk @angular/animations
     # - npm install --save karma-junit-reporter jasmine-reporters
     # - npm run test -- --watch=false --karma-config=karma.conf.js
