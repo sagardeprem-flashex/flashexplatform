@@ -1,4 +1,4 @@
-package com.flashex.ordermicroservice.workerservice;
+package com.flashex.shipmentmicroservice.workerservice;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

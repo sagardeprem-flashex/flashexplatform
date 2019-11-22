@@ -36,7 +36,7 @@ public class Shipment {
     public Date shipmentDate;
 
     /** Objects from local package **/
-    public ArrayList<Order> orderList = new ArrayList<Order>();
+    public ArrayList<Package> orderList = new ArrayList<Package>();
 
 
 }

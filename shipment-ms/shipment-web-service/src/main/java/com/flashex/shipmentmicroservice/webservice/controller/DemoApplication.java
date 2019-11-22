@@ -22,7 +22,9 @@ public class DemoApplication {
 
     @GetMapping("/home")
     public String home() {
-        return sampleService.message();
+//        return sampleService.message();
+        return "dasfkn";
+
     }
     @GetMapping("/")
     public String home1() {

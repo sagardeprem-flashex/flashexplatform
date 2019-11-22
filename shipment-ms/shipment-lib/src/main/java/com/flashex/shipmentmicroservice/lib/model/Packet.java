@@ -1,15 +1,11 @@
 package com.flashex.shipmentmicroservice.lib.model;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Date;
 import java.util.UUID;
 
-import org.springframework.data.annotation.Id;
-/*
-* The following class stores the details of the order received.
-* */
-
-
-public class Order {
+public class Packet {
 
     /** String variables **/
     @Id
@@ -17,12 +13,17 @@ public class Order {
     private UUID productId;
     private String orderDescription;
     private String deliveryDescription;
+    private String orderType;
+    private String priority;
+    private String status;
 
     /** Float variables **/
     private float weight;
     private float length;
     private float breadth;
     private float height;
+    private float costOfOrder;
+
 
     /** Date type variables**/
     private Date receivedDate;
@@ -34,13 +35,12 @@ public class Order {
     private Date actualDeliveryDate;
 
     /** Enum type variables **/
-    private String orderType;
-    private String priority;
-    private String status;
+
 
     /** Objects of same package**/
     private DeliveryAddress deliveryAddress = new DeliveryAddress();
     private Customer customer = new Customer();
+
 
     public UUID getOrderId() {
         return orderId;
@@ -168,5 +168,14 @@ public class Order {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+
+    public float getCostOfOrder() {
+        return costOfOrder;
+    }
+
+    public void setCostOfOrder(float costOfOrder) {
+        this.costOfOrder = costOfOrder;
     }
 }

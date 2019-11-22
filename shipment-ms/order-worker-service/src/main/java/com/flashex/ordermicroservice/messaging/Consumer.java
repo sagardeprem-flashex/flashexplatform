@@ -1,7 +1,8 @@
-package com.flashex.ordermicroservice.workerservice.messaging;
+package com.flashex.ordermicroservice.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flashex.shipmentmicroservice.lib.model.TestClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;

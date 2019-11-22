@@ -1,8 +1,7 @@
 package com.flashex.shipmentmicroservice.lib.services;
 
-import com.flashex.shipmentmicroservice.lib.model.Order;
+import com.flashex.shipmentmicroservice.lib.model.Packet;
 import com.flashex.shipmentmicroservice.lib.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +20,12 @@ public class OrderService {
 //    }
 
 
-    public List<Order> getAllOrders()
+    public List<Packet> getAllOrders()
     {
         return orderRepository.findAll();
     }
 
-    public Order saveOrder(Order orderToBeSaved)
+    public Packet saveOrder(Packet orderToBeSaved)
     {
         UUID orderUuid = UUID.randomUUID();
         UUID productUuid = UUID.randomUUID();

@@ -1,7 +1,8 @@
-package com.flashex.ordermicroservice.workerservice.messaging;
+package com.flashex.shipmentmicroservice.workerservice.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flashex.shipmentmicroservice.lib.model.Packet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class Producer {
     @Autowired
     private KafkaTemplate<Object, String> kafkaTemplateJSON;
 
-    public void sendMessage(TestClass message) throws JsonProcessingException {
+    public void sendMessage(Packet message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
         this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
     }
