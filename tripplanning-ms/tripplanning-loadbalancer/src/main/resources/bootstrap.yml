@@ -1,0 +1,12 @@
+spring:
+	application:
+		name: tripplanning-load-balancer
+	spring:
+		cloud:
+			config:
+				uri: ${CONFIG_URL}
+eureka:
+	client:
+		serviceUrl:
+			defaultZone: ${REGISTRY_URL}
+
