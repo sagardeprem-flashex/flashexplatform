@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogRef } from '@angular/material';
 
 describe('TripPlanningPropertiesComponent', () => {
   let component: TripPlanningPropertiesComponent;
@@ -20,6 +21,12 @@ describe('TripPlanningPropertiesComponent', () => {
         MaterialModule,
         ReactiveFormsModule,
         BrowserAnimationsModule
+      ],
+      providers: [
+        {
+          provide: MatDialogRef,
+          useValues: {}
+        }
       ]
     })
     .compileComponents();

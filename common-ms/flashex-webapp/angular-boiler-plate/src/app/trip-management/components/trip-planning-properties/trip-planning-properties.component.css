@@ -1,3 +1,7 @@
 #form-content {
-  height: 80vh;
+  height: 60vh;
+}
+
+mat-form-field {
+  width: 100%;
 }
