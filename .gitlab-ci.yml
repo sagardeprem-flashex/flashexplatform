@@ -1,4 +1,5 @@
 variables:
+ DEPLOY_BRANCH: $CI_COMMIT_REF_NAME 
  KARMA: "
   let defaultConfFile = './karma.conf';
   const karmaConfig = require(defaultConfFile);
