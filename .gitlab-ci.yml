@@ -95,20 +95,20 @@ build_app:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
 #-----------Angular Test
-# karma_unit_tests:
-#   image: circleci/node:11-browsers
-#   stage: test
-#   when: always
-#   before_script:
-#     - echo $KARMA > ./karma.config.js
-#   # tags:
-#   #   - flashex-ci-jobs
-#   script:
-#     - cd common-ms/flashex-webapp/angular-boiler-plate/
-#     - npm install
-#     - npm install --save @angular/material @angular/cdk @angular/animations
-#     - npm install --save karma-junit-reporter jasmine-reporters
-#     - npm run test -- --watch=false --karma-config=karma.conf.js
+karma_unit_tests:
+  image: circleci/node:12-browsers
+  stage: test
+  when: always
+  before_script:
+    - echo $KARMA > ./karma.config.js
+  # tags:
+  #   - flashex-ci-jobs
+  script:
+    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - npm install
+    - npm install --save @angular/material @angular/cdk @angular/animations
+    - npm install --save karma-junit-reporter jasmine-reporters
+    - npm run test -- --watch=false --karma-config=karma.conf.js
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
