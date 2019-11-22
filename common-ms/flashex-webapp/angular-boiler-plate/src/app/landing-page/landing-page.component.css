@@ -1,87 +1,82 @@
-#mainBody h2 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 90px;
-    letter-spacing: 10px;
-    text-align: center;
-    color: rgb(94, 93, 91);
-    font-weight: 400;
-    text-transform: uppercase;
-    z-index: 10;
-    opacity: 1;
+header{display:inline-block; font-size:12px;}
+span{padding-left:20px;}
+a{color:#eff1f3;}
+
+
+/* Typography */
+#mainBody h1 {font-family:'Oswald', sans-serif; font-size:24px; font-weight:400; text-transform: capitalize; color:black; padding:0; margin:0;}
+#mainBody h2 {font-family:'Oswald', sans-serif; font-size:90px; letter-spacing:10px; text-align:center; color:black; font-weight:400; text-transform:uppercase; z-index:10; opacity:1;}
+#mainBody h3 {font-family:'Oswald', sans-serif; font-size:24px; line-height:30px; font-weight:400; text-align:center; letter-spacing:8px; text-transform: uppercase; color:black; text-align:center; font-weight: bold;}
+#mainBody p {font-family:'Source Sans Pro', sans-serif; font-weight:400; font-size:20px; line-height:24px;}
+
+/* Section - Block */
+#mainBody .block {background: white; padding: 60px; width:900px; margin:0 auto; text-align:justify;}
+
+/* Parallax */
+#mainBody .parallax-one {
+  /* padding-top: 280px; */
+  z-index: -5;
+  /* display: flex; */
+  /* padding-bottom: 200px; */
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url("../../assets/images/for-dribbble.gif");
+  /* background-size: 90% 75%; */
+  background-attachment: fixed;
+  height: 95vh;
+  justify-content: center;
+  /* background-size: cover; */
+  /* -moz-background-size: cover;
+  -webkit-background-size: cover; */
+  /* background-repeat: no-repeat; */
+  background-position: top center;
 }
 
-​ #mainBody h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    line-height: 20px;
-    font-weight: 400;
-    text-align: center;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    color: #212121;
-    text-align: center;
-    font-weight: bold;
-}
-
-​ #mainBody p {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-​ #mainBody .block {
-    background: white;
-    padding: 60px;
-    width: 900px;
-    margin: 0 auto;
-    text-align: justify;
-}
-
-​ #mainBody .parallax-one {
-    padding-top: 280px;
-    z-index: -5;
-    padding-bottom: 250px;
-    overflow: hidden;
-    position: relative;
+.images{
     width: 100%;
-    background-image: url("../../assets/images/landingpageimage1.jpg");
-    background-size: 90% 75%;
-    background-attachment: fixed;
-    background-size: cover;
-    /* -moz-background-size: cover; */
-    /* -webkit-background-size: cover; */
-    background-repeat: no-repeat;
-    background-position: top center;
+    /* display: flexbox;
+    justify-content: space-evenly center;
+    flex-direction: row; */
+}
+img {
+    opacity: 1;
+    border: 1px solid black;
+    border-radius: 4px;
+    overflow: hidden;
+    /* padding-block: 2px; */
+    padding: 0;
+    /* margin: 0; */
+    width: 100%;
+  }
+
+caption
+{
+    width: max-content;
+    /* width: 100%; */
+    text-align: center;
 }
 
-​ @media screen and (max-width: 959px) and (min-width: 768px) {
-    #mainBody .block {
-        padding: 40px;
-        width: 620px;
-    }
-}
 
-​ @media screen and (max-width: 767px) {
-    #mainBody .block {
-        padding: 30px;
-        width: 420px;
-    }
-    #mainBody h2 {
-        font-size: 30px;
-    }
-    #mainBody .block {
-        padding: 30px;
-    }
-    #mainBody .parallax-one {
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
+/* Responsive */
+@media screen and (max-width: 959px) and (min-width: 768px) {
+  #mainBody .block {
+    padding: 40px;
+    /* width: 100%; */
+    width:620px;
+  }
 }
-
-​ @media screen and (max-width: 479px) {
-    #mainBody .block {
-        padding: 30px 15px;
-        width: 290px;
-    }
+@media screen and (max-width: 767px) and (min-width: 479px){
+  #mainBody .block {
+    padding: 30px;
+    width:420px;
+    /* width: 100%; */
+  }
+  #mainBody h2 {font-size:30px;}
+  /* #mainBody .block {padding: 30px;} */
+  #mainBody .parallax-one{padding-top:100px; padding-bottom:100px;}
+}
+@media screen and (max-width: 479px) and (min-width: 100px) {
+  #mainBody .block {padding: 30px 15px; width:290px;}
+  #mainBody h2 {font-size:30px;}
 }
