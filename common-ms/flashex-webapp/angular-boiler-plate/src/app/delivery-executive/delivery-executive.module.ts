@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderDeliveryListComponent } from './components/order-delivery-list/order-delivery-list.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { MaterialModule } from '../material/material.module';
 import { TripsComponent } from './components/trips/trips.component';
 import { DeliveryExecutiveRoutingModule } from './delivery-executive-routing.module';
 
@@ -11,8 +12,9 @@ import { DeliveryExecutiveRoutingModule } from './delivery-executive-routing.mod
   declarations: [OrderDeliveryListComponent, NavigationComponent, TripsComponent],
   imports: [
     CommonModule,
-    DeliveryExecutiveRoutingModule
+    DeliveryExecutiveRoutingModule,
+    MaterialModule
   ],
-  exports: [OrderDeliveryListComponent, NavigationComponent, TripsComponent]
+  exports: [OrderDeliveryListComponent, NavigationComponent, TripsComponent, MaterialModule]
 })
 export class DeliveryExecutiveModule { }
