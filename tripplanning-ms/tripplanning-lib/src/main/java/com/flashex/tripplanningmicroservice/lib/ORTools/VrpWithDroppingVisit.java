@@ -26,9 +26,6 @@ public class VrpWithDroppingVisit {
 
 
     /** Minimal VRP.*/
-    static {
-        System.loadLibrary("jniortools");
-    }
 
     private static final Logger logger = Logger.getLogger(VrpWithDroppingVisit.class.getName());
 

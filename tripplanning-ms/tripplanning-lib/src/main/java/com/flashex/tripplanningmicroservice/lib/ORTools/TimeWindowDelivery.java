@@ -28,7 +28,6 @@ import java.util.logging.Logger;
 public class TimeWindowDelivery {
 
         /** Minimal VRP.*/
-        static { System.loadLibrary("jniortools"); }
 
         private static final Logger logger = Logger.getLogger(TimeWindowDelivery.class.getName());
 

@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.stereotype.Service;
 
 //  This service belongs to VRP problem with capacity constraint
+
 @Service
 @EnableConfigurationProperties(ServiceProperties.class)
 public class ORService {

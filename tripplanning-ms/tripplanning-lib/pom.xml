@@ -46,11 +46,33 @@
 			<version>1.1.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.ortools</groupId>
+			<artifactId>com.google.ortools</artifactId>
+			<version>7.4.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.6.1</version>
+		</dependency>
+
+
 		<!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
 		<dependency>
 			<groupId>com.google.maps</groupId>
 			<artifactId>google-maps-services</artifactId>
 			<version>0.10.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+			<scope>provided</scope>
 		</dependency>
 
 

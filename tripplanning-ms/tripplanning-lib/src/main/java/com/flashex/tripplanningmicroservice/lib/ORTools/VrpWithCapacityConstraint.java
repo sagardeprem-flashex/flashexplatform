@@ -14,17 +14,15 @@ import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
 import org.json.simple.parser.ParseException;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import java.util.*;
 import java.util.logging.Logger;
+
+@EnableAutoConfiguration
 public class VrpWithCapacityConstraint {
 
     /** Minimal VRP.*/
-
-    static {
-        System.loadLibrary("jniortools");
-    }
-
     private static final Logger logger = Logger.getLogger(VrpWithCapacityConstraint.class.getName());
 
     static class DataModel {
