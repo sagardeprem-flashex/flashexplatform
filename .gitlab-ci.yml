@@ -50,7 +50,7 @@ stages:
 #     - npm install
 #-----------Angular Test
 karma_unit_tests:
-  image: circleci/node:12-browsers-legacy
+  image: circleci/node:12-browsers
   stage: test
   when: always
   # before_script:
