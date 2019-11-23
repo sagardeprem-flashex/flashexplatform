@@ -29,7 +29,7 @@ module.exports = function (config) {
     customLaunchers: {
       MyHeadlessChrome: {
         base: 'ChromeHeadless',
-        flags: ['--disable-translate', '--disable-extensions', '--remote-debugging-port=9223']
+        flags: ['--no-sandbox']
       }
     },
     singleRun: false,
