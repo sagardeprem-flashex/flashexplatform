@@ -59,10 +59,9 @@ karma_unit_tests:
   #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - yarn
-    - yarn test 
-    # - npm install
+    - npm install
     # - npm run test --no-sandbox  --disable-gpu
+    - npm rebuild
     - npm run test
     # - npm install --save @angular/material @angular/cdk @angular/animations
     # - npm install --save karma-junit-reporter jasmine-reporters
