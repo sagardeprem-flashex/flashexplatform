@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TripsComponent } from './trips.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('TripsComponent', () => {
   let component: TripsComponent;
@@ -8,7 +10,11 @@ describe('TripsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TripsComponent ]
+      declarations: [ TripsComponent ],
+      imports: [
+        BrowserAnimationsModule,
+        MaterialModule
+      ]
     })
     .compileComponents();
   }));
