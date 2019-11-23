@@ -50,7 +50,8 @@ stages:
 #     - npm install
 #-----------Angular Test
 karma_unit_tests:
-  image: circleci/node:12-browsers
+#   image: circleci/node:12-browsers
+  image: trion/ng-cli-karma:latest
   stage: test
   when: always
   # before_script:
@@ -61,7 +62,6 @@ karma_unit_tests:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
     # - npm run test --no-sandbox  --disable-gpu
-    - npm rebuild
     - npm run test
     # - npm install --save @angular/material @angular/cdk @angular/animations
     # - npm install --save karma-junit-reporter jasmine-reporters
