@@ -1,6 +1,11 @@
 img {
-  width: 11rem;
-  height: 4rem;
+  width: 8.5rem;
+  height: 3rem;
+  display: block;
+}
+
+.logo-container {
+  cursor: pointer;
 }
 
 mat-toolbar {
