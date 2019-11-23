@@ -32,6 +32,7 @@ module.exports = function (config) {
         flags: [
           '--headless',
           '--disable-gpu',
+          '--js-flags=--max_old_space_size=4096',
           '--remote-debugging-port=9223',
           '--no-sandbox'
         ],
