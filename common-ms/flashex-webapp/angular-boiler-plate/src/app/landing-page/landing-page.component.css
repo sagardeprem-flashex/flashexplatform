@@ -81,13 +81,25 @@ a {
     background-image: url("../../assets/images/for-dribbble.gif");
     /* background-size: 90% 75%; */
     background-attachment: fixed;
-    height: 95vh;
+    height: 90vh;
     justify-content: center;
-    /* background-size: cover; */
+    background-size: 30%;
     /* -moz-background-size: cover;
   -webkit-background-size: cover; */
-    /* background-repeat: no-repeat; */
+    background-repeat: no-repeat;
     background-position: top center;
+    /* margin-block-start: 0;
+    margin-block-end: 0; */
+}
+
+#flashex-title {
+    margin-block-start: 30vh;
+    margin-block-end: 0;
+}
+
+#flashex-catchphrase {
+  margin-block-start: 5vh;
+  margin-block-end: 0;
 }
 
 .images {

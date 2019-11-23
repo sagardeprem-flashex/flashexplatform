@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToHome() {
-    this.router.navigate(['landing']);
+    this.router.navigate(['']);
   }
 
   goToTrips() {

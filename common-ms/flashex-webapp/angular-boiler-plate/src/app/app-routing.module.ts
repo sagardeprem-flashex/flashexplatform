@@ -8,23 +8,23 @@ const routes: Routes = [
       path: 'shared',
       loadChildren: './shared/shared-routing.module#SharedRoutingModule',
     },
-    // {
-    //   path: '', redirectTo: '/landing', pathMatch: 'full'
-    // },
     {
-      path: '', component: LandingPageComponent, pathMatch: 'full'
+      path: '', redirectTo: '/in', pathMatch: 'full'
     },
     {
-      path: 'trips-managemet',
+      path: 'in', component: LandingPageComponent, pathMatch: 'full'
+    },
+    {
+      path: 'trips-management',
       loadChildren: './trip-management/trip-management-routing.module#TripManagementRoutingModule',
     },
     {
       path: 'delivery-executive',
       loadChildren: './delivery-executive/delivery-executive-routing.module#DeliveryExecutiveRoutingModule',
     },
-    {
-      path: '**', redirectTo: ''
-    }
+    // {
+    //   path: '**', component: LandingPageComponent, pathMatch: 'full'
+    // }
 ];
 
 @NgModule({
