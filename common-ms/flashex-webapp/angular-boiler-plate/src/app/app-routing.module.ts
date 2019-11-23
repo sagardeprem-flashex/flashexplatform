@@ -8,11 +8,11 @@ const routes: Routes = [
       path: 'shared',
       loadChildren: './shared/shared-routing.module#SharedRoutingModule',
     },
+    // {
+    //   path: '', redirectTo: '/landing', pathMatch: 'full'
+    // },
     {
-      path: '', redirectTo: '/landing', pathMatch: 'full'
-    },
-    {
-      path: 'landing', component: LandingPageComponent
+      path: '', component: LandingPageComponent, pathMatch: 'full'
     },
     {
       path: 'trips-managemet',
@@ -22,6 +22,9 @@ const routes: Routes = [
       path: 'delivery-executive',
       loadChildren: './delivery-executive/delivery-executive-routing.module#DeliveryExecutiveRoutingModule',
     },
+    {
+      path: '**', redirectTo: ''
+    }
 ];
 
 @NgModule({

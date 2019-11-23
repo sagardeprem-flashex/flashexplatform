@@ -92,7 +92,7 @@ a {
 
 .images {
     width: 100%;
-    background-image: url("../../assets/images/landingpageimage1.jpg");
+    /* background-image: url("../../assets/images/landingpageimage1.jpg"); */
     background-size: 90% 75%;
     background-attachment: fixed;
     /* background-size: cover; */
