@@ -25,14 +25,14 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['MyHeadlessChrome'],
     customLaunchers: {
-      ChromeHeadless: {
+      MyHeadlessChrome: {
         base: 'ChromeHeadless',
         flags: [
           '--headless',
           '--disable-gpu',
-          '--remote-debugging-port=9222',
+          '--remote-debugging-port=9223',
           '--no-sandbox'
         ],
       }
