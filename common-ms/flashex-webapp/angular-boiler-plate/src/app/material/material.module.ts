@@ -9,7 +9,8 @@ import {  MatSidenavModule,
           MatDialogModule,
           MatFormFieldModule,
           MatInputModule,
-          MatTabsModule} from '@angular/material';
+          MatTabsModule,
+          MatMenuModule} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
@@ -30,7 +31,8 @@ const MaterialComponents = [
   MatInputModule,
   MatTabsModule,
   FlexLayoutModule,
-  MatListModule
+  MatListModule,
+  MatMenuModule
 ];
 
 @NgModule({
@@ -48,7 +50,8 @@ const MaterialComponents = [
               MatInputModule,
               MatTabsModule,
               FlexLayoutModule,
-              MatListModule
+              MatListModule,
+              MatMenuModule
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -64,7 +67,8 @@ const MaterialComponents = [
               MatInputModule,
               MatTabsModule,
               FlexLayoutModule,
-              MatListModule
+              MatListModule,
+              MatMenuModule
             ]
 })
 export class MaterialModule { }

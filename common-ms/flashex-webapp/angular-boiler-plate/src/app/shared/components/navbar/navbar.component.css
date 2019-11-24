@@ -14,3 +14,17 @@ mat-toolbar {
   justify-content: space-between;
   height: 10vh;
 }
+
+.responsive-dropdown {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .responsive-dropdown {
+    display: block;
+  }
+
+  .routes-container {
+    display: none;
+  }
+}
