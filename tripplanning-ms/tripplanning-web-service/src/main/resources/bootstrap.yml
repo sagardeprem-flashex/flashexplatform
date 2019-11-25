@@ -1,13 +1,12 @@
 spring:
-	application:
-		name: tripplanning-microservice-webservice
-	spring:
-		cloud:
-			config:
-				uri: ${CONFIG_URL}
+  application:
+    name: tripplanning-microservice-webservice
+  cloud:
+    config:
+      uri: ${CONFIG_URL}
 eureka:
-	client:
-		serviceUrl:
-			defaultZone: ${REGISTRY_URL}
+  client:
+    serviceUrl:
+      defaultZone: ${REGISTRY_URL}
 
 
