@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ILoginResponse } from '../interfaces/LoginResponse';
+import { AuthLoginInfo} from './logininfo';
+import { SignUpInfo} from './signupinfo';
+import { JwtResponse} from './jwtresponse';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -12,12 +17,14 @@ export class AuthenticationService {
     private http: HttpClient
   ) { }
 
-  LOGIN_URL = 'https://flashex-dev.stackroute.io/login';
+  private loginUrl = 'http://localhost:8080/api/auth/signin';
+  private signupUrl = 'http://localhost:8080/api/auth/signup';
 
-  login(userName: string, password: string): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>(this.LOGIN_URL, {
-      userName,
-      password
-    });
+  attemptAuth(credentials: AuthLoginInfo): Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
+  }
+
+  signUp(info: SignUpInfo): Observable<string> {
+    return this.http.post<string>(this.signupUrl, info, httpOptions);
   }
 }

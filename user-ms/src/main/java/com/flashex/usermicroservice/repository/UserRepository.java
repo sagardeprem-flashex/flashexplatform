@@ -1,11 +1,13 @@
 package com.flashex.usermicroservice.repository;
 
-import com.flashex.usermicroservice.model.User;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import java.util.Optional;
 
-public interface UserRepository extends MongoRepository<User, String> {
-//    public List<User> findByUserNameContaining(String userName);
-    public Optional<User> findByUserNameContaining(String userName);
-    public Optional<User> deleteByUserNameContaining(String userName);
+import com.flashex.usermicroservice.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+     User findByUsername(String username);
+     Boolean existsByUsername(String username);
+     Boolean existsByEmail(String email);
 }

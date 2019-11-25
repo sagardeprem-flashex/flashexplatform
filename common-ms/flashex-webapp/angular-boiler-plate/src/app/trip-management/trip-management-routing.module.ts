@@ -5,31 +5,58 @@ import { LiveTrackingComponent } from './components/live-tracking/live-tracking.
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
-import { AuthGuard } from '../shared/auth/auth-guard';
+import { AuthguardService } from '../shared/services/authguard.service';
 
 
 const tripRoutes: Routes = [
   {
-    path: 'home',
+    path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'track' , component: LiveTrackingComponent
-  },
-  {
-    path: 'vehicle' , component: VehicleDetailsComponent
-  },
-  {
-    path: 'trips' , component: TripDetailsComponent
-  },
-  {
-    path: 'orders' , component: OrderDetailsComponent
+    canActivate: [AuthguardService],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    },
+    children: [
+      {
+        path: 'trips',
+        component: TripDetailsComponent,
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
+      },
+      {
+        path: 'track',
+        component: LiveTrackingComponent,
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
+      },
+      {
+        path: 'admin/orders',
+        component: OrderDetailsComponent,
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
+      },
+      {
+        path: 'admin/vehicle',
+        component: VehicleDetailsComponent,
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
+      }
+    ]
   }
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forChild(tripRoutes)],
-exports: [RouterModule],
+  exports: [RouterModule],
 })
 export class TripManagementRoutingModule { }

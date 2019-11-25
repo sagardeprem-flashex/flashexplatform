@@ -1,16 +1,10 @@
 img {
-  width: 8.5rem;
-  height: 3rem;
-  display: block;
-}
-
-.logo-container {
-  cursor: pointer;
+  width: 11rem;
+  height: 4rem;
 }
 
 mat-toolbar {
   width: 100%;
   display: inline-flex;
   justify-content: space-between;
-  height: 10vh;
 }

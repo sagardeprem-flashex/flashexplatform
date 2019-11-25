@@ -6,7 +6,6 @@
         </h2>
         <h3 id='flashex-catchphrase'>Lightning Fast Delivery</h3>
     </section>
-    ​
     <section class="block">
         <h3>Welcome to FlashEx</h3>
         <div id="aboutUs">
@@ -18,37 +17,32 @@
             </p>
         </div>
     </section>
-
-    <!-- <hr> -->
-    ​
     <section>
         <div class="block">
             <h3>Our Unique Selling Points</h3>
         </div>
-        ​
         <div class="images" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
-        <!-- <div class="images"> -->
-            <figure>
-                <img src="../../assets/images/LiveTracking1.png" alt="Live Tracking" [ngStyle]="{width: '100%'}"> ​ ​
-                <caption>Live Tracking</caption>
-            </figure>
-
-            <!-- <div >
+            <div class="images">
                 <figure>
-                    <img src="../../assets/images/DistanceAndTimeBasedRoutesSuggestions.png" alt="Optimized Route suggstions" [ngStyle]="{width: '100%'}" [ngStyle.xs]="{width: '90%'}"> ​
-                    <caption>Optimized Route suggestion</caption>
-                </figure>​
-            </div> -->
-            <figure>
+                    <img src="../../assets/images/LiveTracking1.png" alt="Live Tracking" [ngStyle]="{width: '100%'}"> ​ ​
+                    <caption>Live Tracking</caption>
+                </figure>
+
+                <div>
+                    <figure>
+                        <img src="../../assets/images/DistanceAndTimeBasedRoutesSuggestions.png" alt="Optimized Route suggstions" [ngStyle]="{width: '100%'}" [ngStyle.xs]="{width: '90%'}"> ​
+                        <caption>Optimized Route suggestion</caption>
+                    </figure>​
+                </div>
+                <figure>
                     <img src="../../assets/images/LiveTracking1.png" alt="Automatic order loading" [ngStyle]="{width: '100%'}"> ​
                     <caption>Automatic order loading</caption>
-            </figure>
+                </figure>
 
+            </div>
         </div>
-        ​
     </section>
 
-    <!-- <hr> -->
     ​ ​
     <section>
         <div class="block">
@@ -63,3 +57,9 @@
     </section>
     ​
 </div>
+
+<button class="btn btn-secondary" (click)="logout()">Logout</button>
+
+<ng-template #loggedOut>
+    Please login.
+</ng-template>

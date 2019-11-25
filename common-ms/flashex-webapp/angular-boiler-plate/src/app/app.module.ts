@@ -12,7 +12,7 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
-
+import { AuthguardService } from './shared/services/authguard.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +29,7 @@ import { FlexLayoutModule} from '@angular/flex-layout';
     FlexLayoutModule
   ],
   providers: [
+    AuthguardService,
     {
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false }

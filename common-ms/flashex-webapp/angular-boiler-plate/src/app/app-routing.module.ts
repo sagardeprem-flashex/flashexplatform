@@ -22,9 +22,6 @@ const routes: Routes = [
       path: 'delivery-executive',
       loadChildren: './delivery-executive/delivery-executive-routing.module#DeliveryExecutiveRoutingModule',
     },
-    // {
-    //   path: '**', component: LandingPageComponent, pathMatch: 'full'
-    // }
 ];
 
 @NgModule({
