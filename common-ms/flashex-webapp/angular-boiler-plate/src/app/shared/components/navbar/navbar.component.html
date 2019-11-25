@@ -1,9 +1,22 @@
-<mat-toolbar color="primary">
-    <img src="../assets/images/logo.png">
+<nav>
+  <mat-toolbar color="primary">
+    <div class='logo-container' (click)='goToHome()'>
+      <img src="../assets/images/logo.png">
+    </div>
     <div class='routes-container'>
       <button mat-icon-button (click)='goToHome()'><mat-icon color='accent'>home</mat-icon></button>
       <button mat-icon-button (click)='goToTrips()'><mat-icon color='accent'>local_shipping</mat-icon></button>
       <button mat-icon-button (click)='goToTrack()'><mat-icon color='accent'>my_location</mat-icon></button>
       <button mat-icon-button (click)='goToLogin()'><mat-icon color='accent'>person</mat-icon></button>
     </div>
-</mat-toolbar>
+    <div class='responsive-dropdown'>
+      <button class='responsive-dropdown' [matMenuTriggerFor]='navMenu' mat-icon-button><mat-icon color='accent'>menu</mat-icon></button>
+      <mat-menu class='responsive-dropdown menu' #navMenu='matMenu'>
+        <button mat-menu-item (click)='goToHome()'><mat-icon color='accent'>home</mat-icon>Home</button>
+        <button mat-menu-item (click)='goToTrips()'><mat-icon color='accent'>local_shipping</mat-icon>Trips</button>
+        <button mat-menu-item (click)='goToTrack()'><mat-icon color='accent'>my_location</mat-icon>Track</button>
+        <button mat-menu-item (click)='goToLogin()'><mat-icon color='accent'>person</mat-icon>Login</button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</nav>

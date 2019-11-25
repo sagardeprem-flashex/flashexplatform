@@ -10,7 +10,7 @@ import {  MatSidenavModule,
           MatFormFieldModule,
           MatInputModule,
           MatTabsModule,
-        MatTableModule} from '@angular/material';
+          MatMenuModule} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
@@ -31,7 +31,8 @@ const MaterialComponents = [
   MatInputModule,
   MatTabsModule,
   FlexLayoutModule,
-  MatListModule
+  MatListModule,
+  MatMenuModule
 ];
 
 @NgModule({
@@ -50,7 +51,11 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
+<<<<<<< HEAD
               MatTableModule
+=======
+              MatMenuModule
+>>>>>>> c37b0c061a397da694a50ebf60583250eb664a25
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -67,7 +72,11 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
+<<<<<<< HEAD
               MatTableModule
+=======
+              MatMenuModule
+>>>>>>> c37b0c061a397da694a50ebf60583250eb664a25
             ]
 })
 export class MaterialModule { }

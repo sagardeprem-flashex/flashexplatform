@@ -1,51 +1,5 @@
 variables:
  DEPLOY_BRANCH: $CI_COMMIT_REF_NAME 
- KARMA: "
-  let defaultConfFile = './karma.conf';
-  const karmaConfig = require(defaultConfFile);
-  module.exports = function(overridedConfig) {
-    reporters = ['progress', 'junit'];
-    browsers = ['ChromeHeadless'];
-    customLaunchers = {
-      ChromeHeadless: {
-        base: 'Chrome',
-        flags: [
-          '--headless',
-          '--disable-gpu',
-          '--remote-debugging-port=9222',
-          '--no-sandbox'
-        ],
-      }
-    };
-    junitReporter = {
-      outputDir:  'reports/karma/',
-      outputFile: 'karma-test-result.xml',
-      suite: '',
-      useBrowserName: false,
-    };
-    let mycfg = {
-      set(val) {
-        val.plugins = [
-          require('karma-jasmine'),
-          require('karma-chrome-launcher'),
-          require('karma-jasmine-html-reporter'),
-          require('karma-coverage-istanbul-reporter'),
-          require('@angular-devkit/build-angular/plugins/karma'),
-          require('karma-junit-reporter')
-        ];
-        val.reporters = reporters;
-        val.junitReporter = junitReporter;
-        val.browsers = browsers;
-        val.customLaunchers = customLaunchers;
-        val.singleRun = true;
-        val.browserDisconnectTolerance = 1;
-        val.browserNoActivityTimeout = 50000;
-        overridedConfig.set(val);
-      }
-    };
-    karmaConfig(mycfg);
-  }
-  "
 
 cache:
   paths:
@@ -73,7 +27,6 @@ junit_java:
   stage: test
   # tags:
   #   - flashex-ci-jobs
-  when: always
   script:
   - cd common-ms
   - mvn test
@@ -81,7 +34,8 @@ junit_java:
 pmd_maven:
   image: maven:3-jdk-11
   stage: lint
-  when: always
+  # tags:
+  #   - flashex-ci-jobs
   script:
   - cd common-ms
   - mvn pmd:check
@@ -96,24 +50,18 @@ build_app:
     - npm install
 #-----------Angular Test
 karma_unit_tests:
-  image: circleci/node:11-browsers
+  image: circleci/node:12-browsers
   stage: test
-  when: always
-  before_script:
-    - echo $KARMA > ./karma.config.js
   # tags:
   #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
-    - npm install --save @angular/material @angular/cdk @angular/animations
-    - npm install --save karma-junit-reporter jasmine-reporters
-    - npm run test -- --watch=false --karma-config=karma.conf.js
+    - npm run test
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
   stage: lint
-  when: always
   # tags:
   #   - flashex-ci-jobs
   script:
@@ -146,8 +94,8 @@ release_deploy:
 production_deploy:
     image: ubuntu:latest
     stage: production
-    tags:
-        - flashex-ci-jobs
+    # tags:
+    #     - flashex-ci-jobs
     before_script:
     #generate ssh key
         - mkdir -p ~/.ssh

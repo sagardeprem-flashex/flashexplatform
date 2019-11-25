@@ -12,7 +12,7 @@ const deliveryRoutes: Routes = [
   },
   {
     path: 'trip', component: TripsComponent
-  },
+  }
 ];
 @NgModule({
   imports: [RouterModule.forChild(deliveryRoutes)],
