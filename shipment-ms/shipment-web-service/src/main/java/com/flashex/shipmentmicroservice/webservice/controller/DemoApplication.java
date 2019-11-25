@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(
         scanBasePackages = {"com.flashex.shipmentmicroservice"}
         )
-@RestController
 //@EnableCassandraRepositories("com.flashex.shipmentmicroservice.lib.repository")
-
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);

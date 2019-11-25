@@ -4,8 +4,6 @@ package com.flashex.shipmentmicroservice.webservice.controller;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
 import com.flashex.shipmentmicroservice.lib.services.PacketService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

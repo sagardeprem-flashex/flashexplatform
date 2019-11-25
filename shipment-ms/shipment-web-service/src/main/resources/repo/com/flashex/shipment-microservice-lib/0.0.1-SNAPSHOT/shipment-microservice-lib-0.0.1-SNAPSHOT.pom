@@ -17,6 +17,7 @@
 	<properties>
 		<maven-compiler-source>11</maven-compiler-source>
 		<maven-compiler-target>11</maven-compiler-target>
+		<spring.framework.version>5.2.1.RELEASE</spring.framework.version>
 	</properties>
 	<dependencies>
 		<dependency>

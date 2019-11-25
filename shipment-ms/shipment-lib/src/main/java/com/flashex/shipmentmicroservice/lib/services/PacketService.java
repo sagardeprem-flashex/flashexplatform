@@ -26,7 +26,7 @@ public class PacketService {
     {
         String packetUuid = UUID.randomUUID().toString();
         String productUuid = UUID.randomUUID().toString();
-        packetToBeSaved.setOrderId(packetUuid);
+        packetToBeSaved.setPacketId(packetUuid);
         packetToBeSaved.setProductId(productUuid);
         this.packetRepository.save(packetToBeSaved) ;
         return packetToBeSaved;
