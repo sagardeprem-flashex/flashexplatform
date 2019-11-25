@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
 
-
 @Component({
   selector: 'app-live-tracking',
   templateUrl: './live-tracking.component.html',
@@ -37,7 +36,8 @@ export class LiveTrackingComponent implements OnInit {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
       this.getRandomColor();
-      this.url = 'http://labs.google.com/ridefinder/images/mm_20_gray.png';      // tslint:disable-next-line: prefer-for-of
+      this.url = '../../../../assets/images/warehouse.png';
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < data.length; i++) {
         const location = this.dataSource[i];
 

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { IList } from '../interfaces/trip-itinerary';
 import { HttpHeaders } from '@angular/common/http';
+import { ITripProperties } from '../interfaces/trip-planning-properties';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class TripItineraryService {
 
   public location;
+  public planningProperties: ITripProperties;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -30,4 +32,5 @@ export class TripItineraryService {
        this.behaviourSubject.next(this.dataSource);
      });
    }
+
 }

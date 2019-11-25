@@ -1,8 +1,11 @@
-img {
-    width: 11rem;
-    height: 4rem;
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
 }
 
-mat-toolbar {
-    width: 100%;
+.router-outlet-container {
+  padding-top: 10vh;
 }

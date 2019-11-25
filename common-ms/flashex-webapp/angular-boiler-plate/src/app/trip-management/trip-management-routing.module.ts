@@ -5,12 +5,15 @@ import { LiveTrackingComponent } from './components/live-tracking/live-tracking.
 import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-details.component';
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { AuthGuard } from '../shared/auth/auth-guard';
 
 
 const tripRoutes: Routes = [
   {
-    path: 'home', component: HomeComponent
-    },
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'track' , component: LiveTrackingComponent
   },
@@ -27,6 +30,6 @@ const tripRoutes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(tripRoutes)],
-  exports: [RouterModule],
+exports: [RouterModule],
 })
 export class TripManagementRoutingModule { }

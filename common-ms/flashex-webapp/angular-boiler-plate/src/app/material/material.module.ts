@@ -1,17 +1,74 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
-import { MatSidenavModule, MatExpansionModule} from '@angular/material';
+import {  MatSidenavModule,
+          MatProgressBarModule,
+          MatListModule,
+          MatExpansionModule,
+          MatButtonToggleModule,
+          MatDialogModule,
+          MatFormFieldModule,
+          MatInputModule,
+          MatTabsModule,
+          MatMenuModule} from '@angular/material';
+import { MatCardModule } from '@angular/material';
+import { MatStepperModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MaterialComponents = [
   MatToolbarModule,
   MatButtonModule,
   MatSidenavModule,
-  MatExpansionModule
+  MatCardModule,
+  MatStepperModule,
+  MatIconModule,
+  MatProgressBarModule,
+  MatExpansionModule,
+  MatButtonToggleModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule,
+  FlexLayoutModule,
+  MatListModule,
+  MatMenuModule
 ];
 
 @NgModule({
-  imports: [ MatToolbarModule, MatButtonModule, MatSidenavModule, MatExpansionModule ],
-  exports: [   MatToolbarModule, MatButtonModule, MatSidenavModule, MatExpansionModule ]
+  imports: [  MatToolbarModule,
+              MatButtonModule,
+              MatSidenavModule,
+              MatCardModule,
+              MatStepperModule,
+              MatIconModule,
+              MatProgressBarModule,
+              MatExpansionModule,
+              MatButtonToggleModule,
+              MatDialogModule,
+              MatFormFieldModule,
+              MatInputModule,
+              MatTabsModule,
+              FlexLayoutModule,
+              MatListModule,
+              MatMenuModule
+            ],
+  exports: [  MatToolbarModule,
+              MatButtonModule,
+              MatSidenavModule,
+              MatCardModule,
+              MatStepperModule,
+              MatIconModule,
+              MatProgressBarModule,
+              MatExpansionModule,
+              MatButtonToggleModule,
+              MatDialogModule,
+              MatFormFieldModule,
+              MatInputModule,
+              MatTabsModule,
+              FlexLayoutModule,
+              MatListModule,
+              MatMenuModule
+            ]
 })
 export class MaterialModule { }

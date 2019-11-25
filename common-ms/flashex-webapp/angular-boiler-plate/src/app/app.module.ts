@@ -9,7 +9,9 @@ import { SharedModule } from './shared/shared.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
-
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,19 @@ import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive
     BrowserAnimationsModule,
     MaterialModule,
     TripManagementModule,
-    DeliveryExecutiveModule
+    DeliveryExecutiveModule,
+    FlexLayoutModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false }
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+  ],
+  exports: [
+    LandingPageComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
