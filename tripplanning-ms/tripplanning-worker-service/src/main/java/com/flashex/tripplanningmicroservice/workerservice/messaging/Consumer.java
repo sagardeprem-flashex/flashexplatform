@@ -20,4 +20,6 @@ public class Consumer {
     public void consume(String message) throws JsonProcessingException {
         processOnConsumption.processData(message);
     }
+
+//
 }

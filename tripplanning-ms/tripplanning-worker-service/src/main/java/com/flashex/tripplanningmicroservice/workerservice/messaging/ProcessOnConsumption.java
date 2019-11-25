@@ -2,7 +2,10 @@ package com.flashex.tripplanningmicroservice.workerservice.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Urllib;
 import com.flashex.tripplanningmicroservice.lib.model.Shipment;
+import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
+import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +24,24 @@ public class ProcessOnConsumption {
         this.producer = producer;
     }
 
-    public void processData(String message) throws JsonProcessingException {
+    public void processData(String message) throws Exception {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
         String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
         deliveryAddresses[0] = "hello";
         orService.settingAddressArray(deliveryAddresses);
+        orService.VrpfunctionWithCapCons();
+        orService.VrpfuncWithDropNode();
+        orService.TimeWindowConsFunction();
 
+
+//        received data from kafka
+        // get fleet details
         // plan the trip
         // some algo
         // store in db
 //        producer.sendMessageJSON();
         //
     }
+
 }

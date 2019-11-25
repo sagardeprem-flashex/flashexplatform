@@ -16,13 +16,13 @@ import java.util.List;
 @NoArgsConstructor
 public class Shipment {
     /** String variables **/
-    public String shipmentId;
+    private String shipmentId;
     /** Integer variables**/
-    public int MAX_SHIPMENT_SIZE;
+    private int MAX_SHIPMENT_SIZE;
     /** Date variables **/
-    public Date shipmentDate;
+    private Date shipmentDate;
     /** Objects from local package **/
-    public ArrayList<Packet> packetList;
+    private ArrayList<Packet> packetList;
 
     public String[] getAllDeliveryAddresses(){
         int packetlistsize = this.packetList.size();

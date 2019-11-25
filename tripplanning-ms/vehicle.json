@@ -1,0 +1,214 @@
+{
+  "vehicle": [
+    {
+      "vehicleId": 1,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 18,
+      "availability": false,
+      "vehicleCrew": "Benton Lynn"
+    },
+    {
+      "vehicleId": 5,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 15,
+      "availability": true,
+      "vehicleCrew": "Bean Poole"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 18,
+      "availability": false,
+      "vehicleCrew": "Tanya Mathis"
+    },
+    {
+      "vehicleId": 3,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 14,
+      "availability": false,
+      "vehicleCrew": "Taylor Boyd"
+    },
+    {
+      "vehicleId": 11,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 17,
+      "availability": false,
+      "vehicleCrew": "Terri Neal"
+    },
+    {
+      "vehicleId": 6,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 14,
+      "availability": true,
+      "vehicleCrew": "Evelyn James"
+    },
+    {
+      "vehicleId": 12,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 13,
+      "availability": true,
+      "vehicleCrew": "Donna Downs"
+    },
+    {
+      "vehicleId": 8,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Holloway Cherry"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 16,
+      "availability": true,
+      "vehicleCrew": "Virginia Conway"
+    },
+    {
+      "vehicleId": 9,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Dale Bowen"
+    },
+    {
+      "vehicleId": 11,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 18,
+      "availability": false,
+      "vehicleCrew": "Tamika Walsh"
+    },
+    {
+      "vehicleId": 12,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Howe Mills"
+    },
+    {
+      "vehicleId": 6,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 15,
+      "availability": true,
+      "vehicleCrew": "Frances Dickson"
+    },
+    {
+      "vehicleId": 9,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 16,
+      "availability": true,
+      "vehicleCrew": "Darla Lott"
+    },
+    {
+      "vehicleId": 2,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 15,
+      "availability": false,
+      "vehicleCrew": "Pitts Pugh"
+    },
+    {
+      "vehicleId": 2,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 18,
+      "availability": true,
+      "vehicleCrew": "Monique Jacobson"
+    },
+    {
+      "vehicleId": 10,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 14,
+      "availability": false,
+      "vehicleCrew": "Taylor Butler"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 18,
+      "availability": true,
+      "vehicleCrew": "Crosby Moses"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 15,
+      "availability": true,
+      "vehicleCrew": "Ivy Leach"
+    },
+    {
+      "vehicleId": 12,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 13,
+      "availability": false,
+      "vehicleCrew": "Colette Mosley"
+    },
+    {
+      "vehicleId": 9,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 14,
+      "availability": true,
+      "vehicleCrew": "Angela Brown"
+    },
+    {
+      "vehicleId": 9,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Brock Nash"
+    },
+    {
+      "vehicleId": 12,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Keith Roman"
+    },
+    {
+      "vehicleId": 10,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 18,
+      "availability": false,
+      "vehicleCrew": "Linda Rosario"
+    },
+    {
+      "vehicleId": 9,
+      "vehicleType": "Jeep",
+      "vehicleVolume": 16,
+      "availability": true,
+      "vehicleCrew": "Harris Santana"
+    },
+    {
+      "vehicleId": 1,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 17,
+      "availability": true,
+      "vehicleCrew": "Young Mcmahon"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 16,
+      "availability": true,
+      "vehicleCrew": "Cannon Morgan"
+    },
+    {
+      "vehicleId": 2,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 16,
+      "availability": true,
+      "vehicleCrew": "Guerrero Love"
+    },
+    {
+      "vehicleId": 4,
+      "vehicleType": "Cargo Van",
+      "vehicleVolume": 15,
+      "availability": false,
+      "vehicleCrew": "Bethany Wilkinson"
+    },
+    {
+      "vehicleId": 11,
+      "vehicleType": "Box Truck",
+      "vehicleVolume": 15,
+      "availability": false,
+      "vehicleCrew": "Horne Cote"
+    }
+  ]
+}

@@ -1,7 +1,10 @@
 package com.flashex.tripplanningmicroservice.lib.ORTools;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
+import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
+import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -36,12 +39,15 @@ public class VrpWithCapacityConstraint {
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
         public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
 
+        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
+        VehicleList vehicleList = getJsonServerData.processJsonData();
+
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8, 8};
-        public final long[] vehicleCapacities = {15, 15, 15, 15};
-        public final int vehicleNumber = 4;
+        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();// = {15, 15, 15, 15};
+        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
         public final int depot = 0;
 
-        DataModel() throws ParseException {
+                DataModel() throws ParseException, JsonProcessingException {
         }
     }
 
