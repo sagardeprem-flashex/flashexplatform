@@ -9,7 +9,8 @@ import {  MatSidenavModule,
           MatDialogModule,
           MatFormFieldModule,
           MatInputModule,
-          MatTabsModule} from '@angular/material';
+          MatTabsModule,
+        MatTableModule} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
@@ -48,7 +49,8 @@ const MaterialComponents = [
               MatInputModule,
               MatTabsModule,
               FlexLayoutModule,
-              MatListModule
+              MatListModule,
+              MatTableModule
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -64,7 +66,8 @@ const MaterialComponents = [
               MatInputModule,
               MatTabsModule,
               FlexLayoutModule,
-              MatListModule
+              MatListModule,
+              MatTableModule
             ]
 })
 export class MaterialModule { }
