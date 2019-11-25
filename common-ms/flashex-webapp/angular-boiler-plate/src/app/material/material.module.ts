@@ -51,11 +51,7 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
-<<<<<<< HEAD
-              MatTableModule
-=======
               MatMenuModule
->>>>>>> c37b0c061a397da694a50ebf60583250eb664a25
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -72,11 +68,7 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
-<<<<<<< HEAD
-              MatTableModule
-=======
               MatMenuModule
->>>>>>> c37b0c061a397da694a50ebf60583250eb664a25
             ]
 })
 export class MaterialModule { }
