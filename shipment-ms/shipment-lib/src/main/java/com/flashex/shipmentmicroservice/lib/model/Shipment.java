@@ -2,6 +2,13 @@ package com.flashex.shipmentmicroservice.lib.model;
 
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,12 +20,17 @@ import java.util.Date;
  * Shipment--1--has---*-->Orders
  *
  * */
-
+@Table("Shipment")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class Shipment {
 
     /** String variables **/
 
+    @PrimaryKey
     public String shipmentId;
 
     /** Integer variables**/
@@ -29,7 +41,7 @@ public class Shipment {
     public Date shipmentDate;
 
     /** Objects from local package **/
-    public ArrayList<Package> orderList = new ArrayList<Package>();
+    public ArrayList<Packet> packetList;
 
 
 }

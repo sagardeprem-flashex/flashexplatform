@@ -3,7 +3,6 @@ package com.flashex.shipmentmicroservice.lib.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
-import org.springframework.data.cassandra.config.AbstractClusterConfiguration;
 import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
@@ -12,7 +11,6 @@ import org.springframework.data.cassandra.core.mapping.BasicCassandraMappingCont
 import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
 
-import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +18,7 @@ import java.util.List;
 @EnableCassandraRepositories(basePackages = "com.flashex.shipmentmicroservice")
 public class ClusterConfig extends AbstractCassandraConfiguration{
 
-        public static final String KEYSPACE = "shipment";
+    public static final String KEYSPACE = "shipment";
 //
 //    @Override
     public SchemaAction getSchemaAction() {
@@ -39,15 +37,31 @@ public class ClusterConfig extends AbstractCassandraConfiguration{
         return Arrays.asList(DropKeyspaceSpecification.dropKeyspace(KEYSPACE));
     }
 
-//    @Override
+    //    @Override
     protected String getKeyspaceName() {
-        return KEYSPACE;
-    }
-
-//    @Override
+            return KEYSPACE;
+        }
+    //
+    ////    @Override
     public String[] getEntityBasePackages() {
         return new String[]{"com.flashex.shipmentmicroservice"};
     }
+
+
+    @Bean
+    public CassandraClusterFactoryBean cluster() {
+        CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
+        cluster.setContactPoints("127.0.0.1");
+        cluster.setPort(9042);
+        return cluster;
+    }
+
+//    @Bean
+//    public CassandraMappingContext cassandraMapping()
+//      throws ClassNotFoundException {
+//            return new BasicCassandraMappingContext();
+//        }
+//    }
 
 }
 
