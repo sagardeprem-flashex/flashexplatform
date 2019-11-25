@@ -3,6 +3,7 @@ package com.flashex.tripplanningmicroservice.lib.services;
 import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
+import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,14 @@ public class ORService {
     private final VrpWithCapacityConstraint vrpWithCapacityConstraint;
     private final VrpWithDroppingVisit vrpWithDroppingVisit;
     private final TimeWindowDelivery timeWindowDelivery;
+    private final Data data;
 
-    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery) {
+    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data) {
         this.serviceProperties = serviceProperties;
         this.vrpWithCapacityConstraint = vrpWithCapacityConstraint;
         this.vrpWithDroppingVisit = vrpWithDroppingVisit;
         this.timeWindowDelivery = timeWindowDelivery;
+        this.data = data;
     }
 
     public String message() {
@@ -44,5 +47,9 @@ public class ORService {
         timeWindowDelivery.FinalResult();
     }
 
+//    Send array of address
+    public void settingAddressArray(String[] address){
+        data.setAddr(address);
+    }
 
 }

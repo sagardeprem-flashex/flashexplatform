@@ -9,18 +9,17 @@ import org.json.simple.parser.ParseException;
 
 public class GenerateMatrix {
 
-private String API_key;
 
-public GenerateMatrix()
-{
-    API_key = "AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY";
-}
+    public GenerateMatrix() {
+    }
 
 public Data createData() {
 
     Data d = new Data();
-    d.API_Key = this.API_key;
-    d.addr = new String[]{
+    ArrayData data = new ArrayData();
+    data.API_Key = d.getAPI_Key();
+    data.addr = d.getAddr();
+   /* d.addr = new String[]{
             "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
             "1921+Elvis+Presley+Blvd+Memphis+TN",
             "149+Union+Avenue+Memphis+TN",
@@ -37,7 +36,7 @@ public Data createData() {
             "5959+Park+Ave+Memphis+TN",
             "814+Scott+St+Memphis+TN",
             "1005+Tillman+St+Memphis+TN"
-    };
+    };*/
     return d;
 };
 

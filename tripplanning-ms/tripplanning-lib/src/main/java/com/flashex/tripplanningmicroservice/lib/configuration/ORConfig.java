@@ -4,6 +4,7 @@ package com.flashex.tripplanningmicroservice.lib.configuration;
 import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
+import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,6 +23,11 @@ public class ORConfig {
     @Bean
     public TimeWindowDelivery timeWindowDelivery(){
         return new TimeWindowDelivery();
+    }
+
+    @Bean
+    public Data data(){
+        return new Data();
     }
 
 }
