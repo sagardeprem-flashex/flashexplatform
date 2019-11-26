@@ -60,3 +60,27 @@ flex: 1;
     display: inline-grid;
     margin: 10px;
 }
+
+.example-header-image {
+    background-image: url('images.png');
+    background-size: cover;
+}
+
+.example-header-image1 {
+    background-image: url('wrong.png');
+    background-size: cover;
+}
+
+table {
+    width: 100%;
+}
+
+span {
+    padding-left: 200px;
+    font-size: small;
+    color: #635e5e;
+}
+
+b {
+    color: rgb(129, 126, 126);
+}

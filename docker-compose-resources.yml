@@ -62,10 +62,3 @@ services:
       ZOO_SERVER_PASSWORDS: flashex
     ports:
       - 2181:2181
-
-
-
-
-
-
-
