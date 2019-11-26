@@ -13,14 +13,14 @@ stages:
   - release
   - production
 
-# build_mvn:
-#   image: maven:3-jdk-11
-#   stage: build
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#     - cd common-ms
-#     - mvn clean package
+build_mvn:
+  image: maven:3-jdk-11
+  stage: build
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms
+    - mvn clean package
 
 junit_java:
   image: maven:3-jdk-11
@@ -41,14 +41,14 @@ pmd_maven:
   - mvn pmd:check
 
 #---------Angular Build
-# build_app:
-#   image: circleci/node:11-browsers
-#   stage: build
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#     - cd common-ms/flashex-webapp/angular-boiler-plate/
-#     - npm install
+build_app:
+  image: circleci/node:11-browsers
+  stage: build
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - npm install
 # -----------Angular Test
 karma_unit_tests:
   image: circleci/node:12-browsers
