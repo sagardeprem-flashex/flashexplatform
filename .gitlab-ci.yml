@@ -4,7 +4,7 @@ variables:
 cache:
   paths:
     - .m2/repository
-    # - node_modules/
+    - node_modules/
 
 stages:
   - build
@@ -31,14 +31,15 @@ stages:
 #   - cd common-ms
 #   - mvn test
 
-pmd_maven:
-  image: maven:3-jdk-11
-  stage: lint
-  tags:
-    - flashex-ci-jobs
-  script:
-  - cd common-ms
-  - mvn pmd:check
+# pmd_maven:
+#   image: maven:3-jdk-11
+#   stage: lint
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   - cd common-ms
+#   - mvn pmd:check
+
 #---------Angular Build
 # build_app:
 #   image: circleci/node:11-browsers
@@ -49,27 +50,27 @@ pmd_maven:
 #     - cd common-ms/flashex-webapp/angular-boiler-plate/
 #     - npm install
 #-----------Angular Test
-karma_unit_tests:
-  image: circleci/node:12-browsers
-  stage: test
-  tags:
-    - flashex-ci-jobs
-  before_script:
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install  
-  script:
-    - npm run test
+# karma_unit_tests:
+#   image: circleci/node:12-browsers
+#   stage: test
+#   tags:
+#     - flashex-ci-jobs
+#   before_script:
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install  
+#   script:
+#     - npm run test
 #--------Angular Lint
-tslint_app:
-  image: circleci/node:11-browsers
-  stage: lint
-  tags:
-    - flashex-ci-jobs
-  script:
-  #------go to the path
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
-    - npm run lint -- --format json
+# tslint_app:
+#   image: circleci/node:11-browsers
+#   stage: lint
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   #------go to the path
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install
+#     - npm run lint -- --format json
 # --- Deployment on Release branch
 release_deploy:
     image: ubuntu:latest
