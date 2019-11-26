@@ -6,7 +6,7 @@
                 <h1 class="example-app-name">Trip Details</h1>
             </mat-toolbar>
             <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-                <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+                <mat-sidenav opened="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
                     <mat-nav-list class="sidenav">
                         <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
                     </mat-nav-list>
@@ -14,77 +14,87 @@
 
                 <mat-sidenav-content>
                     <!-- <p *ngFor="let content of fillerContent">{{content}}</p> -->
-                    <div>
-                        <mat-card class="example-card">
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image"></div>
-                                <mat-card-title>Darshan</mat-card-title>
-                                <mat-card-subtitle>Contact No: 1233456 </mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <p><b>Address: </b>10th Main Road, 4th Cross, Koramangala</p>
-                                <p><b>Order ID: </b>AB1234</p>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button title="View Direction" mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
+                    <mat-tab-group>
+                        <mat-tab label="Trip Info">
+                            <mat-list role="list">
+                                <mat-list-item role="listitem">Trip Start time </mat-list-item>
+                                <mat-list-item role="listitem">Trip End time</mat-list-item>
+                                <mat-list-item>Total No of Orders:</mat-list-item>
+                                <mat-list-item>Total trip distance:</mat-list-item>
+                            </mat-list>
+                        </mat-tab>
+                        <mat-tab label="Order Details">
+                            <div>
+                                <mat-card class="example-card">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="example-header-image"></div>
+                                        <mat-card-title>Darshan</mat-card-title>
+                                        <mat-card-subtitle>Contact No: 1233456 </mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p><b>Address: </b>10th Main Road, 4th Cross, Koramangala</p>
+                                        <p><b>Order ID: </b>AB1234</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button title="View Direction" mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
                                     <mat-icon><i class="material-icons">near_me</i></mat-icon>
                                   </button>
-                                <span>Order S.No: 1</span>
-                            </mat-card-actions>
-                        </mat-card>
-                        <mat-card class="example-card">
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image1"></div>
-                                <mat-card-title>Saif</mat-card-title>
-                                <mat-card-subtitle>Contact No: 654321 </mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <p><b>Address: </b> 10th Main Road, 4th Cross, Koramangala</p>
-                                <p><b>Order ID: </b>AB1234</p>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
+                                        <span>Order S.No: 1</span>
+                                    </mat-card-actions>
+                                </mat-card>
+                                <mat-card class="example-card">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="example-header-image1"></div>
+                                        <mat-card-title>Saif</mat-card-title>
+                                        <mat-card-subtitle>Contact No: 654321 </mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p><b>Address: </b> 10th Main Road, 4th Cross, Koramangala</p>
+                                        <p><b>Order ID: </b>AB1234</p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
                                     <mat-icon><i class="material-icons">near_me</i></mat-icon>
                                   </button>
-                                <span>Order S.No: 2</span>
-                            </mat-card-actions>
-                        </mat-card>
-                        <!-- <mat-card class="example-card">
-                            <mat-card-header>
-                                <div mat-card-avatar class="example-header-image"></div>
-                                <mat-card-title>Reciever: Shiba Inu</mat-card-title>
-                                <mat-card-subtitle>Order ID: </mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <p>
-                                    Address: Koramangala
-                                </p>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button mat-button>View on Maps</button>
-                            </mat-card-actions>
-                        </mat-card>
-                        <mat-card class="example-card">
-                            <mat-card-header>
-                                <mat-card-title>Order S.No. </mat-card-title>
-                                <mat-card-subtitle>Order ID: </mat-card-subtitle>
-                            </mat-card-header>
-                            <mat-card-content>
-                                <mat-list role="list">
-                                    <mat-list-item role="listitem">Name: </mat-list-item>
-                                    <mat-list-item role="listitem">Address:</mat-list-item>
-                                    <mat-list-item role="listitem">Contact No:</mat-list-item>
-                                </mat-list>
-
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                                        <span>Order S.No: 2</span>
+                                    </mat-card-actions>
+                                </mat-card>
+                                <mat-card class="example-card">
+                                    <mat-card-header>
+                                        <div mat-card-avatar class="example-header-image"></div>
+                                        <mat-card-title>Reciever: Shiba Inu</mat-card-title>
+                                        <mat-card-subtitle>Order ID: </mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <p>
+                                            Address: Koramangala
+                                        </p>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-button>View on Maps</button>
+                                    </mat-card-actions>
+                                </mat-card>
+                                <mat-card class="example-card">
+                                    <mat-card-header>
+                                        <mat-card-title>Order S.No. </mat-card-title>
+                                        <mat-card-subtitle>Order ID: </mat-card-subtitle>
+                                    </mat-card-header>
+                                    <mat-card-content>
+                                        <mat-list role="list">
+                                            <mat-list-item role="listitem">Name: </mat-list-item>
+                                            <mat-list-item role="listitem">Address:</mat-list-item>
+                                            <mat-list-item role="listitem">Contact No:</mat-list-item>
+                                        </mat-list>
+                                    </mat-card-content>
+                                    <mat-card-actions>
+                                        <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
                                     <mat-icon>favorite</mat-icon>
                                   </button>
-                            </mat-card-actions>
-                        </mat-card> -->
-                    </div>
-
+                                    </mat-card-actions>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
                 </mat-sidenav-content>
             </mat-sidenav-container>
         </div>
