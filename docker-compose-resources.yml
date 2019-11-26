@@ -25,7 +25,8 @@ services:
       - 9042
 
   kafka:
-    image: wurstmeister/kafka:2.11-2.0.0
+    # image: wurstmeister/kafka:2.11-2.0.0
+    image: wurstmeister/kafka:2.12-2.3.0
     container_name: kafka
     restart: on-failure
     volumes:
