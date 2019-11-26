@@ -61,14 +61,17 @@ stages:
 build_mvn:
   image: maven:3-jdk-11
   stage: stage::build
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms
     - mvn clean package
-  
+
 junit_java:
   image: maven:3-jdk-11
   stage: test
-  when: always
+  # tags:
+  #   - flashex-ci-jobs
   script:
   - cd common-ms
   - mvn test
@@ -76,7 +79,8 @@ junit_java:
 pmd_maven:
   image: maven:3-jdk-11
   stage: lint
-  when: always
+  # tags:
+  #   - flashex-ci-jobs
   script:
   - cd common-ms
   - mvn pmd:check
@@ -84,8 +88,8 @@ pmd_maven:
 build_app:
   image: circleci/node:11-browsers
   stage: stage::build
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
@@ -93,30 +97,24 @@ build_app:
 karma_unit_tests:
   image: circleci/node:11-browsers
   stage: test
-  when: always
-  before_script:
-    - echo $KARMA > ./karma.config.js
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
-    - npm install --save @angular/material @angular/cdk @angular/animations
-    - npm install --save karma-junit-reporter jasmine-reporters
-    - npm run test -- --watch=false --karma-config=karma.conf.js
+    - npm run test
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
   stage: lint
-  when: always
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
   #------go to the path
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
     - npm run lint -- --format json
-#--- Deployment on Release branch    
+# --- Deployment on Release branch
 release_deploy:
     image: ubuntu:latest
     stage: release
@@ -141,15 +139,15 @@ release_deploy:
 production_deploy:
     image: ubuntu:latest
     stage: production
-    tags:
-        - flashex-ci-jobs
-    before_script: 
-    #generate ssh key   
-        - mkdir -p ~/.ssh     
-        - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa     
-        - chmod 600 ~/.ssh/id_rsa     
-        - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'   
-    script:     
+    # tags:
+    #     - flashex-ci-jobs
+    before_script:
+    #generate ssh key
+        - mkdir -p ~/.ssh
+        - echo -e "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    script:
         - ls -ltr
         - /bin/sh .gitlab-deploy.sh   
     environment:     

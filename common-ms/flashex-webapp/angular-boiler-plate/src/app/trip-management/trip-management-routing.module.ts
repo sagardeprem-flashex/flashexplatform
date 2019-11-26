@@ -34,7 +34,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'admin/orders',
+        path: 'orders',
         component: OrderDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -42,7 +42,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'admin/vehicle',
+        path: 'vehicle',
         component: VehicleDetailsComponent,
         canActivate: [AuthguardService],
         data: {
