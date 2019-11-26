@@ -4,7 +4,7 @@ variables:
 cache:
   paths:
     - .m2/repository
-    - node_modules/
+    # - node_modules/
 
 stages:
   - build
