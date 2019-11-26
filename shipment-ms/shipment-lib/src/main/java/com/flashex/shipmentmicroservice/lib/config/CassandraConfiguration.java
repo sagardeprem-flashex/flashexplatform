@@ -1,5 +1,6 @@
 package com.flashex.shipmentmicroservice.lib.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
@@ -11,9 +12,15 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
          * Provide a contact point to the configuration.
          */
 
+        @Value("${spring.data.cassandra.contact-points}")
+        private String CONTACT_POINTS;
+
+        @Value("${spring.data.cassandra.keyspace-name}")
+        private String KEYSPACE;
+
         @Override
         public String getContactPoints() {
-            return "localhost";
+            return CONTACT_POINTS;
         }
 
         /*
@@ -21,7 +28,7 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
          */
         @Override
         public String getKeyspaceName() {
-            return "shipment";
+            return KEYSPACE;
         }
 }
 
