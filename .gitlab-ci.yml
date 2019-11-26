@@ -54,9 +54,10 @@ karma_unit_tests:
   stage: test
   tags:
     - flashex-ci-jobs
-  script:
+  before_script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
+    - npm install  
+  script:
     - npm run test
 #--------Angular Lint
 tslint_app:
