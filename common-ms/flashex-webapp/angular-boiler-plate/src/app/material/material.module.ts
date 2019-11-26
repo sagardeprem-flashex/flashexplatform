@@ -14,6 +14,7 @@ import {  MatSidenavModule,
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 const MaterialComponents = [
@@ -32,7 +33,8 @@ const MaterialComponents = [
   MatTabsModule,
   FlexLayoutModule,
   MatListModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTableModule
 ];
 
 @NgModule({
@@ -51,7 +53,8 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
-              MatMenuModule
+              MatMenuModule,
+              MatTableModule
             ],
   exports: [  MatToolbarModule,
               MatButtonModule,
@@ -68,7 +71,8 @@ const MaterialComponents = [
               MatTabsModule,
               FlexLayoutModule,
               MatListModule,
-              MatMenuModule
+              MatMenuModule,
+              MatTableModule
             ]
 })
 export class MaterialModule { }
