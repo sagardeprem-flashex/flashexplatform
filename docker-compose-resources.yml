@@ -70,7 +70,7 @@ services:
     restart: always
     environment:
       # MYSQL_USER: flashex
-      # MYSQL_PASSWORD: flashex
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userDB
     ports:
       - 3306:3306
