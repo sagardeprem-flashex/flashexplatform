@@ -8,7 +8,8 @@ span {
 }
 
 a {
-    color: #eff1f3;
+    color: #626364;
+    list-style: none;
 }
 
 
@@ -54,6 +55,7 @@ a {
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+    color: black;
 }
 
 
@@ -71,21 +73,22 @@ a {
 /* Parallax */
 
 #mainBody .parallax-one {
-    /* padding-top: 280px; */
+    /* padding-top: 40vh; */
     z-index: -5;
     /* display: flex; */
     /* padding-bottom: 200px; */
     overflow: hidden;
     position: relative;
     width: 100%;
-    background-image: url("../../assets/images/for-dribbble.gif");
+    background-image: url("../../assets/images/backgroundimage4.jpg");
     /* background-size: 90% 75%; */
     background-attachment: fixed;
-    height: 90vh;
+    height: 95vh;
+    margin-top: -5ch;
     justify-content: center;
     background-size: 60vh;
-    /* -moz-background-size: cover;
-  -webkit-background-size: cover; */
+    -moz-background-size: cover;
+  -webkit-background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
     /* margin-block-start: 0;
@@ -129,6 +132,7 @@ caption {
     width: max-content;
     /* width: 100%; */
     text-align: center;
+    font-weight: 500;
 }
 
 
@@ -167,3 +171,45 @@ caption {
         font-size: 30px;
     }
 }
+
+
+
+.site-footer
+{
+  background-color:#ccccce;
+  font-size:15px;
+  line-height:24px;
+  color:#f4f3f7;
+}
+
+
+.social-icons
+{
+  list-style:none;
+}
+.social-icons li
+{
+  display:inline-block;
+  margin-bottom:4px;
+  margin-left: 0ch;
+}
+.social-icons li.title
+{
+  margin-right:15px;
+  text-transform:uppercase;
+  color:#96a2b2;
+  font-weight:700;
+  font-size:13px
+}
+.social-icons a{
+  background-color:#feffff;
+  color:#818a91;
+  font-size:16px;
+  display:inline-block;
+  line-height:44px;
+  width:44px;
+  height:44px;
+  margin-right:8px;
+  border-radius:100%;
+}
+
