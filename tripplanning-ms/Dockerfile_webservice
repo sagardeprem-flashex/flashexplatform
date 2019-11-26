@@ -28,6 +28,8 @@ RUN $MVN dependency:go-offline
 
 ENV PATH="/usr/local/google-or-tools/lib:${PATH}"
 
+RUN ls -a
+
 CMD ["/bin/bash"]
 
 COPY tripplanning-lib/src /app/libs/src
