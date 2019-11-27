@@ -99,7 +99,7 @@ karma_unit_tests:
   image: circleci/node:11-browsers
   stage: test
   tags:
-    - boeing-custom-runner
+    - flashex-ci-jobs
   before_script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install  
