@@ -17,15 +17,7 @@ const tripRoutes: Routes = [
       expectedRole: 'ROLE_ADMIN'
     },
     children: [
-      {
-        path: 'trips',
-        component: TripDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
-      },
-      {
+            {
         path: 'track',
         component: LiveTrackingComponent,
         canActivate: [AuthguardService],
@@ -50,7 +42,16 @@ const tripRoutes: Routes = [
         }
       }
     ]
+  },
+  {
+    path: 'trips',
+    component: TripDetailsComponent,
+    canActivate: [AuthguardService],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    }
   }
+  
 ];
 
 
