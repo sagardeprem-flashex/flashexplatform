@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 const sharedRoutes: Routes = [
   {
-    path: 'navbar', component: NavbarComponent
-    },
+    path: 'auth/login', component: LoginComponent
+  },
   {
-    path: 'login' , component: LoginComponent
+    path: 'auth/signup', component: SignUpComponent
   }
 ];
 
