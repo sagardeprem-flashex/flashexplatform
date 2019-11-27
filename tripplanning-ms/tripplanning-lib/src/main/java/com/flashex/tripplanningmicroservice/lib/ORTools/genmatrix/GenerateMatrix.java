@@ -18,8 +18,8 @@ public Data createData() {
     Data d = new Data();
     ArrayData data = new ArrayData();
     data.API_Key = d.getAPI_Key();
-    data.addr = d.getAddr();
-   /* d.addr = new String[]{
+//    data.addr = d.getAddr();
+    d.addr = new String[]{
             "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
             "1921+Elvis+Presley+Blvd+Memphis+TN",
             "149+Union+Avenue+Memphis+TN",
@@ -36,7 +36,7 @@ public Data createData() {
             "5959+Park+Ave+Memphis+TN",
             "814+Scott+St+Memphis+TN",
             "1005+Tillman+St+Memphis+TN"
-    };*/
+    };
     return d;
 };
 
