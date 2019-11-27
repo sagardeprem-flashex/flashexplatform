@@ -5,16 +5,17 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { MaterialModule } from '../material/material.module';
 import { TripsComponent } from './components/trips/trips.component';
 import { DeliveryExecutiveRoutingModule } from './delivery-executive-routing.module';
+import { DeliveryExecutiveHomeComponent } from './components/delivery-executive-home/delivery-executive-home.component';
 
 
 
 @NgModule({
-  declarations: [OrderDeliveryListComponent, NavigationComponent, TripsComponent],
+  declarations: [OrderDeliveryListComponent, NavigationComponent, TripsComponent, DeliveryExecutiveHomeComponent],
   imports: [
     CommonModule,
     DeliveryExecutiveRoutingModule,
     MaterialModule
   ],
-  exports: [OrderDeliveryListComponent, NavigationComponent, TripsComponent, MaterialModule]
+  exports: [OrderDeliveryListComponent, NavigationComponent, TripsComponent, MaterialModule, DeliveryExecutiveHomeComponent]
 })
 export class DeliveryExecutiveModule { }

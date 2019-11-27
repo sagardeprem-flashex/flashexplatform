@@ -17,11 +17,16 @@ import java.util.logging.Logger;
 @RestController
 public class TripPlanningWebServ {
 
+//    static {
+//        Logger logger = Logger.getLogger(TripPlanningWebServ.class.getName());
+//        Path workingDirectory=Paths.get("tripplanning-web-service/src").toAbsolutePath();
+//        logger.info("Current-path:" + workingDirectory);
+//        logger.info(String.format(String.valueOf(workingDirectory)));
+//        Runtime.getRuntime().load(workingDirectory+"/main/resources/extjars/libjniortools.so");
+//    }
+
     static {
-        Logger logger = Logger.getLogger(TripPlanningWebServ.class.getName());
-        Path workingDirectory=Paths.get("src").toAbsolutePath();
-        logger.info(String.format(String.valueOf(workingDirectory)));
-        Runtime.getRuntime().load(workingDirectory+"/main/resources/extjars/libjniortools.so");
+        System.loadLibrary("jniortools");
     }
 
     private final SampleService sampleService;

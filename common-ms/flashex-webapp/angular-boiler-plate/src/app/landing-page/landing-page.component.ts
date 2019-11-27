@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '../shared/services/token-storage.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
+  info: any;
 
-  constructor() { }
+  constructor(private token: TokenStorageService) { }
 
   ngOnInit() {
   }
-
+  logout() {
+    this.token.signOut();
+    window.location.reload();
+  }
 }

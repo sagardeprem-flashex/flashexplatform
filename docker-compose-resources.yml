@@ -63,3 +63,14 @@ services:
     #   ZOO_SERVER_PASSWORDS: flashex
     ports:
       - 2181:2181
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      # MYSQL_USER: flashex
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: userDB
+    ports:
+      - 3306:3306

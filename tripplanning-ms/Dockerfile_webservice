@@ -26,11 +26,11 @@ RUN $MVN --version
 
 RUN $MVN dependency:go-offline
 
-ENV PATH="/usr/local/google-or-tools/lib:${PATH}"
+#ENV PATH="/usr/local/google-or-tools/lib:${PATH}"
 
 RUN ls -a
 
-CMD ["/bin/bash"]
+#CMD ["/bin/bash"]
 
 COPY tripplanning-lib/src /app/libs/src
 
@@ -39,8 +39,11 @@ RUN $MVN clean install -DskipTests
 #-------------------BUILD SERVICE-------------------#
 #FROM maven:3.6.2-jdk-12 AS build
 FROM prithivid/flashexdepends:latest AS build
+#FROM rajiff/prepackaged-google-or-tools:latest AS build
 
 RUN mkdir -p /app/service
+
+COPY --from=or-tools-build /root/.m2/repository /root/.m2/repository
 
 COPY tripplanning-web-service/pom.xml /app/service/pom.xml
 
@@ -64,17 +67,25 @@ FROM gesellix/wait-for as waitfor
 #-------------------START SERVICE-------------------#
 FROM openjdk:12-alpine
 
-COPY --from=or-tools-build /usr/local/google-or-tools /usr/local/google-or-tools
+RUN apk add --no-cache libstdc++
+
+RUN apk update
+
+RUN apk add gcompat
+
+COPY --from=or-tools-build /usr/local/google-or-tools/lib /usr/java/packages/lib
+
+RUN ls -la /usr/java/packages/lib
+
+#ENV PATH="/usr/local/google-or-tools/:${PATH}"
+
+CMD ["/bin/bash"]
 
 #COPY --from=lib-build /root/.m2/repository/com/flashex /root/.m2/repository/com/flashex
 
 COPY --from=build /app/service/target/*.jar app.jar
 
 COPY --from=waitfor ./wait-for ./wait-for
-
-ENV PATH="/usr/local/google-or-tools/lib:${PATH}"
-
-CMD ["/bin/bash"]
 
 EXPOSE 6020
 

@@ -43,8 +43,10 @@ public class VrpWithCapacityConstraint {
         VehicleList vehicleList = getJsonServerData.processJsonData();
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8, 8};
-        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();// = {15, 15, 15, 15};
-        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
+//        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+        public final long[] vehicleCapacities = {15, 15, 15, 15};
+//        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
+        public final int vehicleNumber = 4;
         public final int depot = 0;
 
                 DataModel() throws ParseException, JsonProcessingException {

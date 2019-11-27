@@ -1,5 +1,51 @@
 variables:
- DEPLOY_BRANCH: $CI_COMMIT_REF_NAME 
+ DEPLOY_BRANCH: $CI_COMMIT_REF_NAME
+ KARMA: "
+  let defaultConfFile = './karma.conf';
+  const karmaConfig = require(defaultConfFile);
+  module.exports = function(overridedConfig) {
+    reporters = ['progress', 'junit'];
+    browsers = ['ChromeHeadless'];
+    customLaunchers = {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--remote-debugging-port=9222',
+          '--no-sandbox'
+        ],
+      }
+    };
+    junitReporter = {
+      outputDir:  'reports/karma/',
+      outputFile: 'karma-test-result.xml',
+      suite: '',
+      useBrowserName: false,
+    };
+    let mycfg = {
+      set(val) {
+        val.plugins = [
+          require('karma-jasmine'),
+          require('karma-chrome-launcher'),
+          require('karma-jasmine-html-reporter'),
+          require('karma-coverage-istanbul-reporter'),
+          require('@angular-devkit/build-angular/plugins/karma'),
+          require('karma-junit-reporter')
+        ];
+        val.reporters = reporters;
+        val.junitReporter = junitReporter;
+        val.browsers = browsers;
+        val.customLaunchers = customLaunchers;
+        val.singleRun = true;
+        val.browserDisconnectTolerance = 1;
+        val.browserNoActivityTimeout = 50000;
+        overridedConfig.set(val);
+      }
+    };
+    karmaConfig(mycfg);
+  }
+  "    
 
 cache:
   paths:
@@ -7,7 +53,7 @@ cache:
     - node_modules/
 
 stages:
-  - stage::build
+  - build
   - test
   - lint
   - release
@@ -15,9 +61,9 @@ stages:
 
 build_mvn:
   image: maven:3-jdk-11
-  stage: stage::build
-  # tags:
-  #   - flashex-ci-jobs
+  stage: build
+  tags:
+    - flashex-ci-jobs
   script:
     - cd common-ms
     - mvn clean package
@@ -25,8 +71,8 @@ build_mvn:
 junit_java:
   image: maven:3-jdk-11
   stage: test
-  # tags:
-  #   - flashex-ci-jobs
+  tags:
+    - flashex-ci-jobs
   script:
   - cd common-ms
   - mvn test
@@ -34,36 +80,38 @@ junit_java:
 pmd_maven:
   image: maven:3-jdk-11
   stage: lint
-  # tags:
-  #   - flashex-ci-jobs
+  tags:
+    - flashex-ci-jobs
   script:
   - cd common-ms
   - mvn pmd:check
+
 #---------Angular Build
 build_app:
   image: circleci/node:11-browsers
-  stage: stage::build
-  # tags:
-  #   - flashex-ci-jobs
+  stage: build
+  tags:
+    - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
-#-----------Angular Test
+# -----------Angular Test
 karma_unit_tests:
-  image: circleci/node:12-browsers
+  image: circleci/node:11-browsers
   stage: test
-  # tags:
-  #   - flashex-ci-jobs
-  script:
+  tags:
+    - flashex-ci-jobs
+  before_script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install
+    - npm install  
+  script:
     - npm run test
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
   stage: lint
-  # tags:
-  #   - flashex-ci-jobs
+  tags:
+    - flashex-ci-jobs
   script:
   #------go to the path
     - cd common-ms/flashex-webapp/angular-boiler-plate/
@@ -73,8 +121,8 @@ tslint_app:
 release_deploy:
     image: ubuntu:latest
     stage: release
-    # tags:
-    #   - flashex-ci-jobs
+    tags:
+      - flashex-ci-jobs
     before_script:
     #generate ssh key
         - mkdir -p ~/.ssh
@@ -83,19 +131,19 @@ release_deploy:
         - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     script:
         - ls -ltr
-        - /bin/sh .gitlab-deploy.sh
-    environment:
-        name: release
-        url: http://flashex-dev.stackroute.io
+        - /bin/sh .gitlab-deploy.sh   
+    environment:     
+        name: production     
+        url: http:/flashex-dev.stackroute.io
     when: on_success
     only:
-        - release_v0.1.0
+        - release_v0.2.0
 #-----Production Deployment
 production_deploy:
     image: ubuntu:latest
     stage: production
-    # tags:
-    #     - flashex-ci-jobs
+    tags:
+        - flashex-ci-jobs
     before_script:
     #generate ssh key
         - mkdir -p ~/.ssh
@@ -104,10 +152,10 @@ production_deploy:
         - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     script:
         - ls -ltr
-        - /bin/sh .gitlab-deploy.sh
-    environment:
-        name: production
+        - /bin/sh .gitlab-deploy.sh   
+    environment:     
+        name: production     
         url: http://flashex-dev.stackroute.io
     when: manual
-    only:
+    only: 
         - master
