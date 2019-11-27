@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
-import { SignUpInfo } from '../../services/signupinfo';
+import { SignUpInfo } from '../../interfaces/signupinfo';
 
 
 

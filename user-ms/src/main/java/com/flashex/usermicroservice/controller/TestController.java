@@ -15,12 +15,6 @@ public class TestController {
         return ">>> User Contents!";
     }
 
-    @GetMapping("/api/test/manager/**")
-    @PreAuthorize("hasRole('PM') or hasRole('ADMIN')")
-    public String projectManagementAccess() {
-        return ">>> Project Management Board";
-    }
-
     @GetMapping("/api/test/admin/**")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminAccess() {

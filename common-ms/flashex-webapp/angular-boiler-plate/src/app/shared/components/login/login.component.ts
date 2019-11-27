@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../services/authentication.service';
 import { TokenStorageService } from '../../services/token-storage.service';
-import { AuthLoginInfo } from '../../services/logininfo';
+import { AuthLoginInfo } from '../../interfaces/logininfo';
 
 @Component({
   selector: 'app-login',
