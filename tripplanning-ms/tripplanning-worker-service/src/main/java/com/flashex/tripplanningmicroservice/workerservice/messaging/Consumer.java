@@ -17,7 +17,7 @@ public class Consumer {
     }
 
     @KafkaListener(topics = "Batches", groupId = "group_id")
-    public void consume(String message) throws JsonProcessingException {
+    public void consume(String message) throws Exception {
         processOnConsumption.processData(message);
     }
 

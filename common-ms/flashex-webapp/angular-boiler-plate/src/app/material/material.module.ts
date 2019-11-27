@@ -10,6 +10,7 @@ import {  MatSidenavModule,
           MatFormFieldModule,
           MatInputModule,
           MatTabsModule,
+          MatTableModule,
           MatMenuModule} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
@@ -32,43 +33,14 @@ const MaterialComponents = [
   MatTabsModule,
   FlexLayoutModule,
   MatListModule,
-  MatMenuModule
+  MatMenuModule,
+  MatTableModule
 ];
 
 @NgModule({
-  imports: [  MatToolbarModule,
-              MatButtonModule,
-              MatSidenavModule,
-              MatCardModule,
-              MatStepperModule,
-              MatIconModule,
-              MatProgressBarModule,
-              MatExpansionModule,
-              MatButtonToggleModule,
-              MatDialogModule,
-              MatFormFieldModule,
-              MatInputModule,
-              MatTabsModule,
-              FlexLayoutModule,
-              MatListModule,
-              MatMenuModule
-            ],
-  exports: [  MatToolbarModule,
-              MatButtonModule,
-              MatSidenavModule,
-              MatCardModule,
-              MatStepperModule,
-              MatIconModule,
-              MatProgressBarModule,
-              MatExpansionModule,
-              MatButtonToggleModule,
-              MatDialogModule,
-              MatFormFieldModule,
-              MatInputModule,
-              MatTabsModule,
-              FlexLayoutModule,
-              MatListModule,
-              MatMenuModule
-            ]
+  imports: [MaterialComponents
+  ],
+  exports: [MaterialComponents
+  ]
 })
 export class MaterialModule { }
