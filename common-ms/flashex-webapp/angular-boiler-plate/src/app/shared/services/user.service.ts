@@ -6,10 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  // private userUrl = 'http://localhost:8080/api/test/user';
-  // private adminUrl = 'http://localhost:8080/api/test/admin';
-  private userUrl = 'http://flashex-dev.stackroute.io/api/test/user';
-  private adminUrl = 'http://flashex-dev.stackroute.io/api/test/admin';
+  private userUrl = 'http://localhost:8080/user-microservice/api/test/user';
+  private adminUrl = 'http://localhost:8080/user-microservice/api/test/admin';
+  // private userUrl = 'http://flashex-dev.stackroute.io/api/test/user';
+  // private adminUrl = 'http://flashex-dev.stackroute.io/api/test/admin';
 
   constructor(private http: HttpClient) { }
 
