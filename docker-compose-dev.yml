@@ -86,6 +86,7 @@ services:
     image: shipment-webservice:latest
     expose:
       - 6010
+    restart: always
     ports:
       - 6010:6010
     env_file:
