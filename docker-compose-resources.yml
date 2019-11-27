@@ -33,13 +33,13 @@ services:
       - $HOME/kakfa_data/flashexDB:/data/db
     environment:
       KAFKA_MESSAGE_MAX_BYTES: 2000000
-      KAFKA_ZOOKEEPER_USER: kafka
-      KAFKA_ZOOKEEPER_PASSWORD: kafka
-      KAFKA_INTER_BROKER_USER: interuser
-      KAFKA_INTER_BROKER_PASSWORD: interpassword
-      KAFKA_BROKER_USER: user
-      KAFKA_BROKER_PASSWORD: password
-      KAFKA_CERTIFICATE_PASSWORD: certificatePassword123
+      # KAFKA_ZOOKEEPER_USER: kafka
+      # KAFKA_ZOOKEEPER_PASSWORD: kafka
+      # KAFKA_INTER_BROKER_USER: interuser
+      # KAFKA_INTER_BROKER_PASSWORD: interpassword
+      # KAFKA_BROKER_USER: user
+      # KAFKA_BROKER_PASSWORD: password
+      # KAFKA_CERTIFICATE_PASSWORD: certificatePassword123
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:19092,PLAINTEXT_HOST://localhost:9092
@@ -57,9 +57,9 @@ services:
     image: wurstmeister/zookeeper
     container_name: zookeeper
     restart: on-failure
-    environment:
-      ZOO_ENABLE_AUTH: "yes"
-      ZOO_SERVER_USERS: flashex
-      ZOO_SERVER_PASSWORDS: flashex
+    # environment:
+    #   ZOO_ENABLE_AUTH: "yes"
+    #   ZOO_SERVER_USERS: flashex
+    #   ZOO_SERVER_PASSWORDS: flashex
     ports:
       - 2181:2181
