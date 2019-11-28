@@ -36,7 +36,7 @@ import { MatPaginatedTabHeader } from '@angular/material/tabs/typings/paginated-
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false }
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   exports: [
     LandingPageComponent

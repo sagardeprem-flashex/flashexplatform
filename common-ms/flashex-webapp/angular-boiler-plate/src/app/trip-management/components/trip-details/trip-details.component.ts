@@ -16,6 +16,7 @@ export class TripDetailsComponent implements OnInit {
   public selectedOptimization;
   public userName;
   public properties: ITripProperties;
+
   constructor(private tripService: TripItineraryService, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -27,7 +28,6 @@ export class TripDetailsComponent implements OnInit {
 
     });
     // console.log(this.dataSource);
-
 
   }
 

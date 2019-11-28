@@ -8,8 +8,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class DeliveryExecutiveHomeComponent implements OnInit {
 
-  board: string;
-  errorMessage: string;
+  public board: string;
+  public errorMessage: string;
 
   constructor(private userService: UserService) { }
 

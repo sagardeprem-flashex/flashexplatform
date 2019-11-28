@@ -28,4 +28,8 @@ public class TripItineraryController {
         return tripItineraries;
     }
 
+    @GetMapping("/tripItinerary/${id}")
+    public TripItinerary getSpecificTripItinerary(@PathVariable String id) {
+        return tripItineraryService.getSpecificTripItinerary(id);
+    }
 }
