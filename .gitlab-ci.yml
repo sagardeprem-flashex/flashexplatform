@@ -53,8 +53,8 @@ build_app:
 karma_unit_tests:
   image: circleci/node:12-browsers
   stage: test
-  tags:
-    - flashex-ci-jobs
+  # tags:
+  #   - flashex-ci-jobs
   script:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install  
