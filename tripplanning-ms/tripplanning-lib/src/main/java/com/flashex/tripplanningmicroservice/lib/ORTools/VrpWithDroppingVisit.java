@@ -1,7 +1,11 @@
 package com.flashex.tripplanningmicroservice.lib.ORTools;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
+import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
+import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
+import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -40,22 +44,40 @@ public class VrpWithDroppingVisit {
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
         public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
 
+        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
+        VehicleList vehicleList = getJsonServerData.processJsonData();
+
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8};
-        public final long[] vehicleCapacities = {30, 15, 17, 18};
-        public final int vehicleNumber = 4;
+//        public final long[] vehicleCapacities = {30, 15, 17, 18};
+//        public final int vehicleNumber = 4;
+        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
+
         public final int depot = 0;
 
-        DataModel() throws ParseException {
+        DataModel() throws ParseException, JsonProcessingException {
         }
     }
 
     /// @brief Print the solution.
-    static void printSolution(
+    static TripItinerary printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution, String[] address) throws Exception {
 
         String[] addr = address;
         HashMap<String, Set<String>> Locationcord = new HashMap();
+
+        TripItinerary tripItinerary = new TripItinerary();
+
+        tripItinerary.setPlannedStartTime("9 AM");
+        tripItinerary.getPlannedStartTime();
+
+        tripItinerary.setPlannedEndTime("5 PM");
+        tripItinerary.getPlannedEndTime();
+
+//      Setting vehicle details
+        VehicleList vehicleList = new VehicleList();
+//        logger.info((""+ vehicleList.listofvehicle));
 
 
         // Display dropped nodes.
@@ -78,6 +100,10 @@ public class VrpWithDroppingVisit {
         for (int i = 0; i < data.vehicleNumber; ++i) {
             long index = routing.start(i);
             logger.info("Route for Vehicle " + i + ":");
+
+            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+
+
             long routeDistance = 0;
             long routeLoad = 0;
             String response = "";
@@ -86,16 +112,29 @@ public class VrpWithDroppingVisit {
             while (!routing.isEnd(index)) {
                 long nodeIndex = manager.indexToNode(index);
                 routeLoad += data.demands[(int) nodeIndex];
+
+                long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
+                long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity);
+                tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
+
                 route += nodeIndex + " Load(" + routeLoad + ")  -> " ; //+ "Address" + addr[(int) nodeIndex] + "-->";
                 response = geocode(addr[(int) nodeIndex],data.Key);
                 System.out.println(latlongarr.size());
-
                 latlongarr.add(response);
-
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+
+                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
+                long milage = 21;
+                long tripexpense = milage*routeDistance;
+                tripItinerary.setTripExpense(tripexpense);
+
             }
+            tripItinerary.getPlannedTotalDistance(); // get distance of the route
+            tripItinerary.getVehicle(); // get the vehicle details
+            tripItinerary.getOccupiedVolume(); // get occupied volume
+            tripItinerary.getTripExpense(); // get trip expense
 
             Locationcord.put("Vehicle:" + i,latlongarr);
 
@@ -112,6 +151,8 @@ public class VrpWithDroppingVisit {
         }
         logger.info("Total Distance of all routes: " + totalDistance + "m");
         logger.info("Total Load of all routes: " + totalLoad);
+
+        return tripItinerary;
     }
 
     static void matPrint(int[][] distmat, int[][] timemat, String[] address) {
@@ -198,7 +239,7 @@ public class VrpWithDroppingVisit {
 
 
 //                Prints distance and time matrices
-    matPrint(data.distmat,data.timemat,data.addresses);
+        matPrint(data.distmat,data.timemat,data.addresses);
 
     }
 }

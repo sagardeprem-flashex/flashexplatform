@@ -18,8 +18,8 @@ public Data createData() {
     Data d = new Data();
     ArrayData data = new ArrayData();
     data.API_Key = d.getAPI_Key();
-//    data.addr = d.getAddr();
-    d.addr = new String[]{
+    data.addr = d.getAddr();
+   /* d.addr = new String[]{
             "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
             "1921+Elvis+Presley+Blvd+Memphis+TN",
             "149+Union+Avenue+Memphis+TN",
@@ -36,7 +36,7 @@ public Data createData() {
             "5959+Park+Ave+Memphis+TN",
             "814+Scott+St+Memphis+TN",
             "1005+Tillman+St+Memphis+TN"
-    };
+    };*/
     return d;
 };
 
@@ -110,7 +110,7 @@ public int[][] buildTimetravelMat(JSONObject jobj,int rows, int columns){
             JSONObject jobj2 = (JSONObject) jsonarr_2.get(j);
             JSONObject jobjdist = (JSONObject) jobj2.get("duration");
             int time = Integer.parseInt(jobjdist.get("value").toString());
-            time_mat[i][k] = time;
+            time_mat[i][k] = time/110;
             k++;
         }
     }

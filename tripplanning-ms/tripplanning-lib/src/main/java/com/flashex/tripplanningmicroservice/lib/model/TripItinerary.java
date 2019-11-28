@@ -26,10 +26,10 @@ public class TripItinerary {
 //    private List<Packet> packets;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date plannedStartTime;
+    private String plannedStartTime;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date plannedEndTime;
+    private String plannedEndTime;
 
     @CassandraType(type = DataType.Name.FLOAT)
     private float plannedTotalDistance;
