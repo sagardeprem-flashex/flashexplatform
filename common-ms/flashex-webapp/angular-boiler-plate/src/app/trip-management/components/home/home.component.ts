@@ -7,6 +7,9 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  sidenavWidth = 4;
+  ngStyle: string;
+
   board: string;
   errorMessage: string;
 
@@ -21,6 +24,13 @@ export class HomeComponent implements OnInit {
         this.errorMessage = `${error.status}: ${JSON.parse(error.error).message}`;
       }
     );
+  }
+
+  increase() {
+    this.sidenavWidth = 15;
+  }
+  decrease() {
+    this.sidenavWidth = 4;
   }
 
 }

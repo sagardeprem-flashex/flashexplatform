@@ -1,5 +1,12 @@
-mat-card {
-    box-shadow: none !important;
+.card {
+    max-width: 250px;
+    margin-top: 17px
+}
+
+img {
+    height: 30vh;
+    margin-left: 0vh;
+    width: 100%;
 }
 
 .mat-typography {

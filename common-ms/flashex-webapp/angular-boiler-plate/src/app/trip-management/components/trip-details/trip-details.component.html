@@ -1,58 +1,58 @@
-<div class="trips-container">
-  <section class="mat-typography">
-    <h1>Upcoming Trips</h1>
-    <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button>
-  </section>
+<div class="trips-container" style="padding-top: 10vh;">
+    <section class="mat-typography">
+        <h1 style="font-size: 2em;">Upcoming Trips</h1>
+        <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button>
+    </section>
 
-  <mat-accordion multi="true">
-    <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
-      <mat-expansion-panel-header>
-        <mat-panel-title>TripId#{{trip.tripItineraryId}}</mat-panel-title>
-        <mat-panel-description>VehicleNumber#{{trip.tripItineraryId}}</mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-content>
-            <!-- <mat-button-toggle-group name="selectedOptimization">
+    <mat-accordion multi="true">
+        <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
+            <mat-expansion-panel-header>
+                <mat-panel-title>TripId#{{trip.tripItineraryId}}</mat-panel-title>
+                <mat-panel-description>VehicleNumber#{{trip.tripItineraryId}}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-card>
+                <mat-card-content>
+                    <!-- <mat-button-toggle-group name="selectedOptimization">
                 <mat-button-toggle value="distance">Distance</mat-button-toggle>
                 <mat-button-toggle value="time">Duration</mat-button-toggle>
             </mat-button-toggle-group> -->
-          <mat-tab-group>
-            <mat-tab label='Distance'>
-              <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </mat-step>
+                    <mat-tab-group>
+                        <mat-tab label='Distance'>
+                            <mat-vertical-stepper>
+                                <mat-step *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
+                                    {{order.deliveryAddress}}<br><br>
+                                    <button mat-button matStepperPrevious>Back</button>
+                                    <button mat-button matStepperNext>Next</button>
+                                </mat-step>
 
-                <!-- Icon overrides. -->
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper>
-            </mat-tab>
-            <mat-tab label='Duration'>
-              <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </mat-step>
+                                <!-- Icon overrides. -->
+                                <ng-template matStepperIcon="edit">
+                                    <mat-icon>chevron_right</mat-icon>
+                                </ng-template>
+                                <ng-template matStepperIcon="done">
+                                    <mat-icon>expand_more</mat-icon>
+                                </ng-template>
+                            </mat-vertical-stepper>
+                        </mat-tab>
+                        <mat-tab label='Duration'>
+                            <mat-vertical-stepper>
+                                <mat-step *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
+                                    {{order.deliveryAddress}}<br><br>
+                                    <button mat-button matStepperPrevious>Back</button>
+                                    <button mat-button matStepperNext>Next</button>
+                                </mat-step>
 
-                <!-- Icon overrides. -->
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper>
-            </mat-tab>
-          </mat-tab-group>
-          <!-- <mat-vertical-stepper>
+                                <!-- Icon overrides. -->
+                                <ng-template matStepperIcon="edit">
+                                    <mat-icon>chevron_right</mat-icon>
+                                </ng-template>
+                                <ng-template matStepperIcon="done">
+                                    <mat-icon>expand_more</mat-icon>
+                                </ng-template>
+                            </mat-vertical-stepper>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <!-- <mat-vertical-stepper>
             <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
               {{order.deliveryAddress}}<br><br>
               <button mat-button matStepperPrevious>Back</button>
@@ -66,12 +66,12 @@
               <mat-icon>expand_more</mat-icon>
             </ng-template>
           </mat-vertical-stepper> -->
-        </mat-card-content>
-      </mat-card>
-    </mat-expansion-panel>
-  </mat-accordion>
+                </mat-card-content>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-  <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
+    <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
     <mat-card-subtitle>TripId#{{trip.tripItineraryId}}</mat-card-subtitle>
     <mat-card-title>VehicleNumber#{{trip.tripItineraryId}}</mat-card-title>
     <mat-card-content *ngIf="i === selected">
