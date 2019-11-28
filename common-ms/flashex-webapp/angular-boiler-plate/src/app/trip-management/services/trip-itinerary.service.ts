@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { IList } from '../interfaces/trip-itinerary';
 import { HttpHeaders } from '@angular/common/http';
 import { ITripProperties } from '../interfaces/trip-planning-properties';
+import { IItinerary } from '../interfaces/trip-itinerary';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,10 @@ export class TripItineraryService {
 
    private url = '../../../assets/tripItinerary1.json';
    private dataSource = [];
-   public behaviourSubject = new BehaviorSubject<IList[]>(this.dataSource);
+   public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);
 
    load() {
-     this.http.get<IList[]>(this.url).subscribe(data => {
+     this.http.get<IItinerary[]>(this.url).subscribe(data => {
        this.dataSource = data;
        this.behaviourSubject.next(this.dataSource);
      });

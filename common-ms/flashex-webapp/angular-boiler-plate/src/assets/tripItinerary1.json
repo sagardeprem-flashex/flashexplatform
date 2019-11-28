@@ -421,16 +421,22 @@
     ],
     "plannedStartTime": "2019-11-28T09:00:00+00:00",
     "plannedEndTime": "2019-11-28T13:00:00+00:00",
-    "plannedTotalDistance": 120,
+    "plannedTotalDistance": 120000,
     "vehicle": {
-      "vehicleId": 0,
+      "vehicleId": 1,
       "vehicleType": "Cargo Van",
       "vehicleVolume": 30,
       "availability": true,
       "vehicleCrew": "Christi Contreras"
     },
     "tripExpense": 1600,
-    "occupiedVolume": 92
+    "occupiedVolume": 92,
+    "originAddress": {
+      "address": "139/28, Domlur Layout Opp. Embassy Golf Links, Off, Intermediate Ring Rd, Krishna Reddy Layout, Amarjyoti Layout, Bengaluru, Karnataka 560071",
+      "latitude": 12.9534628,
+      "longitude": 77.6366707
+    },
+    "algorithm": "VrpWithCapacityConstraint"
   },
   {
     "tripItineraryId": "OuoFoWpZY1DvRAkozfGh",
@@ -918,15 +924,21 @@
     ],
     "plannedStartTime": "2019-11-28T09:00:00+00:00",
     "plannedEndTime": "2019-11-28T13:00:00+00:00",
-    "plannedTotalDistance": 150,
+    "plannedTotalDistance": 150000,
     "vehicle": {
-      "vehicleId": 2,
+      "vehicleId": 3,
       "vehicleType": "Jeep",
       "vehicleVolume": 30,
       "availability": true,
       "vehicleCrew": "Hoover Pruitt"
     },
     "tripExpense": 1350,
-    "occupiedVolume": 94
+    "occupiedVolume": 94,
+    "originAddress": {
+      "address": "139/28, Domlur Layout Opp. Embassy Golf Links, Off, Intermediate Ring Rd, Krishna Reddy Layout, Amarjyoti Layout, Bengaluru, Karnataka 560071",
+      "latitude": 12.9534628,
+      "longitude": 77.6366707
+    },
+    "algorithm": "VrpWithCapacityConstraint"
   }
 ]

@@ -8,3 +8,19 @@ mat-card {
   width: 94%;
   justify-content: space-between;
 }
+
+.mat-title {
+  margin: 16px 0 16px 0;
+}
+
+.summary-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.trip-details-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 8vh 0 0 0;
+}
