@@ -23,16 +23,27 @@ public class OptimizationProperties {
     @CassandraType(type = DataType.Name.TEXT)
     private String propertiesId;
 
+    @CassandraType(type = DataType.Name.TEXT)
+    private String algorithmSelected;
+
+    @CassandraType(type = DataType.Name.INT)
+    private int maxNoOfElementsInDistMat;
+
     @CassandraType(type = DataType.Name.INT)
     private int noOfDepot;
 
-    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.TEXT)
-    private List<String> homeTime;
+//    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.TEXT)
+//    private List<String> homeTime;
+//
+//    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.TEXT)
+//    private List<String> officeTime;
 
-    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.TEXT)
-    private List<String> officeTime;
+    @CassandraType(type = DataType.Name.INT)
+    private int solverTimeLimit;
 
     @CassandraType(type = DataType.Name.DOUBLE)
-    private double penalty;
+    private double distancePenalty;
 
+    @CassandraType(type = DataType.Name.DOUBLE)
+    private double durationPenalty;
 }

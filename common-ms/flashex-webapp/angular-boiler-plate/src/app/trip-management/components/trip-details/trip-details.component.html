@@ -17,24 +17,10 @@
                 <mat-button-toggle value="time">Duration</mat-button-toggle>
             </mat-button-toggle-group> -->
           <mat-tab-group>
-            <mat-tab label='Distance'>
-              <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </mat-step>
+            <!-- <mat-tab label='Summary'>
 
-                <!-- Icon overrides. -->
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper>
-            </mat-tab>
-            <mat-tab label='Duration'>
+            </mat-tab> -->
+            <mat-tab label='Orders'>
               <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
                   {{order.deliveryAddress}}<br><br>

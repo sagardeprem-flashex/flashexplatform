@@ -23,9 +23,10 @@ export class TripItineraryService {
     this.load();
    }
 
-   private url = '../../../assets/tripItinerary.json';
+   private url = '../../../assets/tripItinerary1.json';
    private dataSource = [];
    public behaviourSubject = new BehaviorSubject<IList[]>(this.dataSource);
+
    load() {
      this.http.get<IList[]>(this.url).subscribe(data => {
        this.dataSource = data;
