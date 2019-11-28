@@ -3,14 +3,14 @@
     /* display: flex; */
     align-items: center;
     justify-content: center;
-    margin: 16px;
-    padding: 16px;
-    border-radius: 8px;
+    /* margin: 16px;
+    padding: 16px; */
+    /* border-radius: 8px; */
     width: 90%;
 }
 
 .example-small-box {
-    width: 90%;
+    width: 100%;
 }
 
 .example-container {
@@ -24,7 +24,7 @@
 }
 
 .example-is-mobile .example-toolbar {
-    position: fixed;
+    position: absolute;
     /* Make sure the toolbar will stay on top of the content as it scrolls past. */
     z-index: 2;
 }
@@ -49,7 +49,7 @@ flex: 1;
 }
 
 .sidenav {
-    width: 200px;
+    width: 150px;
 }
 
 .example-card {

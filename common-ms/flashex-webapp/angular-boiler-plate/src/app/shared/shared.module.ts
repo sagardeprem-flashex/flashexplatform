@@ -6,12 +6,15 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthGuard } from './auth/auth-guard';
 import { AuthenticationService } from './services/authentication.service';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { UserService} from '../shared/services/user.service';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './services/auth-interceptor';
 
 
 @NgModule({
-  declarations: [NavbarComponent, LoginComponent],
+  declarations: [NavbarComponent, LoginComponent, SignUpComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -19,9 +22,10 @@ import { AuthenticationService } from './services/authentication.service';
     AppRoutingModule,
     SharedRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [AuthGuard, AuthenticationService],
-  exports: [ NavbarComponent, LoginComponent]
+  providers: [AuthenticationService, UserService, httpInterceptorProviders],
+  exports: [ NavbarComponent, LoginComponent, SignUpComponent]
 })
 export  class SharedModule { }
