@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class TripItineraryService {
@@ -14,14 +13,26 @@ public class TripItineraryService {
     @Autowired
     private TripItineraryRepository tripItineraryRepository;
 
+    public TripItinerary getSpecificTripItinerary(String id) {
+        if(this.tripItineraryRepository.findById(id).isPresent()) {
+            return this.tripItineraryRepository.findById(id).get();
+        }
+        return null;
+    }
+
     public List<TripItinerary> getAllTripItineraries()
     {
         return this.tripItineraryRepository.findAll();
     }
 
-    public TripItinerary saveTripItinerary(TripItinerary tripItinerary)
+    public void saveTripItinerary(TripItinerary tripItinerary)
     {
-        return  this.tripItineraryRepository.save(tripItinerary) ;
+        this.tripItineraryRepository.save(tripItinerary);
+    }
+
+    public void deleteTripItinerary(TripItinerary tripItinerary) {
+
+        this.tripItineraryRepository.delete(tripItinerary);
     }
 
 }
