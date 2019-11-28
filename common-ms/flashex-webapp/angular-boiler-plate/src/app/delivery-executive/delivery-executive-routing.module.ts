@@ -3,15 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { OrderDeliveryListComponent } from './components/order-delivery-list/order-delivery-list.component';
 import { TripsComponent } from './components/trips/trips.component';
+import { DeliveryExecutiveHomeComponent } from './components/delivery-executive-home/delivery-executive-home.component';
 const deliveryRoutes: Routes = [
   {
-    path: 'navigation', component: NavigationComponent
-  },
-  {
-    path: 'order', component: OrderDeliveryListComponent
-  },
-  {
-    path: 'trip', component: TripsComponent
+    path: 'user', component: DeliveryExecutiveHomeComponent,
+    children: [
+      {
+        path: 'navigation', component: NavigationComponent
+      },
+      {
+        path: 'order', component: OrderDeliveryListComponent
+      },
+      {
+        path: 'tripschedule', component: TripsComponent
+      }
+    ]
   }
 ];
 @NgModule({

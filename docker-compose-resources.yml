@@ -14,16 +14,15 @@ services:
       - 27017:27017
 
   cassandra:
-    image: cassandra:latest
+    image: cassandra
     container_name: cassandra
-    restart: on-failure
+    restart: always
     volumes:
       - $HOME/cassandra_data/flashexDB:/data/db
-    environment:
-      CASS_USERNAME: flashex
-      CASS_PASSWORD: flashex
     ports:
       - 9042:9042
+    expose:
+      - 9042
 
   kafka:
     image: wurstmeister/kafka:2.11-2.0.0
@@ -63,3 +62,14 @@ services:
       ZOO_SERVER_PASSWORDS: flashex
     ports:
       - 2181:2181
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: userDb
+    ports:
+      - 3306:3306

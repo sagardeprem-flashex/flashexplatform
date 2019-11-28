@@ -13,6 +13,7 @@ import { AgmDirectionModule } from 'agm-direction';
 import { TripPlanningPropertiesComponent } from './components/trip-planning-properties/trip-planning-properties.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 
@@ -23,7 +24,8 @@ import { TripItineraryService } from './services/trip-itinerary.service';
       OrderDetailsComponent,
       LiveTrackingComponent,
       VehicleDetailsComponent,
-      TripPlanningPropertiesComponent
+      TripPlanningPropertiesComponent,
+      DashboardComponent
     ],
   imports: [
     CommonModule,
