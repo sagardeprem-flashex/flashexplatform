@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from '../../services/authentication.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -14,7 +15,7 @@ describe('SignUpComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SignUpComponent ],
-      imports: [MaterialModule, FormsModule, HttpClientModule, BrowserAnimationsModule],
+      imports: [MaterialModule, FormsModule, HttpClientModule, BrowserAnimationsModule, HttpClientTestingModule],
       providers: [AuthenticationService]
     })
     .compileComponents();
