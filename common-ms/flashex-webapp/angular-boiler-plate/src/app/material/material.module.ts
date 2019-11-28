@@ -11,7 +11,8 @@ import {  MatSidenavModule,
           MatInputModule,
           MatTabsModule,
           MatTableModule,
-          MatMenuModule} from '@angular/material';
+          MatMenuModule,
+          MatPaginatorModule} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
@@ -34,7 +35,8 @@ const MaterialComponents = [
   FlexLayoutModule,
   MatListModule,
   MatMenuModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule
 ];
 
 @NgModule({
