@@ -110,7 +110,7 @@ public int[][] buildTimetravelMat(JSONObject jobj,int rows, int columns){
             JSONObject jobj2 = (JSONObject) jsonarr_2.get(j);
             JSONObject jobjdist = (JSONObject) jobj2.get("duration");
             int time = Integer.parseInt(jobjdist.get("value").toString());
-            time_mat[i][k] = time/110;
+            time_mat[i][k] = time/100;
             k++;
         }
     }

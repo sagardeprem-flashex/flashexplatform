@@ -23,17 +23,18 @@ public class Packet {
 
     @CassandraType(type = DataType.Name.TEXT)
     private String productId;
-    //    private String packetDescription;
-//    private String deliveryDescription;
-//    private String packetType;
-//    private String priority;
-//    private String status;
-//
-//    /** Float variables **/
-//    private float weight;
-//    private float length;
-//    private float breadth;
-//    private float height;
+
+    private String packetDescription;
+    private String deliveryDescription;
+    private String packetType;
+    private String priority;
+    private String status;
+
+    /** Float variables **/
+    private float weight;
+    private float length;
+    private float breadth;
+    private float height;
     @CassandraType(type = DataType.Name.FLOAT)
     private float costOfPacket;
 

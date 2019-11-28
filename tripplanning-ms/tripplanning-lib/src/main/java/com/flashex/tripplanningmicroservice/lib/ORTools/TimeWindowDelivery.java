@@ -132,8 +132,8 @@ public class TimeWindowDelivery {
                     long nodeIndex = manager.indexToNode(index);
                     routeLoad += data.demands[(int) nodeIndex]; // wasnot here before I put it here for calculating occupied vehicle volume
 
-                    route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*110 + ","
-                            + solution.max(timeVar)*110 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
+                    route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
+                            + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
@@ -156,11 +156,11 @@ public class TimeWindowDelivery {
 
                 IntVar timeVar = timeDimension.cumulVar(index);
 
-                route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*110 + ","
-                        + solution.max(timeVar)*110 + ")";
+                route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
+                        + solution.max(timeVar)*100 + ")";
 
                 logger.info(route);
-                logger.info("Time of the route: " + solution.min(timeVar)*110 + "s");
+                logger.info("Time of the route: " + solution.min(timeVar)*100 + "m");
 
 
 
@@ -170,7 +170,7 @@ public class TimeWindowDelivery {
                 logger.info("Key value" + Locationcord);
             }
 
-            logger.info("Total time of all routes: " + totalTime*110 + "m");
+            logger.info("Total time of all routes: " + totalTime*100 + "m");
 
             return tripItinerary;
         }

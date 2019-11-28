@@ -22,8 +22,8 @@ public class TripItinerary {
     @CassandraType(type = DataType.Name.TEXT)
     private String tripItineraryId;
 
-//    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.UDT, userTypeName = "packet")
-//    private List<Packet> packets;
+    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.UDT, userTypeName = "packet")
+    private List<Packet> packets;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
     private String plannedStartTime;
