@@ -23,7 +23,6 @@ public class PacketService {
     }
 
     public List<Packet> savePackets(List<Packet> packetsToBeSaved){
-
         for(Packet packet: packetsToBeSaved){
             String packetUuid = UUID.randomUUID().toString();
             String productUuid = UUID.randomUUID().toString();
