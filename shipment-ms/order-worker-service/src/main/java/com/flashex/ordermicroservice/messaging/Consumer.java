@@ -14,14 +14,13 @@ import org.springframework.stereotype.Service;
 public class Consumer {
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
-//    @Autowired
-//    private PacketService packetService;
+    @Autowired
+    private PacketService packetService;
 
-    @KafkaListener(topics = "Batches", groupId = "group_id")
+    @KafkaListener(topics = "Order", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Packet packet = new ObjectMapper().readValue(message, Packet.class);
-//        packetService.savePacket(packet);
-        logger.info(String.format("$$ -> Consumed Message -> %s",packet));
+        packetService.savePacket(packet);
     }
 }

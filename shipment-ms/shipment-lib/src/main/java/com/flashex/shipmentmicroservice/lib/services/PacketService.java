@@ -22,14 +22,16 @@ public class PacketService {
         return this.packetRepository.findAll();
     }
 
-    public Packet savePacket(Packet packetToBeSaved)
-    {
-        String packetUuid = UUID.randomUUID().toString();
-        String productUuid = UUID.randomUUID().toString();
-        packetToBeSaved.setPacketId(packetUuid);
-        packetToBeSaved.setProductId(productUuid);
-        this.packetRepository.save(packetToBeSaved) ;
-        return packetToBeSaved;
+    public List<Packet> savePackets(List<Packet> packetsToBeSaved){
+
+        for(Packet packet: packetsToBeSaved){
+            String packetUuid = UUID.randomUUID().toString();
+            String productUuid = UUID.randomUUID().toString();
+            packet.setPacketId(packetUuid);
+            packet.setProductId(productUuid);
+            this.packetRepository.save(packet) ;
+        }
+        return packetsToBeSaved;
     }
 
 }

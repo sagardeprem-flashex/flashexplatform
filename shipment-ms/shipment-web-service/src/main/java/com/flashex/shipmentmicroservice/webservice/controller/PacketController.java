@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
-
 public class PacketController {
 
     @Autowired
@@ -23,9 +22,9 @@ public class PacketController {
     }
 
     @PostMapping("/packets")
-    public Packet saveOrder(@RequestBody Packet packetData)
+    public List<Packet> savePackets(@RequestBody List<Packet> packets)
     {
-        return packetService.savePacket(packetData);
+        return packetService.savePackets(packets);
     }
 
 }
