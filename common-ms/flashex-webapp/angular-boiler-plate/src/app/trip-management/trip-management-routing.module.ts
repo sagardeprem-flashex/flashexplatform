@@ -42,7 +42,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'vehicledetial',
+        path: 'vehicledetail',
         component: VehicleDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -53,6 +53,7 @@ const tripRoutes: Routes = [
   },
 
 ];
+
 
 
 
