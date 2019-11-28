@@ -16,8 +16,6 @@ export class TripPlanningPropertiesComponent implements OnInit {
               private fb: FormBuilder, private tripService: TripItineraryService,
               private router: Router) { }
 
-              ngOnInit() {
-              }
   public algorithms = ['Time Window Delivery', 'VRP with Capacity constraint', 'VRP with Dropping Visit'];
   public addProperties = this.fb.group({
     algorithmSelected: ['', Validators.required],
@@ -28,6 +26,8 @@ export class TripPlanningPropertiesComponent implements OnInit {
     durationPenalty: ['']
   });
 
+  ngOnInit() {
+  }
 
   onSubmit() {
     console.log(`From trip planning component -->`);

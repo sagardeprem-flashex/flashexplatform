@@ -29,7 +29,6 @@ export class TripDetailsComponent implements OnInit {
     });
     // console.log(this.dataSource);
 
-
   }
 
   openPropertiesDialog(): void {
