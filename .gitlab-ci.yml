@@ -51,7 +51,7 @@ build_app:
     - npm install
 # -----------Angular Test
 karma_unit_tests:
-  image: circleci/node:11-browsers
+  image: circleci/node:12-browsers
   stage: test
   tags:
     - flashex-ci-jobs
