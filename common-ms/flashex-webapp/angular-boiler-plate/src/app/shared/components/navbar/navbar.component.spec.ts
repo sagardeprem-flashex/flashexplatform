@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TokenStorageService } from '../../services/token-storage.service';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -16,7 +17,8 @@ describe('NavbarComponent', () => {
         MaterialModule,
         BrowserAnimationsModule,
         RouterTestingModule
-      ]
+      ],
+      providers: [TokenStorageService]
     })
     .compileComponents();
   }));
