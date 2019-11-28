@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
+import { MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-order-details',
@@ -18,8 +19,9 @@ import { transition, animate, trigger, state, style } from '@angular/animations'
 
 export class OrderDetailsComponent implements OnInit {
 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  columnsToDisplay = ['packetId', 'packetDescription', 'packetType', 'receivedDate'];
+  columnsToDisplay = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
   public dataSource;
   constructor(private packetService: ShipmentManagementService) {
 
@@ -28,7 +30,7 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      console.log(this.dataSource);
+      // console.log(this.dataSource);
 
     });
   }

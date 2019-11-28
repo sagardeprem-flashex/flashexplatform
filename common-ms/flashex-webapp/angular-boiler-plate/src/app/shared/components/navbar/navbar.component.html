@@ -1,5 +1,5 @@
 <mat-toolbar class="navbar" color="primary">
-    <img src="../assets/images/logo.png">
+    <img src="../assets/images/logo.png" routerLink="/in">
     <div class='routes-container'>
         <button mat-icon-button *ngIf="authority === 'user'" routerLink="user"><mat-icon color='accent'>supervised_user_circle</mat-icon></button>
         <button mat-icon-button *ngIf="authority === 'user'" (click)="logout()"><mat-icon color='accent'>directions_exit</mat-icon></button>
