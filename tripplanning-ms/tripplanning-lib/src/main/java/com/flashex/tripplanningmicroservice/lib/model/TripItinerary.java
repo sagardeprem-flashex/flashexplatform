@@ -22,14 +22,14 @@ public class TripItinerary {
     @CassandraType(type = DataType.Name.TEXT)
     private String tripItineraryId;
 
-//    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.UDT, userTypeName = "packet")
-//    private List<Packet> packets;
+    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.UDT, userTypeName = "packet")
+    private List<Packet> packets;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date plannedStartTime;
+    private String plannedStartTime;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date plannedEndTime;
+    private String plannedEndTime;
 
     @CassandraType(type = DataType.Name.FLOAT)
     private float plannedTotalDistance;
@@ -42,5 +42,11 @@ public class TripItinerary {
 
     @CassandraType(type = DataType.Name.FLOAT)
     private float occupiedVolume;
+
+    @CassandraType(type = DataType.Name.TEXT)
+    private String originAddress;
+
+    @CassandraType(type = DataType.Name.TEXT)
+    private String algorithm;
 
 }
