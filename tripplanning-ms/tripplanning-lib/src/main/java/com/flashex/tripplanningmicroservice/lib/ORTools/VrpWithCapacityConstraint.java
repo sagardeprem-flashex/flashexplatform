@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 @EnableAutoConfiguration
@@ -43,10 +44,11 @@ public class VrpWithCapacityConstraint {
         VehicleList vehicleList = getJsonServerData.processJsonData();
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8, 8};
-//        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-        public final long[] vehicleCapacities = {15, 15, 15, 15};
-//        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
-        public final int vehicleNumber = 4;
+        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+//        public final long[] vehicleCapacities = {15, 15, 15, 15};
+        public final int vehicleNumber = vehicleList.getNoOfVehicle();
+//        public final int vehicleNumber = 4;
+
         public final int depot = 0;
 
                 DataModel() throws ParseException, JsonProcessingException {
@@ -54,11 +56,24 @@ public class VrpWithCapacityConstraint {
     }
 
     /// @brief Print the solution.
-    static void printSolution(
+    static TripItinerary printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address) throws Exception {
 
         String[] addr = address;
         HashMap<String, Set<String>> Locationcord = new HashMap();
+
+        TripItinerary tripItinerary = new TripItinerary();
+        Shipment shipment = new Shipment();
+
+        tripItinerary.setPlannedStartTime("9 AM");
+        tripItinerary.getPlannedStartTime();
+
+        tripItinerary.setPlannedEndTime("5 PM");
+        tripItinerary.getPlannedEndTime();
+
+//      Setting vehicle details
+        VehicleList vehicleList = new VehicleList();
+//        logger.info((""+ vehicleList.listofvehicle));
 
 
         // Inspect solution.
@@ -67,6 +82,9 @@ public class VrpWithCapacityConstraint {
         for (int i = 0; i < data.vehicleNumber; ++i) {
             long index = routing.start(i);
             logger.info("Route for Vehicle " + i + ":");
+
+            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+
             long routeDistance = 0;
             long routeLoad = 0;
             String route = "";
@@ -75,16 +93,42 @@ public class VrpWithCapacityConstraint {
             while (!routing.isEnd(index)) {
                 long nodeIndex = manager.indexToNode(index);
                 routeLoad += data.demands[(int) nodeIndex];
+
+                long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
+                long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity);
+                tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
+
                 route += nodeIndex + " Load(" + routeLoad + ")  -> " + "Address" + addr[(int) nodeIndex] + "-->";
                 response = geocode(addr[(int) nodeIndex],data.Key);
                 System.out.println(latlongarr.size());
                 latlongarr.add(response);
+
+                tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+
+                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
+                long milage = 21;
+                long tripexpense = milage*routeDistance;
+                tripItinerary.setTripExpense(tripexpense);
+
             }
 
+            tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
+            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
+
+            tripItinerary.getPackets(); // get order list optimized as per dilivery order
+            tripItinerary.getPlannedTotalDistance(); // get distance of the route
+            tripItinerary.getVehicle(); // get the vehicle details
+            tripItinerary.getOccupiedVolume(); // get occupied volume
+            tripItinerary.getTripExpense(); // get trip expense
+            tripItinerary.getOriginAddress(); // get origin address
+            tripItinerary.getAlgorithm(); // get name of algo
+
             Locationcord.put("Vehicle:" + i,latlongarr);
+
             route += manager.indexToNode(routing.end(i));
             logger.info(route);
             logger.info("Distance of the route: " + routeDistance + "m");
@@ -95,6 +139,9 @@ public class VrpWithCapacityConstraint {
         }
         logger.info("Total distance of all routes: " + totalDistance + "m");
         logger.info("Total load of all routes: " + totalLoad);
+
+
+        return tripItinerary;
     }
 
     static void matPrint(int[][] distmat, int[][] timemat, String[] address) {

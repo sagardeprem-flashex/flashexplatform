@@ -28,7 +28,7 @@ public class ProcessOnConsumption {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
         String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
-        deliveryAddresses[0] = "hello";
+        deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
         orService.settingAddressArray(deliveryAddresses);
         orService.VrpfunctionWithCapCons();
         orService.VrpfuncWithDropNode();

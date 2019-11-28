@@ -1,10 +1,19 @@
 package com.flashex.tripplanningmicroservice.lib.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+//@Getter
+//@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class VehicleList {
 
-    private ArrayList<Vehicle> listofvehicle;
+    public ArrayList<Vehicle> listofvehicle;
 
     public int getNoOfVehicle(){
         int vehiclelistsize = this.listofvehicle.size();
