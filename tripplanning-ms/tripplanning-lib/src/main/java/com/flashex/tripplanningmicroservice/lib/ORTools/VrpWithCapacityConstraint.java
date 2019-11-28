@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
-import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
-import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -65,6 +63,7 @@ public class VrpWithCapacityConstraint {
         HashMap<String, Set<String>> Locationcord = new HashMap();
 
         TripItinerary tripItinerary = new TripItinerary();
+        Shipment shipment = new Shipment();
 
         tripItinerary.setPlannedStartTime("9 AM");
         tripItinerary.getPlannedStartTime();
@@ -103,6 +102,9 @@ public class VrpWithCapacityConstraint {
                 response = geocode(addr[(int) nodeIndex],data.Key);
                 System.out.println(latlongarr.size());
                 latlongarr.add(response);
+
+                tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
@@ -113,10 +115,17 @@ public class VrpWithCapacityConstraint {
                 tripItinerary.setTripExpense(tripexpense);
 
             }
+
+            tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
+            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
+
+            tripItinerary.getPackets(); // get order list optimized as per dilivery order
             tripItinerary.getPlannedTotalDistance(); // get distance of the route
             tripItinerary.getVehicle(); // get the vehicle details
             tripItinerary.getOccupiedVolume(); // get occupied volume
             tripItinerary.getTripExpense(); // get trip expense
+            tripItinerary.getOriginAddress(); // get origin address
+            tripItinerary.getAlgorithm(); // get name of algo
 
             Locationcord.put("Vehicle:" + i,latlongarr);
 
@@ -130,6 +139,7 @@ public class VrpWithCapacityConstraint {
         }
         logger.info("Total distance of all routes: " + totalDistance + "m");
         logger.info("Total load of all routes: " + totalLoad);
+
 
         return tripItinerary;
     }
