@@ -1,10 +1,9 @@
 <mat-toolbar class="navbar" color="primary">
     <img src="../assets/images/logo.png">
     <div class='routes-container'>
-        <button mat-icon-button (click)='goToHome()'><mat-icon color='accent'>home</mat-icon></button>
         <button mat-icon-button *ngIf="authority === 'user'" routerLink="user"><mat-icon color='accent'>supervised_user_circle</mat-icon></button>
         <button mat-icon-button *ngIf="authority === 'user'" (click)="logout()"><mat-icon color='accent'>directions_exit</mat-icon></button>
-        <button mat-icon-button *ngIf="authority === 'admin'" routerLink="admin"><mat-icon color='accent'>supervisor_account</mat-icon></button>
+        <button mat-icon-button *ngIf="authority === 'admin'" routerLink="admin"><mat-icon color='accent'>home</mat-icon></button>
         <button mat-icon-button *ngIf="authority === 'admin'" (click)="logout()"><mat-icon color='accent'>directions_exit</mat-icon></button>
         <button mat-icon-button *ngIf="!authority" routerLink="auth/login"><mat-icon color='accent'>person</mat-icon></button>
     </div>
@@ -12,10 +11,9 @@
     <div class='responsive-dropdown'>
         <button class='responsive-dropdown' [matMenuTriggerFor]='navMenu' mat-icon-button><mat-icon color='accent'>menu</mat-icon></button>
         <mat-menu class='responsive-dropdown menu' #navMenu='matMenu'>
-            <button mat-icon-button (click)='goToHome()'><mat-icon color='accent'>home</mat-icon></button>
             <button mat-icon-button *ngIf="authority === 'user'" routerLink="user"><mat-icon color='accent'>supervised_user_circle</mat-icon></button>
             <button mat-icon-button *ngIf="authority === 'user'" (click)="logout()"><mat-icon color='accent'>directions_exit</mat-icon></button>
-            <button mat-icon-button *ngIf="authority === 'admin'" routerLink="admin"><mat-icon color='accent'>supervisor_account</mat-icon></button>
+            <button mat-icon-button *ngIf="authority === 'admin'" routerLink="admin"><mat-icon color='accent'>home</mat-icon></button>
             <button mat-icon-button *ngIf="authority === 'admin'" (click)="logout()"><mat-icon color='accent'>directions_exit</mat-icon></button>
             <button mat-icon-button *ngIf="!authority" routerLink="auth/login"><mat-icon color='accent'>person</mat-icon></button>
         </mat-menu>

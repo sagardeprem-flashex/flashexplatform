@@ -9,7 +9,7 @@ button {
 }
 
 .example-container {
-    width: 97%;
+    width: 100%;
     height: 40em;
     margin: 1em;
     border: 1px solid #555;
@@ -20,4 +20,8 @@ button {
     height: 100%;
     overflow: auto;
     border: 1px solid #555;
+}
+
+.sidenavbar {
+    width: min-content;
 }
