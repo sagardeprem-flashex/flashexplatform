@@ -8,50 +8,81 @@ import { OrderDetailsComponent } from './components/order-details/order-details.
 import { AuthguardService } from '../shared/services/authguard.service';
 
 
+// const tripRoutes: Routes = [
+//   {
+//     path: 'admin',
+//     component: HomeComponent,
+//     canActivate: [AuthguardService],
+//     data: {
+//       expectedRole: 'ROLE_ADMIN'
+//     },
+//     children: [
+//       {
+//         path: 'tripitinerary',
+//         component: TripDetailsComponent,
+//         canActivate: [AuthguardService],
+//         data: {
+//           expectedRole: 'ROLE_ADMIN'
+//         }
+//       },
+//       {
+//         path: 'triptrack',
+//         component: LiveTrackingComponent,
+//         canActivate: [AuthguardService],
+//         data: {
+//           expectedRole: 'ROLE_ADMIN'
+//         }
+//       },
+//       {
+//         path: 'orderdetail',
+//         component: OrderDetailsComponent,
+//         canActivate: [AuthguardService],
+//         data: {
+//           expectedRole: 'ROLE_ADMIN'
+//         }
+//       },
+//       {
+//         path: 'vehicledetail',
+//         component: VehicleDetailsComponent,
+//         canActivate: [AuthguardService],
+//         data: {
+//           expectedRole: 'ROLE_ADMIN'
+//         }
+//       }
+//     ]
+//   },
+
+// ];
+
 const tripRoutes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthguardService],
-    data: {
-      expectedRole: 'ROLE_ADMIN'
-    },
     children: [
       {
-        path: 'trips',
+        path: 'tripitinerary',
         component: TripDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+
       },
       {
-        path: 'track',
+        path: 'triptrack',
         component: LiveTrackingComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+
       },
       {
-        path: 'orders',
+        path: 'orderdetail',
         component: OrderDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+
       },
       {
-        path: 'vehicle',
+        path: 'vehicledetail',
         component: VehicleDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
       }
     ]
-  }
+  },
+
 ];
+
 
 
 
