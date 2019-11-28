@@ -13,15 +13,16 @@ export class TripItineraryService {
   public location;
   public planningProperties: ITripProperties;
 
+  constructor(private http: HttpClient) {
+    this.load();
+   }
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
     })
   };
 
-  constructor(private http: HttpClient) {
-    this.load();
-   }
 
    private url = '../../../assets/tripItinerary1.json';
    private dataSource = [];

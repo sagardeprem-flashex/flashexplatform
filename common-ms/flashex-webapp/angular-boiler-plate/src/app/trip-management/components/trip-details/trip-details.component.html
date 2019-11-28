@@ -7,8 +7,8 @@
   <mat-accordion multi="true">
     <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
       <mat-expansion-panel-header>
-        <mat-panel-title>TripId#{{trip.tripItineraryId}}</mat-panel-title>
-        <mat-panel-description>{{trip.vehicle.vehicleType}}</mat-panel-description>
+        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+        <mat-panel-description>{{trip.plannedStartTime | date:'full'}}  </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
