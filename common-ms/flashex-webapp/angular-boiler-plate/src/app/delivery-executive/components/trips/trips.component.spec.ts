@@ -1,31 +1,37 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TripsComponent } from './trips.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MaterialModule } from '../../../material/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TripItineraryService } from '../../services/trip-itinerary.service';
+
 
 describe('TripsComponent', () => {
-  // let component: TripsComponent;
-  // let fixture: ComponentFixture<TripsComponent>;
+  let component: TripsComponent;
+  let fixture: ComponentFixture<TripsComponent>;
 
-  // beforeEach(async(() => {
-  //   TestBed.configureTestingModule({
-  //     declarations: [ TripsComponent ],
-  //     imports: [
-  //       BrowserAnimationsModule,
-  //       MaterialModule
-  //     ]
-  //   })
-  //   .compileComponents();
-  // }));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ TripsComponent ],
+      imports: [
+        BrowserAnimationsModule,
+        MaterialModule,
+        HttpClientModule,
+        HttpClientTestingModule,
+      ],
+      providers: [TripItineraryService]
+    })
+    .compileComponents();
+  }));
 
-  // beforeEach(() => {
-  //   fixture = TestBed.createComponent(TripsComponent);
-  //   component = fixture.componentInstance;
-  //   fixture.detectChanges();
-  // });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TripsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

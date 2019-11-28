@@ -1,5 +1,37 @@
-<button mat-raised-button color="primary" routerLink='tripitinerary'>Trip Details</button>
-<button mat-raised-button color="primary" routerLink='triptrack'>Trip Tracking</button>
-<button mat-raised-button color="primary" routerLink='orderdetail'>Order Details</button>
-<button mat-raised-button color="primary" routerLink='vehicledetail'>Vehicle Details</button>
-<router-outlet></router-outlet>
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth, paddingTop: '10vh' }" opened="true" (mouseenter)="increase()" (mouseleave)="decrease()" style="background-color:#ECEFF1">
+        <mat-nav-list>
+
+            <mat-list-item routerLink="orderdetail" routerLinkActive="active">
+                <mat-icon mat-list-icon>details</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em;">Show Orders</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item routerLink="tripitinerary" routerLinkActive="is-active">
+                <mat-icon mat-list-icon>dashboard</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em;">Trip Details</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item routerLink="triptrack" routerLinkActive="active">
+                <mat-icon mat-list-icon>gps_fixed</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em;">Track Your Trips</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item routerLink="vehicledetail" routerLinkActive="active">
+                <mat-icon mat-list-icon>local_shipping</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em;">Vehicle Details</h5>
+                </div>
+            </mat-list-item>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <router-outlet></router-outlet>
+</mat-sidenav-container>
