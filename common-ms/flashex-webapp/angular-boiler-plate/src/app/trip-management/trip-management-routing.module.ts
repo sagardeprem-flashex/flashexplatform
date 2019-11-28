@@ -18,7 +18,7 @@ const tripRoutes: Routes = [
     },
     children: [
       {
-        path: 'trips',
+        path: 'tripitinerary',
         component: TripDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -26,7 +26,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'track',
+        path: 'triptrack',
         component: LiveTrackingComponent,
         canActivate: [AuthguardService],
         data: {
@@ -34,7 +34,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'orders',
+        path: 'orderdetail',
         component: OrderDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -42,7 +42,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'vehicle',
+        path: 'vehicledetail',
         component: VehicleDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -50,8 +50,10 @@ const tripRoutes: Routes = [
         }
       }
     ]
-  }
+  },
+
 ];
+
 
 
 

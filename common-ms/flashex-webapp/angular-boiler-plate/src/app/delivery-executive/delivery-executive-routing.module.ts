@@ -15,7 +15,7 @@ const deliveryRoutes: Routes = [
         path: 'order', component: OrderDeliveryListComponent
       },
       {
-        path: 'trip', component: TripsComponent
+        path: 'tripschedule', component: TripsComponent
       }
     ]
   }
