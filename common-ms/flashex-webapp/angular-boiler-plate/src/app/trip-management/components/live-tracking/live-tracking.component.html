@@ -1,10 +1,10 @@
 <body style="background-color:#ECEFF1;">
-    <h1>Trips Details</h1>
+    <h1 style="margin-top: 0%;">Trips Details</h1>
     <p><button mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Trips Detail</button></p>
 
     <mat-sidenav-container class="example-container" style="background-color:#ECEFF1;">
 
-        <mat-sidenav #sidenav opened mode="side" style="background-color:#ECEFF1;">
+        <mat-sidenav class="sidenavbar" #sidenav opened mode="side" style="background-color:#ECEFF1;">
 
             <div *ngFor="let id of dataSource, let i=index">
                 <mat-expansion-panel style="background-color:#ECEFF1;">

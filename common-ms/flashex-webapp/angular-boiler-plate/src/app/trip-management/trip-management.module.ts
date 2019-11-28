@@ -30,7 +30,7 @@ import { TripItineraryService } from './services/trip-itinerary.service';
     TripManagementRoutingModule,
     HttpClientModule,
     AgmCoreModule.forRoot({
-       apiKey: 'AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY'
+      //  apiKey: 'AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY'
     }),
     MaterialModule,
     AgmDirectionModule,
