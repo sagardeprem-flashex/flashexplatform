@@ -1,0 +1,41 @@
+
+mat-form-field{
+  margin:auto;
+  width: 350px;
+  max-width: 95%;
+  padding: 5px;
+}
+.bodytag
+{
+
+  z-index: -5;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  background-image: url("../../../../assets/images/backgroundimage4.jpg");
+  background-attachment: fixed;
+  height: 95vh;
+  margin-top: -5ch;
+  justify-content: center;
+  background-size: 60vh;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  }
+
+
+.matcard {
+  padding: 16px;
+  border-radius: 4px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+}
+.mat-card-header
+{
+  width: inherit;
+}
+
