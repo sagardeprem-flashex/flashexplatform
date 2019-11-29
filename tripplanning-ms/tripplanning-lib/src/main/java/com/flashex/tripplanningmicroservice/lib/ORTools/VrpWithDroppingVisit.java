@@ -25,7 +25,10 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class VrpWithDroppingVisit {
-
+//
+//    static {
+//        System.loadLibrary("jniortools");
+//    }
 
 
     /** Minimal VRP.*/
@@ -43,15 +46,17 @@ public class VrpWithDroppingVisit {
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
         public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
 
-        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
-        VehicleList vehicleList = getJsonServerData.processJsonData();
+//        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
+//        VehicleList vehicleList = getJsonServerData.processJsonData();
 
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8};
-//        public final long[] vehicleCapacities = {30, 15, 17, 18};
-//        public final int vehicleNumber = 4;
-        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
+//        public final long[] demands = {0, 8, 8, 2, 4};
+
+        public final long[] vehicleCapacities = {30, 15, 17, 18};
+        public final int vehicleNumber = 4;
+//        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+//        public final int vehicleNumber = vehicleList.getNoOfVehicle(); // 4
 
         public final int depot = 0;
 

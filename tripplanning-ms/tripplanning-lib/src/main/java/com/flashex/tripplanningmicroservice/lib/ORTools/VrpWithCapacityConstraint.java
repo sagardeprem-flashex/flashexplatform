@@ -26,6 +26,10 @@ import java.util.logging.Logger;
 @EnableAutoConfiguration
 public class VrpWithCapacityConstraint {
 
+//    static {
+//        System.loadLibrary("jniortools");
+//    }
+
     /** Minimal VRP.*/
     private static final Logger logger = Logger.getLogger(VrpWithCapacityConstraint.class.getName());
 
@@ -35,19 +39,21 @@ public class VrpWithCapacityConstraint {
         GenerateMatrix matGenerator = new GenerateMatrix();
         Data d = matGenerator.createData();
         public final int[][] distanceMatrix = matGenerator.createDistanceMatrix(d);
-        public final String[] addresses = d.addr;
+        public final String[] addresses = Data.addr;
         public final String Key = d.API_Key;
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
         public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
 
-        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
-        VehicleList vehicleList = getJsonServerData.processJsonData();
+//        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
+//        VehicleList vehicleList = getJsonServerData.processJsonData();
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8, 8};
-        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-//        public final long[] vehicleCapacities = {15, 15, 15, 15};
-        public final int vehicleNumber = vehicleList.getNoOfVehicle();
-//        public final int vehicleNumber = 4;
+//        public final long[] demands = {0, 8, 8, 2, 4};
+
+        //        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+        public final long[] vehicleCapacities = {15, 15, 15, 15};
+//        public final int vehicleNumber = vehicleList.getNoOfVehicle();
+        public final int vehicleNumber = 4;
 
         public final int depot = 0;
 
@@ -178,6 +184,9 @@ public class VrpWithCapacityConstraint {
     public void FinalResult() throws Exception {
         // Instantiate the data problem.
         final DataModel data = new DataModel();
+
+        matPrint(data.distmat,data.timemat,data.addresses);
+
 
         // Create Routing Index Manager
         RoutingIndexManager manager =

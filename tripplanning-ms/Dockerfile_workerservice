@@ -1,5 +1,5 @@
 #---------------------OR TOOLS LIB BUILD--------------------#
-FROM maven:3.6-jdk-11 as or-tools-build
+FROM maven:3.6.0-jdk-12-alpine as or-tools-build
 
 COPY google-or-tools-lib/or-tools_Ubuntu-18.04-64bit_v7.4.7247 /usr/local/google-or-tools
 
@@ -7,7 +7,7 @@ RUN mvn install:install-file -Dfile=/usr/local/google-or-tools/lib/com.google.or
 
 
 #---------------------LIB BUILD--------------------#
-#FROM maven:3.6.2-jdk-12 AS lib-build
+#FROM maven:3.6.0-jdk-12-alpine AS lib-build
 FROM prithivid/flashexdepends:latest AS lib-build
 
 RUN mkdir -p /app/libs
@@ -37,7 +37,7 @@ COPY tripplanning-lib/src /app/libs/src
 RUN $MVN clean install -DskipTests
 
 #-------------------BUILD SERVICE-------------------#
-#FROM maven:3.6.2-jdk-12 AS build
+#FROM maven:3.6.0-jdk-12-alpine AS build
 FROM prithivid/flashexdepends:latest AS build
 #FROM rajiff/prepackaged-google-or-tools:latest AS build
 
@@ -61,11 +61,20 @@ COPY tripplanning-worker-service/src /app/service/src
 
 RUN $MVN clean package -DskipTests
 
+RUN ls /app/service/target
+
+RUN mkdir -p /target/or-lib
+
+COPY --from=or-tools-build /usr/local/google-or-tools/lib /app/service/target/or-lib
+
+RUN ls /app/service/target/or-lib
+
 #---------------------WAIT-FOR---------------------#
 FROM gesellix/wait-for as waitfor
 
 #-------------------START SERVICE-------------------#
-FROM openjdk:12-alpine
+#FROM openjdk:12-alpine
+FROM maven:3.6.0-jdk-12-alpine
 
 RUN apk add --no-cache libstdc++
 
@@ -85,11 +94,21 @@ CMD ["/bin/bash"]
 
 COPY --from=build /app/service/target/*.jar app.jar
 
+#RUN mkdir /target
+
+#COPY --from=build /app/service/target /target
+
 COPY --from=waitfor ./wait-for ./wait-for
 
 EXPOSE 5020
 
+
+#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-Djava.library.path", "=","/usr/java/packages/lib","-jar", "/target/tripplanning-microservice-worker-service-0.0.1-SNAPSHOT.jar"]
+
 ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
-# ENTRYPOINT ["java","-jar","app.jar"]
+
+#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "/target/tripplanning-microservice-worker-service-0.0.1-SNAPSHOT.jar"]
+
+# ENTRYPOINT ["java","-D","/usr/java/packages/lib","-jar","app.jar"]
 
 #----------------------------------------------------#

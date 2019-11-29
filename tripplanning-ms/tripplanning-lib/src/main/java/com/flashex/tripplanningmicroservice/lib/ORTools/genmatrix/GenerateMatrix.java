@@ -2,23 +2,34 @@ package com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix;
 
 
 
+import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Arrays;
+import java.util.logging.Logger;
 
 public class GenerateMatrix {
 
+    private static final Logger logger = Logger.getLogger(GenerateMatrix.class.getName());
+    @Autowired
+    private ORService orService;
 
     public GenerateMatrix() {
     }
-
+//    static Data d
 public Data createData() {
-
-    Data d = new Data();
+    Data d = (new Data());
     ArrayData data = new ArrayData();
     data.API_Key = d.getAPI_Key();
+    logger.info("API_key =================In GenMat=========================== "+d.getAPI_Key());
+
     data.addr = d.getAddr();
+    logger.info("Address array ======================================= "+ Arrays.toString(d.getAddr()));
+
    /* d.addr = new String[]{
             "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
             "1921+Elvis+Presley+Blvd+Memphis+TN",
@@ -122,7 +133,7 @@ public int[][] buildTimetravelMat(JSONObject jobj,int rows, int columns){
 public int[][] createDistanceMatrix(Data d) throws ParseException {
     int max_elements = d.addr.length;
     int num_addr = d.addr.length;
-    int max_rows = 6;   //Fix it to 6 , for this array of address we have to send only 6 rows at a time
+    int max_rows = 100/max_elements;   //Fix it to 6 , for this array of address we have to send only 6 rows at a time
     int q = num_addr/max_rows;
     int r = num_addr%max_rows;
     String[] dest_addr = d.addr;
@@ -167,7 +178,7 @@ public int[][] createDistanceMatrix(Data d) throws ParseException {
 public int[][] createTimeTravelMatrix(Data d) throws ParseException {
     int max_elements = d.addr.length;
     int num_addr = d.addr.length;
-    int max_rows = 6;   //Fix it to 6 , for this array of address we have to send only 6 rows at a time
+    int max_rows = 100/max_elements;//100/max_elements;   //Fix it to 6 , for this array of address we have to send only 6 rows at a time
     int q = num_addr/max_rows;
     int r = num_addr%max_rows;
     String[] dest_addr = d.addr;

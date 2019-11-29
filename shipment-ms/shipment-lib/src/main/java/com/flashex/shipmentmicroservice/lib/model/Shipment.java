@@ -39,7 +39,7 @@ public class Shipment {
 
     /** Integer variables**/
     @CassandraType(type = DataType.Name.INT)
-    public int MAX_SHIPMENT_SIZE;
+    public int maxShipmentSize;
 
     /** Date variables **/
     @CassandraType(type = DataType.Name.TIMESTAMP)
