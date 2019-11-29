@@ -171,10 +171,6 @@ services:
       - 5020:5020
     env_file:
       - ./env-files/local/common.env
-    memory:
-      - 2G
-    memory-swap:
-      - 2G
     depends_on:
       - config-server
       - discovery-server

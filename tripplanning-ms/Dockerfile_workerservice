@@ -73,8 +73,8 @@ RUN ls /app/service/target/or-lib
 FROM gesellix/wait-for as waitfor
 
 #-------------------START SERVICE-------------------#
-#FROM openjdk:12-alpine
-FROM maven:3.6.0-jdk-12-alpine
+FROM openjdk:12-alpine
+#FROM maven:3.6.0-jdk-12-alpine
 
 RUN apk add --no-cache libstdc++
 
