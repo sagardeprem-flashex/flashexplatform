@@ -28,7 +28,7 @@ describe('TripPlanningPropertiesComponent', () => {
           provide: MatDialogRef,
           // useValues: {}
           useValue: TripDetailsComponent
-        },
+        }
         // {
         //   provide: MatDialogRef,
         //   useValue: true
@@ -45,7 +45,7 @@ describe('TripPlanningPropertiesComponent', () => {
   });
 
   it('should create', () => {
-    console.log('Trip properties component creation test passed ------------------>')
+    console.log('Trip properties component creation test passed ------------------>');
     expect(component).toBeTruthy();
   });
 });
