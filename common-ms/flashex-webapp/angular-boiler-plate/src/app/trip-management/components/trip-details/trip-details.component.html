@@ -11,7 +11,7 @@
     <p class="title-part mat-body-2">Start Date</p>
   </div>
   </mat-toolbar>
-  <mat-accordion multi="false">
+  <mat-accordion>
     <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
