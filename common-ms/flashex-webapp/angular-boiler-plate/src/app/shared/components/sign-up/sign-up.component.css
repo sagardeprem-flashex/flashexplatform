@@ -28,8 +28,17 @@ mat-form-field{
   left: 50%;
   transform: translate(-50%, -45%);
 }
+
 .mat-card-header
 {
   width: inherit;
 }
 
+mat-hint{
+  font-size: smaller;
+}
+
+.validation {
+  margin-bottom: -1.5em;
+  padding-top: 1.5em;
+}
