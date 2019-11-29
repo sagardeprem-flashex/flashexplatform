@@ -24,8 +24,13 @@ describe('TripPlanningPropertiesComponent', () => {
       ],
       providers: [
         {
-          provide: MatDialogRef,
+          provide: dialogRef,
+          useClass: MatDialogRef,
           useValues: {}
+        },
+        {
+          provide: dialogRef.disableClose,
+          useValue: true
         }
       ]
     })
