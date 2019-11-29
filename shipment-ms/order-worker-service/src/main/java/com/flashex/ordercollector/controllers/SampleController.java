@@ -1,7 +1,7 @@
 package com.flashex.ordercollector.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.flashex.ordercollector.messaging.Producer;
+import com.flashex.ordercollector.messagingservice.ProducerService;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SampleController {
-    private final Producer producer;
+    private final ProducerService producer;
 
     @Autowired
-    public SampleController(Producer producer) {
+    public SampleController(ProducerService producer) {
         this.producer = producer;
     }
 
