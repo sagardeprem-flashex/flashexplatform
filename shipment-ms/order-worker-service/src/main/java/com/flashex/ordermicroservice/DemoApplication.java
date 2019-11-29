@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication(scanBasePackages = "com.flashex.shipmentmicroservice")
+@SpringBootApplication(scanBasePackages = {"com.flashex.shipmentmicroservice","com.flashex.ordermicroservice"})
 @RestController
 @EnableDiscoveryClient
 public class DemoApplication {
