@@ -1,7 +1,16 @@
 <div class="bodytag">
 
     <div *ngIf="isSignedUp; else signupForm" style="padding-top: 12vh;">
-        Your registration is successful. Please <a href="/auth/login">login!</a>
+
+        <mat-card style="position: relative; top: 30%; text-align: center; width: max-content; max-width: 80%; margin: auto; vertical-align: 50%;">
+        Congratulations, your registration is successful. Please click below to login.
+        <br>
+
+        <button style="margin: auto; position: relative; margin: 2em 0em 0em;
+        top: 50%;" mat-raised-button color="primary" href="/auth/login">login!</button>
+        </mat-card>
+
+
     </div>
 
     <ng-template #signupForm>
@@ -55,19 +64,20 @@
                         <div>
                             <mat-form-field appearance="outline">
                                 <mat-label for="password">Password</mat-label>
-                                <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" required maxlength="14" pattern="^[&@$_.#!]{0,1}[a-zA-Z0-9]+[&@$_.#!]+[a-zA-Z0-9]+[&@$_.#!]{0,1}$"/>
+                                <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" required maxlength="14"
+                                pattern="^[&@$_.#!]{0,1}[a-zA-Z0-9]+[&@$_.#!]+[a-zA-Z0-9]+[&@$_.#!]{0,1}$" />
                                 <mat-hint>Hint: Password must contain 6-14 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special characters. </mat-hint>
+
                                 <div *ngIf="f.submitted && password.invalid">
 
                                     <div *ngIf="password.errors.required">Password is required</div>
-                                    <div *ngIf="password.errors.minlength">Password must be between 6 to 14 characters</div>
-                                    <div *ngIf="password.errors.pattern">Password is invalid</div>
+                                    <div *ngIf="password.errors.minlength || password.errors.pattern">Hint: Password must contain 6-14 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special characters.</div>
                                 </div>
                             </mat-form-field>
                         </div>
                         <div>
                             <mat-card-actions style="padding-left:1em;">
-                                <button mat-raised-button color="primary" class="btn btn-primary">Register</button>
+                                <button mat-raised-button color="primary" class="btn btn-primary" style="margin-top: 2em;">Register</button>
                                 <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
                                     Signup failed!<br/>{{errorMessage}}
                                 </div>

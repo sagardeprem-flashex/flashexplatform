@@ -14,7 +14,8 @@ import {  MatSidenavModule,
           MatMenuModule,
           MatPaginatorModule,
           MatSelectModule,
-          MatProgressSpinnerModule} from '@angular/material';
+          MatProgressSpinnerModule,
+        } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';

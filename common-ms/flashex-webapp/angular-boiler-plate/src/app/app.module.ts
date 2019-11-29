@@ -14,6 +14,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS, MatPaginatorModule } from '@angular/materia
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
 import { MatPaginatedTabHeader } from '@angular/material/tabs/typings/paginated-tab-header';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { MatPaginatedTabHeader } from '@angular/material/tabs/typings/paginated-
     TripManagementModule,
     DeliveryExecutiveModule,
     FlexLayoutModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatPasswordStrengthModule
   ],
   providers: [
     AuthguardService,
