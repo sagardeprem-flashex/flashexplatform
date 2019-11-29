@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 @Service
 public class Consumer {
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
@@ -21,6 +23,6 @@ public class Consumer {
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Packet packet = new ObjectMapper().readValue(message, Packet.class);
-        packetService.savePacket(packet);
+        packetService.savePackets(Collections.singletonList(packet));
     }
 }
