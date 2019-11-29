@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { TripItineraryService } from '../../../trip-management/services/trip-itinerary.service';
+import { TripService } from 'src/app/trip-management/services/trip.service';
 
 @Component({
   selector: 'app-trips',
@@ -40,7 +40,7 @@ export class TripsComponent implements OnInit {
   public listofOrders;
   public tripDetails;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tripService: TripItineraryService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tripService: TripService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation

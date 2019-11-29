@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TripService } from '../../services/trip.service';
 
 @Component({
   selector: 'app-live-tracking',
@@ -29,7 +29,7 @@ export class LiveTrackingComponent implements OnInit {
     latitude: 12.95381,
     longitude: 77.6375593
   };
-  constructor(private tripService: TripItineraryService) { }
+  constructor(private tripService: TripService) { }
   public routes = [];
 
   ngOnInit() {
