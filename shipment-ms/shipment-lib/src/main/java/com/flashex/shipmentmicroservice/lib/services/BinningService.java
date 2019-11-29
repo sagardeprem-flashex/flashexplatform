@@ -4,6 +4,7 @@ import com.flashex.shipmentmicroservice.lib.model.Bin;
 import com.flashex.shipmentmicroservice.lib.model.BinnerConfig;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
 import com.flashex.shipmentmicroservice.lib.model.Shipment;
+import org.apache.commons.collections4.ListUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -37,8 +38,19 @@ public class BinningService {
     }
 
     public List<Shipment> generateShipment(){
-
-        return null;
+        List<Shipment> shipments = new ArrayList<>();
+        
+        bins.forEach(bin -> {
+            List<List<Packet>> generatedShipments = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
+            generatedShipments.forEach(generatedShipment ->{
+                Shipment shipment = new Shipment();
+                shipment.setPacketList((ArrayList<Packet>) generatedShipment);
+                shipment.setShipmentDate(new Date());
+                shipment.setShipmentId(UUID.randomUUID().toString());
+                shipments.add(shipment);
+            });
+        });
+        return shipments;
     }
 
     public void createBin(List<String> binningStrategy, List<String> sortingStrategy){
@@ -93,6 +105,5 @@ public class BinningService {
         config.setMaxShipmentSize(15);
         return config;
     }
-
 
 }

@@ -37,10 +37,6 @@ public class Shipment {
     @CassandraType(type = DataType.Name.TEXT)
     public String shipmentId;
 
-    /** Integer variables**/
-    @CassandraType(type = DataType.Name.INT)
-    public int MAX_SHIPMENT_SIZE;
-
     /** Date variables **/
     @CassandraType(type = DataType.Name.TIMESTAMP)
     public Date shipmentDate;
