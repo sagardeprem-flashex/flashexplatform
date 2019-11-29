@@ -51,7 +51,7 @@ public class VrpWithCapacityConstraint {
 //        public final long[] demands = {0, 8, 8, 2, 4};
 
         //        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-        public final long[] vehicleCapacities = {15, 15, 15, 15};
+        public final long[] vehicleCapacities = {60,60,60,60};
 //        public final int vehicleNumber = vehicleList.getNoOfVehicle();
         public final int vehicleNumber = 4;
 

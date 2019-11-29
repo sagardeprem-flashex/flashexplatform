@@ -1,5 +1,5 @@
 #---------------------OR TOOLS LIB BUILD--------------------#
-FROM maven:3.6.0-jdk-12-alpine as or-tools-build
+FROM maven:3.6-jdk-11 as or-tools-build
 
 COPY google-or-tools-lib/or-tools_Ubuntu-18.04-64bit_v7.4.7247 /usr/local/google-or-tools
 
@@ -7,7 +7,7 @@ RUN mvn install:install-file -Dfile=/usr/local/google-or-tools/lib/com.google.or
 
 
 #---------------------LIB BUILD--------------------#
-#FROM maven:3.6.0-jdk-12-alpine AS lib-build
+#FROM maven:3.6-jdk-11 AS lib-build
 FROM prithivid/flashexdepends:latest AS lib-build
 
 RUN mkdir -p /app/libs
@@ -18,7 +18,7 @@ COPY --from=or-tools-build /usr/local/google-or-tools /usr/local/google-or-tools
 
 COPY tripplanning-lib/pom.xml /app/libs/pom.xml
 
-WORKDIR /app/libs/
+#WORKDIR /app/libs/
 
 ENV MVN="mvn -f /app/libs/pom.xml"
 
@@ -37,7 +37,7 @@ COPY tripplanning-lib/src /app/libs/src
 RUN $MVN clean install -DskipTests
 
 #-------------------BUILD SERVICE-------------------#
-#FROM maven:3.6.0-jdk-12-alpine AS build
+#FROM maven:3.6-jdk-11 AS build
 FROM prithivid/flashexdepends:latest AS build
 #FROM rajiff/prepackaged-google-or-tools:latest AS build
 
@@ -47,7 +47,7 @@ COPY --from=or-tools-build /root/.m2/repository /root/.m2/repository
 
 COPY tripplanning-worker-service/pom.xml /app/service/pom.xml
 
-WORKDIR /app/service/
+#WORKDIR /app/service/
 
 ENV MVN="mvn -f /app/service/pom.xml"
 
@@ -73,18 +73,18 @@ RUN ls /app/service/target/or-lib
 FROM gesellix/wait-for as waitfor
 
 #-------------------START SERVICE-------------------#
-FROM openjdk:12-alpine
-#FROM maven:3.6.0-jdk-12-alpine
+#FROM openjdk:12-alpine
+FROM maven:3.6-jdk-11
 
-RUN apk add --no-cache libstdc++
+RUN apt-get update
 
-RUN apk update
+RUN curl http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.29-0ubuntu2_amd64.deb --output libc6_2.29-0ubuntu2_amd64.deb
 
-RUN apk add gcompat
+RUN dpkg -i libc6_2.29-0ubuntu2_amd64.deb
 
-COPY --from=or-tools-build /usr/local/google-or-tools/lib /usr/java/packages/lib
+#RUN apt-get install -y libstdc++6
 
-RUN ls -la /usr/java/packages/lib
+COPY --from=or-tools-build /usr/local/google-or-tools/lib /usr/lib
 
 #ENV PATH="/usr/local/google-or-tools/:${PATH}"
 
@@ -102,13 +102,8 @@ COPY --from=waitfor ./wait-for ./wait-for
 
 EXPOSE 5020
 
+#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
 
-#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-Djava.library.path", "=","/usr/java/packages/lib","-jar", "/target/tripplanning-microservice-worker-service-0.0.1-SNAPSHOT.jar"]
-
-ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
-
-#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "/target/tripplanning-microservice-worker-service-0.0.1-SNAPSHOT.jar"]
-
-# ENTRYPOINT ["java","-D","/usr/java/packages/lib","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
 
 #----------------------------------------------------#
