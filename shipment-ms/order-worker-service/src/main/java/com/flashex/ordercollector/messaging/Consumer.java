@@ -1,4 +1,4 @@
-package com.flashex.ordermicroservice.messaging;
+package com.flashex.ordercollector.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 
 @Service
 public class Consumer {
@@ -21,6 +23,6 @@ public class Consumer {
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Packet packet = new ObjectMapper().readValue(message, Packet.class);
-        packetService.savePacket(packet);
+        packetService.savePackets(Collections.singletonList(packet));
     }
 }
