@@ -6,28 +6,42 @@
                 <mat-icon mat-list-icon>details</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em;">Show Orders</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Show Orders</h5>
                 </div>
             </mat-list-item>
             <mat-list-item routerLink="tripitinerary" routerLinkActive="is-active">
                 <mat-icon mat-list-icon>dashboard</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em;">Trip Details</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Trip Details</h5>
                 </div>
             </mat-list-item>
             <mat-list-item routerLink="triptrack" routerLinkActive="active">
                 <mat-icon mat-list-icon>gps_fixed</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em;">Track Your Trips</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Track Your Trips</h5>
                 </div>
             </mat-list-item>
             <mat-list-item routerLink="vehicledetail" routerLinkActive="active">
                 <mat-icon mat-list-icon>local_shipping</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em;">Vehicle Details</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Vehicle Details</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item routerLink="/admin" routerLinkActive="active">
+                <mat-icon mat-list-icon>home</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Dashboard</h5>
+                </div>
+            </mat-list-item>
+            <mat-list-item (click)="logout()">
+                <mat-icon mat-list-icon>person</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Logout</h5>
                 </div>
             </mat-list-item>
 
