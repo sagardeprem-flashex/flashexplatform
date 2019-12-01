@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
-import { MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {  MatSidenavModule,
-          MatProgressBarModule,
-          MatListModule,
-          MatExpansionModule,
-          MatButtonToggleModule,
-          MatDialogModule,
-          MatFormFieldModule,
-          MatInputModule,
-          MatTabsModule,
-          MatTableModule,
-          MatMenuModule,
-          MatPaginatorModule,
-          MatSelectModule,
-          MatProgressSpinnerModule,
-        MatTooltipModule} from '@angular/material';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import {
+  MatSidenavModule,
+  MatProgressBarModule,
+  MatListModule,
+  MatExpansionModule,
+  MatButtonToggleModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTabsModule,
+  MatTableModule,
+  MatMenuModule,
+  MatPaginatorModule,
+  MatSelectModule,
+  MatProgressSpinnerModule,
+  MatTooltipModule
+} from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';

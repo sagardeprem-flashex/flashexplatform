@@ -60,8 +60,6 @@ const tripRoutes: Routes = [
 ];
 
 
-
-
 @NgModule({
   imports: [RouterModule.forChild(tripRoutes)],
   exports: [RouterModule],
