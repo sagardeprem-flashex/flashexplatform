@@ -52,7 +52,10 @@ public class BinningService {
                 });
             });
         }
-        bins.clear();
+//        bins.clear();
+        bins.forEach(bin -> {
+            bin.getBinnedPackets().clear();
+        });
         return shipments;
     }
 
