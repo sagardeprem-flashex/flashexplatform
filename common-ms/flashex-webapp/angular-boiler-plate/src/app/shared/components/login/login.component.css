@@ -1,35 +1,33 @@
-
-mat-form-field{
-  margin:auto;
-  width: 300px;
+mat-form-field {
+    margin: auto;
+    width: 300px;
 }
 
-button{
-  width: 40%;
-  padding: auto;
+button {
+    width: 40%;
+    padding: auto;
 }
 
-.bodytag
-{
-  z-index: -5;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  background-image: url("../../../../assets/images/longexposurebackgroundimage.jpg");
-  /* background-attachment: fixed; */
-  height: 96.5vh;
-  margin-top: -5ch;
-  justify-content: center;
-  background-size: 60vh;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
+.bodytag {
+    z-index: -5;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background-image: url("../../../../assets/images/longexposurebackgroundimage.jpg");
+    /* background-attachment: fixed; */
+    height: 96.5vh;
+    margin-top: -5ch;
+    justify-content: center;
+    background-size: 60vh;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
 }
 
 .matcard {
-  padding: 16px;
-  border-radius: 4px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    padding: 16px;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

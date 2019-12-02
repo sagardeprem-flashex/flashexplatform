@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
+  private authority: string;
+
 
   constructor(
     private authService: AuthenticationService, private tokenStorage: TokenStorageService,
@@ -52,8 +54,12 @@ export class LoginComponent implements OnInit {
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();
+        this.roles = this.tokenStorage.getAuthorities();        if (this.roles[0] === 'ROLE_ADMIN') {
+          this.route.navigate(['/admin']);
+        } else if (this.roles[0] === 'ROLE_USER') {
+          this.route.navigate(['/user']);
+
+        }
       },
       error => {
         console.log(error);
@@ -62,10 +68,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-
-  reloadPage() {
-    window.location.reload();
-  }
-
-
 }
