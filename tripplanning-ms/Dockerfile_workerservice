@@ -102,8 +102,8 @@ COPY --from=waitfor ./wait-for ./wait-for
 
 EXPOSE 5020
 
-#ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
+ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
 
-ENTRYPOINT ["java","-jar","app.jar"]
+#ENTRYPOINT ["java","-jar","app.jar"]
 
 #----------------------------------------------------#
