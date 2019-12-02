@@ -50,15 +50,15 @@ build_app:
     - cd common-ms/flashex-webapp/angular-boiler-plate/
     - npm install
 # -----------Angular Test
-karma_unit_tests:
-  image: circleci/node:12-browsers
-  stage: test
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
-    - npm install  
-    - npm run test
+# karma_unit_tests:
+#   image: circleci/node:12-browsers
+#   stage: test
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install  
+#     - npm run test
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
