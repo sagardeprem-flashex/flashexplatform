@@ -2,7 +2,7 @@ package com.flashex.ordercollector.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.ordercollector.messagingservice.ProducerService;
-import com.flashex.shipmentmicroservice.lib.model.Packet;
+import com.flashex.shipmentmicroservice.lib.model.Shipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class SampleController {
     }
 
     @PostMapping(value = "/publishJSON")
-    public Packet sendMessageToKafkaTopicJSON(@RequestBody Packet message) throws JsonProcessingException {
+    public Shipment sendMessageToKafkaTopicJSON(@RequestBody Shipment message) throws JsonProcessingException {
         this.producer.sendMessage(message);
         return message;
     }
