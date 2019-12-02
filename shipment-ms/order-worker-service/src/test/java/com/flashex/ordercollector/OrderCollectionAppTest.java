@@ -1,18 +1,16 @@
-package com.flashex.shipmentmicroservice.workerservice;
-
-import static org.assertj.core.api.Assertions.assertThat;
+package com.flashex.ordercollector;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class DemoApplicationTest {
+class OrderCollectionAppTest {
+
 
     @Test
     public void contextLoads() {
 
     }
-
 }

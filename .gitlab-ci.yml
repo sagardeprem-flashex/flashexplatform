@@ -53,12 +53,12 @@ build_app:
 # karma_unit_tests:
 #   image: circleci/node:12-browsers
 #   stage: test
-  # tags:
-  #   - flashex-ci-jobs
-  # script:
-  #   - cd common-ms/flashex-webapp/angular-boiler-plate/
-  #   - npm install  
-  #   - npm run test
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms/flashex-webapp/angular-boiler-plate/
+#     - npm install  
+#     - npm run test
 #--------Angular Lint
 tslint_app:
   image: circleci/node:11-browsers
@@ -90,7 +90,7 @@ release_deploy:
         url: http:/flashex-dev.stackroute.io
     when: on_success
     only:
-        - release_v0.2.0
+        - release_v0.3.0
 #-----Production Deployment
 production_deploy:
     image: ubuntu:latest
