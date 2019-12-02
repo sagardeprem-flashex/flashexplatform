@@ -1,23 +1,20 @@
 package com.flashex.shipmentmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.*;
 
 import java.util.Date;
 
-@Table("packet")
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Table("packet")
+@UserDefinedType("packet")
 public class Packet {
 
     /** String variables **/
@@ -25,20 +22,29 @@ public class Packet {
     @PrimaryKeyColumn(name = "packetId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
     private String packetId;
-
     @CassandraType(type = DataType.Name.TEXT)
     private String productId;
-//    private String packetDescription;
-//    private String deliveryDescription;
-//    private String packetType;
-//    private String priority;
-//    private String status;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String packetDescription;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String deliveryDescription;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String packetType;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String priority;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String status;
 //
 //    /** Float variables **/
-//    private float weight;
-//    private float length;
-//    private float breadth;
-//    private float height;
+
+    @CassandraType(type = DataType.Name.FLOAT)
+    private float weight;
+    @CassandraType(type = DataType.Name.FLOAT)
+    private float length;
+    @CassandraType(type = DataType.Name.FLOAT)
+    private float breadth;
+    @CassandraType(type = DataType.Name.FLOAT)
+    private float height;
     @CassandraType(type = DataType.Name.FLOAT)
     private float costOfPacket;
 
@@ -48,7 +54,8 @@ public class Packet {
     private Date receivedDate;
 //
 //    //to be updated by Trip Planning microservice
-//    private Date estimatedDeliveryDate;
+    @CassandraType(type = DataType.Name.TIMESTAMP)
+    private Date estimatedDeliveryDate;
 //
 //    //to be updated by Trip Itinerary microservice
 //    private Date actualDeliveryDate;
