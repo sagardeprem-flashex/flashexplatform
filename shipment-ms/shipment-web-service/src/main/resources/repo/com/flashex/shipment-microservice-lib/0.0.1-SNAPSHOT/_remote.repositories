@@ -1,8 +1,6 @@
 #NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
-<<<<<<< HEAD
-#Thu Nov 28 16:48:29 IST 2019
-=======
-#Fri Nov 29 16:26:08 IST 2019
->>>>>>> c12f1fe414164602e3e786c40ec993732e00bbc5
+#Mon Dec 02 14:29:06 IST 2019
 shipment-microservice-lib-0.0.1-SNAPSHOT.pom>=
+shipment-microservice-lib-0.0.1-SNAPSHOT.jar>project.local=
+shipment-microservice-lib-0.0.1-SNAPSHOT.pom>project.local=
 shipment-microservice-lib-0.0.1-SNAPSHOT.jar>=
