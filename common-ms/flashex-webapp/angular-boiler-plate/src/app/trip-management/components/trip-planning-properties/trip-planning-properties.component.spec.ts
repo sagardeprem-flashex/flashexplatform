@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogRef } from '@angular/material';
+import { TripDetailsComponent } from '../trip-details/trip-details.component';
 
 describe('TripPlanningPropertiesComponent', () => {
   let component: TripPlanningPropertiesComponent;
@@ -25,8 +26,13 @@ describe('TripPlanningPropertiesComponent', () => {
       providers: [
         {
           provide: MatDialogRef,
-          useValues: {}
+          // useValues: {}
+          useValue: TripDetailsComponent
         }
+        // {
+        //   provide: MatDialogRef,
+        //   useValue: true
+        // }
       ]
     })
     .compileComponents();
@@ -39,6 +45,7 @@ describe('TripPlanningPropertiesComponent', () => {
   });
 
   it('should create', () => {
+    console.log('Trip properties component creation test passed ------------------>');
     expect(component).toBeTruthy();
   });
 });

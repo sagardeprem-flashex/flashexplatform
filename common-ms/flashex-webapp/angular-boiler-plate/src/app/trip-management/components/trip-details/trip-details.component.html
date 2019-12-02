@@ -1,14 +1,21 @@
 <div class="trips-container">
   <section class="mat-typography">
-    <h1>Upcoming Trips</h1>
-    <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button>
+      <h1>Upcoming Trips</h1>
+      <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button>
   </section>
 
-  <mat-accordion multi="true">
+  <mat-toolbar>
+  <div class='table-header'>
+    <p class="title-part mat-body-2">TripId</p>
+    <span class="space-filler"></span>
+    <p class="title-part mat-body-2">Start Date</p>
+  </div>
+  </mat-toolbar>
+  <mat-accordion>
     <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
       <mat-expansion-panel-header>
-        <mat-panel-title>TripId#{{trip.tripItineraryId}}</mat-panel-title>
-        <mat-panel-description>VehicleNumber#{{trip.tripItineraryId}}</mat-panel-description>
+        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+        <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
@@ -17,42 +24,64 @@
                 <mat-button-toggle value="time">Duration</mat-button-toggle>
             </mat-button-toggle-group> -->
           <mat-tab-group>
-            <mat-tab label='Distance'>
+            <mat-tab label='Summary'>
+              <div class='summary-container'>
+                <div class="trip-summary-container">
+                  <p class='mat-title'>Trip Summary</p>
+                  <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
+                </div>
+                <div class='trip-details-container'>
+                    <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
+                    </mat-progress-spinner>
+                    <div class='progress-spinner-data'>
+                      <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
+                      <!-- <p class="mat-body-2">Occupied</p> -->
+                    </div>
+                </div>
+                <div class='vehicle-details-container'>
+                  <p class='mat-title'>Vehicle Details</p>
+                  <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
+                  <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                </div>
+              </div>
+              <div class='origin-address-container'>
+                <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.address}}</p>
+                <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
+              </div>
+            </mat-tab>
+            <mat-tab label='Orders'>
               <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
+                <mat-step  *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
+                  <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
+                  <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br>
+                  Weight: {{packet.weight}} kg<br>
+                  Priority: {{packet.priority}}<br>
+                  Packet Type: {{packet.packetType}}</p>
+                  <br><br>
                   <button mat-button matStepperPrevious>Back</button>
                   <button mat-button matStepperNext>Next</button>
                 </mat-step>
 
-                <!-- Icon overrides. -->
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper>
-            </mat-tab>
-            <mat-tab label='Duration'>
-              <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </mat-step>
-
-                <!-- Icon overrides. -->
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper>
-            </mat-tab>
-          </mat-tab-group>
-          <!-- <mat-vertical-stepper>
+                                <!-- Icon overrides. -->
+                                <ng-template matStepperIcon="edit">
+                                    <mat-icon>chevron_right</mat-icon>
+                                </ng-template>
+                                <ng-template matStepperIcon="done">
+                                    <mat-icon>expand_more</mat-icon>
+                                </ng-template>
+                            </mat-vertical-stepper>
+                        </mat-tab>
+                    </mat-tab-group>
+                    <!-- <mat-vertical-stepper>
             <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
               {{order.deliveryAddress}}<br><br>
               <button mat-button matStepperPrevious>Back</button>
@@ -66,12 +95,12 @@
               <mat-icon>expand_more</mat-icon>
             </ng-template>
           </mat-vertical-stepper> -->
-        </mat-card-content>
-      </mat-card>
-    </mat-expansion-panel>
-  </mat-accordion>
+                </mat-card-content>
+            </mat-card>
+        </mat-expansion-panel>
+    </mat-accordion>
 
-  <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
+    <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
     <mat-card-subtitle>TripId#{{trip.tripItineraryId}}</mat-card-subtitle>
     <mat-card-title>VehicleNumber#{{trip.tripItineraryId}}</mat-card-title>
     <mat-card-content *ngIf="i === selected">

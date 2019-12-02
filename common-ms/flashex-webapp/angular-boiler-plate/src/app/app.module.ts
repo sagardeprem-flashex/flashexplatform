@@ -10,9 +10,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatPaginatorModule } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
+import { MatPaginatedTabHeader } from '@angular/material/tabs/typings/paginated-tab-header';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { AuthguardService } from './shared/services/authguard.service';
     MaterialModule,
     TripManagementModule,
     DeliveryExecutiveModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatPaginatorModule,
+    MatPasswordStrengthModule
   ],
   providers: [
     AuthguardService,

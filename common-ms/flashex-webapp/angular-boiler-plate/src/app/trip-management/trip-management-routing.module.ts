@@ -6,6 +6,7 @@ import { VehicleDetailsComponent } from './components/vehicle-details/vehicle-de
 import { TripDetailsComponent } from './components/trip-details/trip-details.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AuthguardService } from '../shared/services/authguard.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 const tripRoutes: Routes = [
@@ -18,7 +19,7 @@ const tripRoutes: Routes = [
     },
     children: [
       {
-        path: 'trips',
+        path: 'tripitinerary',
         component: TripDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -26,7 +27,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'track',
+        path: 'triptrack',
         component: LiveTrackingComponent,
         canActivate: [AuthguardService],
         data: {
@@ -34,7 +35,7 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'orders',
+        path: 'orderdetail',
         component: OrderDetailsComponent,
         canActivate: [AuthguardService],
         data: {
@@ -42,17 +43,21 @@ const tripRoutes: Routes = [
         }
       },
       {
-        path: 'vehicle',
+        path: 'vehicledetail',
         component: VehicleDetailsComponent,
         canActivate: [AuthguardService],
         data: {
           expectedRole: 'ROLE_ADMIN'
         }
+      },
+      {
+        path: '',
+        component: DashboardComponent,
+        pathMatch: 'full'
       }
     ]
-  }
+  },
 ];
-
 
 
 @NgModule({
