@@ -41,13 +41,54 @@ public class TimeWindowDelivery {
         static class DataModel {
 
 
-        GenerateMatrix matGenerator = new GenerateMatrix();
+            public final String[] addresses = new String[]{
+                    "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
+                    "1921+Elvis+Presley+Blvd+Memphis+TN",
+                    "149+Union+Avenue+Memphis+TN",
+                    "1034+Audubon+Drive+Memphis+TN",
+                    "1532+Madison+Ave+Memphis+TN",
+                    "706+Union+Ave+Memphis+TN",
+                    "3641+Central+Ave+Memphis+TN",
+                    "926+E+McLemore+Ave+Memphis+TN",
+                    "4339+Park+Ave+Memphis+TN",
+                    "600+Goodwyn+St+Memphis+TN",
+                    "2000+North+Pkwy+Memphis+TN",
+                    "262+Danny+Thomas+Pl+Memphis+TN",
+                    "125+N+Front+St+Memphis+TN",
+                    "5959+Park+Ave+Memphis+TN",
+                    "814+Scott+St+Memphis+TN",
+                    "1005+Tillman+St+Memphis+TN"
+            };
+
+            public final long[][] timeMatrix =
+                {
+                {0, 22, 28, 17, 27, 27, 22, 23, 18, 21, 25, 28, 27, 13, 22, 23},
+                {22, 0, 11, 15, 10, 9, 14, 5, 15, 10, 13, 13, 10, 17, 16, 15},
+                {28, 11, 0, 22, 7, 4, 17, 7, 21, 14, 11, 7, 3, 23, 14, 15},
+                {17, 15, 21, 0, 15, 19, 5, 15, 1, 8, 16, 22, 20, 8, 12, 13},
+                {27, 10, 8, 16, 0, 6, 11, 7, 16, 10, 7, 9, 7, 20, 10, 10},
+                {27, 10, 4, 21, 6, 0, 16, 8, 21, 13, 11, 9, 6, 22, 15, 13},
+                {22, 14, 17, 6, 11, 16, 0, 12, 5, 4, 12, 20, 16, 13, 8, 9},
+                {23, 5, 8, 15, 7, 8, 12, 0, 15, 8, 12, 12, 9, 18, 13, 14},
+                {18, 16, 21, 1, 15, 19, 5, 15, 0, 8, 16, 22, 20, 8, 12, 13},
+                {21, 10, 14, 7, 10, 13, 4, 8, 7, 0, 11, 15, 13, 15, 7, 9},
+                {25, 13, 11, 16, 7, 11, 11, 12, 16, 10, 0, 12, 10, 17, 5, 6},
+                {28, 11, 6, 23, 8, 8, 18, 10, 22, 14, 10, 0, 4, 23, 13, 14},
+                {27, 10, 3, 20, 7, 6, 17, 10, 20, 13, 10, 6, 0, 21, 12, 13},
+                {13, 18, 24, 9, 21, 22, 13, 19, 9, 15, 18, 25, 22, 0, 15, 16},
+                {22, 16, 15, 13, 10, 15, 9, 14, 13, 9, 6, 15, 14, 15, 0, 1},
+                {23, 16, 15, 14, 11, 13, 10, 14, 14, 10, 6, 16, 15, 15, 1, 0}
+        };
+
+
+
+       /* GenerateMatrix matGenerator = new GenerateMatrix();
         Data d = matGenerator.createData();
         public final int[][] timeMatrix = matGenerator.createTimeTravelMatrix(d);
         public final String[] addresses = d.addr;
         public final String Key = d.API_Key;
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
-        public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
+        public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);*/
 
 //        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
 //        VehicleList vehicleList = getJsonServerData.processJsonData();
@@ -147,7 +188,7 @@ public class TimeWindowDelivery {
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
                     tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
 
-                response = geocode(addr[(int) nodeIndex],data.Key);
+//                response = geocode(addr[(int) nodeIndex],data.Key);  // appliacble when using google api to give lat long
 //                System.out.println(latlongarr.size()); // To print size of latlongarrray
                 latlongarr.add(response);
 
@@ -281,6 +322,6 @@ public class TimeWindowDelivery {
         printSolution(data, routing, manager, solution,data.addresses);
 
 //                Prints distance and time matrices
-        matPrint(data.distmat,data.timemat,data.addresses);
+//        matPrint(data.distmat,data.timemat,data.addresses);  // use with google api only
         }
     }
