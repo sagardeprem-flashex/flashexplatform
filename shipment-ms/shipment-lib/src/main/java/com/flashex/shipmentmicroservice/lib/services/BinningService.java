@@ -42,24 +42,28 @@ public class BinningService {
 
         if(bins.size()!=0){
             bins.forEach(bin -> {
+                // generate shipments
                 List<List<Packet>> generatedShipments = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
                 generatedShipments.forEach(generatedShipment ->{
                     Shipment shipment = new Shipment();
+
+                    // sorting to be done 
+//                    generatedShipment.sort();
                     shipment.setPacketList((ArrayList<Packet>) generatedShipment);
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
                     shipments.add(shipment);
                 });
+
+                // clear bin on generating the shipment
+                bin.getBinnedPackets().clear();
+
             });
         }
-//        bins.clear();
-        bins.forEach(bin -> {
-            bin.getBinnedPackets().clear();
-        });
         return shipments;
     }
 
-    public void createBin(List<String> binningStrategy, List<String> sortingStrategy){
+    public void createBin(List<String> binningStrategy, String sortingStrategy){
         Bin bin = new Bin();
         bin.setBinningStrategy(binningStrategy);
         bin.setSortingStrategy(sortingStrategy);
@@ -103,7 +107,7 @@ public class BinningService {
         BinnerConfig config = new BinnerConfig();
         config.setConfigDate(new Date());
         config.setConfigId(UUID.randomUUID().toString());
-        config.setSortBy(Collections.singletonList("RECEIVED_DATE"));
+        config.setSortBy("RECEIVED_DATE");
         List<String> groupStrategy = new ArrayList<>();
         groupStrategy.add("PINCODE");
         groupStrategy.add("PACKET_TYPE");

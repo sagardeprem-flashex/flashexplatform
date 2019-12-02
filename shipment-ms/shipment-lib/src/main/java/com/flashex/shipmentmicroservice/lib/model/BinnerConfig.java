@@ -27,8 +27,8 @@ public class BinnerConfig {
     private Date configDate;
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.TEXT } )
     private List<String> groupStrategy;
-    @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.TEXT })
-    private List<String> sortBy;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String sortBy;
     @CassandraType(type = DataType.Name.INT)
     private int maxShipmentSize;
 

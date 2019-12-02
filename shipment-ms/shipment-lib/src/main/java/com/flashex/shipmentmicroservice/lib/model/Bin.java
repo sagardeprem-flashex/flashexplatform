@@ -15,7 +15,7 @@ public class Bin {
     private String binId;
     private Date createdOn;
     private List<String> binningStrategy;
-    private List<String> sortingStrategy;
+    private String sortingStrategy;
     private List<Packet> binnedPackets;
 
 }
