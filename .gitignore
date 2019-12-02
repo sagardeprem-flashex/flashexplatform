@@ -1,7 +1,6 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!.mvnw/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
 
@@ -32,6 +31,7 @@ build/
 .vscode/
 
 ### mvn files ###
-.mvn 
-.mvnw
+/mvnw
+/mvnw.bat
+mvnw.cmd
 
