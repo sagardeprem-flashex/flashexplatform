@@ -1,8 +1,8 @@
-package com.flashex.ordermicroservice.messaging;
+package com.flashex.shipmentmicroservice.workerservice.messagingservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.shipmentmicroservice.lib.model.TestClass;
+import com.flashex.shipmentmicroservice.lib.model.Shipment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Producer {
+public class ProducerService {
 
     private static final String TOPIC = "Batches";
-    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
+    private static final Logger logger = LoggerFactory.getLogger(ProducerService.class);
 
     @Autowired
     private KafkaTemplate<String,String> kafkaTemplateString;
@@ -21,7 +21,7 @@ public class Producer {
     @Autowired
     private KafkaTemplate<Object, String> kafkaTemplateJSON;
 
-    public void sendMessage(TestClass message) throws JsonProcessingException {
+    public void sendMessage(Shipment message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
         this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
     }

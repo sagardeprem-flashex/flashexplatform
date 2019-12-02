@@ -1,4 +1,4 @@
-package com.flashex.shipmentmicroservice.workerservice.messaging;
+package com.flashex.ordercollector.messagingservice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +11,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Producer {
+public class ProducerService {
 
     private static final String TOPIC = "Batches";
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);

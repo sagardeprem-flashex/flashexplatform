@@ -42,7 +42,7 @@ services:
       # KAFKA_CERTIFICATE_PASSWORD: certificatePassword123
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:19092,PLAINTEXT_HOST://localhost:9092
       KAFKA_LISTENERS: PLAINTEXT://kafka:19092,PLAINTEXT_HOST://localhost:9092
       KAFKA_CREATE_TOPICS: "jackieChanCommand:1:1,Order:1:1:delete,Batches:1:1:delete,Fleet:1:1:delete,TripItinerary:1:1:delete"

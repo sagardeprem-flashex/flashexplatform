@@ -1,5 +1,5 @@
 <body style="background-color:#ECEFF1; margin-top: 10vh;">
-    <h1>Trips Details</h1>
+    <h1 style="margin-left: 0.5em; margin-top: 10vh;">Trips Details</h1>
     <p><button mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Trips Detail</button></p>
 
     <mat-sidenav-container class="example-container" style="background-color:#ECEFF1;">
@@ -47,8 +47,10 @@
 
             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
                 <agm-marker [latitude]="warehouse.latitude" [longitude]="warehouse.longitude" [iconUrl]="url"></agm-marker>
-                <agm-direction *ngFor="let route of routes" [origin]="route.origin" [destination]="route.dest" [renderOptions]="renderOptions">
+
+                <agm-direction *ngFor="let route of routes" [origin]="route.origin" [destination]="route.dest" [renderOptions]="renderOptions" [provideRouteAlternatives]="provideRouteAlternatives">
                 </agm-direction>
+
                 <div *ngFor="let id of dataSource, let j=index">
 
                     <agm-marker *ngFor="let marker of markers, let j =index" [latitude]="marker.deliveryLocation.lat" [longitude]="marker.deliveryLocation.lng" [label]="{

@@ -7,14 +7,8 @@ import { TokenStorageService } from '../shared/services/token-storage.service';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
-  info: any;
-
-  constructor(private token: TokenStorageService) { }
+  constructor() { }
 
   ngOnInit() {
-  }
-  logout() {
-    this.token.signOut();
-    window.location.reload();
   }
 }

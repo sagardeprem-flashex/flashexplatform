@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TripService } from 'src/app/trip-management/services/trip.service';
+import { Router } from '@angular/router';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 
 @Component({
   selector: 'app-trips',
@@ -40,7 +42,9 @@ export class TripsComponent implements OnInit {
   public listofOrders;
   public tripDetails;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tripService: TripService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private tripService: TripService, private router: Router,
+              private tokenStorage: TokenStorageService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -53,7 +57,7 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      console.log( 'mm', this.dataSource);
+      console.log('mm', this.dataSource);
       this.trip(0);
     });
   }
@@ -70,6 +74,10 @@ export class TripsComponent implements OnInit {
       console.log('hh', this.tripDetails);
     }
 
+  }
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/auth/login']);
   }
 }
 

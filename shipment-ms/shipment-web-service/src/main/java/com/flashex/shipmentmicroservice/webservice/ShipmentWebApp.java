@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @SpringBootApplication(scanBasePackages = "com.flashex.shipmentmicroservice")
 @RestController
-public class DemoApplication {
+public class ShipmentWebApp {
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(ShipmentWebApp.class, args);
     }
 }

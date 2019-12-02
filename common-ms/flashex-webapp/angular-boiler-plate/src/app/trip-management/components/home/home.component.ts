@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/shared/services/user.service';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +15,7 @@ export class HomeComponent implements OnInit {
   board: string;
   errorMessage: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private tokenStorage: TokenStorageService, private router: Router) { }
 
   ngOnInit() {
     this.userService.getAdminBoard().subscribe(
@@ -31,6 +33,10 @@ export class HomeComponent implements OnInit {
   }
   decrease() {
     this.sidenavWidth = 4;
+  }
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/auth/login']);
   }
 
 }
