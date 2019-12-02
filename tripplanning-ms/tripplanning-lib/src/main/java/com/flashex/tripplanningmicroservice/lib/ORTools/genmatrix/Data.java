@@ -12,9 +12,25 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Data {
-        public String API_Key = "AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY";
-        public String[] addr = new String[]{};
+//        public String API_Key = "AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY";
+        public String API_Key;
+        public static String[] addr = new String[]{};
 
+        public String getAPI_Key() {
+                return API_Key;
+        }
+
+        public static String[] getAddr() {
+                return addr;
+        }
+
+        public void setAPI_Key(String API_Key) {
+                this.API_Key = API_Key;
+        }
+
+        public static void setAddr(String[] addr) {
+                Data.addr = addr;
+        }
 //        public String getAPI_Key() {
 //                return API_Key;
 //        }

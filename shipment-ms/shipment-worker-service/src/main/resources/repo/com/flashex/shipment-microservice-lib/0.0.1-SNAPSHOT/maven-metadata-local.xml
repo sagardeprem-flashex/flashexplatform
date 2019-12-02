@@ -7,17 +7,29 @@
     <snapshot>
       <localCopy>true</localCopy>
     </snapshot>
+<<<<<<< HEAD
+    <lastUpdated>20191128111829</lastUpdated>
+=======
     <lastUpdated>20191129105608</lastUpdated>
+>>>>>>> c12f1fe414164602e3e786c40ec993732e00bbc5
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
         <value>0.0.1-SNAPSHOT</value>
+<<<<<<< HEAD
+        <updated>20191128111829</updated>
+=======
         <updated>20191129105608</updated>
+>>>>>>> c12f1fe414164602e3e786c40ec993732e00bbc5
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
         <value>0.0.1-SNAPSHOT</value>
+<<<<<<< HEAD
+        <updated>20191128111829</updated>
+=======
         <updated>20191129105608</updated>
+>>>>>>> c12f1fe414164602e3e786c40ec993732e00bbc5
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
