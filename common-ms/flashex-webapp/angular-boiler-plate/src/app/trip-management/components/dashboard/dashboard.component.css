@@ -1,12 +1,13 @@
 .card {
     max-width: 250px;
+    margin-left: 2em;
     margin-top: 17px
 }
 
 img {
     height: 30vh;
     margin-left: 0vh;
-    width: 100%;
+    width: 245px;
 }
 
 .mat-typography {

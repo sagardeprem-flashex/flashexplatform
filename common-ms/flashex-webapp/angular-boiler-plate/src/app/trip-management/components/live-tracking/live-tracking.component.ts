@@ -29,6 +29,10 @@ export class LiveTrackingComponent implements OnInit {
     latitude: 12.95381,
     longitude: 77.6375593
   };
+public provideRouteAlternatives: boolean = true // default: false
+
+
+
   constructor(private tripService: TripService) { }
   public routes = [];
 
