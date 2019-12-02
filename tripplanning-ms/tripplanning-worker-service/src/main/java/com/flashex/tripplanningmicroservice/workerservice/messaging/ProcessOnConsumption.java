@@ -11,6 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 @RestController
 public class ProcessOnConsumption {
 
@@ -28,20 +31,14 @@ public class ProcessOnConsumption {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
         String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
+        logger.info("------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
         deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
+        logger.info("<<<<<<<<<<<<<<---------------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
         orService.settingAddressArray(deliveryAddresses);
         orService.VrpfunctionWithCapCons();
         orService.VrpfuncWithDropNode();
         orService.TimeWindowConsFunction();
 
-
-//        received data from kafka
-        // get fleet details
-        // plan the trip
-        // some algo
-        // store in db
-//        producer.sendMessageJSON();
-        //
     }
 
 }

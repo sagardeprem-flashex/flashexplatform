@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Consumer {
+
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
     private final ProcessOnConsumption processOnConsumption;
 
@@ -18,6 +19,8 @@ public class Consumer {
 
     @KafkaListener(topics = "Batches", groupId = "group_id")
     public void consume(String message) throws Exception {
+
+
         processOnConsumption.processData(message);
     }
 

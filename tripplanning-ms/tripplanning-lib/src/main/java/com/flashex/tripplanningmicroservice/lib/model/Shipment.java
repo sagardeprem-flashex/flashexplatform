@@ -18,7 +18,7 @@ public class Shipment {
     /** String variables **/
     private String shipmentId;
     /** Integer variables**/
-    private int MAX_SHIPMENT_SIZE;
+    private int maxShipmentSize;
     /** Date variables **/
     private Date shipmentDate;
     /** Objects from local package **/
@@ -28,8 +28,8 @@ public class Shipment {
         int packetlistsize = this.packetList.size();
         String[] address = new String[packetlistsize+1];
 
-        for(int i=1; i<packetlistsize; i++){
-            address[i] = this.packetList.get(i-1).getDeliveryAddress().getAddressLine1() + "+" +
+        for(int i=1; i<=packetlistsize; i++){
+            address[i] = this.packetList.get(i-1).getDeliveryAddress().getAddressLine1().replaceAll(", ","+").replaceAll(" ","+") + "+" +
                     this.packetList.get(i-1).getDeliveryAddress().getCity()+ "+" +
                     this.packetList.get(i-1).getDeliveryAddress().getState() + "+" +
                     this.packetList.get(i-1).getDeliveryAddress().getPincode();

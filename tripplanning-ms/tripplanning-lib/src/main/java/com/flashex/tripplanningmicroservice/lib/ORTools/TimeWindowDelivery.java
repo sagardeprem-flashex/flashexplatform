@@ -30,7 +30,11 @@ import java.util.logging.Logger;
 
 public class TimeWindowDelivery {
 
-        /** Minimal VRPTW.*/
+//        static {
+//        System.loadLibrary("jniortools");
+//    }
+
+    /** Minimal VRPTW.*/
 
         private static final Logger logger = Logger.getLogger(TimeWindowDelivery.class.getName());
 
@@ -45,10 +49,11 @@ public class TimeWindowDelivery {
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
         public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
 
-        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
-        VehicleList vehicleList = getJsonServerData.processJsonData();
+//        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
+//        VehicleList vehicleList = getJsonServerData.processJsonData();
 
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8};
+//        public final long[] demands = {0, 8, 8, 2, 4};
 
 
         public final long[][] timeWindows = {
@@ -71,10 +76,11 @@ public class TimeWindowDelivery {
             };
 
 
-//            public final int  vehicleNumber = 4;
-            public final int vehicleNumber = vehicleList.getNoOfVehicle();
+            public final int  vehicleNumber = 6;
+//            public final int vehicleNumber = vehicleList.getNoOfVehicle();
 
-            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+//            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
+            public final long[] vehicleCapacities = {20, 20, 30, 30, 30 , 30};
             public final int  depot = 0;
 
             DataModel() throws ParseException, JsonProcessingException {
@@ -194,8 +200,8 @@ public class TimeWindowDelivery {
             long[][] time_mat = new long[timemat.length][timemat.length];
 
             for (int i = 0, j = 0; i < dist_mat.length || j < time_mat.length; i = Math.min(dist_mat.length + 1, i + 1), j = Math.min(time_mat.length + 1, j + 1)) {
-//            System.out.println(dist_mat[i].length + " Distance Matrix " + Arrays.toString(distmat[i]) + "\n" +
-//                    time_mat[i].length + " Time Travel " + Arrays.toString(timemat[i]) + "\n");
+            System.out.println(dist_mat[i].length + " Distance Matrix " + Arrays.toString(distmat[i]) + "\n" +
+                    time_mat[i].length + " Time Travel " + Arrays.toString(timemat[i]) + "\n");
             }
             String[] addr = address;
             System.out.println(Arrays.toString(addr));

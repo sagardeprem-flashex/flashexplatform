@@ -4,8 +4,12 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
+import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.logging.Logger;
 
 //  This service belongs to VRP problem with capacity constraint
 
@@ -13,12 +17,17 @@ import org.springframework.stereotype.Service;
 @EnableConfigurationProperties(ServiceProperties.class)
 public class ORService {
 
+    private static final Logger logger = Logger.getLogger(ORService.class.getName());
 
-    private final ServiceProperties serviceProperties;
-    private final VrpWithCapacityConstraint vrpWithCapacityConstraint;
-    private final VrpWithDroppingVisit vrpWithDroppingVisit;
-    private final TimeWindowDelivery timeWindowDelivery;
-    private final Data data;
+    private  ServiceProperties serviceProperties;
+    private  VrpWithCapacityConstraint vrpWithCapacityConstraint;
+    private  VrpWithDroppingVisit vrpWithDroppingVisit;
+    private  TimeWindowDelivery timeWindowDelivery;
+    private Data data;
+
+    public Data getData() {
+        return this.data;
+    }
 
     public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data) {
         this.serviceProperties = serviceProperties;
@@ -30,6 +39,12 @@ public class ORService {
 
     public String message() {
         return this.serviceProperties.getMessage();
+    }
+
+    //    Send array of address
+    public void settingAddressArray(String[] address){
+        data.setAddr(address);
+        logger.info("-----------In OR Service----------"+ Arrays.toString(data.getAddr()));
     }
 
 //    VRP with capacity constraint function
@@ -47,9 +62,6 @@ public class ORService {
         timeWindowDelivery.FinalResult();
     }
 
-//    Send array of address
-    public void settingAddressArray(String[] address){
-        data.setAddr(address);
-    }
+
 
 }

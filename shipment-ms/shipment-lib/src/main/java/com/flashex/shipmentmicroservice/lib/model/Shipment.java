@@ -2,11 +2,15 @@ package com.flashex.shipmentmicroservice.lib.model;
 
 
 
+import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.ArrayList;
@@ -20,28 +24,29 @@ import java.util.Date;
  * Shipment--1--has---*-->Orders
  *
  * */
-@Table("Shipment")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Table("shipment")
 public class Shipment {
 
     /** String variables **/
 
-    @PrimaryKey
+    @PrimaryKeyColumn(name = "shipmentId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
+    @CassandraType(type = DataType.Name.TEXT)
     public String shipmentId;
 
     /** Integer variables**/
+    @CassandraType(type = DataType.Name.INT)
+    public int maxShipmentSize;
 
-    public int MAX_SHIPMENT_SIZE;
     /** Date variables **/
-
+    @CassandraType(type = DataType.Name.TIMESTAMP)
     public Date shipmentDate;
 
     /** Objects from local package **/
+    @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "packet")
     public ArrayList<Packet> packetList;
-
 
 }

@@ -65,17 +65,18 @@ RUN $MVN clean package -DskipTests
 FROM gesellix/wait-for as waitfor
 
 #-------------------START SERVICE-------------------#
-FROM openjdk:12-alpine
 
-RUN apk add --no-cache libstdc++
+FROM maven:3.6-jdk-11
 
-RUN apk update
+RUN apt-get update
 
-RUN apk add gcompat
+RUN curl http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.29-0ubuntu2_amd64.deb --output libc6_2.29-0ubuntu2_amd64.deb
 
-COPY --from=or-tools-build /usr/local/google-or-tools/lib /usr/java/packages/lib
+RUN dpkg -i libc6_2.29-0ubuntu2_amd64.deb
 
-RUN ls -la /usr/java/packages/lib
+#RUN apt-get install -y libstdc++6
+
+COPY --from=or-tools-build /usr/local/google-or-tools/lib /usr/lib
 
 #ENV PATH="/usr/local/google-or-tools/:${PATH}"
 
@@ -85,11 +86,16 @@ CMD ["/bin/bash"]
 
 COPY --from=build /app/service/target/*.jar app.jar
 
+#RUN mkdir /target
+
+#COPY --from=build /app/service/target /target
+
 COPY --from=waitfor ./wait-for ./wait-for
 
 EXPOSE 6020
 
 ENTRYPOINT [ "./wait-for", "config-server:8888", "-t", "20", "--", "java", "-jar", "app.jar"]
-# ENTRYPOINT ["java","-jar","app.jar"]
+
+#ENTRYPOINT ["java","-jar","app.jar"]
 
 #----------------------------------------------------#

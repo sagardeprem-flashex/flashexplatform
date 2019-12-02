@@ -44,7 +44,7 @@ public class Packet {
     private Date receivedDate;
 //
 //    //to be updated by Trip Planning microservice
-//    private Date estimatedDeliveryDate;
+    private Date estimatedDeliveryDate;
 //
 //    //to be updated by Trip Itinerary microservice
 //    private Date actualDeliveryDate;

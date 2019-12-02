@@ -18,20 +18,20 @@ import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 @AllArgsConstructor
 
 @UserDefinedType("customer")
-    public class Customer {
+public class Customer {
 
-        /** String variables **/
-        @CassandraType(type = DataType.Name.TEXT)
-        public String firstName;
-        @CassandraType(type = DataType.Name.TEXT)
-        public String middleName;
-        @CassandraType(type = DataType.Name.TEXT)
-        public String lastName;
-        @CassandraType(type = DataType.Name.TEXT)
-        public String emailId;
+    /** String variables **/
+    @CassandraType(type = DataType.Name.TEXT)
+    public String firstName;
+    @CassandraType(type = DataType.Name.TEXT)
+    public String middleName;
+    @CassandraType(type = DataType.Name.TEXT)
+    public String lastName;
+    @CassandraType(type = DataType.Name.TEXT)
+    public String emailId;
 
-        /** Integer variables **/
-        @CassandraType(type = DataType.Name.INT)
-        public int phoneNumber;
+    /** Integer variables **/
+    @CassandraType(type = DataType.Name.INT)
+    public int phoneNumber;
 
 }
