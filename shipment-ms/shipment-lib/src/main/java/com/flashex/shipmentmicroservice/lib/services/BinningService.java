@@ -47,7 +47,7 @@ public class BinningService {
                 generatedShipments.forEach(generatedShipment ->{
                     Shipment shipment = new Shipment();
 
-                    // sorting to be done 
+                    // sorting to be done
 //                    generatedShipment.sort();
                     shipment.setPacketList((ArrayList<Packet>) generatedShipment);
                     shipment.setShipmentDate(new Date());

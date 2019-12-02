@@ -25,7 +25,8 @@ public class ShipmentGeneration {
     @Autowired
     ProducerService producer;
 
-    @Scheduled(cron = "1 * * * * ?")
+//    Uncommenting until JSON stream doesn't work
+//    @Scheduled(cron = "1 * * * * ?")
     public void generateShipment() {
         log.info("Sending shipments {}", dateFormat.format(new Date()));
 
