@@ -1,0 +1,25 @@
+#map {
+    height: 50em;
+    width: 50em;
+}
+
+button {
+    margin-left: 1em;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+.example-container {
+    height: 40em;
+}
+
+.example-events {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    border: 1px solid #555;
+}
+
+.sidenavbar {
+    width: min-content;
+}
