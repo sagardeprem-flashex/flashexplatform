@@ -39,17 +39,20 @@ public class BinningService {
 
     public List<Shipment> generateShipment(){
         List<Shipment> shipments = new ArrayList<>();
-        
-        bins.forEach(bin -> {
-            List<List<Packet>> generatedShipments = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
-            generatedShipments.forEach(generatedShipment ->{
-                Shipment shipment = new Shipment();
-                shipment.setPacketList((ArrayList<Packet>) generatedShipment);
-                shipment.setShipmentDate(new Date());
-                shipment.setShipmentId(UUID.randomUUID().toString());
-                shipments.add(shipment);
+
+        if(bins.size()!=0){
+            bins.forEach(bin -> {
+                List<List<Packet>> generatedShipments = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
+                generatedShipments.forEach(generatedShipment ->{
+                    Shipment shipment = new Shipment();
+                    shipment.setPacketList((ArrayList<Packet>) generatedShipment);
+                    shipment.setShipmentDate(new Date());
+                    shipment.setShipmentId(UUID.randomUUID().toString());
+                    shipments.add(shipment);
+                });
             });
-        });
+        }
+        bins.clear();
         return shipments;
     }
 
