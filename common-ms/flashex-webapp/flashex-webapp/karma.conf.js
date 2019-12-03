@@ -26,9 +26,9 @@ module.exports = function(config) {
         autoWatch: true,
         browsers: ['ChromeHeadless'],
         // Karma server will restart if it is not recieving any data from the browser
-        browserNoActivityTimeout: 10000,
-        browserDisconnectTolerance: 10,
-        singleRun: true,
+        // browserNoActivityTimeout: 10000,
+        // browserDisconnectTolerance: 10,
+        singleRun: false,
         restartOnFileChange: true
     });
 };
