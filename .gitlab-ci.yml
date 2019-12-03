@@ -90,7 +90,7 @@ release_deploy:
         url: http:/flashex-dev.stackroute.io
     when: on_success
     only:
-        - release_v0.3.0
+        - release_v0.4.0
 #-----Production Deployment
 production_deploy:
     image: ubuntu:latest
