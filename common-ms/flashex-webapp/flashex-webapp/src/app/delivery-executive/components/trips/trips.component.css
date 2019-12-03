@@ -46,12 +46,10 @@ h1.example-app-name {
 }
 
 .example-header-image {
-    background-image: url('images.png');
     background-size: cover;
 }
 
 .example-header-image1 {
-    background-image: url('wrong.png');
     background-size: cover;
 }
 
@@ -70,6 +68,5 @@ b {
 }
 
 .display {
-    background-image: url('search_error.png');
     background-size: cover;
 }
