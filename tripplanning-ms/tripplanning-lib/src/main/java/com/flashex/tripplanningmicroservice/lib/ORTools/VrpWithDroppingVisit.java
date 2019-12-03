@@ -25,10 +25,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class VrpWithDroppingVisit {
-//
-//    static {
-//        System.loadLibrary("jniortools");
-//    }
+
 
 
     /** Minimal VRP.*/

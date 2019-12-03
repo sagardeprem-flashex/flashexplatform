@@ -30,10 +30,6 @@ import java.util.logging.Logger;
 
 public class TimeWindowDelivery {
 
-//        static {
-//        System.loadLibrary("jniortools");
-//    }
-
     /** Minimal VRPTW.*/
 
         private static final Logger logger = Logger.getLogger(TimeWindowDelivery.class.getName());
@@ -121,7 +117,7 @@ public class TimeWindowDelivery {
 //            public final int vehicleNumber = vehicleList.getNoOfVehicle();
 
 //            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-            public final long[] vehicleCapacities = {20, 20, 30, 30, 30 , 30};
+            public final long[] vehicleCapacities = {50, 50, 50, 50, 50 , 50};
             public final int  depot = 0;
 
             DataModel() throws ParseException, JsonProcessingException {
