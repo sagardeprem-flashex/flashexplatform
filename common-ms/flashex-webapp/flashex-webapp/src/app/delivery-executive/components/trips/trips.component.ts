@@ -57,21 +57,21 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      console.log('mm', this.dataSource);
+      // console.log('mm', this.dataSource);
       this.trip(0);
     });
   }
   trip(value) {
-    console.log('g', value);
+    // console.log('g', value);
     // console.log(this.dataSource)
 
     this.details = this.dataSource[value];
-    console.log('ff', this.details);
+    // console.log('ff', this.details);
     if (this.details) {
       // this.details = this.details.orders[value].deliveryAddress;
       this.tripDetails = this.details;
       this.listofOrders = this.details.orders;
-      console.log('hh', this.tripDetails);
+      // console.log('hh', this.tripDetails);
     }
 
   }

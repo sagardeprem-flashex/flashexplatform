@@ -30,10 +30,10 @@ export class TripPlanningPropertiesComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(`From trip planning component -->`);
-    console.log(this.addProperties.value, this.addProperties.valid);
+    // console.log(`From trip planning component -->`);
+    // console.log(this.addProperties.value, this.addProperties.valid);
     this.tripService.planningProperties = this.addProperties.value;
-    console.log(this.tripService.planningProperties);
+    // console.log(this.tripService.planningProperties);
     // this.router.navigate(['trips']);
     this.dialogRef.close();
   }

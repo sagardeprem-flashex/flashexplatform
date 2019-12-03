@@ -39,7 +39,7 @@ export class TripDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.properties = this.tripService.planningProperties;
-      console.log(this.tripService.planningProperties, this.properties);
+      // console.log(this.tripService.planningProperties, this.properties);
     });
   }
 
