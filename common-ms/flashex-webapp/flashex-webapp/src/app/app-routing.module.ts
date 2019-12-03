@@ -9,9 +9,6 @@ const routes: Routes = [
       loadChildren: './shared/shared-routing.module#SharedRoutingModule',
     },
     {
-      path: '', redirectTo: '/in', pathMatch: 'full'
-    },
-    {
       path: 'in', component: LandingPageComponent, pathMatch: 'full'
     },
     {
@@ -21,6 +18,9 @@ const routes: Routes = [
     {
       path: 'delivery-executive',
       loadChildren: './delivery-executive/delivery-executive-routing.module#DeliveryExecutiveRoutingModule',
+    },
+    {
+      path: '', redirectTo: '/in', pathMatch: 'full'
     },
 ];
 

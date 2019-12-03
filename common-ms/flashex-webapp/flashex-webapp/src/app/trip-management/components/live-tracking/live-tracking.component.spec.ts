@@ -2,12 +2,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LiveTrackingComponent } from './live-tracking.component';
 import { MaterialModule } from 'src/app/material/material.module';
-import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule} from '@angular/common/http/testing';
-import { AgmDirectionModule } from 'agm-direction';
 
 
 describe('LiveTrackingComponent', () => {
@@ -18,13 +16,9 @@ describe('LiveTrackingComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LiveTrackingComponent],
       imports: [MaterialModule,
-        AgmCoreModule.forRoot({
-          apiKey: 'AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY'
-        }),
         HttpClientModule,
         BrowserAnimationsModule,
-        HttpClientTestingModule,
-        AgmDirectionModule
+        HttpClientTestingModule
       ],
       providers: [TripItineraryService ]
     })

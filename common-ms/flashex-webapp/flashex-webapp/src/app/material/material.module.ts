@@ -22,6 +22,7 @@ import { MatCardModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -44,7 +45,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatSelectModule,
   MatProgressSpinnerModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatPasswordStrengthModule
 ];
 
 @NgModule({

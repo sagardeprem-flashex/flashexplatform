@@ -24,7 +24,7 @@ export class TripItineraryService {
   };
 
 
-   private url = '../../../assets/tripItinerary1.json';
+   private url = '../../../assets/tripsListFormat2.json';
    private dataSource = [];
    public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);
 

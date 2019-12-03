@@ -10,6 +10,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class ShipmentManagementService {
 
   public packetList: IPacket;
+  public errormsg;
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,9 +26,14 @@ export class ShipmentManagementService {
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);
   load() {
-    this.http.get<IPacket[]>(this.url).subscribe(data => {
-      this.dataSource = data;
-      this.behaviourSubject.next(this.dataSource);
-    });
+    this.http.get<IPacket[]>(this.url).subscribe(
+      data => {
+        this.dataSource = data;
+        this.behaviourSubject.next(this.dataSource);
+      },
+      error => {
+        this.errormsg = error.message;
+      }
+    );
   }
 }

@@ -59,30 +59,6 @@ export class LiveTrackingComponent implements OnInit {
       this.markers = [].concat.apply([], this.markers);
     });
   }
-  // on click to each trip it will carry value and passed to this function
-  trip(value) {
-    this.routes = [];
-    // store information of trip corresponding to value
-    const location = this.dataSource[value];
-
-    if (location && location.orders) {
-      this.markers = location.orders;
-      // fetch latitude and longitude from each trip to center the map
-      this.lat = location.orders[2].deliveryLocation.lat;
-      this.lng = location.orders[2].deliveryLocation.lng;
-      this.zoom = 12;
-      // store orgin and destination of each routes and pass to agm-direction
-      this.origin = { lat: this.warehouse.latitude, lng: this.warehouse.longitude };
-      this.destination = { lat: location.orders[0].deliveryLocation.lat, lng: location.orders[0].deliveryLocation.lng };
-      this.routes.push({ origin: this.origin, dest: this.destination });
-      // creates the array that will store all routes between each marker for a particular trip
-      for (let j = 0; j < location.orders.length - 1; j++) {
-        this.origin = { lat: location.orders[j].deliveryLocation.lat, lng: location.orders[j].deliveryLocation.lng };
-        this.destination = { lat: location.orders[j + 1].deliveryLocation.lat, lng: location.orders[j + 1].deliveryLocation.lng };
-        this.routes.push({ origin: this.origin, dest: this.destination });
-      }
-    }
-  }
 
   // provide different color to each trips and corresponding markers
   getRandomColor() {
