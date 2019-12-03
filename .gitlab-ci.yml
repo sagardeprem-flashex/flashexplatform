@@ -13,63 +13,63 @@ stages:
   - release
   - production
 
-# build_mvn:
-#   image: maven:3-jdk-11
-#   stage: build
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#     - cd common-ms
-#     - mvn clean package
+build_mvn:
+  image: maven:3-jdk-11
+  stage: build
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms
+    - mvn clean package
 
-# junit_java:
-#   image: maven:3-jdk-11
-#   stage: test
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#   - cd common-ms
-#   - mvn test
-
-# pmd_maven:
-#   image: maven:3-jdk-11
-#   stage: lint
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#   - cd common-ms
-#   - mvn pmd:check
-
-# # ---------Angular Build
-# build_app:
-#   image: circleci/node:12-browsers
-#   stage: build
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#     - cd common-ms/flashex-webapp/flashex-webapp/
-#     - npm install
-# -----------Angular Test
-karma_unit_tests:
-  image: circleci/node:12-browsers
+junit_java:
+  image: maven:3-jdk-11
   stage: test
   tags:
     - flashex-ci-jobs
   script:
+  - cd common-ms
+  - mvn test
+
+pmd_maven:
+  image: maven:3-jdk-11
+  stage: lint
+  tags:
+    - flashex-ci-jobs
+  script:
+  - cd common-ms
+  - mvn pmd:check
+
+# ---------Angular Build
+build_app:
+  image: circleci/node:12-browsers
+  stage: build
+  tags:
+    - flashex-ci-jobs
+  script:
     - cd common-ms/flashex-webapp/flashex-webapp/
-    - npm install  
-    - npm run test
-# #--------Angular Lint
-# tslint_app:
-#   image: circleci/node:11-browsers
-#   stage: lint
+    - npm install
+# -----------Angular Test
+# karma_unit_tests:
+#   image: circleci/node:12-browsers
+#   stage: test
 #   tags:
 #     - flashex-ci-jobs
 #   script:
-#   #------go to the path
 #     - cd common-ms/flashex-webapp/flashex-webapp/
-#     - npm install
-#     - npm run lint -- --format json
+#     - npm install  
+#     - npm run test
+#--------Angular Lint
+tslint_app:
+  image: circleci/node:11-browsers
+  stage: lint
+  tags:
+    - flashex-ci-jobs
+  script:
+  #------go to the path
+    - cd common-ms/flashex-webapp/flashex-webapp/
+    - npm install
+    - npm run lint -- --format json
 # --- Deployment on Release branch
 release_deploy:
     image: ubuntu:latest
@@ -90,7 +90,7 @@ release_deploy:
         url: http:/flashex-dev.stackroute.io
     when: on_success
     only:
-        - release_v0.3.0
+        - release_v0.4.0
 #-----Production Deployment
 production_deploy:
     image: ubuntu:latest
