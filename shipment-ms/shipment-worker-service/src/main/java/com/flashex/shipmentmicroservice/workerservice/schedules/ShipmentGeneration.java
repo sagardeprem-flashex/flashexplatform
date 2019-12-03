@@ -26,19 +26,23 @@ public class ShipmentGeneration {
     ProducerService producer;
 
 //    Uncommenting until JSON stream doesn't work
-//    @Scheduled(cron = "1 * * * * ?")
+    @Scheduled(cron = "2 * * * * ?")
     public void generateShipment() {
         log.info("Sending shipments {}", dateFormat.format(new Date()));
 
         List<Shipment> shipments = binningService.generateShipment();
-
-        shipments.forEach(shipment -> {
-            try {
-                producer.sendMessage(shipment);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        });
+        System.out.println(shipments.toString());
+        if(shipments.size()>0){
+            shipments.forEach(shipment -> {
+                try {
+                    producer.sendMessage(shipment);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            });
+        }else {
+            System.out.println("No shipment generated");
+        }
 
     }
 

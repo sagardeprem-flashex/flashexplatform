@@ -13,7 +13,7 @@ import java.util.*;
 public class BinningService {
 
 
-    private static List<Bin> bins;
+    private static List<Bin> bins = new ArrayList<>();
 
     public static List<Bin> getBins() {
         return bins;
@@ -28,9 +28,10 @@ public class BinningService {
 
         // get binning properties
         List<String> packetProperties = getPacketProperties(packet);
+        System.out.println(packetProperties.toString());
 
         // find which bin to add
-        int binIndex = getBinIndex(packetProperties);
+        int binIndex = this.getBinIndex(packetProperties);
 
         // add to bin
         bins.get(binIndex).getBinnedPackets().add(packet);
@@ -41,25 +42,61 @@ public class BinningService {
         List<Shipment> shipments = new ArrayList<>();
 
         if(bins.size()!=0){
-            bins.forEach(bin -> {
+//            bins.forEach(bin -> {
+//                // generate shipments
+//                List<List<Packet>> generatedPacketLists = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
+//                System.out.println("#########################Generating shipments################################");
+//                System.out.println(generatedPacketLists.toString());
+//                System.out.println("########################################################");
+//                generatedPacketLists.forEach(generatedPacketList ->{
+//                    Shipment shipment = new Shipment();
+//
+//                    // sorting to be done
+//                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
+//
+//                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
+//                    shipment.setShipmentDate(new Date());
+//                    shipment.setShipmentId(UUID.randomUUID().toString());
+//                    shipments.add(shipment);
+//                });
+//
+//                // clear bin on generating the shipment
+//                bin.getBinnedPackets().clear();
+//
+//            });
+
+            for(int i=0; i<bins.size();i++){
                 // generate shipments
-                List<List<Packet>> generatedPacketLists = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
-                generatedPacketLists.forEach(generatedPacketList ->{
+                List<List<Packet>> generatedPacketLists = ListUtils.partition(bins.get(i).getBinnedPackets(),getConfig().getMaxShipmentSize());
+                System.out.println("#########################Generating shipments################################");
+                System.out.println(generatedPacketLists.toString());
+                System.out.println("########################################################");
+//                generatedPacketLists.forEach(generatedPacketList ->{
+//                    Shipment shipment = new Shipment();
+//
+//                    // sorting to be done
+//                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
+//
+//                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
+//                    shipment.setShipmentDate(new Date());
+//                    shipment.setShipmentId(UUID.randomUUID().toString());
+//                    shipments.add(shipment);
+//                });
+
+
+                for(int j = 0; j<generatedPacketLists.size(); j++){
                     Shipment shipment = new Shipment();
 
-                    // sorting to be done
-                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
-
-                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
+                    shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
                     shipments.add(shipment);
-                });
+                }
+
 
                 // clear bin on generating the shipment
-                bin.getBinnedPackets().clear();
-
-            });
+                bins.get(i).getBinnedPackets().clear();
+            }
         }
         return shipments;
     }
@@ -69,6 +106,7 @@ public class BinningService {
         bin.setBinningStrategy(binningStrategy);
         bin.setSortingStrategy(sortingStrategy);
         bin.setCreatedOn(new Date());
+        bin.setBinnedPackets(new ArrayList<>());
         bins.add(bin);
     }
 
@@ -79,7 +117,8 @@ public class BinningService {
 
         for(String groupByField: groupBy){
             if(groupByField=="PINCODE"){
-                packetProperty.add(Integer.toString(packet.getDeliveryAddress().getPincode()));
+                packetProperty.add(Long.toString(packet.getDeliveryAddress().getPincode()));
+//                packetProperty.add(Integer.toString(packet.getDeliveryAddress().getPincode()));
             } else if(groupByField=="PACKET_TYPE"){
                 packetProperty.add(packet.getPacketType());
             }
@@ -89,16 +128,23 @@ public class BinningService {
 
 
     public int getBinIndex(List<String> packetProperties){
+        System.out.println(">>>>>>>>>>>>>>>Getting bin index >>>>>>>>>>>");
 
         int binIndex = 0;
-        for (int i=0; i < bins.size();i++){
-            if(bins.get(i).getBinningStrategy().equals(packetProperties) ){
-                binIndex=i;
-            } else {
-                createBin(packetProperties, getConfig().getSortBy());
-                binIndex=bins.size()-1;
+        if(bins.size()>0){
+            for (int i=0; i < bins.size();i++){
+                if(bins.get(i).getBinningStrategy().equals(packetProperties) ){
+                    binIndex=i;
+                } else {
+                    createBin(packetProperties, getConfig().getSortBy());
+                    binIndex=bins.size()-1;
+                }
             }
+        }else {
+            createBin(packetProperties, getConfig().getSortBy());
         }
+
+        System.out.println(">>>>>>>>>>>>>>>Getting bin index done >>>>>>>>>>>"+binIndex);
        return binIndex;
     }
 

@@ -29,12 +29,15 @@ public class ProcessOnConsumption {
 
     public void processData(String message) throws Exception {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
-        Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
-        String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
-        logger.info("------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
-        deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
-        logger.info("<<<<<<<<<<<<<<---------------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
-        orService.settingAddressArray(deliveryAddresses);
+
+//        Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
+//        String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
+//
+//        logger.info("------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
+//        deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
+//        logger.info("<<<<<<<<<<<<<<---------------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
+//
+//        orService.settingAddressArray(deliveryAddresses);
         orService.VrpfunctionWithCapCons();
         orService.VrpfuncWithDropNode();
         orService.TimeWindowConsFunction();

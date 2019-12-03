@@ -15,6 +15,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /*
  * The following class is responsible for creating Shipments of Orders based on sorting,
@@ -43,6 +44,6 @@ public class Shipment {
 
     /** Objects from local package **/
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "packet")
-    public ArrayList<Packet> packetList;
+    public List<Packet> packetList;
 
 }
