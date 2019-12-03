@@ -13,6 +13,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
+import { HAMMER_LOADER } from '@angular/platform-browser';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,11 @@ import { AuthguardService } from './shared/services/authguard.service';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false }
     },
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    {
+      provide: HAMMER_LOADER,
+      useValue: () => new Promise(() => {})
+    }
   ],
   exports: [
     LandingPageComponent
