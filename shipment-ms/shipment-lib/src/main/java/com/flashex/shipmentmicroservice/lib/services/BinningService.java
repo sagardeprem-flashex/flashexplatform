@@ -43,13 +43,14 @@ public class BinningService {
         if(bins.size()!=0){
             bins.forEach(bin -> {
                 // generate shipments
-                List<List<Packet>> generatedShipments = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
-                generatedShipments.forEach(generatedShipment ->{
+                List<List<Packet>> generatedPacketLists = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
+                generatedPacketLists.forEach(generatedPacketList ->{
                     Shipment shipment = new Shipment();
 
                     // sorting to be done
-//                    generatedShipment.sort();
-                    shipment.setPacketList((ArrayList<Packet>) generatedShipment);
+                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
+
+                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
                     shipments.add(shipment);
@@ -101,6 +102,14 @@ public class BinningService {
        return binIndex;
     }
 
+    public List<Packet> sortPacketList(List<Packet> packetList,String sortBy){
+
+        List<Packet> sortedPackets = packetList;
+        if(sortBy=="RECEIVED_DATE"){
+            sortedPackets.sort(Comparator.comparing(Packet::getReceivedDate));
+        }
+        return sortedPackets;
+    }
 
     public BinnerConfig getConfig(){
 
