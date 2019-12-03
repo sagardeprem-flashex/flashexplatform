@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
-import { MatPaginator} from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import * as moment from 'moment';
+import { IPacket } from '../../interfaces/Packet';
 
 @Component({
   selector: 'app-order-details',
@@ -17,23 +19,60 @@ import { MatPaginator} from '@angular/material';
 })
 
 
-export class OrderDetailsComponent implements OnInit {
+export class OrderDetailsComponent implements OnInit {public dataSource;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true })paginator: MatPaginator;
 
-  columnsToDisplay = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
-  public dataSource;
+  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
+  public packetList = [];
+  public mydata = [];
+
   constructor(private packetService: ShipmentManagementService) {
 
   }
-
+  // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
-      this.dataSource = data;
-      // console.log(this.dataSource);
+      let temp;
+      data.forEach(d => {
+        temp = d;
+        temp.receivedDate = moment(d.receivedDate, "YYYYMMDD").fromNow();
+        //temp.receivedDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+        this.mydata.push(temp);
+      });
+
+      this.dataSource = new MatTableDataSource(this.mydata);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.packetList = data;
+      console.log(this.packetList);
 
     });
+}
+applyFilter(filterValue: string) {
+  this.dataSource.filter = filterValue.trim();
+}
+
+funColor(priority){
+
+
+  if ( priority === 'HIGH') {
+    return {
+
+      color : 'red'
+    };
+  } else if (priority === 'MEDIUM') {
+    return{
+      color: 'orange'
+    };
+  } else {
+    return{
+      color: 'green'
+    };
   }
+
+}
 
 
 
