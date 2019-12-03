@@ -31,15 +31,30 @@ public class ShipmentGeneration {
         log.info("Sending shipments {}", dateFormat.format(new Date()));
 
         List<Shipment> shipments = binningService.generateShipment();
+
+
         System.out.println(shipments.toString());
+
         if(shipments.size()>0){
-            shipments.forEach(shipment -> {
+//            shipments.forEach(shipment -> {
+//                try {
+//                    producer.sendMessage(shipment);
+//                } catch (JsonProcessingException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+
+            for (int i=0; i<shipments.size(); i++){
                 try {
-                    producer.sendMessage(shipment);
-                } catch (JsonProcessingException e) {
+                    producer.sendMessage(shipments.get(i));
+                    System.out.println(shipments.get(i).toString());
+                }catch (Exception e){
                     e.printStackTrace();
                 }
-            });
+//                catch (JsonProcessingException e) {
+//                    e.printStackTrace();
+//                }
+            }
         }else {
             System.out.println("No shipment generated");
         }

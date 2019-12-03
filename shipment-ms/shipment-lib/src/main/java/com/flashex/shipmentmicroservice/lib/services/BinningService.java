@@ -42,28 +42,6 @@ public class BinningService {
         List<Shipment> shipments = new ArrayList<>();
 
         if(bins.size()!=0){
-//            bins.forEach(bin -> {
-//                // generate shipments
-//                List<List<Packet>> generatedPacketLists = ListUtils.partition(bin.getBinnedPackets(),getConfig().getMaxShipmentSize());
-//                System.out.println("#########################Generating shipments################################");
-//                System.out.println(generatedPacketLists.toString());
-//                System.out.println("########################################################");
-//                generatedPacketLists.forEach(generatedPacketList ->{
-//                    Shipment shipment = new Shipment();
-//
-//                    // sorting to be done
-//                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
-//
-//                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
-//                    shipment.setShipmentDate(new Date());
-//                    shipment.setShipmentId(UUID.randomUUID().toString());
-//                    shipments.add(shipment);
-//                });
-//
-//                // clear bin on generating the shipment
-//                bin.getBinnedPackets().clear();
-//
-//            });
 
             for(int i=0; i<bins.size();i++){
                 // generate shipments
@@ -71,18 +49,6 @@ public class BinningService {
                 System.out.println("#########################Generating shipments################################");
                 System.out.println(generatedPacketLists.toString());
                 System.out.println("########################################################");
-//                generatedPacketLists.forEach(generatedPacketList ->{
-//                    Shipment shipment = new Shipment();
-//
-//                    // sorting to be done
-//                    generatedPacketList=sortPacketList(generatedPacketList, getConfig().getSortBy());
-//
-//                    shipment.setPacketList((ArrayList<Packet>) generatedPacketList);
-//                    shipment.setShipmentDate(new Date());
-//                    shipment.setShipmentId(UUID.randomUUID().toString());
-//                    shipments.add(shipment);
-//                });
-
 
                 for(int j = 0; j<generatedPacketLists.size(); j++){
                     Shipment shipment = new Shipment();

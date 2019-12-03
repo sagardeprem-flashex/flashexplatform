@@ -23,6 +23,9 @@ public class ProducerService {
 
     public void sendMessage(Shipment message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
-        this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
+        logger.info(String.format("$$ -> Producing message --> %s",message.toString()));
+        if(message.getPacketList().size()>0){
+            this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
+        }
     }
 }
