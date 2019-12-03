@@ -13,42 +13,42 @@ stages:
   - release
   - production
 
-build_mvn:
-  image: maven:3-jdk-11
-  stage: build
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms
-    - mvn clean package
+# build_mvn:
+#   image: maven:3-jdk-11
+#   stage: build
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms
+#     - mvn clean package
 
-junit_java:
-  image: maven:3-jdk-11
-  stage: test
-  tags:
-    - flashex-ci-jobs
-  script:
-  - cd common-ms
-  - mvn test
+# junit_java:
+#   image: maven:3-jdk-11
+#   stage: test
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   - cd common-ms
+#   - mvn test
 
-pmd_maven:
-  image: maven:3-jdk-11
-  stage: lint
-  tags:
-    - flashex-ci-jobs
-  script:
-  - cd common-ms
-  - mvn pmd:check
+# pmd_maven:
+#   image: maven:3-jdk-11
+#   stage: lint
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   - cd common-ms
+#   - mvn pmd:check
 
 # ---------Angular Build
-build_app:
-  image: circleci/node:12-browsers
-  stage: build
-  tags:
-    - flashex-ci-jobs
-  script:
-    - cd common-ms/flashex-webapp/flashex-webapp/
-    - npm install
+# build_app:
+#   image: circleci/node:12-browsers
+#   stage: build
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#     - cd common-ms/flashex-webapp/flashex-webapp/
+#     - npm install
 # -----------Angular Test
 karma_unit_tests:
   image: circleci/node:12-browsers
@@ -60,16 +60,16 @@ karma_unit_tests:
     - npm install  
     - npm run test
 #--------Angular Lint
-tslint_app:
-  image: circleci/node:11-browsers
-  stage: lint
-  tags:
-    - flashex-ci-jobs
-  script:
-  #------go to the path
-    - cd common-ms/flashex-webapp/flashex-webapp/
-    - npm install
-    - npm run lint -- --format json
+# tslint_app:
+#   image: circleci/node:11-browsers
+#   stage: lint
+#   tags:
+#     - flashex-ci-jobs
+#   script:
+#   #------go to the path
+#     - cd common-ms/flashex-webapp/flashex-webapp/
+#     - npm install
+#     - npm run lint -- --format json
 # --- Deployment on Release branch
 release_deploy:
     image: ubuntu:latest
