@@ -29,35 +29,6 @@ public class TripPlanningWebServ {
         System.loadLibrary("jniortools");
     }
 
-    private final SampleService sampleService;
-    private final ORService orService;
-
-    public TripPlanningWebServ(SampleService sampleService, ORService orService) {
-        this.sampleService = sampleService;
-        this.orService = orService;
-    }
-
-    @GetMapping("/")
-    public String home() {
-        return sampleService.message();
-    }
-
-    @GetMapping("/VRPCapCons")
-    public void VrpCapCons() throws Exception {
-         orService.VrpfunctionWithCapCons();
-    }
-
-    @GetMapping("/VRPNodeDrop")
-    public void VrpNodeDrop() throws Exception {
-        orService.VrpfuncWithDropNode();
-    }
-
-    @GetMapping("/VRPTimeWindow")
-    public void VrpTimeWindow() throws Exception {
-        orService.TimeWindowConsFunction();
-    }
-
-
     public static void main(String[] args) {
         SpringApplication.run(TripPlanningWebServ.class, args);
     }

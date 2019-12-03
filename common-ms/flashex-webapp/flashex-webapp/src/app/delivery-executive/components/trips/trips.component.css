@@ -1,0 +1,72 @@
+.example-small-box,
+.example-large-box {
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+}
+
+.example-small-box {
+    width: 100%;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.example-is-mobile .example-toolbar {
+    position: absolute;
+    z-index: 2;
+}
+
+h1.example-app-name {
+    margin-left: 8px;
+}
+
+.example-is-mobile .example-sidenav-container {
+    flex: 1 0 auto;
+}
+
+.sidenav {
+    width: 150px;
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.mat-card {
+    display: inline-grid;
+    margin: 10px;
+}
+
+.example-header-image {
+    background-size: cover;
+}
+
+.example-header-image1 {
+    background-size: cover;
+}
+
+table {
+    width: 100%;
+}
+
+span {
+    padding-left: 200px;
+    font-size: small;
+    color: #635e5e;
+}
+
+b {
+    color: rgb(129, 126, 126);
+}
+
+.display {
+    background-size: cover;
+}
