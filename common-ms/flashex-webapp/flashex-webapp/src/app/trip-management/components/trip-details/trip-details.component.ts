@@ -21,7 +21,7 @@ export class TripDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.properties = this.tripService.planningProperties;
-    console.log('Trip planning properties inside trip-details component-----> ');
+    // console.log('Trip planning properties inside trip-details component-----> ');
     // console.log(this.properties);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
@@ -39,7 +39,7 @@ export class TripDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.properties = this.tripService.planningProperties;
-      console.log(this.tripService.planningProperties, this.properties);
+      // console.log(this.tripService.planningProperties, this.properties);
     });
   }
 

@@ -34,13 +34,13 @@ export class SignUpComponent implements OnInit {
     // check if authorized and subscribe if sign up is successed or failed
     this.authService.signUp(this.signupInfo).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.isSignedUp = true;
         this.isSignUpFailed = false;
       },
       // display error based on sign up failed message
       error => {
-        console.log(error);
+        // console.log(error);
         this.errorMessage = error.error.message;
         this.isSignUpFailed = true;
       }
