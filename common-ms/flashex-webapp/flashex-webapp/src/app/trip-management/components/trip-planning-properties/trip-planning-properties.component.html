@@ -1,0 +1,42 @@
+<div class="container">
+    <title mat-dialog-title>Trip planner Properties</title>
+    <div mat-dialog-content id='form-content'>
+        <!-- <section mat-headline>Please enter the relevent for each fields</section> -->
+        <form [formGroup]="addProperties" (ngSubmit)='onSubmit()'>
+            <!-- <mat-form-field>
+        <h4>Properties ID: </h4>
+        <h4></h4>
+      </mat-form-field> -->
+            <mat-form-field>
+                <mat-label>Select an Algorithm</mat-label>
+                <mat-select formControlName="algorithmSelected">
+                    <mat-option *ngFor='let li of algorithms' [value]='li' style="color: black;">
+                        {{li}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName='maxElementsForDistanceMatrix' type='number' placeholder="Maximum number of elements in Distance Matrix (0 - 100)">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName='noOfDepot' type='number' placeholder="Number of Depots stations available">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput formControlName='solverTimeLimit' type='number' placeholder="Set Solver Time limit">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput formControlName='distancePenalty' type='number' placeholder="Set Distance Penalty">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput formControlName='durationPenalty' type='number' placeholder="Set Duration Penalty">
+            </mat-form-field>
+
+            <mat-dialog-actions>
+                <button mat-raised-button color='primary' [disabled]='!addProperties.valid' type='submit'>Ok</button>
+                <button mat-raised-button color='primary' (click)="onNoClick()" type='reset'>Cancel</button>
+            </mat-dialog-actions>
+        </form>
+    </div>
+</div>

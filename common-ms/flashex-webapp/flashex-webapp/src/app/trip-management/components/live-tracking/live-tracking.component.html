@@ -1,0 +1,50 @@
+<body style="background-color:#ECEFF1; margin-top: 10vh;">
+    <h1 style="margin-left: 0.5em; margin-top: 10vh;">Trips Details</h1>
+    <p><button mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Trips Detail</button></p>
+
+    <mat-sidenav-container class="example-container" style="background-color:#ECEFF1;">
+
+        <mat-sidenav class="sidenavbar" #sidenav opened mode="side" style="background-color:#ECEFF1;">
+
+            <div *ngFor="let id of dataSource, let i=index">
+                <mat-expansion-panel style="background-color:#ECEFF1;">
+
+                    <mat-expansion-panel-header style="background-color:#ECEFF1;">
+                        <mat-panel-title>
+                            <button mat-raised-button [ngStyle]="{'background-color': colors[i]}" (click)="trip(id.tripItineraryId - 1)">Trip {{id.tripItineraryId}}</button>
+
+                            <br>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <mat-expansion-panel>
+
+                        <mat-expansion-panel-header style="background-color:#ECEFF1;">
+                            <mat-panel-title>
+                                Check Trip Status
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div>
+                            <mat-vertical-stepper>
+                                <mat-step>
+                                    Vehicle for this trip has left the warehouse
+                                </mat-step>
+                                <mat-step *ngFor="let order of id.orders; let i = index">
+                                    <p>Order: {{id.orders[i].orderId}} has delivered at location {{id.orders[i].deliveryAddress}}</p>
+                                </mat-step>
+
+                            </mat-vertical-stepper>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <p *ngFor="let order of id.orders; let i = index"> Order - {{i+1}} Delivery Address: {{order.deliveryAddress}}</p>
+
+                </mat-expansion-panel>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div id="map"></div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</body>

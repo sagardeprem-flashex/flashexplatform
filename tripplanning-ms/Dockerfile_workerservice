@@ -78,6 +78,8 @@ FROM maven:3.6-jdk-11
 
 RUN apt-get update
 
+RUN apt-get install -y netcat
+
 RUN curl http://archive.ubuntu.com/ubuntu/pool/main/g/glibc/libc6_2.29-0ubuntu2_amd64.deb --output libc6_2.29-0ubuntu2_amd64.deb
 
 RUN dpkg -i libc6_2.29-0ubuntu2_amd64.deb
