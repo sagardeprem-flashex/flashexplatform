@@ -12,7 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Data {
-//        public String API_Key = "AIzaSyDWuoodBo_sLP8B1_wWVDwkyGwaavc3UUY";
         public String API_Key;
         public static String[] addr = new String[]{};
 
