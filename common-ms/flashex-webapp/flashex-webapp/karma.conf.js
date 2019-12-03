@@ -24,7 +24,7 @@ module.exports = function(config) {
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: true,
-        browsers: ['Chrome'],
+        browsers: ['ChromeHeadless'],
         // Karma server will restart if it is not recieving any data from the browser
         browserNoActivityTimeout: 10000,
         browserDisconnectTolerance: 10,
