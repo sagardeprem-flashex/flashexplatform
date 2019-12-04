@@ -7,6 +7,7 @@ import com.flashex.shipmentmicroservice.lib.model.Shipment;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,6 +15,9 @@ import java.util.*;
 @Service
 public class BinningService {
 
+
+    @Autowired
+    ShipmentService shipmentService;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
@@ -71,6 +75,11 @@ public class BinningService {
             bins.forEach(bin -> {
                 bin.setBinnedPackets(new ArrayList<>());
             });
+        }
+
+        // save generated shipments to db
+        if(shipments.size()>0){
+            shipmentService.saveShipments(shipments);
         }
         return shipments;
     }
