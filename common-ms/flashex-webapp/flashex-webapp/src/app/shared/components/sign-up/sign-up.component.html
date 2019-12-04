@@ -5,7 +5,7 @@
 
 <div *ngIf="isSignedUp; else signupForm" style="padding-top: 12vh;">
 
-    <mat-card style="position: relative; top: 30%; text-align: center; width: max-content; max-width: 80%; margin: auto; vertical-align: 50%;">
+    <mat-card class="matcard" style="text-align: center;">
         Congratulations, your registration is successful. Please click below to login.
         <br>
 
@@ -89,7 +89,7 @@
                     <div>
                         <mat-card-actions style="padding-left:1em;">
                             <button mat-raised-button color="primary" style="margin-top: 1em;" class="btn btn-primary">Register</button>
-                            <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+                            <div style="padding-top: 1em;" *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
                                 Signup failed!<br/>{{errorMessage}}
                             </div>
                         </mat-card-actions>
