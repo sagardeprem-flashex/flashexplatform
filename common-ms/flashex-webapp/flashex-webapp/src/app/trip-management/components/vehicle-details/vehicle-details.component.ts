@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { IVehicle } from '../../interfaces/vehicle';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VehicleDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private tripItineraryService: TripItineraryService) { }
+
+  public vehicleDataSource;
 
   ngOnInit() {
+      this.tripItineraryService.vehicleBehaviourSubject.subscribe(data => {
+      this.vehicleDataSource = data;
+    });
   }
 
 }
