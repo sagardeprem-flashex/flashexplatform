@@ -4,10 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
-import com.flashex.tripplanningmicroservice.lib.model.Packet;
-import com.flashex.tripplanningmicroservice.lib.model.Shipment;
-import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -20,13 +18,15 @@ import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.logging.Logger;
 
 public class VrpWithDroppingVisit {
 
-
+    @Autowired
+    private TripItineraryService tripItineraryService;
 
     /** Minimal VRP.*/
 
@@ -104,20 +104,24 @@ public class VrpWithDroppingVisit {
     }
 
     /// @brief Print the solution.
-    static TripItinerary printSolution(
+    TripItinerary printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution, String[] address) throws Exception {
 
         String[] addr = address;
         HashMap<String, Set<String>> Locationcord = new HashMap();
 
         TripItinerary tripItinerary = new TripItinerary();
+        tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
         Shipment shipment = new Shipment();
 
-        tripItinerary.setPlannedStartTime("9 AM");
-        tripItinerary.getPlannedStartTime();
+        Vehicle vehicle = new Vehicle(); // delete it this temp
 
-        tripItinerary.setPlannedEndTime("5 PM");
-        tripItinerary.getPlannedEndTime();
+
+        tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
+//            tripItinerary.getPlannedStartTime();
+
+        tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
+//            tripItinerary.getPlannedEndTime();
 
 //      Setting vehicle details
         VehicleList vehicleList = new VehicleList();
@@ -145,7 +149,8 @@ public class VrpWithDroppingVisit {
             long index = routing.start(i);
             logger.info("Route for Vehicle " + i + ":");
 
-            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+//            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+            tripItinerary.setVehicle(vehicle); // temporary only
 
 
             long routeDistance = 0;
@@ -163,10 +168,10 @@ public class VrpWithDroppingVisit {
 
                 route += nodeIndex + " Load(" + routeLoad + ")  -> " ; //+ "Address" + addr[(int) nodeIndex] + "-->";
 //                response = geocode(addr[(int) nodeIndex],data.Key); // use when using gjon to get lat and long applicable with using google api only
-                System.out.println(latlongarr.size());
                 latlongarr.add(response);
 
-                tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+//                tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+                tripItinerary.setPackets((List<Packet>) shipment.getPacketList()); // temp
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
@@ -178,7 +183,7 @@ public class VrpWithDroppingVisit {
                 tripItinerary.setTripExpense(tripexpense);
 
             }
-            tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
+            tripItinerary.setAlgorithm("VrpwithDroppingVisit");
             tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
 
             tripItinerary.getPackets(); // get order list optimized as per dilivery order
@@ -201,6 +206,8 @@ public class VrpWithDroppingVisit {
 
             logger.info("Array of lat & long" + latlongarr);
             logger.info("Key value" + Locationcord);
+            tripItineraryService.saveTripItinerary(tripItinerary);
+
 
         }
         logger.info("Total Distance of all routes: " + totalDistance + "m");

@@ -5,10 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
-import com.flashex.tripplanningmicroservice.lib.model.Packet;
-import com.flashex.tripplanningmicroservice.lib.model.Shipment;
-import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -23,6 +21,7 @@ import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -30,11 +29,17 @@ import java.util.logging.Logger;
 
 public class TimeWindowDelivery {
 
+    @Autowired
+    private TripItineraryService tripItineraryService;
+
+
     /** Minimal VRPTW.*/
 
         private static final Logger logger = Logger.getLogger(TimeWindowDelivery.class.getName());
 
         static class DataModel {
+
+
 
 
             public final String[] addresses = new String[]{
@@ -117,7 +122,7 @@ public class TimeWindowDelivery {
 //            public final int vehicleNumber = vehicleList.getNoOfVehicle();
 
 //            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-            public final long[] vehicleCapacities = {50, 50, 50, 50, 50 , 50};
+            public final long[] vehicleCapacities = {60, 60, 40, 60, 60 , 50};
             public final int  depot = 0;
 
             DataModel() throws ParseException, JsonProcessingException {
@@ -125,7 +130,7 @@ public class TimeWindowDelivery {
         }
 
         /// @brief Print the solution.
-        static TripItinerary printSolution(
+         TripItinerary printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address) throws Exception {
 
             RoutingDimension timeDimension = routing.getMutableDimension("Time");
@@ -134,17 +139,14 @@ public class TimeWindowDelivery {
         HashMap<String, Set<String> > Locationcord = new HashMap();
 
             TripItinerary tripItinerary = new TripItinerary();
-            Shipment shipment = new Shipment();
+            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
 
-//            tripItinerary.setPlannedStartTime("9 AM");
-//            tripItinerary.getPlannedStartTime();
+             Shipment shipment = new Shipment();
 
-//            tripItinerary.setPlannedEndTime("5 PM");
-//            tripItinerary.getPlannedEndTime();
+            Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
-            VehicleList vehicleList = new VehicleList();
-//        logger.info((""+ vehicleList.listofvehicle));
+            VehicleList vehicleList = (new VehicleList());
 
             String droppedNodes = "Dropped nodes:";
             for (int node = 0; node < routing.size(); ++node) {
@@ -161,10 +163,18 @@ public class TimeWindowDelivery {
             long routeLoad = 0;
             long totalTime = 0;
             for (int i = 0; i < data.vehicleNumber; ++i) {
+
+                tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
+//            tripItinerary.getPlannedStartTime();
+
+                tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
+//            tripItinerary.getPlannedEndTime();
+
                 long index = routing.start(i);
                 logger.info("Route for Vehicle " + i + ":");
 
 //                tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+                tripItinerary.setVehicle(vehicle); // temporary only
 
                 String route = "";
                 String response = "";
@@ -179,10 +189,11 @@ public class TimeWindowDelivery {
                             + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
 //                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList());
 
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
-//                    tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
+                    tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
 
 //                response = geocode(addr[(int) nodeIndex],data.Key);  // appliacble when using google api to give lat long
 //                System.out.println(latlongarr.size()); // To print size of latlongarrray
@@ -191,14 +202,14 @@ public class TimeWindowDelivery {
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
-//                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
+                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long milage = 21;
                 long tripexpense = milage*solution.min(timeVar);
-//                tripItinerary.setTripExpense(tripexpense);
+                tripItinerary.setTripExpense(tripexpense); // set total expense
                 }
 
-//                tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
-//                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
+                tripItinerary.setAlgorithm("VrpwithTimeWindowDelivery");
+                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
 
 //                tripItinerary.getPackets(); // get order list optimized as per dilivery order
 //                tripItinerary.getPlannedTotalDistance(); // get distance of the route
@@ -225,6 +236,9 @@ public class TimeWindowDelivery {
 
                 logger.info("Array of lat & long" + latlongarr);
                 logger.info("Key value" + Locationcord);
+
+                tripItineraryService.saveTripItinerary(tripItinerary);
+
             }
 
             logger.info("Total time of all routes: " + totalTime*100 + "m");
@@ -315,9 +329,10 @@ public class TimeWindowDelivery {
                             .build();
             Assignment solution = routing.solveWithParameters(searchParameters);
 
-        printSolution(data, routing, manager, solution,data.addresses);
+             printSolution(data, routing, manager, solution,data.addresses);
 
 //                Prints distance and time matrices
 //        matPrint(data.distmat,data.timemat,data.addresses);  // use with google api only
         }
+
     }

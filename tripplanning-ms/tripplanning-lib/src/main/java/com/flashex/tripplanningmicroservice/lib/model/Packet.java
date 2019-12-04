@@ -3,37 +3,47 @@ package com.flashex.tripplanningmicroservice.lib.model;
 import com.datastax.driver.core.DataType;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.UserDefinedType;
+import org.springframework.data.cassandra.core.mapping.*;
 
 import java.util.Date;
 
 
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Table("packet")
 @UserDefinedType("packet")
 public class Packet {
 
+    /** String variables **/
+
+    @PrimaryKeyColumn(name = "packetId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
     private String packetId;
-
     @CassandraType(type = DataType.Name.TEXT)
     private String productId;
-
+    @CassandraType(type = DataType.Name.TEXT)
     private String packetDescription;
+    @CassandraType(type = DataType.Name.TEXT)
     private String deliveryDescription;
+    @CassandraType(type = DataType.Name.TEXT)
     private String packetType;
+    @CassandraType(type = DataType.Name.TEXT)
     private String priority;
+    @CassandraType(type = DataType.Name.TEXT)
     private String status;
+//
+//    /** Float variables **/
 
-    /** Float variables **/
+    @CassandraType(type = DataType.Name.FLOAT)
     private float weight;
+    @CassandraType(type = DataType.Name.FLOAT)
     private float length;
+    @CassandraType(type = DataType.Name.FLOAT)
     private float breadth;
+    @CassandraType(type = DataType.Name.FLOAT)
     private float height;
     @CassandraType(type = DataType.Name.FLOAT)
     private float costOfPacket;
@@ -42,8 +52,9 @@ public class Packet {
     /** Date type variables**/
     @CassandraType(type = DataType.Name.TIMESTAMP)
     private Date receivedDate;
-//
+    //
 //    //to be updated by Trip Planning microservice
+    @CassandraType(type = DataType.Name.TIMESTAMP)
     private Date estimatedDeliveryDate;
 //
 //    //to be updated by Trip Itinerary microservice
@@ -59,5 +70,5 @@ public class Packet {
     @CassandraType(type = DataType.Name.UDT, userTypeName = "customer")
     private Customer customer;
 
-}
 
+}
