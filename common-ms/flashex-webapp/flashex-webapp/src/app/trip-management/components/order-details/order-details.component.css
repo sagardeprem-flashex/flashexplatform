@@ -75,3 +75,7 @@ lid black; */
 td{
 width: 25%
 }
+
+.status{
+  display: inline
+}

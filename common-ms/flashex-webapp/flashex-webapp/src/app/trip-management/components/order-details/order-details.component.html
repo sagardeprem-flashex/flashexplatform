@@ -32,6 +32,11 @@
     <td mat-cell *matCellDef="let element" [ngStyle]="funColor(element.priority)" class="priorityClass"> {{element.priority}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="currentStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Status </th>
+      <td mat-cell *matCellDef="let element" [ngStyle]="statusColor(element.currentStatus)" class="priorityClass"> {{element.currentStatus}} </td>
+    </ng-container>
+
   <ng-container matColumnDef="packetDescription" style="width: 30%">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Description </th>
     <td mat-cell *matCellDef="let element"> {{element.packetDescription}} </td>
@@ -57,10 +62,38 @@
             <div class="example-element-position"> {{element.receivedDate}} </div>
             <div class="example-element-name"> {{element.packetType}} </div>
             <div class="example-element-weight"> {{element.packetDescription}} </div>
+
           </div>
+          <div style="margin-top: 10vh">
+
+              <mat-horizontal-stepper>
+                  <mat-step label="RECEIVED">
+                  </mat-step>
+                  <mat-step label="PROCESSED">
+                  </mat-step>
+                  <mat-step label="DISPATCHED">
+                  </mat-step>
+                  <mat-step label="DELIVERED">
+                    </mat-step>
+
+                  <!-- Icon overrides. -->
+                  <!-- <ng-template matStepperIcon="phone">
+                    <mat-icon>call_end</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="chat">
+                    <mat-icon>forum</mat-icon>
+                  </ng-template> -->
+                </mat-horizontal-stepper>
+          </div>
+
+
+
       </div>
+
     </td>
+
   </ng-container>
+
 
 </div>
 
