@@ -136,11 +136,11 @@ public class TimeWindowDelivery {
             TripItinerary tripItinerary = new TripItinerary();
             Shipment shipment = new Shipment();
 
-            tripItinerary.setPlannedStartTime("9 AM");
-            tripItinerary.getPlannedStartTime();
+//            tripItinerary.setPlannedStartTime("9 AM");
+//            tripItinerary.getPlannedStartTime();
 
-            tripItinerary.setPlannedEndTime("5 PM");
-            tripItinerary.getPlannedEndTime();
+//            tripItinerary.setPlannedEndTime("5 PM");
+//            tripItinerary.getPlannedEndTime();
 
 //      Setting vehicle details
             VehicleList vehicleList = new VehicleList();
@@ -164,7 +164,7 @@ public class TimeWindowDelivery {
                 long index = routing.start(i);
                 logger.info("Route for Vehicle " + i + ":");
 
-                tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+//                tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
 
                 String route = "";
                 String response = "";
@@ -178,11 +178,11 @@ public class TimeWindowDelivery {
                     route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
                             + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
-                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+//                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
 
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
-                    tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
+//                    tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
 
 //                response = geocode(addr[(int) nodeIndex],data.Key);  // appliacble when using google api to give lat long
 //                System.out.println(latlongarr.size()); // To print size of latlongarrray
@@ -191,22 +191,22 @@ public class TimeWindowDelivery {
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
-                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
+//                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long milage = 21;
                 long tripexpense = milage*solution.min(timeVar);
-                tripItinerary.setTripExpense(tripexpense);
+//                tripItinerary.setTripExpense(tripexpense);
                 }
 
-                tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
-                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
+//                tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
+//                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
 
-                tripItinerary.getPackets(); // get order list optimized as per dilivery order
-                tripItinerary.getPlannedTotalDistance(); // get distance of the route
-                tripItinerary.getVehicle(); // get the vehicle details
-                tripItinerary.getOccupiedVolume(); // get occupied volume
-                tripItinerary.getTripExpense(); // get trip expense
-                tripItinerary.getOriginAddress(); // get origin address
-                tripItinerary.getAlgorithm(); // get name of algo
+//                tripItinerary.getPackets(); // get order list optimized as per dilivery order
+//                tripItinerary.getPlannedTotalDistance(); // get distance of the route
+//                tripItinerary.getVehicle(); // get the vehicle details
+//                tripItinerary.getOccupiedVolume(); // get occupied volume
+//                tripItinerary.getTripExpense(); // get trip expense
+//                tripItinerary.getOriginAddress(); // get origin address
+//                tripItinerary.getAlgorithm(); // get name of algo
 
 
                 Locationcord.put("Vehicle:" + i,latlongarr);
