@@ -5,10 +5,15 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstrain
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
+import com.flashex.tripplanningmicroservice.lib.model.Packet;
+import com.flashex.tripplanningmicroservice.lib.model.PacketList;
+import com.flashex.tripplanningmicroservice.lib.model.Shipment;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 //  This service belongs to VRP problem with capacity constraint
@@ -19,32 +24,50 @@ public class ORService {
 
     private static final Logger logger = Logger.getLogger(ORService.class.getName());
 
-    private  ServiceProperties serviceProperties;
-    private  VrpWithCapacityConstraint vrpWithCapacityConstraint;
-    private  VrpWithDroppingVisit vrpWithDroppingVisit;
-    private  TimeWindowDelivery timeWindowDelivery;
+
+    private ServiceProperties serviceProperties;
+    private VrpWithCapacityConstraint vrpWithCapacityConstraint;
+    private VrpWithDroppingVisit vrpWithDroppingVisit;
+    private TimeWindowDelivery timeWindowDelivery;
     private Data data;
+    private PacketList packetList;
+
 
     public Data getData() {
         return this.data;
     }
 
-    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data) {
+    public PacketList getPacketList(){
+        return this.packetList;
+    }
+
+    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data, PacketList packetList) {
         this.serviceProperties = serviceProperties;
         this.vrpWithCapacityConstraint = vrpWithCapacityConstraint;
         this.vrpWithDroppingVisit = vrpWithDroppingVisit;
         this.timeWindowDelivery = timeWindowDelivery;
         this.data = data;
+        this.packetList = packetList;
     }
 
     public String message() {
         return this.serviceProperties.getMessage();
     }
 
+    //    Send packet list
+    public void settingPacketList(ArrayList<Packet> packets){
+        packetList.setListOfPackets(packets);
+        logger.info("is it empty ============================="+packetList.getListOfPackets());
+    }
+
+    public ArrayList<Packet> getListofPackets(){
+        return packetList.getListOfPackets();
+    }
+
+
     //    Send array of address
     public void settingAddressArray(String[] address){
         data.setAddr(address);
-        logger.info("-----------In OR Service----------"+ Arrays.toString(data.getAddr()));
     }
 
 //    VRP with capacity constraint function
@@ -61,7 +84,5 @@ public class ORService {
     public void TimeWindowConsFunction() throws Exception {
         timeWindowDelivery.FinalResult();
     }
-
-
 
 }

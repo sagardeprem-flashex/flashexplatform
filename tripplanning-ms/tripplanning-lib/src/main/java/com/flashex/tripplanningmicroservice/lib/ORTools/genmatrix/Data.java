@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Data {
@@ -30,20 +30,5 @@ public class Data {
         public static void setAddr(String[] addr) {
                 Data.addr = addr;
         }
-//        public String getAPI_Key() {
-//                return API_Key;
-//        }
-//
-//        public void setAPI_Key(String API_Key) {
-//                this.API_Key = API_Key;
-//        }
-//
-//        public String[] getAddr() {
-//                return addr;
-//        }
-//
-//        public void setAddr(String[] addr) {
-//                this.addr = addr;
-//        }
 
 }

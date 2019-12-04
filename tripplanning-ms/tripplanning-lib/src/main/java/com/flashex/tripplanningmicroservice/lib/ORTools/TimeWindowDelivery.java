@@ -6,6 +6,7 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,8 +30,13 @@ import java.util.logging.Logger;
 
 public class TimeWindowDelivery {
 
+
     @Autowired
     private TripItineraryService tripItineraryService;
+
+
+    @Autowired
+    private ORService orService;
 
 
     /** Minimal VRPTW.*/
@@ -39,10 +45,7 @@ public class TimeWindowDelivery {
 
         static class DataModel {
 
-
-
-
-            public final String[] addresses = new String[]{
+         /*   public final String[] addresses = new String[]{
                     "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
                     "1921+Elvis+Presley+Blvd+Memphis+TN",
                     "149+Union+Avenue+Memphis+TN",
@@ -59,7 +62,7 @@ public class TimeWindowDelivery {
                     "5959+Park+Ave+Memphis+TN",
                     "814+Scott+St+Memphis+TN",
                     "1005+Tillman+St+Memphis+TN"
-            };
+            };*/
 
             public final long[][] timeMatrix =
                 {
@@ -80,7 +83,12 @@ public class TimeWindowDelivery {
                 {22, 16, 15, 13, 10, 15, 9, 14, 13, 9, 6, 15, 14, 15, 0, 1},
                 {23, 16, 15, 14, 11, 13, 10, 14, 14, 10, 6, 16, 15, 15, 1, 0}
         };
+            Data d = (new Data());
+            public final String[] addresses = d.getAddr();
 
+//            ArrayList<Packet> templist = orService.getListofPackets();
+//            Shipment shipment = (new Shipment());
+//            ArrayList<Packet> templist = shipment.getPacketList();
 
 
        /* GenerateMatrix matGenerator = new GenerateMatrix();
@@ -141,7 +149,7 @@ public class TimeWindowDelivery {
             TripItinerary tripItinerary = new TripItinerary();
             tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
 
-             Shipment shipment = new Shipment();
+//             Shipment shipment = (new Shipment());
 
             Vehicle vehicle = new Vehicle(); // delete it this temp
 
@@ -186,10 +194,11 @@ public class TimeWindowDelivery {
                     routeLoad += data.demands[(int) nodeIndex]; // wasnot here before I put it here for calculating occupied vehicle volume
 
                     route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
-                            + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
+                            + solution.max(timeVar)*100 + ") -> " ;//+ "Address" + addr[(int) nodeIndex] + "-->";
 
+                    logger.info("//////////////////"+ String.valueOf(orService.getListofPackets()));
 //                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
-                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList());
+//                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList());
 
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
@@ -197,7 +206,7 @@ public class TimeWindowDelivery {
 
 //                response = geocode(addr[(int) nodeIndex],data.Key);  // appliacble when using google api to give lat long
 //                System.out.println(latlongarr.size()); // To print size of latlongarrray
-                latlongarr.add(response);
+//                latlongarr.add(response);
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
