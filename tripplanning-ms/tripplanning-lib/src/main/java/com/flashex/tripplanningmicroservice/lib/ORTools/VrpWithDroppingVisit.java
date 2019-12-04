@@ -25,10 +25,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class VrpWithDroppingVisit {
-//
-//    static {
-//        System.loadLibrary("jniortools");
-//    }
+
 
 
     /** Minimal VRP.*/
@@ -37,14 +34,56 @@ public class VrpWithDroppingVisit {
 
     static class DataModel {
 
+        public final String[] addresses = new String[]{
+                "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
+                "1921+Elvis+Presley+Blvd+Memphis+TN",
+                "149+Union+Avenue+Memphis+TN",
+                "1034+Audubon+Drive+Memphis+TN",
+                "1532+Madison+Ave+Memphis+TN",
+                "706+Union+Ave+Memphis+TN",
+                "3641+Central+Ave+Memphis+TN",
+                "926+E+McLemore+Ave+Memphis+TN",
+                "4339+Park+Ave+Memphis+TN",
+                "600+Goodwyn+St+Memphis+TN",
+                "2000+North+Pkwy+Memphis+TN",
+                "262+Danny+Thomas+Pl+Memphis+TN",
+                "125+N+Front+St+Memphis+TN",
+                "5959+Park+Ave+Memphis+TN",
+                "814+Scott+St+Memphis+TN",
+                "1005+Tillman+St+Memphis+TN"
+        };
 
-        GenerateMatrix matGenerator = new GenerateMatrix();
+
+//        Distance matrix
+
+        public final long[][] distanceMatrix = {
+
+                {0,24357,33350,14928,31957,32166,19319,28392,15621,21404,28731,34765,35142,10523,26727,26303},
+                {25244,0,8314,11334,5869,7131,10678,3270,11311,7873,11350,9729,10107,19122,12350,13609},
+                {34062,8491,0,14384,4086,1651,11008,4239,14501,9627,7179,1864,925,27939,9730,9997},
+                {15494,10806,14024,0,11065,12841,4047,11458,635,5226,10788,15681,16059,6012,9180,9507},
+                {33351,5882,4096,11348,0,2671,7364,4363,11118,6736,3619,5108,5485,20768,6649,7076},
+                {32878,7307,1651,13200,2902,0,9824,3840,13318,8444,7203,2748,2269,26756,9086,9462},
+                {19361,10678,11017,4038,7398,9834,0,9159,3808,2809,7099,10921,13146,9186,5491,5812},
+                {29097,3270,4257,11458,4350,3848,9159,0,11228,6354,9303,5359,5151,22975,10620,11562},
+                {15873,10762,13795,635,10836,12611,3817,11228,0,4997,10559,15452,15829,5496,8950,9278},
+                {21831,7873,9492,5226,6282,8308,2809,6354,4997,0,6967,11149,11526,10374,5119,6383},
+                {28822,11931,6831,10681,3305,5965,6999,10627,10451,7159,0,5693,6341,18297,3267,4068},
+                {35172,9601,1824,14537,4703,2861,10856,5438,14308,10803,5964,0,1392,29095,8515,8782},
+                {36058,10487,927,16446,5590,2257,11253,5134,16564,11689,7277,1512,0,29982,9828,10095},
+                {11333,19346,28339,6012,20917,27155,9194,23381,5496,10374,18568,29458,29835,0,16564,16140},
+                {27151,11444,9719,10131,6656,9092,5640,10421,9901,6417,3335,8581,9228,16626,0,1264},
+                {27191,14469,10406,10534,7093,9676,5879,13164,10304,6422,3933,9268,9915,16666,1288,0}
+        };
+
+
+      /*  GenerateMatrix matGenerator = new GenerateMatrix();
         Data d = matGenerator.createData();
         public final int[][] distanceMatrix = matGenerator.createDistanceMatrix(d);
         public final String[] addresses = d.addr;
         public final String Key = d.API_Key;
         public final int[][] distmat = matGenerator.createDistanceMatrix(d);
-        public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);
+        public final int[][] timemat = matGenerator.createTimeTravelMatrix(d);*/
 
 //        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
 //        VehicleList vehicleList = getJsonServerData.processJsonData();
@@ -123,7 +162,7 @@ public class VrpWithDroppingVisit {
                 tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
 
                 route += nodeIndex + " Load(" + routeLoad + ")  -> " ; //+ "Address" + addr[(int) nodeIndex] + "-->";
-                response = geocode(addr[(int) nodeIndex],data.Key);
+//                response = geocode(addr[(int) nodeIndex],data.Key); // use when using gjon to get lat and long applicable with using google api only
                 System.out.println(latlongarr.size());
                 latlongarr.add(response);
 
@@ -254,7 +293,7 @@ public class VrpWithDroppingVisit {
 
 
 //                Prints distance and time matrices
-        matPrint(data.distmat,data.timemat,data.addresses);
+//        matPrint(data.distmat,data.timemat,data.addresses); // applicable when using ggogle to genrate matrix
 
     }
 }
