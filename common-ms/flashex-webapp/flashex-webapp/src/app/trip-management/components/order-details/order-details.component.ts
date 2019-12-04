@@ -28,6 +28,8 @@ export class OrderDetailsComponent implements OnInit {
   displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
   public packetList = [];
   public mydata = [];
+  public expandedElement: any;
+  public expandedDetail: any;
 
   constructor(private packetService: ShipmentManagementService) {
 
