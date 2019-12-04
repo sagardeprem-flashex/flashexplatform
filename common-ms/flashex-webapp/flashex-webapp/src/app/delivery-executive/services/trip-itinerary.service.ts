@@ -23,7 +23,7 @@ export class TripItineraryService {
     this.load();
    }
 
-   private url = '../../../assets/tripsListFormat1.json';
+   private url = '../../../assets/tripItinerary.json';
    private dataSource = [];
    public behaviourSubject = new BehaviorSubject<IList[]>(this.dataSource);
    load() {

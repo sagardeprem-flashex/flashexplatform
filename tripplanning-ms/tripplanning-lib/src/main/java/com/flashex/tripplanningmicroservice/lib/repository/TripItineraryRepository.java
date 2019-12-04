@@ -5,4 +5,8 @@ import org.springframework.data.cassandra.repository.CassandraRepository;
 
 public interface TripItineraryRepository extends CassandraRepository<TripItinerary,String> {
 
+
+
+    
+
 }

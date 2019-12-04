@@ -71,7 +71,6 @@ ul {
 #mainBody .parallax-one {
     z-index: -5;
     overflow: hidden;
-    /* position: relative; */
     width: 100%;
     background-image: url("../../assets/images/longexposurebackgroundimage.jpg");
     background-attachment: fixed;
@@ -86,7 +85,7 @@ ul {
 }
 
 #flashex-title {
-    margin-block-start: 34vh;
+    margin-block-start: 24vh;
     margin-block-end: 0;
 }
 
