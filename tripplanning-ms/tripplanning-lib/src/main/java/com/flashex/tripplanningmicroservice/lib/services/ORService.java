@@ -54,17 +54,6 @@ public class ORService {
         return this.serviceProperties.getMessage();
     }
 
-    //    Send packet list
-    public void settingPacketList(ArrayList<Packet> packets){
-        packetList.setListOfPackets(packets);
-        logger.info("is it empty ============================="+packetList.getListOfPackets());
-    }
-
-    public ArrayList<Packet> getListofPackets(){
-        return packetList.getListOfPackets();
-    }
-
-
     //    Send array of address
     public void settingAddressArray(String[] address){
         data.setAddr(address);
@@ -81,8 +70,8 @@ public class ORService {
     }
 
 //    VRP with Time window constraint
-    public void TimeWindowConsFunction() throws Exception {
-        timeWindowDelivery.FinalResult();
+    public void TimeWindowConsFunction(ArrayList<Packet> packets) throws Exception {
+        timeWindowDelivery.FinalResult(packets);
     }
 
 }

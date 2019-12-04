@@ -35,10 +35,6 @@ public class TimeWindowDelivery {
     private TripItineraryService tripItineraryService;
 
 
-    @Autowired
-    private ORService orService;
-
-
     /** Minimal VRPTW.*/
 
         private static final Logger logger = Logger.getLogger(TimeWindowDelivery.class.getName());
@@ -85,6 +81,7 @@ public class TimeWindowDelivery {
         };
             Data d = (new Data());
             public final String[] addresses = d.getAddr();
+
 
 //            ArrayList<Packet> templist = orService.getListofPackets();
 //            Shipment shipment = (new Shipment());
@@ -138,8 +135,8 @@ public class TimeWindowDelivery {
         }
 
         /// @brief Print the solution.
-         TripItinerary printSolution(
-            DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address) throws Exception {
+         public TripItinerary printSolution(
+            DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address, ArrayList<Packet> packets) throws Exception {
 
             RoutingDimension timeDimension = routing.getMutableDimension("Time");
 
@@ -194,12 +191,12 @@ public class TimeWindowDelivery {
                     routeLoad += data.demands[(int) nodeIndex]; // wasnot here before I put it here for calculating occupied vehicle volume
 
                     route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
-                            + solution.max(timeVar)*100 + ") -> " ;//+ "Address" + addr[(int) nodeIndex] + "-->";
+                            + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
-                    logger.info("//////////////////"+ String.valueOf(orService.getListofPackets()));
-//                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+                    if(nodeIndex>0 && nodeIndex<16) {
+                        tripItinerary.setPackets(Collections.singletonList(packets.get((int) (nodeIndex - 1))));
 //                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList());
-
+                    }
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
                     tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
@@ -285,7 +282,7 @@ public class TimeWindowDelivery {
         }
 
 
-        public void FinalResult() throws Exception {
+        public void FinalResult(ArrayList<Packet> packets) throws Exception {
             // Instantiate the data problem.
             final DataModel data = new DataModel();
 
@@ -338,7 +335,7 @@ public class TimeWindowDelivery {
                             .build();
             Assignment solution = routing.solveWithParameters(searchParameters);
 
-             printSolution(data, routing, manager, solution,data.addresses);
+             printSolution(data, routing, manager, solution,data.addresses,packets);
 
 //                Prints distance and time matrices
 //        matPrint(data.distmat,data.timemat,data.addresses);  // use with google api only

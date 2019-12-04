@@ -31,7 +31,7 @@ public class Customer {
     public String emailId;
 
     /** Integer variables **/
-    @CassandraType(type = DataType.Name.INT)
-    public int phoneNumber;
+    @CassandraType(type = DataType.Name.BIGINT)
+    public long phoneNumber;
 
 }

@@ -32,7 +32,6 @@ public class ProcessOnConsumption {
     public void processData(String message) throws Exception {
 //        logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
-//        logger.info("6666666666666666666666666666666666666666666666666666666[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]"+String.valueOf(shipmentReceived.getPacketList()));
         String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
 //        logger.info("------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
 //        deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
@@ -40,17 +39,16 @@ public class ProcessOnConsumption {
 //        logger.info("<<<<<<<<<<<<<<---------------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
         orService.settingAddressArray(deliveryAddresses);
 
-        orService.settingPacketList(shipmentReceived.getPacketList());
 //        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 starts here>>>>>>>>>>>>>>>>>>");
-//        orService.VrpfunctionWithCapCons();
+//        orService.VrpfunctionWithCapCons(shipmentReceived.getPacketList());
 //        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 ends here>>>>>>>>>>>>>>>>>>>>>");
 //
 //        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 starts here>>>>>>>>>>>>>>>>>>>>");
-//        orService.VrpfuncWithDropNode();
+//        orService.VrpfuncWithDropNode(shipmentReceived.getPacketList());
 //        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 ends here>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 starts here>>>>>>>>>>>>>>>>>>>>>>");
-        orService.TimeWindowConsFunction();
+        orService.TimeWindowConsFunction(shipmentReceived.getPacketList());
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
 

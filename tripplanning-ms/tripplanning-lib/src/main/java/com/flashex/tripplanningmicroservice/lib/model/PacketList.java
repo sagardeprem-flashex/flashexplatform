@@ -15,12 +15,5 @@ public class PacketList {
 
     private ArrayList<Packet> listOfPackets;
 
-//    public static void setListOfPackets(ArrayList<Packet> packets) {
-//        PacketList.listOfPackets = listOfPackets;
-//    }
-//
-//    public static ArrayList<Packet> getListOfPackets(){
-//        return listOfPackets;
-//    }
 
 }
