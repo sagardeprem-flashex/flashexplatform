@@ -1,17 +1,17 @@
 <div class="container">
-  <section class="mat-typography">
+  <section class="mat-typography page-title">
     <h1>Vehicles List</h1>
   </section>
-  <div class="vehicle-card-container">
+  <div class="vehicle-card-container" style="padding-left: 5%;" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="6%" fxLayoutGap.xs="10%">
     <mat-card class="vehicle-card" *ngFor='let vehicle of vehicleDataSource; let i = index'>
       <mat-card-header>
-        <div mat-card-avatar class="vehicle-header-image">
+        <div mat-card-avatar class="vehicle-header-image" style="background-image: url('{{vehicle.vehicleImage}}+?random={{vehicle.vehicleId}}');">
           <!-- <img src="https://loremflickr.com/640/480/vehicle" alt="Random images from loremflickr"> -->
         </div>
         <mat-card-subtitle>Id#{{vehicle.vehicleId}}</mat-card-subtitle>
         <mat-card-title>{{vehicle.vehicleType}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{vehicle.vehicleImage}}" alt="Image of Vehicle">
+      <img mat-card-image class="images" src="{{vehicle.vehicleImage}}+?random={{vehicle.vehicleId}}" alt="Image of Vehicle">
       <mat-card-content class="card-contents">
         <div class="details-container-flex">
           <div class="detail-container">
