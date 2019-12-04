@@ -19,10 +19,11 @@ import { IPacket } from '../../interfaces/Packet';
 })
 
 
-export class OrderDetailsComponent implements OnInit {public dataSource;
+export class OrderDetailsComponent implements OnInit {
+  public dataSource;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  @ViewChild(MatPaginator, { static: true })paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
   public packetList = [];
@@ -37,8 +38,7 @@ export class OrderDetailsComponent implements OnInit {public dataSource;
       let temp;
       data.forEach(d => {
         temp = d;
-        temp.receivedDate = moment(d.receivedDate, "YYYYMMDD").fromNow();
-        //temp.receivedDate = moment().format('MMMM Do YYYY, h:mm:ss a');
+        temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
         this.mydata.push(temp);
       });
 
@@ -49,30 +49,30 @@ export class OrderDetailsComponent implements OnInit {public dataSource;
       console.log(this.packetList);
 
     });
-}
-applyFilter(filterValue: string) {
-  this.dataSource.filter = filterValue.trim();
-}
-
-funColor(priority){
-
-
-  if ( priority === 'HIGH') {
-    return {
-
-      color : 'red'
-    };
-  } else if (priority === 'MEDIUM') {
-    return{
-      color: 'orange'
-    };
-  } else {
-    return{
-      color: 'green'
-    };
+  }
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim();
   }
 
-}
+  funColor(priority) {
+
+
+    if (priority === 'HIGH') {
+      return {
+
+        color: 'red'
+      };
+    } else if (priority === 'MEDIUM') {
+      return {
+        color: 'orange'
+      };
+    } else {
+      return {
+        color: 'green'
+      };
+    }
+
+  }
 
 
 
