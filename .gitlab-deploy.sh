@@ -29,7 +29,7 @@ apt-get update && apt-get install -y openssh-client
 
 ## Rolling Update
 
- # cd /home/ubuntu/flashexplatform && docker-compose down && \
+ #cd /home/ubuntu/flashexplatform && docker-compose down && \
 
 command="ls -ltr && \
  rm -rf /home/ubuntu/flashexplatform && \
