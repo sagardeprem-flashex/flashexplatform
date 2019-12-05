@@ -31,13 +31,11 @@ apt-get update && apt-get install -y openssh-client
 
 
 command="ls -ltr && \
- cd /home/ubuntu/flashexplatform && \ 
- docker-compose down && \
- cd && \
  rm -rf /home/ubuntu/flashexplatform && \
  git clone https://${gituser}:${gittoken}@gitlab.stackroute.in/flashex/flashexplatform.git -b ${branch} && \
  cd /home/ubuntu/flashexplatform && \
  echo 'Deploying the Application' && ls && \
+ docker-compose down && \
  docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
  echo 'DONE DEPLOYING'"
 
