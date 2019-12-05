@@ -9,7 +9,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TripManagementModule } from './trip-management/trip-management.module';
 import { DeliveryExecutiveModule } from './delivery-executive/delivery-executive.module';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatPaginatorModule } from '@angular/material';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
 import { HAMMER_LOADER } from '@angular/platform-browser';
