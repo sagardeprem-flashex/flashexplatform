@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { ITripProperties } from '../interfaces/trip-planning-properties';
 import { IItinerary } from '../interfaces/trip-itinerary';
+import { IVehicle } from '../interfaces/vehicle';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +24,24 @@ export class TripItineraryService {
     })
   };
 
+  private tripItineraryUrl = '../../../assets/tripsListFormat2.json';
 
-   private url = '../../../assets/tripsListFormat2.json';
-   private dataSource = [];
-   public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);
+  private vehiclesListUrl = '../../../assets/vehiclesList.json';
 
-   load() {
-     this.http.get<IItinerary[]>(this.url).subscribe(data => {
-       this.dataSource = data;
-       this.behaviourSubject.next(this.dataSource);
-     });
-   }
+  private dataSource = [];
+  public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);
+  private vehiclesData = [];
+  public vehicleBehaviourSubject = new BehaviorSubject<IVehicle[]>(this.vehiclesData);
+
+  load() {
+    this.http.get<IItinerary[]>(this.tripItineraryUrl).subscribe(data => {
+      this.dataSource = data;
+      this.behaviourSubject.next(this.dataSource);
+    });
+    this.http.get<IVehicle[]>(this.vehiclesListUrl).subscribe(data => {
+      this.vehiclesData = data;
+      this.vehicleBehaviourSubject.next(this.vehiclesData);
+    });
+  }
 
 }

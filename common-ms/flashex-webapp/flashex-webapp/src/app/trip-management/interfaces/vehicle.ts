@@ -4,4 +4,5 @@ export interface IVehicle {
   vehicleVolume: number;
   availability: boolean;
   vehicleCrew: string;
+  vehicleImage: string;
 }

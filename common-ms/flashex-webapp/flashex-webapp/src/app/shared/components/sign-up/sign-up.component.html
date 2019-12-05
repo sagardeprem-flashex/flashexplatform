@@ -5,7 +5,7 @@
 
 <div *ngIf="isSignedUp; else signupForm" style="padding-top: 12vh;">
 
-    <mat-card style="position: relative; top: 30%; text-align: center; width: max-content; max-width: 80%; margin: auto; vertical-align: 50%;">
+    <mat-card class="matcard" style="text-align: center;">
         Congratulations, your registration is successful. Please click below to login.
         <br>
 
@@ -48,14 +48,15 @@
                     <div>
                         <mat-form-field appearance="outline" class="validation">
                             <mat-label for="Username">Username</mat-label>
-                            <input matInput placeholder="Username" type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required minlength="6" maxlength="15" pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9]+$" />
+                            <input matInput placeholder="Username" type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required minlength="6" maxlength="20" pattern="^(?=.*[a-zA-Z])[a-zA-Z0-9]+$" />
                         </mat-form-field>
+                        <mat-hint>*Username must be between 6 to 20 characters</mat-hint>
                         <div *ngIf="f.submitted && username.invalid">
                             <div *ngIf="username.errors.required">
                                 <mat-hint>*Username is required</mat-hint>
                             </div>
                             <div *ngIf="username.errors.minlength">
-                                <mat-hint>*Username must be between 6 to 15 characters</mat-hint>
+                                <mat-hint>*Username must be between 6 to 20 characters</mat-hint>
                             </div>
                             <div *ngIf="username.errors.pattern">
                                 <mat-hint>*No special characters allowed. At least one alphabet must be present.</mat-hint>
@@ -81,18 +82,14 @@
                             <mat-label for="password">Password</mat-label>
                             <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" required maxlength="14" pattern="^[&@$_.#!]{0,1}[a-zA-Z0-9]+[&@$_.#!]+[a-zA-Z0-9]+[&@$_.#!]{0,1}$"
                             />
-
                         </mat-form-field>
-                        <div *ngIf="f.submitted && password.invalid">
-                            <mat-hint>*Password must contain 6-14 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special characters. </mat-hint>
-                            <!-- <div *ngIf="password.errors.required">Password is required</div>
-                            <div *ngIf="password.errors.minlength || password.errors.pattern">Hint: Password must contain 6-14 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special characters.</div> -->
-                        </div>
+                        <mat-hint>*Password must contain 6-14 characters, at least 1 uppercase, 1 lowercase, 1 number, 1 special characters. Special characters not allowed at the start or end.</mat-hint>
+
                     </div>
                     <div>
                         <mat-card-actions style="padding-left:1em;">
                             <button mat-raised-button color="primary" style="margin-top: 1em;" class="btn btn-primary">Register</button>
-                            <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+                            <div style="padding-top: 1em;" *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
                                 Signup failed!<br/>{{errorMessage}}
                             </div>
                         </mat-card-actions>
