@@ -1,13 +1,16 @@
 <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Trip Details</h1>
+    <button style="margin-left: auto;" mat-icon-button (click)="logout()"><mat-icon>person</mat-icon></button>
+
+
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
 
     <mat-tab label="Today">
         <div class="example-small-box mat-elevation-z4">
             <mat-sidenav-container class="example-sidenav-container">
-                <mat-sidenav opened="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+                <mat-sidenav opened="false" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
                     <mat-nav-list class="sidenav">
                         <a mat-list-item (click)="trip(nav.tripSequence-1)" *ngFor="let nav of dataSource"> {{nav.tripItineraryId}}</a>
                     </mat-nav-list>
