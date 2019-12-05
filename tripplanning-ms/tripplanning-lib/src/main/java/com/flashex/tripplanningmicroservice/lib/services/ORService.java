@@ -60,13 +60,13 @@ public class ORService {
     }
 
 //    VRP with capacity constraint function
-    public void VrpfunctionWithCapCons() throws Exception {
-        vrpWithCapacityConstraint.FinalResult();
+    public void VrpfunctionWithCapCons(ArrayList<Packet> packets) throws Exception {
+        vrpWithCapacityConstraint.FinalResult(packets);
     }
 
 //    VRP with Dropping nodes function
-    public void VrpfuncWithDropNode() throws Exception {
-        vrpWithDroppingVisit.FinalResult();
+    public void VrpfuncWithDropNode(ArrayList<Packet> packets) throws Exception {
+        vrpWithDroppingVisit.FinalResult(packets);
     }
 
 //    VRP with Time window constraint

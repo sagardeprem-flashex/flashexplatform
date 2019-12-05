@@ -1,20 +1,12 @@
 package com.flashex.tripplanningmicroservice.workerservice.messaging;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
-import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Urllib;
 import com.flashex.tripplanningmicroservice.lib.model.Shipment;
-import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
 @RestController
 public class ProcessOnConsumption {
@@ -33,19 +25,15 @@ public class ProcessOnConsumption {
 //        logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Shipment shipmentReceived = new ObjectMapper().readValue(message, Shipment.class);
         String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
-//        logger.info("------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
-//        deliveryAddresses[0] = "117+Above+SBI+Opposite+Raheja+Arcade+7th+Block+Koramangala+Bengaluru+Karnataka+560095";
-        deliveryAddresses[0] = "13610+Hacks+Cross+Rd+Memphis+TN";
-//        logger.info("<<<<<<<<<<<<<<---------------->>>>>>>>"+ Arrays.toString(deliveryAddresses));
         orService.settingAddressArray(deliveryAddresses);
 
-//        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 starts here>>>>>>>>>>>>>>>>>>");
-//        orService.VrpfunctionWithCapCons(shipmentReceived.getPacketList());
-//        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 ends here>>>>>>>>>>>>>>>>>>>>>");
-//
-//        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 starts here>>>>>>>>>>>>>>>>>>>>");
-//        orService.VrpfuncWithDropNode(shipmentReceived.getPacketList());
-//        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 ends here>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 starts here>>>>>>>>>>>>>>>>>>");
+        orService.VrpfunctionWithCapCons(shipmentReceived.getPacketList());
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 ends here>>>>>>>>>>>>>>>>>>>>>");
+
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 starts here>>>>>>>>>>>>>>>>>>>>");
+        orService.VrpfuncWithDropNode(shipmentReceived.getPacketList());
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 ends here>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 starts here>>>>>>>>>>>>>>>>>>>>>>");
         orService.TimeWindowConsFunction(shipmentReceived.getPacketList());

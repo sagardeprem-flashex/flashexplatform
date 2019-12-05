@@ -41,24 +41,6 @@ public class TimeWindowDelivery {
 
         static class DataModel {
 
-         /*   public final String[] addresses = new String[]{
-                    "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
-                    "1921+Elvis+Presley+Blvd+Memphis+TN",
-                    "149+Union+Avenue+Memphis+TN",
-                    "1034+Audubon+Drive+Memphis+TN",
-                    "1532+Madison+Ave+Memphis+TN",
-                    "706+Union+Ave+Memphis+TN",
-                    "3641+Central+Ave+Memphis+TN",
-                    "926+E+McLemore+Ave+Memphis+TN",
-                    "4339+Park+Ave+Memphis+TN",
-                    "600+Goodwyn+St+Memphis+TN",
-                    "2000+North+Pkwy+Memphis+TN",
-                    "262+Danny+Thomas+Pl+Memphis+TN",
-                    "125+N+Front+St+Memphis+TN",
-                    "5959+Park+Ave+Memphis+TN",
-                    "814+Scott+St+Memphis+TN",
-                    "1005+Tillman+St+Memphis+TN"
-            };*/
 
             public final long[][] timeMatrix =
                 {
@@ -79,6 +61,7 @@ public class TimeWindowDelivery {
                 {22, 16, 15, 13, 10, 15, 9, 14, 13, 9, 6, 15, 14, 15, 0, 1},
                 {23, 16, 15, 14, 11, 13, 10, 14, 14, 10, 6, 16, 15, 15, 1, 0}
         };
+
             Data d = (new Data());
             public final String[] addresses = d.getAddr();
 
@@ -125,7 +108,6 @@ public class TimeWindowDelivery {
 
             public final int  vehicleNumber = 6;
 //            public final int vehicleNumber = vehicleList.getNoOfVehicle();
-
 //            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
             public final long[] vehicleCapacities = {60, 60, 40, 60, 60 , 50};
             public final int  depot = 0;
@@ -135,19 +117,13 @@ public class TimeWindowDelivery {
         }
 
         /// @brief Print the solution.
-         public TripItinerary printSolution(
+         public void printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address, ArrayList<Packet> packets) throws Exception {
 
             RoutingDimension timeDimension = routing.getMutableDimension("Time");
 
         String[] addr = address; // use when using gentmat to run
-        HashMap<String, Set<String> > Locationcord = new HashMap();
-
-            TripItinerary tripItinerary = new TripItinerary();
-            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
-
-//             Shipment shipment = (new Shipment());
-
+//        HashMap<String, Set<String> > Locationcord = new HashMap();
             Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
@@ -162,18 +138,19 @@ public class TimeWindowDelivery {
                     droppedNodes += " " + manager.indexToNode(node);
                 }
             }
-            logger.info(droppedNodes);
 
+            logger.info(droppedNodes);
             long routeDistance = 0;
             long routeLoad = 0;
             long totalTime = 0;
+
             for (int i = 0; i < data.vehicleNumber; ++i) {
+                TripItinerary tripItinerary = new TripItinerary();
+                tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
 
                 tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
-//            tripItinerary.getPlannedStartTime();
 
                 tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
-//            tripItinerary.getPlannedEndTime();
 
                 long index = routing.start(i);
                 logger.info("Route for Vehicle " + i + ":");
@@ -182,8 +159,9 @@ public class TimeWindowDelivery {
                 tripItinerary.setVehicle(vehicle); // temporary only
 
                 String route = "";
-                String response = "";
-                Set<String> latlongarr = new HashSet<String>();
+//                String response = "";
+//                Set<String> latlongarr = new HashSet<String>();
+                ArrayList<Packet> PacketArray = new ArrayList();
 
                 while (!routing.isEnd(index)) {
                     IntVar timeVar = timeDimension.cumulVar(index);
@@ -193,10 +171,9 @@ public class TimeWindowDelivery {
                     route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
                             + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
-                    if(nodeIndex>0 && nodeIndex<16) {
-                        tripItinerary.setPackets(Collections.singletonList(packets.get((int) (nodeIndex - 1))));
-//                    tripItinerary.setPackets((List<Packet>) shipment.getPacketList());
-                    }
+
+                    PacketArray.add(packets.get((int) (nodeIndex)));
+
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
                     tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
@@ -214,19 +191,11 @@ public class TimeWindowDelivery {
                 tripItinerary.setTripExpense(tripexpense); // set total expense
                 }
 
+                tripItinerary.setPackets(PacketArray);
                 tripItinerary.setAlgorithm("VrpwithTimeWindowDelivery");
                 tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
 
-//                tripItinerary.getPackets(); // get order list optimized as per dilivery order
-//                tripItinerary.getPlannedTotalDistance(); // get distance of the route
-//                tripItinerary.getVehicle(); // get the vehicle details
-//                tripItinerary.getOccupiedVolume(); // get occupied volume
-//                tripItinerary.getTripExpense(); // get trip expense
-//                tripItinerary.getOriginAddress(); // get origin address
-//                tripItinerary.getAlgorithm(); // get name of algo
-
-
-                Locationcord.put("Vehicle:" + i,latlongarr);
+//                Locationcord.put("Vehicle:" + i,latlongarr);
 
                 IntVar timeVar = timeDimension.cumulVar(index);
 
@@ -240,8 +209,8 @@ public class TimeWindowDelivery {
 
                 totalTime += solution.min(timeVar);
 
-                logger.info("Array of lat & long" + latlongarr);
-                logger.info("Key value" + Locationcord);
+//                logger.info("Array of lat & long" + latlongarr);
+//                logger.info("Key value" + Locationcord);
 
                 tripItineraryService.saveTripItinerary(tripItinerary);
 
@@ -249,7 +218,6 @@ public class TimeWindowDelivery {
 
             logger.info("Total time of all routes: " + totalTime*100 + "m");
 
-            return tripItinerary;
         }
 
         static void matPrint(int[][] distmat, int[][] timemat, String[] address) {
@@ -286,7 +254,6 @@ public class TimeWindowDelivery {
             // Instantiate the data problem.
             final DataModel data = new DataModel();
 
-
             RoutingIndexManager manager =
                     new RoutingIndexManager(data.timeMatrix.length, data.vehicleNumber, data.depot);
 
@@ -299,7 +266,6 @@ public class TimeWindowDelivery {
                         return data.timeMatrix[fromNode][toNode];
                     });
             routing.setArcCostEvaluatorOfAllVehicles(transitCallbackIndex);
-
 
             routing.addDimensionWithVehicleCapacity(transitCallbackIndex, // transit callback
                     30, // allow waiting time
