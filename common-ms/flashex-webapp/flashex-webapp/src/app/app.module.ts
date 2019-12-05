@@ -27,8 +27,6 @@ import { HAMMER_LOADER } from '@angular/platform-browser';
     MaterialModule,
     TripManagementModule,
     DeliveryExecutiveModule,
-    FlexLayoutModule,
-    MatPaginatorModule,
     FlexLayoutModule
   ],
   providers: [
