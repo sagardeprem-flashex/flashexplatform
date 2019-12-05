@@ -78,8 +78,7 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
-  statusColor(currentStatus)
-  {
+  statusColor(currentStatus) {
     switch (currentStatus) {
       case 'RECEIVED': {
           return{
