@@ -5,6 +5,7 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
 import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -27,6 +28,9 @@ public class VrpWithDroppingVisit {
 
     @Autowired
     private TripItineraryService tripItineraryService;
+
+    @Autowired
+    private ProducerService producerService;
 
     /** Minimal VRP.*/
 
@@ -179,7 +183,7 @@ public class VrpWithDroppingVisit {
 //            logger.info("Array of lat & long" + latlongarr);
 //            logger.info("Key value" + Locationcord);
             tripItineraryService.saveTripItinerary(tripItinerary);
-
+            producerService.sendMessageJSON(tripItinerary);
 
         }
         logger.info("Total Distance of all routes: " + totalDistance + "m");

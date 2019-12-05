@@ -7,6 +7,7 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.*;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
+import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
 import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +34,9 @@ public class TimeWindowDelivery {
 
     @Autowired
     private TripItineraryService tripItineraryService;
+
+    @Autowired
+    private ProducerService producerService;
 
 
     /** Minimal VRPTW.*/
@@ -213,6 +217,7 @@ public class TimeWindowDelivery {
 //                logger.info("Key value" + Locationcord);
 
                 tripItineraryService.saveTripItinerary(tripItinerary);
+                producerService.sendMessageJSON(tripItinerary);
 
             }
 

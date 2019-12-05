@@ -5,6 +5,7 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
 import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,6 +31,9 @@ public class VrpWithCapacityConstraint {
 
     @Autowired
     private TripItineraryService tripItineraryService;
+
+    @Autowired
+    private ProducerService producerService;
 
     /** Minimal VRP.*/
     private static final Logger logger = Logger.getLogger(VrpWithCapacityConstraint.class.getName());
@@ -164,6 +168,7 @@ public class VrpWithCapacityConstraint {
 //            logger.info("Key value" + Locationcord);
 
             tripItineraryService.saveTripItinerary(tripItinerary);
+            producerService.sendMessageJSON(tripItinerary);
 
         }
 
