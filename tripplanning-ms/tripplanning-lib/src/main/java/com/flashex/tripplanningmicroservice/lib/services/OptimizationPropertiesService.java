@@ -18,10 +18,7 @@ public class OptimizationPropertiesService {
     }
 
     public OptimizationProperties getSpecificProperties(String id) {
-        if(this.optimizationPropertiesRepository.findById(id).isPresent()) {
-            return this.optimizationPropertiesRepository.findById(id).get();
-        }
-        return null;
+        return this.optimizationPropertiesRepository.findById(id).orElse(null);
     }
 
     public void saveOptimizationProperties(OptimizationProperties properties) {

@@ -2,6 +2,7 @@ package com.flashex.shipmentmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.*;
 
@@ -32,6 +33,7 @@ public class Packet {
     private String packetType;
     @CassandraType(type = DataType.Name.TEXT)
     private String priority;
+
     @CassandraType(type = DataType.Name.TEXT)
     private String status;
 //

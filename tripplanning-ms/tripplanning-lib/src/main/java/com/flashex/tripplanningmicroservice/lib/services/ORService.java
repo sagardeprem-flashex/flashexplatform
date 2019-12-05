@@ -4,16 +4,11 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
-import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.model.Packet;
-import com.flashex.tripplanningmicroservice.lib.model.PacketList;
-import com.flashex.tripplanningmicroservice.lib.model.Shipment;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 
 //  This service belongs to VRP problem with capacity constraint
@@ -30,24 +25,19 @@ public class ORService {
     private VrpWithDroppingVisit vrpWithDroppingVisit;
     private TimeWindowDelivery timeWindowDelivery;
     private Data data;
-    private PacketList packetList;
 
 
     public Data getData() {
         return this.data;
     }
 
-    public PacketList getPacketList(){
-        return this.packetList;
-    }
 
-    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data, PacketList packetList) {
+    public ORService(ServiceProperties serviceProperties, VrpWithCapacityConstraint vrpWithCapacityConstraint, VrpWithDroppingVisit vrpWithDroppingVisit, TimeWindowDelivery timeWindowDelivery, Data data) {
         this.serviceProperties = serviceProperties;
         this.vrpWithCapacityConstraint = vrpWithCapacityConstraint;
         this.vrpWithDroppingVisit = vrpWithDroppingVisit;
         this.timeWindowDelivery = timeWindowDelivery;
         this.data = data;
-        this.packetList = packetList;
     }
 
     public String message() {

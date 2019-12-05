@@ -22,6 +22,7 @@ import com.google.ortools.constraintsolver.RoutingIndexManager;
 import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
+import com.google.protobuf.Duration;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -307,6 +308,7 @@ public class TimeWindowDelivery {
             RoutingSearchParameters searchParameters =
                     main.defaultRoutingSearchParameters()
                             .toBuilder()
+                            .setTimeLimit(Duration.newBuilder().setSeconds(30).build())
                             .setFirstSolutionStrategy(FirstSolutionStrategy.Value.PATH_CHEAPEST_ARC)
                             .build();
             Assignment solution = routing.solveWithParameters(searchParameters);
