@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TokenStorageService } from '../../../shared/services/token-storage.service';
+import { Router } from '@angular/router';
+
 declare let L;
 declare let tomtom: any;
 
@@ -44,7 +47,9 @@ export class TripsComponent implements OnInit {
   public routes = [];
   step = 0;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tripService: TripItineraryService) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher, private tripService: TripItineraryService,
+              private tokenStorage: TokenStorageService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -93,6 +98,10 @@ export class TripsComponent implements OnInit {
       this.colors.push(generatedColor);
 
     });
+  }
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/auth/login']);
   }
 }
 

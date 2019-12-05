@@ -1,4 +1,4 @@
-package com.flashex.tripplanningmicroservice.lib.model;
+package com.flashex.triptrackingmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
 import lombok.*;
@@ -7,7 +7,6 @@ import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter

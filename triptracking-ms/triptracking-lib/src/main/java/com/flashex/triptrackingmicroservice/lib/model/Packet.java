@@ -1,10 +1,8 @@
-package com.flashex.tripplanningmicroservice.lib.model;
+package com.flashex.triptrackingmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
 import lombok.*;
-import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
 import java.util.Date;
@@ -28,7 +26,6 @@ public class Packet {
     private String deliveryDescription;
     private String packetType;
     private String priority;
-    private String status;
 
     /** Float variables **/
     private float weight;

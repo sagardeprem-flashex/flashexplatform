@@ -1,4 +1,4 @@
-package com.flashex.tripplanningmicroservice.lib.model;
+package com.flashex.triptrackingmicroservice.lib.model;
 
 
 import lombok.AllArgsConstructor;
@@ -6,9 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Getter
