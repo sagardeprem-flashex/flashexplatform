@@ -50,7 +50,8 @@ const MaterialComponents = [
   MatTooltipModule,
   MatPasswordStrengthModule,
   MatSortModule,
-  MatStepperModule
+  MatStepperModule,
+  MatTooltipModule
 ];
 
 @NgModule({
