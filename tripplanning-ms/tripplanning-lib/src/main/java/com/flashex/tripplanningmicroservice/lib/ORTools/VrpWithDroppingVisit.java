@@ -101,6 +101,8 @@ public class VrpWithDroppingVisit {
 
 //      Setting vehicle details
         VehicleList vehicleList = new VehicleList();
+        ArrayList<Packet> droppedPackets = new ArrayList();
+
 //        logger.info((""+ vehicleList.listofvehicle));
 
 
@@ -113,8 +115,11 @@ public class VrpWithDroppingVisit {
             }
             if (solution.value(routing.nextVar(node)) == node) {
                 droppedNodes += " " + manager.indexToNode(node);
+                droppedPackets.add(packets.get(manager.indexToNode(node)));
+
             }
         }
+        logger.info("Array of dropped nodes :" + String.valueOf(droppedPackets));
         logger.info(droppedNodes);
 
         // Display routes
@@ -125,6 +130,8 @@ public class VrpWithDroppingVisit {
 
             TripItinerary tripItinerary = new TripItinerary();
             tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
+
+            tripItinerary.setDroppedpackets(droppedPackets);
 
             tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
 

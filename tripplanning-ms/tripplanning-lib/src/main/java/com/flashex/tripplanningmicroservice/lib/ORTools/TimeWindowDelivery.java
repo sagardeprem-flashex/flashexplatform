@@ -113,7 +113,7 @@ public class TimeWindowDelivery {
             public final int  vehicleNumber = 6;
 //            public final int vehicleNumber = vehicleList.getNoOfVehicle();
 //            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-            public final long[] vehicleCapacities = {60, 60, 40, 60, 60 , 50};
+            public final long[] vehicleCapacities = {60, 60, 40, 50, 50 , 50};
             public final int  depot = 0;
 
             DataModel() throws ParseException, JsonProcessingException {
@@ -132,6 +132,7 @@ public class TimeWindowDelivery {
 
 //      Setting vehicle details
             VehicleList vehicleList = (new VehicleList());
+            ArrayList<Packet> droppedPackets = new ArrayList();
 
             String droppedNodes = "Dropped nodes:";
             for (int node = 0; node < routing.size(); ++node) {
@@ -140,8 +141,10 @@ public class TimeWindowDelivery {
                 }
                 if (solution.value(routing.nextVar(node)) == node) {
                     droppedNodes += " " + manager.indexToNode(node);
+                    droppedPackets.add(packets.get(manager.indexToNode(node)));
                 }
             }
+            logger.info("Array of dropped nodes :" + String.valueOf(droppedPackets));
 
             logger.info(droppedNodes);
             long routeDistance = 0;
@@ -151,6 +154,8 @@ public class TimeWindowDelivery {
             for (int i = 0; i < data.vehicleNumber; ++i) {
                 TripItinerary tripItinerary = new TripItinerary();
                 tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
+
+                tripItinerary.setDroppedpackets(droppedPackets);
 
                 tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
 
