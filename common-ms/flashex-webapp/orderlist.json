@@ -5,7 +5,7 @@
     "deliveryDescription": "fugiat ullamco culpa Lorem magna dolor laboris officia sit nostrud",
     "packetType": "FLAMMABLE",
     "priority": "LOW",
-    "currentStatus": "DELIVERED",
+    "currentStatus": "UNDELIVERED",
     "status": [
       {
         "statusValue": "RECEIVED",
@@ -20,7 +20,7 @@
         "timeStamp": "2019-12-04T10:15:00.000+0000"
       },
       {
-        "statusValue": "DELIVERED",
+        "statusValue": "UNDELIVERED",
         "timeStamp": "2019-12-04T12:15:00.000+0000"
       }
     ],
@@ -53,23 +53,11 @@
     "deliveryDescription": "nostrud labore cillum ipsum exercitation amet commodo enim incididunt dolore",
     "packetType": "FRAGILE",
     "priority": "HIGH",
-    "currentStatus": "DELIVERED",
+    "currentStatus": "RECEIVED",
     "status": [
       {
         "statusValue": "RECEIVED",
         "timeStamp": "2019-12-04T08:15:18.000+0000"
-      },
-      {
-        "statusValue": "PROCESSED",
-        "timeStamp": "2019-12-04T08:15:30.000+0000"
-      },
-      {
-        "statusValue": "DISPATCHED",
-        "timeStamp": "2019-12-04T10:15:00.000+0000"
-      },
-      {
-        "statusValue": "DELIVERED",
-        "timeStamp": "2019-12-04T12:15:00.000+0000"
       }
     ],
     "weight": 3.1,
@@ -101,7 +89,7 @@
     "deliveryDescription": "officia sint amet pariatur fugiat elit commodo et deserunt quis",
     "packetType": "FLAMMABLE",
     "priority": "HIGH",
-    "currentStatus": "DELIVERED",
+    "currentStatus": "PROCESSED",
     "status": [
       {
         "statusValue": "RECEIVED",
@@ -110,14 +98,6 @@
       {
         "statusValue": "PROCESSED",
         "timeStamp": "2019-12-04T08:15:30.000+0000"
-      },
-      {
-        "statusValue": "DISPATCHED",
-        "timeStamp": "2019-12-04T10:15:00.000+0000"
-      },
-      {
-        "statusValue": "DELIVERED",
-        "timeStamp": "2019-12-04T12:15:00.000+0000"
       }
     ],
     "weight": 3.5,
@@ -922,3 +902,6 @@
   }
 ]
 }
+
+
+

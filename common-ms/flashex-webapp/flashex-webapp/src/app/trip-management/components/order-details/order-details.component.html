@@ -65,24 +65,15 @@
 
           </div>
           <div style="margin-top: 10vh">
-
+              <!-- <div *ngFor="let statuslist of element.status">
+                  {{statuslist.statusValue}}
+              </div> -->
               <mat-horizontal-stepper>
-                  <mat-step label="RECEIVED">
+                <div *ngFor="let statuslist of element.status">
+                  <!-- {{statuslist.statusValue}} -->
+                  <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
                   </mat-step>
-                  <mat-step label="PROCESSED">
-                  </mat-step>
-                  <mat-step label="DISPATCHED">
-                  </mat-step>
-                  <mat-step label="DELIVERED">
-                    </mat-step>
-
-                  <!-- Icon overrides. -->
-                  <!-- <ng-template matStepperIcon="phone">
-                    <mat-icon>call_end</mat-icon>
-                  </ng-template>
-                  <ng-template matStepperIcon="chat">
-                    <mat-icon>forum</mat-icon>
-                  </ng-template> -->
+                </div>
                 </mat-horizontal-stepper>
           </div>
 
