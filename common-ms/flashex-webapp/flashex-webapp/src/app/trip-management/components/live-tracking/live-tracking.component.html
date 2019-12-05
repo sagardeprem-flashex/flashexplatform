@@ -11,33 +11,13 @@
 
                     <mat-expansion-panel-header style="background-color:#ECEFF1;">
                         <mat-panel-title>
-                            <button mat-raised-button [ngStyle]="{'background-color': colors[i]}" (click)="trip(id.tripItineraryId - 1)">Trip {{id.tripItineraryId}}</button>
+                            <button mat-raised-button [ngStyle]="{'background-color': colors[i]}">Trip {{id.tripItineraryId}}</button>
 
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <mat-expansion-panel>
-
-                        <mat-expansion-panel-header style="background-color:#ECEFF1;">
-                            <mat-panel-title>
-                                Check Trip Status
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <div>
-                            <mat-vertical-stepper>
-                                <mat-step>
-                                    Vehicle for this trip has left the warehouse
-                                </mat-step>
-                                <mat-step *ngFor="let order of id.orders; let i = index">
-                                    <p>Order: {{id.orders[i].orderId}} has delivered at location {{id.orders[i].deliveryAddress}}</p>
-                                </mat-step>
-
-                            </mat-vertical-stepper>
-                        </div>
-                    </mat-expansion-panel>
-
-                    <p *ngFor="let order of id.orders; let i = index"> Order - {{i+1}} Delivery Address: {{order.deliveryAddress}}</p>
+                    <p *ngFor="let order of id.packets; let i = index"> Order - {{i+1}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}</p>
 
                 </mat-expansion-panel>
             </div>
