@@ -1,5 +1,5 @@
 #map {
-    height: 70%;
+    height: 100%;
     width: 100%;
 }
 
@@ -10,14 +10,15 @@ button {
 }
 
 .example-container {
-    height: 40em;
+    height: 31em;
 }
 
-.example-events {
+
+/* .example-events {
     width: 100%;
     overflow: auto;
     border: 1px solid #555;
-}
+} */
 
 .sidenavbar {
     width: min-content;
