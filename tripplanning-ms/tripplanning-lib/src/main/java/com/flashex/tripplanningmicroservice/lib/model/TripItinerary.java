@@ -50,4 +50,7 @@ public class TripItinerary {
     @CassandraType(type = DataType.Name.TEXT)
     private String algorithm;
 
+    @CassandraType(type = DataType.Name.LIST, typeArguments = DataType.Name.UDT, userTypeName = "packet")
+    private List<Packet> droppedpackets;
+
 }
