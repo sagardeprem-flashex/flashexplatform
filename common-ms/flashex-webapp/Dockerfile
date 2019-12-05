@@ -1,15 +1,15 @@
 FROM node:latest as angular_build
 COPY src /usr/app/src
-COPY angular-boiler-plate /usr/app/frontend
+COPY flashex-webapp /usr/app/frontend
 COPY pom.xml /usr/app
 WORKDIR /usr/app/frontend
 RUN ls -la
 RUN npm install -g @angular/cli
 RUN npm install
 RUN ls
-RUN ng build
+RUN ng build --prod
 
-# FROM maven:3.6.2-jdk-12 AS build
+# FROM maven:3.6.2-jdk-12 AS build`
 FROM prithivid/flashexdepends:latest AS build
 COPY --from=angular_build /usr/app /usr/app
 RUN rm -rf /usr/app/src/main/resources/static

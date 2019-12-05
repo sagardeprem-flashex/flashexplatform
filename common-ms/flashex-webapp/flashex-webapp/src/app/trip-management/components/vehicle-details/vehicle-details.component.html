@@ -1,0 +1,34 @@
+<div class="container">
+  <section class="mat-typography page-title">
+    <h1>Vehicles List</h1>
+  </section>
+  <div class="vehicle-card-container" style="padding-left: 5%;" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="6%" fxLayoutGap.xs="10%">
+    <mat-card class="vehicle-card" *ngFor='let vehicle of vehicleDataSource; let i = index'>
+      <mat-card-header>
+        <div mat-card-avatar class="vehicle-header-image" style="background-image: url('{{vehicle.vehicleImage}}+?random={{vehicle.vehicleId}}');">
+          <!-- <img src="https://loremflickr.com/640/480/vehicle" alt="Random images from loremflickr"> -->
+        </div>
+        <mat-card-subtitle>Id#{{vehicle.vehicleId}}</mat-card-subtitle>
+        <mat-card-title>{{vehicle.vehicleType}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image class="images" src="{{vehicle.vehicleImage}}+?random={{vehicle.vehicleId}}" alt="Image of Vehicle">
+      <mat-card-content class="card-contents">
+        <div class="details-container-flex">
+          <div class="detail-container">
+            <p class="title-part mat-body-2">Vehicle Capacity</p>
+            <p class="mat-body-1">{{vehicle.vehicleVolume}}</p>
+          </div>
+          <div class="detail-container">
+            <p class="title-part mat-body-2">Availability</p>
+            <p class="mat-body-1" color='primary' *ngIf='vehicle.availability === true'>YES</p>
+            <p class="mat-body-1" *ngIf='vehicle.availability === false' color='accent'>NO</p>
+          </div>
+        </div>
+        <div class="crew-detail-container">
+          <p class="title-part mat-body-2">Vehicle Crew</p>
+          <p class="mat-body-1">{{vehicle.vehicleCrew}}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -47,7 +47,7 @@ build_app:
   tags:
     - flashex-ci-jobs
   script:
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - cd common-ms/flashex-webapp/flashex-webapp/
     - npm install
 # -----------Angular Test
 # karma_unit_tests:
@@ -56,8 +56,8 @@ build_app:
 #   tags:
 #     - flashex-ci-jobs
 #   script:
-#     - cd common-ms/flashex-webapp/angular-boiler-plate/
-#     - npm install  
+#     - cd common-ms/flashex-webapp/flashex-webapp/
+#     - npm install
 #     - npm run test
 #--------Angular Lint
 tslint_app:
@@ -67,7 +67,7 @@ tslint_app:
     - flashex-ci-jobs
   script:
   #------go to the path
-    - cd common-ms/flashex-webapp/angular-boiler-plate/
+    - cd common-ms/flashex-webapp/flashex-webapp/
     - npm install
     - npm run lint -- --format json
 # --- Deployment on Release branch
@@ -84,13 +84,13 @@ release_deploy:
         - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     script:
         - ls -ltr
-        - /bin/sh .gitlab-deploy.sh   
-    environment:     
-        name: production     
+        - /bin/sh .gitlab-deploy.sh
+    environment:
+        name: production
         url: http:/flashex-dev.stackroute.io
     when: on_success
     only:
-        - release_v0.3.0
+        - release_v0.4.0
 #-----Production Deployment
 production_deploy:
     image: ubuntu:latest
@@ -105,9 +105,9 @@ production_deploy:
         - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     script:
         - ls -ltr
-        - /bin/sh .gitlab-deploy.sh   
-    environment:     
-        name: production     
+        - /bin/sh .gitlab-deploy.sh
+    environment:
+        name: production
         url: http://flashex-dev.stackroute.io
     when: manual
     only: 
