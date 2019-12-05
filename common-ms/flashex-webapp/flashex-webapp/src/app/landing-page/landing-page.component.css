@@ -10,45 +10,26 @@ ul {
 
 /* Typography */
 
-#mainBody h1 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    text-transform: capitalize;
-    color: black;
-    padding: 0;
-    margin: 0;
-}
 
 #mainBody h2 {
-    font-family: 'Oswald', sans-serif;
     font-size: 90px;
-    letter-spacing: 10px;
     text-align: center;
-    color: black;
-    font-weight: 400;
-    text-transform: uppercase;
-    z-index: 10;
-    opacity: 1;
+    font-weight: 200;
 }
 
 #mainBody h3 {
-    font-family: 'Oswald', sans-serif;
-    font-size: 24px;
-    line-height: 30px;
-    font-weight: 400;
-    text-align: center;
-    letter-spacing: 8px;
+    font-size: 28px;
+    letter-spacing:3px;
     text-transform: uppercase;
     color: black;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
+    /* font-weight: bold; */
 }
 
 #mainBody p {
-    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 24px;
     color: black;
     padding: 0%;
@@ -74,7 +55,7 @@ ul {
     width: 100%;
     background-image: url("../../assets/images/longexposurebackgroundimage.jpg");
     background-attachment: fixed;
-    height: 95vh;
+    height: 100vh;
     margin-top: -5ch;
     justify-content: center;
     background-size: 60vh;
@@ -107,6 +88,7 @@ figcaption {
     font-size: large;
     text-align: center;
     margin: auto;
+    font-size: 20px;
 }
 
 
@@ -127,6 +109,7 @@ figcaption {
     #mainBody h2 {
         font-size: 30px;
     }
+
     /* #mainBody .block {padding: 30px;} */
     #mainBody .parallax-one {
         padding-top: 100px;
@@ -140,7 +123,15 @@ figcaption {
         width: 80%;
     }
     #mainBody h2 {
-        font-size: 30px;
+        font-size: 32px;
+        /* font-weight: bold; */
+    }
+    #mainBody h3 {
+        font-size: 18px;
+    }
+
+    #mainBody p{
+        font-size: 15px;
     }
     .links {
         width: 50%;
@@ -168,8 +159,9 @@ figcaption {
 .socialmediaicons {
     display: inline-flex;
     justify-content: space-around;
-    margin-left: 25%;
-    width: 50%;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
     font-size: 2.25rem;
     text-align: center;
 }
