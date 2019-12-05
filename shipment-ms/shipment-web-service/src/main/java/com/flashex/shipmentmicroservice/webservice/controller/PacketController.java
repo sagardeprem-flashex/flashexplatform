@@ -30,4 +30,9 @@ public class PacketController {
         return packetService.savePackets(packets);
     }
 
+
+    @GetMapping("/packets/{packetId}")
+    public Packet getPacketById(@PathVariable String packetId){
+        return packetService.findByPacketId(packetId);
+    }
 }
