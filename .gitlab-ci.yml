@@ -40,15 +40,15 @@ pmd_maven:
   - cd common-ms
   - mvn pmd:check
 
-# # ---------Angular Build
-# build_app:
-#   image: circleci/node:12-browsers
-#   stage: build
-#   tags:
-#     - flashex-ci-jobs
-#   script:
-#     - cd common-ms/flashex-webapp/flashex-webapp/
-#     - npm install
+# ---------Angular Build
+build_app:
+  image: circleci/node:12-browsers
+  stage: build
+  tags:
+    - flashex-ci-jobs
+  script:
+    - cd common-ms/flashex-webapp/flashex-webapp/
+    - npm install
 # -----------Angular Test
 # karma_unit_tests:
 #   image: circleci/node:12-browsers
