@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { ITripProperties } from '../interfaces/trip-planning-properties';
 import { IItinerary } from '../interfaces/trip-itinerary';
 import { IVehicle } from '../interfaces/vehicle';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class TripItineraryService {
 
   public location;
   public planningProperties: ITripProperties;
+  public handleError;
 
   constructor(private http: HttpClient) {
     this.load();
@@ -28,6 +30,10 @@ export class TripItineraryService {
 
   private vehiclesListUrl = '../../../assets/vehiclesList.json';
 
+  // private optimizationPropertiesUrl = 'http://gateway:8080/tripplanning-microservice-webservice/api/v1/optprops';
+
+  private optimizationPropertiesUrl = 'tripplanning-microservice-webservice/api/v1/optprops';
+
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);
   private vehiclesData = [];
@@ -42,6 +48,18 @@ export class TripItineraryService {
       this.vehiclesData = data;
       this.vehicleBehaviourSubject.next(this.vehiclesData);
     });
+
+    this.http.get<ITripProperties>(this.optimizationPropertiesUrl + '/1793840').subscribe(data => {
+      this.planningProperties = data;
+      this.planningProperties.propertiesId = '1793840';
+    });
   }
 
+  updateOptimizationProperties(properties: ITripProperties) {
+    this.http.put<ITripProperties>( this.optimizationPropertiesUrl + '/' + properties.propertiesId,
+                                    properties,
+                                    this.httpOptions).pipe(
+                                      catchError(this.handleError)
+                                    );
+  }
 }
