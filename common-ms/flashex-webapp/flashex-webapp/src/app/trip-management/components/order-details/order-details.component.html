@@ -1,5 +1,5 @@
 
-<div class="mat-elevation-z8" style="margin-top:15vh">
+<div class="mat-elevation-z8" style="margin-top:10vh">
   <mat-toolbar>Order Details</mat-toolbar>
   <!-- <mat-form-field style="width: 50%; font:bolder; padding-top: 2em; padding-left: 2em; margin-top: 10vh">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search"
@@ -49,8 +49,8 @@
 
 
         <div class="example-element-description">
-
           PacketId: {{element.packetId}}<br>
+          Customer: {{element.customer.firstName}} {{element.customer.middleName}} {{element.customer.lastName}} <br>
           Address Line: {{element.deliveryAddress.addressLine1}}<br>
           City: {{element.deliveryAddress.city}}<br>
           State: {{element.deliveryAddress.state}}<br>
@@ -59,12 +59,12 @@
         </div>
 
         <div class="example-element-diagram">
-            <div class="example-element-position"> {{element.receivedDate}} </div>
-            <div class="example-element-name"> {{element.packetType}} </div>
+            <div class="example-element-name"> {{element.length}} X {{element.breadth}} X {{element.height}} </div>
+            <div class="example-element-name"> {{element.weight}} kg(s)</div>
             <div class="example-element-weight"> {{element.packetDescription}} </div>
 
           </div>
-          <div style="margin-top: 10vh">
+          <div style="margin-top: 1vh">
               <!-- <div *ngFor="let statuslist of element.status">
                   {{statuslist.statusValue}}
               </div> -->
