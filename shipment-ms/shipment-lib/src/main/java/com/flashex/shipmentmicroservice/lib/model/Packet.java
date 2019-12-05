@@ -5,7 +5,9 @@ import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -19,6 +21,7 @@ public class Packet {
 
     /** String variables **/
 
+    @PrimaryKey
     @PrimaryKeyColumn(name = "packetId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
     private String packetId;
@@ -33,7 +36,7 @@ public class Packet {
     @CassandraType(type = DataType.Name.TEXT)
     private String priority;
     @CassandraType(type = DataType.Name.TEXT)
-    private String status;
+    private String currentStatus;
 //
 //    /** Float variables **/
 
@@ -69,6 +72,10 @@ public class Packet {
 
     @CassandraType(type = DataType.Name.UDT, userTypeName = "customer")
     private Customer customer;
+
+
+    @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "status")
+    private List<Status> statusList = new ArrayList<>();
 
 
 }
