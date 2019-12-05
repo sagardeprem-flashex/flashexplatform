@@ -240,3 +240,11 @@ services:
       - config-server
       - discovery-server
       - gateway
+
+  vehicle-json-server:
+    image: clue/json-server
+    container_name: vehicles-json-server
+    ports:
+      - 80:80
+    volumes: 
+      - ./tripplanning-ms/vehicle.json:/data/db.json

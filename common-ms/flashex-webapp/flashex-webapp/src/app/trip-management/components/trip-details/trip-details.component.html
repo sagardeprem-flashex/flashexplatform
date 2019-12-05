@@ -1,16 +1,23 @@
 <div class="trips-container">
-  <section class="mat-typography">
-      <h1>Upcoming Trips</h1>
-      <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button>
-  </section>
-
-  <mat-toolbar>
-  <div class='table-header'>
-    <p class="title-part mat-body-2">TripId</p>
-    <span class="space-filler"></span>
-    <p class="title-part mat-body-2">Start Date</p>
+  <div class="toolbar">
+    <mat-toolbar class="toolbar-title">Upcoming Orders</mat-toolbar>
+    <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
+    <mat-form-field class="dropdown">
+      <mat-select disableOptionCentering placeholder='Select an Algorithm'>
+        <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
+          {{algo}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  </mat-toolbar>
+
+  <!-- <mat-toolbar>
+    <div class='table-header'>
+      <p class="title-part mat-body-2">TripId</p>
+      <span class="space-filler"></span>
+      <p class="title-part mat-body-2">Start Date</p>
+    </div>
+  </mat-toolbar> -->
   <mat-accordion>
     <mat-expansion-panel *ngFor="let trip of dataSource; let i = index">
       <mat-expansion-panel-header>

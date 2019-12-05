@@ -13,6 +13,7 @@ export class TripItineraryService {
 
   public location;
   public planningProperties: ITripProperties;
+  public selectedAlgo;
 
   constructor(private http: HttpClient) {
     this.load();
@@ -26,7 +27,7 @@ export class TripItineraryService {
 
   private tripItineraryUrl = '../../../assets/tripsListFormat2.json';
 
-  private vehiclesListUrl = '../../../assets/vehiclesList.json';
+  private vehiclesListUrl = 'http://localhost:80/vehicles';
 
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<IItinerary[]>(this.dataSource);

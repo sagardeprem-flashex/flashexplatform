@@ -12,10 +12,11 @@ import { ITripProperties } from '../../interfaces/trip-planning-properties';
 export class TripDetailsComponent implements OnInit {
 
   public dataSource;
+  public selectedAlgo;
   public orders;
-  public selectedOptimization;
   public userName;
   public properties: ITripProperties;
+  public algorithms = ['Time Window Delivery', 'VRP with Capacity constraint', 'VRP with Dropping Visit'];
 
   constructor(private tripService: TripItineraryService, private dialog: MatDialog) { }
 
@@ -31,16 +32,22 @@ export class TripDetailsComponent implements OnInit {
 
   }
 
-  openPropertiesDialog(): void {
-    const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
-      width: '65%',
-      data: {userName: this.userName, properties: this.properties}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.properties = this.tripService.planningProperties;
-      // console.log(this.tripService.planningProperties, this.properties);
-    });
+  changeAlgo(algo: string) {
+    this.selectedAlgo = algo;
+    this.tripService.selectedAlgo = this.selectedAlgo;
+    // console.log(this.selectedAlgo);
   }
+
+  // openPropertiesDialog(): void {
+  //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
+  //     width: '65%',
+  //     data: {userName: this.userName, properties: this.properties}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.properties = this.tripService.planningProperties;
+  //     // console.log(this.tripService.planningProperties, this.properties);
+  //   });
+  // }
 
 }

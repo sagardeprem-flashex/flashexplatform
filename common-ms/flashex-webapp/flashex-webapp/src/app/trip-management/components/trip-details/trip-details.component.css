@@ -2,15 +2,18 @@ mat-card {
     box-shadow: none !important;
 }
 
-.mat-typography {
-    display: inline-flex;
-    margin: 2vh 3% 2vh 3%;
-    width: 94%;
-    justify-content: space-between;
+.dropdown {
+  width: 50%;
 }
 
-.mat-typography h1 {
-    font-size: 2em;
+.toolbar {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.toolbar-title {
+  width: 100%;
 }
 
 .mat-title {
