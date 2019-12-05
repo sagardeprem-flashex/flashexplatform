@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,7 +13,6 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
 import { HAMMER_LOADER } from '@angular/platform-browser';
-
 
 @NgModule({
   declarations: [

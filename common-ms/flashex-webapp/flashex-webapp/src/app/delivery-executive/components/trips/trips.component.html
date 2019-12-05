@@ -1,77 +1,103 @@
 <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Trip Details</h1>
-
-    <button mat-icon-button (click)="logout()"><mat-icon>person</mat-icon></button>
-
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
+
     <mat-tab label="Today">
         <div class="example-small-box mat-elevation-z4">
             <mat-sidenav-container class="example-sidenav-container">
                 <mat-sidenav opened="true" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
                     <mat-nav-list class="sidenav">
-                        <a mat-list-item (click)="trip(nav.tripItineraryId-1)" *ngFor="let nav of dataSource"> Trip detail {{nav.tripItineraryId}}</a>
+                        <a mat-list-item (click)="trip(nav.tripSequence-1)" *ngFor="let nav of dataSource"> {{nav.tripItineraryId}}</a>
                     </mat-nav-list>
                 </mat-sidenav>
 
                 <mat-sidenav-content>
                     <mat-tab-group>
-                        <mat-tab label="Trip Info">
-                            <mat-vertical-stepper *ngIf='tripDetails!=null'>
-                                <mat-step>
-                                    <ng-template matStepLabel>Trip Start Time:</ng-template>
-                                    {{tripDetails.tripStartTime}}
-                                </mat-step>
-                                <mat-step>
-                                    <ng-template matStepLabel>Start Location:</ng-template>
-                                    {{tripDetails.hubLocation}}
-                                </mat-step>
-                                <mat-step>
-                                    <ng-template matStepLabel>Total Orders to deliver:</ng-template>
-                                    5
-                                </mat-step>
-                                <mat-step>
-                                    <ng-template matStepLabel>Trip End Time:</ng-template>
-                                    {{tripDetails.tripEndTime}}
+                        <mat-tab label="Trip Summary">
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <div>
+                                    <mat-list *ngIf='tripDetails!=null'>
+                                        <mat-list-item>Trip Code: FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Trip Start Time: {{tripDetails.tripStartTime}}
+                                            <p> <button style="margin: 1em;" mat-raised-button color="primary">Start Trip</button></p>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Start Location: {{tripDetails.hubLocation}}</mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Order Type: Perishable</mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Trip End Time: {{tripDetails.tripEndTime}}</mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Actual Trip Start Time: </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Delivery Status:
+                                            <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item>Actual Trip End Time: </mat-list-item>
+                                    </mat-list>
+                                </div>
+                                <div id="map"></div>
+                            </div>
 
-                                </mat-step>
-                            </mat-vertical-stepper>
                         </mat-tab>
                         <mat-tab label="Order Details">
-                            <div style="height: 25%;">
-                                <mat-card class="example-card" *ngFor="let order of listofOrders; let i = index">
-                                    <mat-card-header>
-                                        <div mat-card-avatar class="example-header-image"></div>
-                                        <mat-card-title>{{listofOrders[i].name}}</mat-card-title>
-                                        <mat-card-subtitle>Contact No: {{listofOrders[i].contactNo}} </mat-card-subtitle>
-                                    </mat-card-header>
-                                    <mat-card-content>
-                                        <p><b>Address: </b>{{listofOrders[i].deliveryAddress}}</p>
-                                        <p><b>Order ID: </b>{{listofOrders[i].orderId}}</p>
-                                    </mat-card-content>
-                                    <mat-card-actions>
-                                        <button title="View Direction" mat-icon-button color="accent" aria-label="Example icon-button with a heart icon">
-                                    <mat-icon  ><i class="material-icons">near_me</i></mat-icon>
-                                  </button>
-                                        <span>Order S.No: 1</span>
-                                    </mat-card-actions>
-                                </mat-card>
-                            </div>
+                            <mat-accordion class="example-headers-align" *ngFor="let order of listofOrders; let i = index">
+                                <mat-expansion-panel hideToggle>
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title>
+                                            <p>{{listofOrders[i].name}}</p>
+                                        </mat-panel-title>
+                                        <mat-panel-description>
+                                            <p>
+                                                <mat-icon><i class="material-icons">phone</i></mat-icon>
+                                                {{listofOrders[i].contactNo}}</p>
+
+                                            <mat-icon mat-card-avatar class="example-header-image"></mat-icon>
+                                        </mat-panel-description>
+
+                                    </mat-expansion-panel-header>
+                                    <div>
+                                        <span style="width: 50%; padding-left: 0ex;">
+                                            <p>Shipment ID: AB12345</p>
+                                            38, StackRoute NIIT, 4th B Cross Road, 5th Block, Koramangala, Bengalore.
+                                            <p><button mat-raised-button color="primary">Delivered</button>
+                                            </p>
+                                        </span>
+                                        <table style="float: right; width: 50%; margin-top: -6em;">
+                                            <tr>
+                                                <td>Reached to Hub</td>
+                                                <td>Out for delivery</td>
+                                                <td>succesfully Delivered</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <mat-progress-bar color="accent" mode="determinate" value="100"></mat-progress-bar>
+                                                </td>
+
+                                                <td>
+                                                    <mat-progress-bar color="accent" mode="determinate" value="100"></mat-progress-bar>
+                                                </td>
+                                                <td>
+                                                    <mat-progress-bar color="accent" mode="determinate" value="0"></mat-progress-bar>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
                         </mat-tab>
                     </mat-tab-group>
                 </mat-sidenav-content>
             </mat-sidenav-container>
         </div>
     </mat-tab>
-    <mat-tab label="Yesterday">
-        <a>
-            <img src="search_error.png" />
-        </a>
-    </mat-tab>
     <mat-tab label="Tomorrow">
         <a>
-            <img src="search_error.png" />
+            <img src="../../../../assets/images/search_error.png" />
         </a>
     </mat-tab>
 </mat-tab-group>

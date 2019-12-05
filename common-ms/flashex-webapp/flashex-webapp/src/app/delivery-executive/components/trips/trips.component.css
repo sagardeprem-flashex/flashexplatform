@@ -33,7 +33,7 @@ h1.example-app-name {
 }
 
 .sidenav {
-    width: 150px;
+    width: 180px;
 }
 
 .example-card {
@@ -46,10 +46,12 @@ h1.example-app-name {
 }
 
 .example-header-image {
+    background-image: url('../../../../assets/images/images.png');
     background-size: cover;
 }
 
 .example-header-image1 {
+    background-image: url('../../../../assets/images/wrong.png');
     background-size: cover;
 }
 
@@ -68,5 +70,39 @@ b {
 }
 
 .display {
+    background-image: url('../../../../assets/images/search_error.png');
     background-size: cover;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mat-card-avatar {
+    height: 25px;
+    width: 25px;
+}
+
+.mat-list-base {
+    display: table;
+}
+
+.material-icons {
+    font-size: 15px;
+    line-height: 2;
+}
+
+#map {
+    height: 64vh;
+    width: 60.5vw;
+}
+
+.mat-expansion-panel {
+    padding: 0px 0px;
 }
