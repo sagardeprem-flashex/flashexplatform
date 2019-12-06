@@ -60,8 +60,8 @@ table {
 }
 
 span {
-    padding-left: 200px;
-    font-size: small;
+    /* padding-left: 200px; */
+    font-size: medium;
     color: #635e5e;
 }
 
