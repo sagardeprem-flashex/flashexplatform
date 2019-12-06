@@ -129,6 +129,21 @@
 							</resources>
 						</configuration>
 					</execution>
+					<execution>
+						<id>copy-to-order-tracking-worker</id>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/../order-tracking-service/src/main/resources/repo/com/flashex/shipment-microservice-lib/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${user.home}/.m2/repository/com/flashex/shipment-microservice-lib</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
