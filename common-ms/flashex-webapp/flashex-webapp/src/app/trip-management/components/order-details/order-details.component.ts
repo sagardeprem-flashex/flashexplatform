@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import * as moment from 'moment';
+// import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
@@ -44,7 +44,7 @@ export class OrderDetailsComponent implements OnInit {
       let temp;
       data.forEach(d => {
         temp = d;
-        temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
         this.mydata.push(temp);
       });
 
