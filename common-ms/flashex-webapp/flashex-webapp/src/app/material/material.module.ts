@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatRippleModule} from '@angular/material/core'; 
+import {MatRippleModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MatSidenavModule,
