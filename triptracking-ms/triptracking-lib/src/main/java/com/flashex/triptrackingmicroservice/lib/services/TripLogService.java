@@ -5,9 +5,7 @@ import com.flashex.triptrackingmicroservice.lib.repository.TripLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class TripLogService {
@@ -15,16 +13,28 @@ public class TripLogService {
     @Autowired
     private TripLogRepository tripLogRepository;
 
+
     public List<TripLog> getAllTripLog(){
         return tripLogRepository.findAll();
     }
 
-    public ArrayList<TripLog> saveTripLogs(ArrayList<TripLog> tripLogs){
-        ArrayList<TripLog> savedTripLogs = new ArrayList<>();
+//    public Optional<TripLog> getById(UUID id){
+//        return tripLogRepository.findById(id);
+//    }
+
+
+
+    public List<TripLog> saveTripLogs(List<TripLog> tripLogs){
+
         for (TripLog tripLog : tripLogs) {
-            tripLog.setTripItineraryId(UUID.randomUUID().toString());
-            savedTripLogs.add(this.tripLogRepository.save(tripLog));
+            List<TripLog> savedTripLogs = new ArrayList<>();
+            if(tripLog.getTripItineraryId() == null){
+                tripLog.setTripItineraryId(UUID.randomUUID().toString());
+                tripLog.setTripStart(new Date());
+                savedTripLogs.add(this.tripLogRepository.save(tripLog));
+            }
         }
-        return savedTripLogs;
+        return tripLogs;
     }
+
 }
