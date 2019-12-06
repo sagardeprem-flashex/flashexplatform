@@ -20,7 +20,7 @@ public class TripLog {
 
     @PrimaryKey
     @PrimaryKeyColumn(name = "tripItineraryId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    @CassandraType(type = DataType.Name.TEXT)
+    @CassandraType(type = DataType.Name.UUID)
     private String tripItineraryId;
 
     @CassandraType(type = DataType.Name.TIMESTAMP)

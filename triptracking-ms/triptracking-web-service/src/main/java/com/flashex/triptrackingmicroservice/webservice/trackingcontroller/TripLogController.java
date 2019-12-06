@@ -1,6 +1,7 @@
 package com.flashex.triptrackingmicroservice.webservice.trackingcontroller;
 
 import com.flashex.triptrackingmicroservice.lib.model.TripLog;
+import com.flashex.triptrackingmicroservice.lib.repository.TripLogRepository;
 import com.flashex.triptrackingmicroservice.lib.services.TripLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class TripLogController {
     @Autowired
     private TripLogService tripLogService;
 
+    @Autowired
+    private TripLogRepository tripLogRepository;
+
     @GetMapping("/triplogs")
     public List<TripLog> getAllShipments(){
         return tripLogService.getAllTripLog();
@@ -27,5 +31,11 @@ public class TripLogController {
     @PostMapping("/triplogs")
     public List<TripLog> saveTripLogs(@RequestBody List<TripLog> tripLogs ){
         return tripLogService.saveTripLogs(tripLogs);
+    }
+
+    @PutMapping("/updatelogs")
+    public TripLog updateLogs(@RequestParam UUID id, @RequestBody TripLog tripLog){
+        return tripLogService.updateTripLog(id,tripLog);
+
     }
 }
