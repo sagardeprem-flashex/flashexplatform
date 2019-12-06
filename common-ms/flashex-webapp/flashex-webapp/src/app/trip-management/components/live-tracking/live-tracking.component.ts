@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TriplogService } from '../../services/triplog.service';
 
 declare let tomtom: any;
 @Component({
@@ -19,11 +20,12 @@ export class LiveTrackingComponent implements OnInit {
 
 
 
-  constructor(private tripService: TripItineraryService) { }
+  constructor(private tripService: TriplogService) { }
 
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
+      console.log(this.dataSource);
       this.getRandomColor();
     });
     // dom should create map container and then only tomtom will load map
@@ -38,7 +40,7 @@ export class LiveTrackingComponent implements OnInit {
       });
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
-        const packets = this.dataSource[i].packets;
+        const packets = this.dataSource[i].packetLogs;
         // store delivery address and latitude and longitude to marks
         // tslint:disable-next-line: prefer-for-of
         for (let j = 0; j < packets.length; j++) {
