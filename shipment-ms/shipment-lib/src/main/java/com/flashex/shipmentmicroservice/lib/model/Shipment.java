@@ -1,7 +1,4 @@
 package com.flashex.shipmentmicroservice.lib.model;
-
-
-
 import com.datastax.driver.core.DataType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

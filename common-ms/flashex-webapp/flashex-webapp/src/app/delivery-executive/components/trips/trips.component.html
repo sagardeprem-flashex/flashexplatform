@@ -1,7 +1,7 @@
 <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Trip Details</h1>
-    <button style="margin-left: auto;" mat-icon-button (click)="logout()"><mat-icon>person</mat-icon></button>
+    <button style="margin-left: auto;" mat-icon-button matTooltip="Logout" (click)="logout()"><mat-icon style="font-size: 25px;">person</mat-icon></button>
 
 
 </mat-toolbar>
@@ -22,25 +22,25 @@
                             <div fxLayout="row" fxLayoutAlign="start center">
                                 <div>
                                     <mat-list *ngIf='tripDetails!=null'>
-                                        <mat-list-item>Trip Code: FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
+                                        <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Trip Start Time: {{tripDetails.tripStartTime}}
+                                        <mat-list-item><span>Trip Start Time :</span> {{tripDetails.tripStartTime}}
                                             <p> <button style="margin: 1em;" mat-raised-button color="primary">Start Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Start Location: {{tripDetails.hubLocation}}</mat-list-item>
+                                        <mat-list-item><span>Start Location :</span> {{tripDetails.hubLocation}}</mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Order Type: Perishable</mat-list-item>
+                                        <mat-list-item><span>Order Type :</span> Perishable</mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Trip End Time: {{tripDetails.tripEndTime}}</mat-list-item>
+                                        <mat-list-item><span>Trip End Time :</span> {{tripDetails.tripEndTime}}</mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Actual Trip Start Time: </mat-list-item>
+                                        <mat-list-item><span> Trip Start Time :</span> </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Delivery Status:
+                                        <mat-list-item><span>Delivery Status :</span>
                                             <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item>Actual Trip End Time: </mat-list-item>
+                                        <mat-list-item><span>Actual Trip End Time :</span> </mat-list-item>
                                     </mat-list>
                                 </div>
                                 <div id="map"></div>
@@ -56,10 +56,12 @@
                                         </mat-panel-title>
                                         <mat-panel-description>
                                             <p>
-                                                <mat-icon><i class="material-icons">phone</i></mat-icon>
+                                                <mat-icon style="font-size: 15px;
+                                                line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
                                                 {{listofOrders[i].contactNo}}</p>
+                                            <p> Order ID: AB12345</p>
 
-                                            <mat-icon mat-card-avatar class="example-header-image"></mat-icon>
+                                            <!-- <mat-icon mat-card-avatar class="example-header-image"></mat-icon> -->
                                         </mat-panel-description>
 
                                     </mat-expansion-panel-header>
@@ -98,9 +100,11 @@
             </mat-sidenav-container>
         </div>
     </mat-tab>
-    <mat-tab label="Tomorrow">
-        <a>
-            <img src="../../../../assets/images/search_error.png" />
-        </a>
+    <mat-tab style="height: 60%;" label="Tomorrow">
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <a>
+                <img style="height: 70vh;width: auto; align-content: center;" src="../../../../assets/images/nodata.jpg" />
+            </a>
+        </div>
     </mat-tab>
 </mat-tab-group>

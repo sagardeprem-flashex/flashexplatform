@@ -2,6 +2,14 @@
     <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth, paddingTop: '10vh' }" opened="true" (mouseenter)="increase()" (mouseleave)="decrease()" style="background-color:#ECEFF1">
         <mat-nav-list>
 
+            <mat-list-item routerLink="/admin" routerLinkActive="active">
+                <mat-icon mat-list-icon>home</mat-icon>
+                <div fxFlex="10"></div>
+                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Dashboard</h5>
+                </div>
+            </mat-list-item>
+
             <mat-list-item routerLink="orderdetail" routerLinkActive="active">
                 <mat-icon mat-list-icon>details</mat-icon>
                 <div fxFlex="10"></div>
@@ -30,13 +38,7 @@
                     <h5 class="lead" style="font-size: 1em; font-weight: normal;">Vehicle Details</h5>
                 </div>
             </mat-list-item>
-            <mat-list-item routerLink="/admin" routerLinkActive="active">
-                <mat-icon mat-list-icon>home</mat-icon>
-                <div fxFlex="10"></div>
-                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Dashboard</h5>
-                </div>
-            </mat-list-item>
+
             <mat-list-item (click)="logout()">
                 <mat-icon mat-list-icon>person</mat-icon>
                 <div fxFlex="10"></div>
