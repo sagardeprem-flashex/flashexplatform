@@ -53,7 +53,7 @@ lid black; */
 
 .example-element-description {
 
-  width: 40%;
+  width:40%;
 
   /* border: 2px solid black; */
   padding: 8px;
@@ -74,4 +74,8 @@ lid black; */
 
 td{
 width: 25%
+}
+
+.status{
+  display: inline
 }

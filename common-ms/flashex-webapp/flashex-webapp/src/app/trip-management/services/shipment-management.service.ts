@@ -23,8 +23,8 @@ export class ShipmentManagementService {
   }
 
   //  private url = 'http://localhost:6010/api/v1/packets';
-   private url = 'http://gateway:8080/api/v1/packets';
- // private url = 'http://localhost:3000/packets';
+  private url = 'http://gateway:8080/api/v1/packets';
+  // private url = '  http://localhost:3000/orderList';
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);
   load() {
