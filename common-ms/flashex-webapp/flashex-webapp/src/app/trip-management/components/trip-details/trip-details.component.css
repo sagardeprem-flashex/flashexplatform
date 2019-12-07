@@ -2,16 +2,8 @@ mat-card {
     box-shadow: none !important;
 }
 
-<<<<<<< HEAD
 .dropdown {
   width: 50%;
-=======
-.mat-typography {
-    display: inline-flex;
-    margin: 3vh 2% 0vh 2%;
-    width: 94%;
-    justify-content: space-between;
->>>>>>> 2cfdf80ff5bb316ba6ef0f47d845c757a66954cf
 }
 
 .toolbar {

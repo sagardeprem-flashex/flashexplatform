@@ -244,6 +244,7 @@ services:
   vehicle-json-server:
     image: clue/json-server
     container_name: vehicles-json-server
+    network_mode: host
     ports:
       - 80:80
     volumes: 
