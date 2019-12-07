@@ -1,6 +1,6 @@
 package com.flashex.shipmentmicroservice.lib.services;
 
-import com.datastax.driver.core.LoggingMonotonicTimestampGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.shipmentmicroservice.lib.model.Bin;
 import com.flashex.shipmentmicroservice.lib.model.BinnerConfig;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
@@ -20,35 +20,38 @@ public class BinningService {
     @Autowired
     ShipmentService shipmentService;
 
+
+    // used for sending messages
+    @Autowired
+    ProducerService producerService;
+
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
     // Local list of bins
-    private List<Bin> bins = new ArrayList<>();
+    private static List<Bin> bins = new ArrayList<>();
 
     public List<Bin> getBins() {
         return bins;
     }
 
     public void setBins(List<Bin> bins) {
-        this.bins = bins;
+        BinningService.bins = bins;
     }
 
     // adds a packet to a bin
     public void binPacket(Packet packet){
 
         // show all bins
-        logger.info("Current size of bins: {}", bins.size());
+        logger.info("$$ Current size of bins ----------->: {}", bins.size());
 
         // get binning properties to decide which bin to add to
-        logger.info("Retrieving properties to decide bin");
+        logger.info("$$ Retrieving properties to decide bin----------->");
         List<String> packetProperties = getPacketProperties(packet);
-        logger.info("Found bin properties>>>>>>>>>>>>>>>>>>");
-        logger.info(packetProperties.toString());
-        logger.info(">>>>>>>>>>>>>>>>>>>>>>>");
+        logger.info(" $$ Extracted properties-----------> {}",packetProperties.toString());
 
         // find bin based on properties
-        int binIndex = this.getBinIndex(packetProperties);
-        logger.info("Binned to packet: {}", binIndex);
+        int binIndex = this.indexOfBin(packetProperties);
+        logger.info("Packet being added to bin number: {}", binIndex);
 
         // add to bin
         bins.get(binIndex).getBinnedPackets().add(packet);
@@ -56,84 +59,71 @@ public class BinningService {
     }
 
 
-    public List<Shipment> generateFixedShipments(){
-        List<Shipment> shipments = new ArrayList<>();
+    public void generateFixedShipments() throws JsonProcessingException {
+
+        logger.info("$$ Shipement generation triggered ----------->");
+
+        // storing the number of packets shipped, needed for clean up
+        List<Integer> binPacketsSize = new ArrayList<>();
+
         if (bins.size()!=0){
+
+            // loop through bins to generate shipment
             for(int i=0; i<bins.size();i++){
 
                 int binSize=bins.get(i).getBinnedPackets().size();
+                logger.info("$$ Size of bin {} before shipment generation and cleaning ----------->: {}", i, binSize);
 
                 // number of shipments that can be generated
                 int nShipments = (int) Math.floor(binSize/getConfig().getMaxShipmentSize());
 
                 // total packets in nShipments
                 int nPackets = getConfig().getMaxShipmentSize()*nShipments;
+                binPacketsSize.add(nPackets);
 
-
+                logger.info("$$ A total of {} packets can be shipped now ----------->", nPackets);
+                logger.debug("$$ Showing packets that can be shipped now  ----------->  {}", bins.get(i).getBinnedPackets().subList(0,nPackets));
                 // pick only those packets which make up the exact shipment size
                 List<List<Packet>> generatedPacketLists = ListUtils.partition(bins.get(i).getBinnedPackets().subList(0,nPackets),getConfig().getMaxShipmentSize());
 
+                // print the sublists
+                generatedPacketLists.forEach(packetList -> {
+                    logger.debug("Packet list ------------- {}", packetList);
+                });
+
+                logger.info("$$ Number of shipments being generated----------->: {}", generatedPacketLists.size());
+                logger.info("$$ This must be equal to {} ", nShipments);
 
                 // generate shipments from the packet lists
                 for(int j = 0; j<generatedPacketLists.size(); j++){
+
+                    // create a new shipment from the packet list
                     Shipment shipment = new Shipment();
                     shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
 
-                    logger.debug("%%%%%%%%%%%%%%%%%%%%%%%%Size of shipment is : {}%%%%%%%%%%%%%%%%  ", shipment.getPacketList().size());
-                    shipments.add(shipment);
+                    logger.info("Number of packets in this shipment is ----------->: {} ", shipment.getPacketList().size());
+                    producerService.sendMessage(shipment);
+                    shipmentService.saveShipments(Collections.singletonList(shipment));
                 }
+                logger.info("$$ Bin {} with properties {} processed successfully ----------->",i, bins.get(i).getBinningStrategy());
 
-                // clean up once shipment is generated
-                Bin cleanedBin = bins.get(i);
-                cleanedBin.getBinnedPackets().subList(0,nPackets).clear();
-                logger.info("Size of bin {} before cleaning: {}", i, bins.get(i).getBinnedPackets().size());
-                bins.set(i,cleanedBin);
-                logger.info("Size of bin {} after clean up: {}",i, bins.get(i).getBinnedPackets().size());
-                logger.info("Properties of bin {}: {}",i, bins.get(i).getBinningStrategy());
-            }
-        }
-        return shipments;
-    }
-
-    // generates shipments from all bins
-    public List<Shipment> generateShipment(){
-
-        // list of all shipments
-        List<Shipment> shipments = new ArrayList<>();
-
-        if(bins.size()!=0){
-
-            for(int i=0; i<bins.size();i++){
-
-                // create sublist for each bin for adding to shipments
-                List<List<Packet>> generatedPacketLists = ListUtils.partition(bins.get(i).getBinnedPackets(),getConfig().getMaxShipmentSize());
-
-                // for each sublist, create a shipment
-
-
-
-                for(int j = 0; j<generatedPacketLists.size(); j++){
-                    Shipment shipment = new Shipment();
-                    shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
-                    shipment.setShipmentDate(new Date());
-                    shipment.setShipmentId(UUID.randomUUID().toString());
-                    shipments.add(shipment);
-                }
             }
 
-            // clear bin on generating the shipment
-            bins.forEach(bin -> {
-                bin.setBinnedPackets(new ArrayList<>());
-            });
         }
 
-        // save generated shipments to db
-        if(shipments.size()>0){
-            shipmentService.saveShipments(shipments);
+        // clean up
+        if(bins.size()>0 && binPacketsSize.size() >0 ){
+            for(int j=0; j<bins.size();j++){
+
+                logger.info("Initiating clean up for bin ----------->{}", j);
+                logger.info("Size of bin {} before cleaning: {} ", j, bins.get(j).getBinnedPackets().size());
+                bins.get(j).getBinnedPackets().subList(0,binPacketsSize.get(j)).clear();
+                logger.info("Size of bin {} after clean up: {}",j, bins.get(j).getBinnedPackets().size());
+            }
         }
-        return shipments;
+
     }
 
     // create a bin based on a certain grouping/binning strategy and sorting strategy
@@ -143,7 +133,7 @@ public class BinningService {
         bin.setSortingStrategy(sortingStrategy);
         bin.setCreatedOn(new Date());
         bin.setBinnedPackets(new ArrayList<>());
-        this.bins.add(bin);
+        bins.add(bin);
     }
 
     // gets properties from a packet to decide which bin it will go to
@@ -157,69 +147,45 @@ public class BinningService {
                 packetProperty.add(Long.toString(packet.getDeliveryAddress().getPincode()));
             } else if(groupByField=="PACKET_TYPE"){
                 packetProperty.add(packet.getPacketType());
-\           }
+           }
         }
-
-        
         return packetProperty;
     }
 
 
-    public int getBinIndex(List<String> packetProperties){
-        logger.debug("Getting the bin index......");
-        int binIndex = 0;
-        if(bins.size()>0){
+    // get Bin index
+    public int indexOfBin(List<String> packetProperties){
+        logger.info("$$ Checking if a bin exists for this packet ----------->");
+        int binIndex =0;
 
-            // if there are bins already, go ahead
-            for (int i=0; i < bins.size();i++){
-                // check if a bin exists for the given properties
-//                if(bins.get(i).getBinningStrategy().equals(packetProperties) ){
+        if(this.bins.size()>0){
+            // if bins already exist, search for bin
 
-
-                if( compareArrays(bins.get(i).getBinningStrategy(), packetProperties)){
-                    logger.info("comparing binning properties : "+ bins.get(i).getBinningStrategy().get(0)+">>>>>>>to>>>>>>>"+packetProperties.get(0));
-                    logger.info("comparing binning properties : "+ bins.get(i).getBinningStrategy().get(1)+">>>>>>>to>>>>>>>"+packetProperties.get(1));
-                    binIndex=i;
-                } else {
-                    // else create a bin
-                    createBin(packetProperties, getConfig().getSortBy());
-                    binIndex=bins.size()-1;
-                    logger.info("Bin not found, creating bin>>>>>>>>>>>>>");
-                    logger.info("Required properties:{},{} ", packetProperties.get(0),packetProperties.get(1));
-                    logger.info("Created properties: {},{}", bins.get(binIndex).getBinningStrategy().get(0),bins.get(binIndex).getBinningStrategy().get(1));
-                    logger.info("Current bin size on creating: {}", bins.size());
+            // assume no inital match
+            Boolean isMatched = false;
+            for(int i=0; i<this.bins.size(); i++){
+                // iteratively loop to find the bin
+                if(bins.get(i).getBinningStrategy().equals(packetProperties)){
+                    //if found, set this to true
+                    isMatched = true;
+                    binIndex = i;
+                    break;
                 }
-                break;
             }
-        }   else {
-            // if bins is empty, create a bin with given properties
+            // if match was not found, create bin
+            if(isMatched == false){
+                createBin(packetProperties, getConfig().getSortBy());
+                binIndex = bins.size()-1;
+            }
+
+        }else {
+            // no bins yet, create one
             createBin(packetProperties, getConfig().getSortBy());
-            logger.info("Creating new bin on startup >>>>>>>>>>>>>>>>>>>");
-            logger.info("Bin not found, creating bin>>>>>>>>>>>>>");
-            logger.info("Required properties: "+ packetProperties);
-            logger.info("Created properties"+bins.get(binIndex).getBinningStrategy());
-            logger.info("Current bin size on creating: {}", bins.size());
-        }
-        logger.info("Bin index: {}", binIndex);
-       return binIndex;
-    }
-
-
-    // match properties
-    public Boolean compareArrays(List<String> array1,List<String> array2){
-
-        Boolean isMatched =false;
-        for (int i=0; i<array1.size();i++){
-           if(array1.get(i) !=array2.get(i)){
-               isMatched = false;
-               break;
-           }else {
-               isMatched = true;
-           }
         }
 
-        return isMatched;
+        return binIndex;
     }
+
 
     // sorts a list of packets with the given strategy
     public List<Packet> sortPacketList(List<Packet> packetList,String sortBy){
