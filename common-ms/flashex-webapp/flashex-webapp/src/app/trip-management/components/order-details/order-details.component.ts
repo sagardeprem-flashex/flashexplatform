@@ -29,7 +29,7 @@ export class OrderDetailsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus',  'packetDescription'];
+  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public expandedElement: any;
