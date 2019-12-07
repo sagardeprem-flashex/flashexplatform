@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { TriplogService } from '../../services/triplog.service';
+import { TripLog, ITripLog} from '../../interfaces/triplog';
+import { Observable } from 'rxjs';
 
 declare let tomtom: any;
 @Component({
@@ -17,15 +18,19 @@ export class LiveTrackingComponent implements OnInit {
   public color;
   public marks = [];
   public addressLine = [];
+  public tripLog: any;
+  public tripLogById;
+  public tripStartTime = new Date();
 
 
 
   constructor(private tripService: TriplogService) { }
+  triplogss: Observable<ITripLog[]>;
+  trip: TripLog = new  TripLog();
 
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      console.log(this.dataSource);
       this.getRandomColor();
     });
     // dom should create map container and then only tomtom will load map
@@ -81,6 +86,30 @@ export class LiveTrackingComponent implements OnInit {
       const color = Math.floor(0x1000000 * Math.random()).toString(16);
       const generatedColor = '#' + ('000000' + color).slice(-6);
       this.colors.push(generatedColor);
+    });
+  }
+
+  getTripLogById(id: string) {
+    this.tripService.getTripLog(id).subscribe(
+      data => {
+        this.tripLogById = data;
+
+      }
+    );
+  }
+   updateTripStart(tripId) {
+     this.trip = new TripLog();
+     this.trip.tripStart = new Date();
+    //  this.trip.tripEnd = new Date();
+     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
+       this.tripLog = data;
+     });
+   }
+   updateTripEnd(tripId) {
+    // this.trip = new TripLog();
+    this.trip.tripEnd = new Date();
+    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
+      this.tripLog = data;
     });
   }
 }

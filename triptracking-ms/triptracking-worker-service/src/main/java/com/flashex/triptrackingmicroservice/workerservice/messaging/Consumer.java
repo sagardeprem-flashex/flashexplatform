@@ -39,16 +39,20 @@ public class Consumer {
 
         // extract data from packets to packetlogs
         List<PacketLog> packetLogs = new ArrayList<>();
-
         for(int i=0; i<tripItinerary.getPackets().size(); i++){
             PacketLog packetLog = new PacketLog();
             packetLog.setPacketId(tripItinerary.getPackets().get(i).getPacketId());
             packetLog.setDeliveryAddress(tripItinerary.getPackets().get(i).getDeliveryAddress());
             packetLog.setDeliveryDescription(tripItinerary.getPackets().get(i).getDeliveryDescription());
             packetLogs.add(packetLog);
+            System.out.println("**********************");
+            System.out.println(packetLogs);
+            System.out.println("*********************");
 
         }
-
+        System.out.println("//////////////////////");
+        System.out.println(packetLogs);
+        System.out.println("/////////////");
         tripLog.setPacketLogs(packetLogs);
 
         // save to database

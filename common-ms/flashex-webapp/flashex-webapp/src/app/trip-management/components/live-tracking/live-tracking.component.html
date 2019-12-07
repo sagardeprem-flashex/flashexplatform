@@ -20,8 +20,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}</p>
+                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br><br> Trip Started at : {{id.tripStart}} <br><br> Trip Ended at : {{id.tripEnd}}</p>
+                    <div>
+                        <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button>
 
+                        <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button>
+                    </div>
                 </mat-expansion-panel>
             </div>
         </mat-sidenav>

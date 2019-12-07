@@ -24,8 +24,13 @@ public class TripLogController {
     private TripLogRepository tripLogRepository;
 
     @GetMapping("/triplogs")
-    public List<TripLog> getAllShipments(){
+    public List<TripLog> getAllTripLogs(){
         return tripLogService.getAllTripLog();
+    }
+
+    @GetMapping("/triplog")
+    public TripLog getTripLogById( @RequestParam UUID id){
+        return tripLogService.getTripLog(id);
     }
 
     @PostMapping("/triplogs")
@@ -36,6 +41,5 @@ public class TripLogController {
     @PutMapping("/updatelogs")
     public TripLog updateLogs(@RequestParam UUID id, @RequestBody TripLog tripLog){
         return tripLogService.updateTripLog(id,tripLog);
-
     }
 }

@@ -19,6 +19,10 @@ public class TripLogService {
         return tripLogRepository.findAll();
     }
 
+    public TripLog getTripLog(UUID id){
+        return tripLogRepository.findById(id).orElse(null);
+    }
+
 
     public List<TripLog> saveTripLogs(List<TripLog> tripLogs){
         List<TripLog> savedTripLogs = new ArrayList<>();
@@ -33,6 +37,10 @@ public class TripLogService {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());
+
+
+
+
         TripLog updateTripLog = tripLogRepository.save(tripLog1);
         return updateTripLog;
     }
