@@ -64,7 +64,7 @@ services:
       - gateway
 
   shipment-loadbalancer:
-    build: 
+    build:
       context: ./shipment-ms
       dockerfile: Dockerfile_loadbalancer
     image: shipment-loadbalancer:latest
@@ -80,7 +80,7 @@ services:
       - gateway
 
   shipment-webservice:
-    build: 
+    build:
       context: ./shipment-ms
       dockerfile: Dockerfile_webservice
     image: shipment-webservice:latest
@@ -97,7 +97,7 @@ services:
       - gateway
 
   order-workerservice:
-    build: 
+    build:
       context: ./shipment-ms
       dockerfile: Dockerfile_order_workerservice
     image: order-workerservice:latest
@@ -112,8 +112,24 @@ services:
       - discovery-server
       - gateway
 
+  order-tracking-workerservice:
+    build:
+      context: ./shipment-ms
+      dockerfile: Dockerfile_order_tracking_workerservice
+    image: order-tracking-workerservice:latest
+    expose:
+      - 5060
+    ports:
+      - 5060:5060
+    env_file:
+      - ./env-files/local/common.env
+    depends_on:
+      - config-server
+      - discovery-server
+      - gateway
+
   shipment-workerservice:
-    build: 
+    build:
       context: ./shipment-ms
       dockerfile: Dockerfile_workerservice
     image: shipment-workerservice:latest
@@ -129,7 +145,7 @@ services:
       - gateway
 
   tripplanning-loadbalancer:
-    build: 
+    build:
       context: ./tripplanning-ms
       dockerfile: Dockerfile_loadbalancer
     image: tripplanning-loadbalancer:latest
@@ -145,7 +161,7 @@ services:
       - gateway
 
   tripplanning-webservice:
-    build: 
+    build:
       context: ./tripplanning-ms
       dockerfile: Dockerfile_webservice
     image: tripplanning-webservice:latest
@@ -161,7 +177,7 @@ services:
       - gateway
 
   tripplanning-workerservice:
-    build: 
+    build:
       context: ./tripplanning-ms
       dockerfile: Dockerfile_workerservice
     image: tripplanning-workerservice:latest
@@ -178,7 +194,7 @@ services:
 
 
   triptracking-loadbalancer:
-    build: 
+    build:
       context: ./triptracking-ms
       dockerfile: Dockerfile_loadbalancer
     image: triptracking-loadbalancer:latest
@@ -194,7 +210,7 @@ services:
       - gateway
 
   triptracking-webservice:
-    build:  
+    build:
       context: ./triptracking-ms
       dockerfile: Dockerfile_webservice
     image: triptracking-webservice:latest
@@ -210,7 +226,7 @@ services:
       - gateway
 
   triptracking-workerservice:
-    build: 
+    build:
       context: ./triptracking-ms
       dockerfile: Dockerfile_workerservice
     image: triptracking-workerservice:latest

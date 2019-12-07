@@ -60,8 +60,8 @@ table {
 }
 
 span {
-    padding-left: 200px;
-    font-size: small;
+    /* padding-left: 200px; */
+    font-size: medium;
     color: #635e5e;
 }
 
@@ -100,7 +100,7 @@ b {
 
 #map {
     height: 64vh;
-    width: 60.5vw;
+    width: 75vw;
 }
 
 .mat-expansion-panel {

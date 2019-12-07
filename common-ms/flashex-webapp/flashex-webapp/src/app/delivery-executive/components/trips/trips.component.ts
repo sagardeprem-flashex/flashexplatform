@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TokenStorageService } from '../../../shared/services/token-storage.service';
+import { Router } from '@angular/router';
+
 declare let L;
 declare let tomtom: any;
 
@@ -44,7 +47,9 @@ export class TripsComponent implements OnInit {
   public routes = [];
   step = 0;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private tripService: TripItineraryService) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher, private tripService: TripItineraryService,
+              private tokenStorage: TokenStorageService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -66,33 +71,36 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      this.getRandomColor();
-      console.log('mm', this.dataSource);
+      // console.log('mm', this.dataSource);
       this.trip(0);
     });
   }
   trip(value) {
-    console.log('g', value);
+    // console.log('g', value);
     // console.log(this.dataSource)
 
     this.details = this.dataSource[value];
-    console.log('ff', this.details);
+    // console.log('ff', this.details);
     if (this.details) {
       // this.details = this.details.orders[value].deliveryAddress;
       this.tripDetails = this.details;
       this.listofOrders = this.details.orders;
-      console.log('hh', this.tripDetails);
+      // console.log('hh', this.tripDetails);
     }
 
   }
 
-  getRandomColor() {
-    this.dataSource.forEach((element, i) => {
-      const color = Math.floor(0x1000000 * Math.random()).toString(16);
-      const generatedColor = '#' + ('000000' + color).slice(-6);
-      this.colors.push(generatedColor);
+  // getRandomColor() {
+  //   this.dataSource.forEach((element, i) => {
+  //     const color = Math.floor(0x1000000 * Math.random()).toString(16);
+  //     const generatedColor = '#' + ('000000' + color).slice(-6);
+  //     this.colors.push(generatedColor);
 
-    });
+  //   });
+  // }
+  logout() {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/auth/login']);
   }
 }
 
