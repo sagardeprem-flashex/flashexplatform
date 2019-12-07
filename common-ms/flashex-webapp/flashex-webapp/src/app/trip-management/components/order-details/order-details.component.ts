@@ -41,10 +41,11 @@ export class OrderDetailsComponent implements OnInit {
   // tslint:disable-next-line: use-lifecycle-interface
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
-      let temp;
+      let temp: IPacket;
       data.forEach(d => {
         temp = d;
         temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
         this.mydata.push(temp);
       });
 
