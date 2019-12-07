@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleList {

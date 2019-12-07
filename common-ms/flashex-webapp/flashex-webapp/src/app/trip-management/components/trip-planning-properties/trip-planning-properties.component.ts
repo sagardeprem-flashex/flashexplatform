@@ -20,8 +20,8 @@ export class TripPlanningPropertiesComponent implements OnInit {
   public addProperties = this.fb.group({
     algorithmSelected: ['', Validators.required],
     maxElementsForDistanceMatrix: [''],
-    solverTimeLimit: [''],
     noOfDepot: [''],
+    solverTimeLimit: [''],
     distancePenalty: [''],
     durationPenalty: ['']
   });
@@ -35,6 +35,7 @@ export class TripPlanningPropertiesComponent implements OnInit {
     this.tripService.planningProperties = this.addProperties.value;
     // console.log(this.tripService.planningProperties);
     // this.router.navigate(['trips']);
+    this.tripService.updateOptimizationProperties(this.tripService.planningProperties);
     this.dialogRef.close();
   }
 
