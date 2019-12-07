@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-// import * as moment from 'moment';
+import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-order-details',
@@ -16,6 +17,9 @@ import { IPacket } from '../../interfaces/Packet';
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }]
 })
 
 
@@ -25,7 +29,7 @@ export class OrderDetailsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'packetDescription'];
+  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public expandedElement: any;
@@ -40,7 +44,7 @@ export class OrderDetailsComponent implements OnInit {
       let temp;
       data.forEach(d => {
         temp = d;
-        // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
         this.mydata.push(temp);
       });
 
@@ -76,6 +80,40 @@ export class OrderDetailsComponent implements OnInit {
 
   }
 
+  statusColor(currentStatus) {
+    switch (currentStatus) {
+      case 'RECEIVED': {
+          return{
+            color: 'blue'
+          };
+          break;
+        }
+      case 'PROCESSED' : {
+        return {
+          color: 'orange'
+        };
+        break;
+      }
+      case 'DISPATCHED': {
+        return{
+          color: 'yellow'
+        };
+        break;
+      }
+      case 'DELIVERED': {
+        return {
+          color: 'green'
+        };
+        break;
+      }
+      case 'UNDELIVERED': {
+        return {
+          color: 'red'
+        };
+        break;
+      }
+    }
+  }
 
 
 }

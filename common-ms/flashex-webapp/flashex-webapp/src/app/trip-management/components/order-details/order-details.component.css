@@ -32,6 +32,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-detail {
   overflow: hidden;
   display: flex;
+  height: 15em;
 
 }
 
@@ -53,14 +54,16 @@ lid black; */
 
 .example-element-description {
 
-  width: 40%;
+  width:40%;
 
   /* border: 2px solid black; */
   padding: 8px;
   font-weight: lighter;
   margin: 8px 0;
-  height: 104px;
-  background: powderblue
+  height: 150px;
+  background: powderblue;
+  overflow-wrap: break-word;
+  width: 150px
 }
 
 .example-element-description-attribution {
@@ -74,4 +77,12 @@ lid black; */
 
 td{
 width: 25%
+}
+
+.status{
+  display: inline
+}
+.example-element-weight{
+overflow-wrap: break-word;
+width:400px;
 }
