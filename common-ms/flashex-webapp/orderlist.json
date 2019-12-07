@@ -1,8 +1,8 @@
 {"orderList":
   [
   {
-    "packetDescription": "incididunt dolore dolore magna laborum nulla ad est esse non",
-    "deliveryDescription": "fugiat ullamco culpa Lorem magna dolor laboris officia sit nostrud",
+    "packetDescription": "incididunt dolore dolore magna laborum nulla ad est esse nondalfkhalshkhflakshdflafaldskhfalkdfalkhfalsfkaldkhfalksfladskhfalkdfhalkdjfaldkfalkdfjaldkfjalskfjalkjflakdjfalkfjalkdjfalkjdflkajfdlkjaslkfjalkfjalkdfjalkfjalkjdlakjfdalkdjlakfjdalk",
+    "deliveryDescription": "dalfkhalshkhflakshdflafaldskhfalkdfalkhfalsfkaldkhfalksfladskhfalkdfhalkdjfaldkfalkdfjaldkfjalskfjalkjflakdjfalkfjalkdjfalkjdflkajfdlkjaslkfjalkfjalkdfjalkfjalkjdlakjfdalkdjlakfjdalk",
     "packetType": "FLAMMABLE",
     "priority": "LOW",
     "currentStatus": "UNDELIVERED",
@@ -98,6 +98,14 @@
       {
         "statusValue": "PROCESSED",
         "timeStamp": "2019-12-04T08:15:30.000+0000"
+      },
+      {
+        "statusValue": "DISPATCHED",
+        "timeStamp": "2019-12-04T10:15:00.000+0000"
+      },
+      {
+        "statusValue": "DELIVERED",
+        "timeStamp": "2019-12-04T12:15:00.000+0000"
       }
     ],
     "weight": 3.5,

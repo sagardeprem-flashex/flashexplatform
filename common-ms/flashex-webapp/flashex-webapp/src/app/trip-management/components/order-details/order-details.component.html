@@ -37,10 +37,10 @@
       <td mat-cell *matCellDef="let element" [ngStyle]="statusColor(element.currentStatus)" class="priorityClass"> {{element.currentStatus}} </td>
     </ng-container>
 
-  <ng-container matColumnDef="packetDescription" style="width: 30%">
+  <!-- <ng-container matColumnDef="packetDescription" style="white-space:nowrap;width: 10px; overflow:hidden; text-overflow: ellipsis; ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Description </th>
-    <td mat-cell *matCellDef="let element"> {{element.packetDescription}} </td>
-  </ng-container>
+    <td mat-cell *matCellDef="let element" style="overflow:hidden; text-overflow: ellipsis; width: 150px"> {{element.packetDescription}} </td>
+  </ng-container> -->
 
   <div>
   <ng-container matColumnDef="expandedDetail" >
@@ -61,7 +61,7 @@
         <div class="example-element-diagram">
             <div class="example-element-name"> {{element.length}} X {{element.breadth}} X {{element.height}} </div>
             <div class="example-element-name"> {{element.weight}} kg(s)</div>
-            <div class="example-element-weight"> {{element.packetDescription}} </div>
+            <div class="example-element-weight">Description: {{element.packetDescription}} </div>
 
           </div>
           <div style="margin-top: 1vh">
