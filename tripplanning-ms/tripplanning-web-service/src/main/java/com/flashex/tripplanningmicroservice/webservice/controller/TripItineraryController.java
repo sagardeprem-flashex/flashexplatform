@@ -14,12 +14,12 @@ public class TripItineraryController {
     @Autowired
     private TripItineraryService tripItineraryService;
 
-    @GetMapping("/tripItineraries")
+    @GetMapping("/tripitinerary")
     public List<TripItinerary> getAllTripItineraries() {
         return tripItineraryService.getAllTripItineraries();
     }
 
-    @PostMapping("/tripItineraries")
+    @PostMapping("/tripitinerary")
     public List<TripItinerary> saveTripItinerary(@RequestBody List<TripItinerary> tripItineraries)
     {
         tripItineraries.forEach(tripItinerary -> {
@@ -28,7 +28,7 @@ public class TripItineraryController {
         return tripItineraries;
     }
 
-    @GetMapping("/tripItinerary/{id}")
+    @GetMapping("/tripitinerary/{id}")
     public TripItinerary getSpecificTripItinerary(@PathVariable String id) {
         return tripItineraryService.getSpecificTripItinerary(id);
     }
