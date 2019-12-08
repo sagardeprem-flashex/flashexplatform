@@ -3,6 +3,7 @@ import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { MatDialog } from '@angular/material';
 import { TripPlanningPropertiesComponent } from '../trip-planning-properties/trip-planning-properties.component';
 import { ITripProperties } from '../../interfaces/trip-planning-properties';
+import { IItinerary } from '../../interfaces/trip-itinerary';
 
 @Component({
   selector: 'app-trip-details',
@@ -11,6 +12,10 @@ import { ITripProperties } from '../../interfaces/trip-planning-properties';
 })
 export class TripDetailsComponent implements OnInit {
 
+  public timeWindowDeliveryTrips = [];
+  public VRPWithCCTrips = [];
+  public VRPWithDVTrips = [];
+  public otherTrips = [];
   public dataSource;
   public selectedAlgo;
   public orders;
@@ -26,6 +31,19 @@ export class TripDetailsComponent implements OnInit {
     // console.log(this.properties);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
+      data.forEach(d => {
+        if (d.algorithm === 'VrpwithTimeWindowDelivery') {
+          this.timeWindowDeliveryTrips.unshift(d);
+        } else
+        if (d.algorithm === 'VrpwithCapacityConstraint') {
+          this.VRPWithCCTrips.unshift(d);
+        } else
+        if (d.algorithm === 'VrpwithDroppingVisit') {
+          this.VRPWithDVTrips.unshift(d);
+        } else {
+          this.otherTrips.unshift(d);
+        }
+      });
 
     });
     // console.log(this.dataSource);
