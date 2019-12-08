@@ -1,10 +1,7 @@
 package com.flashex.shipmentmicroservice.lib.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.flashex.shipmentmicroservice.lib.model.Bin;
-import com.flashex.shipmentmicroservice.lib.model.BinnerConfig;
-import com.flashex.shipmentmicroservice.lib.model.Packet;
-import com.flashex.shipmentmicroservice.lib.model.Shipment;
+import com.flashex.shipmentmicroservice.lib.model.*;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,6 +99,7 @@ public class BinningService {
                     shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
+                    shipment.setOriginAddress(getConfig().getOriginAddress());
 
                     logger.info("Number of packets in this shipment is ----------->: {} ", shipment.getPacketList().size());
                     producerService.sendMessage(shipment);
@@ -211,6 +209,14 @@ public class BinningService {
         groupStrategy.add("PACKET_TYPE");
         config.setGroupStrategy(groupStrategy);
         config.setMaxShipmentSize(15);
+        DeliveryAddress origin = new DeliveryAddress();
+        origin.setAddressLine1("13610+Hacks+Cross+Rd+Memphis+TN");
+        origin.setCity("Bengaluru");
+        origin.setState("Karnataka");
+        origin.setLongitude(77.6132100821);
+        origin.setLatitude(12.9207427973);
+        origin.setPincode(560096);
+        config.setOriginAddress(origin);
         return config;
     }
 
