@@ -116,7 +116,7 @@
     </mat-tab>
     <mat-tab label='VRP with Capacity constraint'>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let trip of VRPWithCCTrips; let i = index">
+        <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
             <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
@@ -211,7 +211,7 @@
     </mat-tab>
     <mat-tab label='VRP with Dropping Visits'>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let trip of VRPWithDVTrips; let i = index">
+        <mat-expansion-panel *ngFor="let trip of vrpWithDVTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
             <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
@@ -306,7 +306,7 @@
     </mat-tab>
     <mat-tab label='Other Algorithms'>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let trip of VRPWithDVTrips; let i = index">
+        <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
             <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>

@@ -13,8 +13,8 @@ import { IItinerary } from '../../interfaces/trip-itinerary';
 export class TripDetailsComponent implements OnInit {
 
   public timeWindowDeliveryTrips = [];
-  public VRPWithCCTrips = [];
-  public VRPWithDVTrips = [];
+  public vrpWithCCTrips = [];
+  public vrpWithDVTrips = [];
   public otherTrips = [];
   public dataSource;
   public selectedAlgo;
@@ -36,10 +36,10 @@ export class TripDetailsComponent implements OnInit {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
         if (d.algorithm === 'VrpwithCapacityConstraint') {
-          this.VRPWithCCTrips.unshift(d);
+          this.vrpWithCCTrips.unshift(d);
         } else
         if (d.algorithm === 'VrpwithDroppingVisit') {
-          this.VRPWithDVTrips.unshift(d);
+          this.vrpWithDVTrips.unshift(d);
         } else {
           this.otherTrips.unshift(d);
         }
