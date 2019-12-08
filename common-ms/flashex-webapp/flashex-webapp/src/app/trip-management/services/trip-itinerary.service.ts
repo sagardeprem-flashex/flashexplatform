@@ -15,7 +15,7 @@ export class TripItineraryService {
   public location;
   public planningProperties: ITripProperties;
   public selectedAlgo;
-  public handleError;
+  public handleError = [];
 
   constructor(private http: HttpClient) {
     this.load();
@@ -46,15 +46,24 @@ export class TripItineraryService {
     this.http.get<IItinerary[]>(this.tripItineraryUrl).subscribe(data => {
       this.dataSource = data;
       this.behaviourSubject.next(this.dataSource);
+    },
+    error => {
+      this.handleError[1] = error;
     });
     this.http.get<IVehicle[]>(this.vehiclesListUrl).subscribe(data => {
       this.vehiclesData = data;
       this.vehicleBehaviourSubject.next(this.vehiclesData);
+    },
+    error => {
+      this.handleError[2] = error;
     });
 
     this.http.get<ITripProperties>(this.optimizationPropertiesUrl + '/1793840').subscribe(data => {
       this.planningProperties = data;
       this.planningProperties.propertiesId = '1793840';
+    },
+    error => {
+      this.handleError[3] = error;
     });
   }
 
@@ -62,7 +71,7 @@ export class TripItineraryService {
     this.http.put<ITripProperties>( this.optimizationPropertiesUrl + '/' + properties.propertiesId,
                                     properties,
                                     this.httpOptions).pipe(
-                                      catchError(this.handleError)
+                                      catchError(this.handleError[0])
                                     );
   }
 }
