@@ -2,7 +2,6 @@ package com.flashex.tripplanningmicroservice.lib.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.tripplanningmicroservice.lib.model.TestClass;
 import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

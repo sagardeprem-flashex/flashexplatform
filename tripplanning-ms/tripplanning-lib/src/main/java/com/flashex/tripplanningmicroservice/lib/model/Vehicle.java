@@ -29,6 +29,6 @@ public class Vehicle {
     @CassandraType(type = DataType.Name.TEXT)
     private String availability;
     @CassandraType(type = DataType.Name.TEXT)
-    private  String vehicleCrew;
+    private String vehicleCrew;
 
 }

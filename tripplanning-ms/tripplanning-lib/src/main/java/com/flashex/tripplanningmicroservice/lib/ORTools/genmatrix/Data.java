@@ -1,14 +1,12 @@
 package com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix;
 
-import com.flashex.tripplanningmicroservice.lib.model.Shipment;
-import com.flashex.tripplanningmicroservice.lib.model.TestClass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Data {

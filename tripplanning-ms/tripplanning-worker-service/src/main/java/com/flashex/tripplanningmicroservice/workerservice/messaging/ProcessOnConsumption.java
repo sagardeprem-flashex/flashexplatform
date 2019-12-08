@@ -14,11 +14,8 @@ public class ProcessOnConsumption {
     private final ORService orService;
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
-    private final Producer producer;
-
-    public ProcessOnConsumption(ORService orService, Producer producer) {
+    public ProcessOnConsumption(ORService orService) {
         this.orService = orService;
-        this.producer = producer;
     }
 
     public void processData(String message) throws Exception {
