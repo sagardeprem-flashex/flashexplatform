@@ -92,6 +92,7 @@
                             <div style="padding-top: 1em;" *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
                                 Signup failed!<br/>{{errorMessage}}
                             </div>
+                            <button mat-raised-button color="primary" routerLink="/in" class="btn btn-success">Cancel</button>
                         </mat-card-actions>
                     </div>
                 </form>

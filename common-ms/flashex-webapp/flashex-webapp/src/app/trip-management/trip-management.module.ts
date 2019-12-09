@@ -9,7 +9,7 @@ import { TripManagementRoutingModule } from './trip-management-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 import { TripPlanningPropertiesComponent } from './components/trip-planning-properties/trip-planning-properties.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
@@ -30,7 +30,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     TripManagementRoutingModule,
     HttpClientModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   entryComponents: [
     TripPlanningPropertiesComponent

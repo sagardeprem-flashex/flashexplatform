@@ -2,7 +2,7 @@ import { IPacket } from '../interfaces/Packet';
 import { IVehicle } from '../interfaces/vehicle';
 
 export interface IItinerary {
-  tripItineraryId: number;
+  tripItineraryId: string;
   packets: IPacket[];
   plannedStartTime: Date;
   plannedEndTime: Date;
@@ -12,4 +12,5 @@ export interface IItinerary {
   occupiedVolume: number;
   originAddress: string;
   algorithm: string;
+  droppedPackets: IPacket[];
 }

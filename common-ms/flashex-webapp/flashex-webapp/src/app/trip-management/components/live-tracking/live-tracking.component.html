@@ -4,8 +4,6 @@
         <h1 class="example-app-name" style="margin-left: 8px;">Trips Details</h1>
 
     </mat-toolbar>
-    <!-- <h1 style="margin-left: 0.5em; margin-top: 10vh;">Trips Details</h1>
-    <p><button mat-raised-button color="primary" (click)="sidenav.toggle()">Toggle Trips Detail</button></p> -->
 
     <mat-sidenav-container class="example-container" style="background-color:#ECEFF1;">
 
@@ -22,8 +20,12 @@
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
-                    <p *ngFor="let order of id.packets; let i = index"> Order - {{i+1}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}</p>
+                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br><br> Trip Started at : {{id.tripStart}} <br><br> Trip Ended at : {{id.tripEnd}}</p>
+                    <div>
+                        <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button>
 
+                        <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button>
+                    </div>
                 </mat-expansion-panel>
             </div>
         </mat-sidenav>

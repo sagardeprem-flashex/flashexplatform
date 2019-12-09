@@ -19,8 +19,8 @@ public class ConsumerService {
 
     @KafkaListener(topics = "Order", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
-        logger.info(String.format("$$ -> Binning received order -> %s",message));
         Packet packet = new ObjectMapper().readValue(message, Packet.class);
+        logger.info(String.format("$$ ->Successfully parsed received order, binning received order -> %s",message));
         binningService.binPacket(packet);
     }
 }

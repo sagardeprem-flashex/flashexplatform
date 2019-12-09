@@ -9,9 +9,9 @@
       </mat-form-field> -->
             <mat-form-field>
                 <mat-label>Select an Algorithm</mat-label>
-                <mat-select formControlName="algorithmSelected">
-                    <mat-option *ngFor='let li of algorithms' [value]='li' style="color: black;">
-                        {{li}}
+                <mat-select>
+                    <mat-option *ngFor='let algo of algorithms' [value]='algo' style="color: black;">
+                        {{algo}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
