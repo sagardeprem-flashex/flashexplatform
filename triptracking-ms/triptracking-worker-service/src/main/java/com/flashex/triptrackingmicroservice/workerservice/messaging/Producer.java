@@ -33,8 +33,8 @@ public class Producer {
     }
 
 
-    public void sendMessageJSONTest(TripItinerary message) throws JsonProcessingException {
+    public void sendMessageJSONTest(KafkaStatusMessage message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
-        this.kafkaTemplateJSON.send("TripItinerary", new ObjectMapper().writeValueAsString(message));
+        this.kafkaTemplateJSON.send("DeliveryStatus", new ObjectMapper().writeValueAsString(message));
     }
 }
