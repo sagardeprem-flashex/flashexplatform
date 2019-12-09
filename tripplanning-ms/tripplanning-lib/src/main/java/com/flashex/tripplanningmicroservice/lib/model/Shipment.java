@@ -18,11 +18,11 @@ public class Shipment {
     /** String variables **/
     private String shipmentId;
     /** Integer variables**/
-    private int maxShipmentSize;
     /** Date variables **/
     private Date shipmentDate;
     /** Objects from local package **/
     private ArrayList<Packet> packetList;
+    public DeliveryAddress originAddress;
 
     public String[] getAllDeliveryAddresses(){
         int packetlistsize = this.packetList.size();

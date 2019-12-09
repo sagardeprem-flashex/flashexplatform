@@ -36,10 +36,6 @@ public class Packet {
     private String packetType;
     @CassandraType(type = DataType.Name.TEXT)
     private String priority;
-
-    @CassandraType(type = DataType.Name.TEXT)
-    private String currentStatus;
-//
 //    /** Float variables **/
 
     @CassandraType(type = DataType.Name.FLOAT)
