@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TriplogService } from '../../services/triplog.service';
 import { TokenStorageService } from '../../../shared/services/token-storage.service';
 import { Router } from '@angular/router';
 
@@ -48,7 +48,7 @@ export class TripsComponent implements OnInit {
   step = 0;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher, private tripService: TripItineraryService,
+              media: MediaMatcher, private tripService: TriplogService,
               private tokenStorage: TokenStorageService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -71,24 +71,24 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      // console.log('mm', this.dataSource);
-      this.trip(0);
+      console.log('mm', this.dataSource);
+      // this.trip(0);
     });
   }
-  trip(value) {
-    // console.log('g', value);
-    // console.log(this.dataSource)
+  // trip(value) {
+  //   // console.log('g', value);
+  //   // console.log(this.dataSource)
 
-    this.details = this.dataSource[value];
-    // console.log('ff', this.details);
-    if (this.details) {
-      // this.details = this.details.orders[value].deliveryAddress;
-      this.tripDetails = this.details;
-      this.listofOrders = this.details.orders;
-      // console.log('hh', this.tripDetails);
-    }
+  //   this.details = this.dataSource[value];
+  //   // console.log('ff', this.details);
+  //   if (this.details) {
+  //     // this.details = this.details.orders[value].deliveryAddress;
+  //     this.tripDetails = this.details;
+  //     this.listofOrders = this.details.orders;
+  //     // console.log('hh', this.tripDetails);
+  //   }
 
-  }
+  // }
 
   // getRandomColor() {
   //   this.dataSource.forEach((element, i) => {

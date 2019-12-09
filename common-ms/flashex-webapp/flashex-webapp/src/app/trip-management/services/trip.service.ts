@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { IList } from 'src/app/delivery-executive/interfaces/trip-itinerary';
+// import { ITripLog } from '../interfaces/triplog';
+import { IList } from '../../delivery-executive/interfaces/triplog';
 
 @Injectable({
   providedIn: 'root'

@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../../../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TriplogService } from '../../services/triplog.service';
 
 
 describe('TripsComponent', () => {
@@ -20,7 +20,7 @@ describe('TripsComponent', () => {
         HttpClientModule,
         HttpClientTestingModule,
       ],
-      providers: [TripItineraryService]
+      providers: [TriplogService]
     })
     .compileComponents();
   }));
