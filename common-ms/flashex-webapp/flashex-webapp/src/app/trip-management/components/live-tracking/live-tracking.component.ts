@@ -35,7 +35,8 @@ export class LiveTrackingComponent implements OnInit {
 
   constructor(private tripService: TriplogService) { }
   triplogss: Observable<ITripLog[]>;
-  trip: TripLog = new TripLog();
+  // trip: TripLog = new TripLog();
+  public trip: any;
 
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {
@@ -106,7 +107,7 @@ export class LiveTrackingComponent implements OnInit {
       this.colors.push(generatedColor);
     });
   }
-
+  // get trip log by its id from backend
   getTripLogById(id: string) {
     this.tripService.getTripLog(id).subscribe(
       data => {
@@ -115,6 +116,7 @@ export class LiveTrackingComponent implements OnInit {
       }
     );
   }
+  // update trip start time for particular trip with its id being fetched from UI
   updateTripStart(tripId) {
     this.trip = new TripLog();
     this.trip.tripStart = new Date();
@@ -122,12 +124,26 @@ export class LiveTrackingComponent implements OnInit {
       this.tripLog = data;
     });
   }
+  // update trip end time for particular trip with its id being fetched from UI
   updateTripEnd(tripId) {
     this.trip.tripEnd = new Date();
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
     });
   }
+
+  // update packet status of particular packet id inside a particular trip itinerary
+  updatePacketLog(tripId, tripPacketId) {
+    if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
+    } else {
+      /* tslint:disable:no-string-literal */
+      this.trip['packetLogs'] = [{packetStatus : 'Delivered'}];
+    }
+    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
+      data => {
+        this.tripLog = data;
+      }
+    );
+  }
 }
-
-

@@ -22,7 +22,9 @@
                     <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button>
                     <p>Trip Started at : {{id.tripStart}}</p><br>
 
-                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}</p><br>
+                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br> Order Status: {{order.packetStatus}}
+                        <button type="button" (click)="updatePacketLog(id.tripItineraryId, order.packetId)">Packet Status</button></p><br>
+
                     <p> Trip Ended at : {{id.tripEnd}}</p>
 
 
