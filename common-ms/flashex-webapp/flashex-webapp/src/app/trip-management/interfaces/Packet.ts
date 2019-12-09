@@ -6,7 +6,7 @@ export interface IPacket {
   packetType: string;
   priority: string;
   currentStatus: string;
-  // status: IStatus[];
+   statusList: IStatus[];
   weight: number;
   length: number;
   breadth: number;
@@ -30,15 +30,15 @@ export interface IPacket {
       emailId: string,
       phoneNumber: number
   };
-  statusList: [{
-    statusValue: string;
-    timeStamp: Date;
-  }];
+  // statusList: [{
+  //   statusValue: string;
+  //   timeStamp: Date;
+  // }];
 }
 
-// export interface IStatus {
-// statusValue: string;
-// timeStamp: Date;
-// }
+export interface IStatus {
+statusValue: string;
+timeStamp: Date;
+}
 
 
