@@ -30,6 +30,13 @@ export interface IPacket {
       emailId: string,
       phoneNumber: number
   };
+<<<<<<< HEAD
+=======
+  // statusList: [{
+  //   statusValue: string;
+  //   timeStamp: Date;
+  // }];
+>>>>>>> e49741871d4a92bf547fd337d9447854ea04829d
 }
 
 export interface IStatus {

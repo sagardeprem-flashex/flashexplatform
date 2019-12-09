@@ -5,6 +5,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+// import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-order-details',
@@ -32,6 +33,7 @@ export class OrderDetailsComponent implements OnInit {
   displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
+  public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
 
@@ -44,9 +46,24 @@ export class OrderDetailsComponent implements OnInit {
       let temp: IPacket;
       data.forEach(d => {
         temp = d;
-        temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        temp.receivedDate = moment().format('M/D/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
+        // console.log(temp.currentStatus);
+
         this.mydata.push(temp);
+      });
+
+      this.mydata.forEach(dt => {
+        const updatedList = [];
+        dt.statusList.forEach(d => {
+          const obj = {
+            statusValue : d.statusValue,
+            timeStamp : moment(d.timeStamp, 'YYYYMMDD').fromNow()
+          };
+          updatedList.push(obj);
+        });
+        dt.statusList = updatedList;
       });
 
       this.dataSource = new MatTableDataSource(this.mydata);
