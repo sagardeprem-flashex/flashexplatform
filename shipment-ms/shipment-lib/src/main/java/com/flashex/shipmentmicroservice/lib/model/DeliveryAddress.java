@@ -17,7 +17,6 @@ import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 @UserDefinedType("deliveryAddress")
 public class DeliveryAddress {
 
@@ -37,7 +36,7 @@ public class DeliveryAddress {
 
     /** Integer variables **/
     @CassandraType(type = DataType.Name.INT)
-    public int pincode;
+    public long pincode;
 
 
 }

@@ -7,13 +7,11 @@ import com.flashex.shipmentmicroservice.lib.repository.PacketRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-//@EnableConfigurationProperties(ServiceProperties.class)
 public class PacketService {
 
     @Autowired
@@ -37,8 +35,6 @@ public class PacketService {
             packet.setStatusList(statusList);
 
             if(packet.getPacketId() == null){
-
-
                 String packetUuid = UUID.randomUUID().toString();
                 packet.setPacketId(packetUuid);
             }

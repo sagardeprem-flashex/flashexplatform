@@ -1,6 +1,9 @@
 export interface ITripProperties {
-  apiKey: string;
+  propertiesId: string;
+  algorithmSelected: string;
   maxElementsForDistanceMatrix: number;
-  searchTimeLimit: number;
-  searchSolutionLimit: number;
+  noOfDepot: number;
+  solverTimeLimit: number;
+  distancePenalty: number;
+  durationPenalty: number;
 }

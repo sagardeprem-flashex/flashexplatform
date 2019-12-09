@@ -1,17 +1,14 @@
 package com.flashex.shipmentmicroservice.lib.model;
+
 import com.datastax.driver.core.DataType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /*
  * The following class is responsible for creating Shipments of Orders based on sorting,
@@ -25,6 +22,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table("shipment")
 public class Shipment {
 
@@ -38,8 +36,11 @@ public class Shipment {
     @CassandraType(type = DataType.Name.TIMESTAMP)
     public Date shipmentDate;
 
+    @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
+    public DeliveryAddress originAddress;
+
     /** Objects from local package **/
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "packet")
-    public ArrayList<Packet> packetList;
+    public List<Packet> packetList;
 
 }
