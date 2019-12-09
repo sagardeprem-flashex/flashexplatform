@@ -15,12 +15,16 @@ public class ShipmentService {
     @Autowired
     private ShipmentRepository shipmentRepository;
 
+    public ShipmentService(ShipmentRepository shipmentRepository) {
+        this.shipmentRepository = shipmentRepository;
+    }
+
     public List<Shipment> getAllShipments(){
         return shipmentRepository.findAll();
     }
 
-    public ArrayList<Shipment> saveShipments(ArrayList<Shipment> shipments){
-        ArrayList<Shipment> savedShipments = new ArrayList<>();
+    public List<Shipment> saveShipments(List<Shipment> shipments){
+        List<Shipment> savedShipments = new ArrayList<>();
         for (Shipment shipment : shipments) {
             shipment.setShipmentId(UUID.randomUUID().toString());
             savedShipments.add(this.shipmentRepository.save(shipment));

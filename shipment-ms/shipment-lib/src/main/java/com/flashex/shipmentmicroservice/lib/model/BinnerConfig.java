@@ -31,5 +31,7 @@ public class BinnerConfig {
     private String sortBy;
     @CassandraType(type = DataType.Name.INT)
     private int maxShipmentSize;
+    @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
+    public DeliveryAddress originAddress;
 
 }
