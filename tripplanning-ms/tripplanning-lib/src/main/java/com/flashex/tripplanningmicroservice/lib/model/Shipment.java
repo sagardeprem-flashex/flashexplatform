@@ -17,8 +17,8 @@ import java.util.List;
 public class Shipment {
     /** String variables **/
     private String shipmentId;
+    private DeliveryAddress originAddress;
     /** Integer variables**/
-    private int maxShipmentSize;
     /** Date variables **/
     private Date shipmentDate;
     /** Objects from local package **/
@@ -36,9 +36,4 @@ public class Shipment {
         }
         return address;
     }
-
-
-
 }
-
-

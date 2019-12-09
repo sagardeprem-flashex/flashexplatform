@@ -29,11 +29,11 @@ public class ProcessOnConsumption {
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 ends here>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 starts here>>>>>>>>>>>>>>>>>>>>");
-        orService.VrpfuncWithDropNode(shipmentReceived.getPacketList());
+//        orService.VrpfuncWithDropNode(shipmentReceived.getPacketList());
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 ends here>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 starts here>>>>>>>>>>>>>>>>>>>>>>");
-        orService.TimeWindowConsFunction(shipmentReceived.getPacketList());
+//        orService.TimeWindowConsFunction(shipmentReceived.getPacketList());
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
 

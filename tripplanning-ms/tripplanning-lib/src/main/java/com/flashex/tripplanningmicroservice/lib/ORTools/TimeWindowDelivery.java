@@ -70,7 +70,6 @@ public class TimeWindowDelivery {
             Data d = (new Data());
             public final String[] addresses = d.getAddr();
 
-
 //            ArrayList<Packet> templist = orService.getListofPackets();
 //            Shipment shipment = (new Shipment());
 //            ArrayList<Packet> templist = shipment.getPacketList();
@@ -119,6 +118,8 @@ public class TimeWindowDelivery {
 
             DataModel() throws ParseException, JsonProcessingException {
             }
+
+
         }
 
         /// @brief Print the solution.

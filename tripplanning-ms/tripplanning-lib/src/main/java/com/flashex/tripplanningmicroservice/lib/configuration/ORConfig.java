@@ -1,6 +1,5 @@
 package com.flashex.tripplanningmicroservice.lib.configuration;
 
-
 import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
@@ -31,5 +30,3 @@ public class ORConfig {
     }
 
 }
-
-
