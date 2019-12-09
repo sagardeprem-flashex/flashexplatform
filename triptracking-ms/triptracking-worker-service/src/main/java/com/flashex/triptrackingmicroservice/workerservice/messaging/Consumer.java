@@ -44,15 +44,10 @@ public class Consumer {
             packetLog.setPacketId(tripItinerary.getPackets().get(i).getPacketId());
             packetLog.setDeliveryAddress(tripItinerary.getPackets().get(i).getDeliveryAddress());
             packetLog.setDeliveryDescription(tripItinerary.getPackets().get(i).getDeliveryDescription());
+            packetLog.setPacketStatus("In-Transit");
             packetLogs.add(packetLog);
-            System.out.println("**********************");
-            System.out.println(packetLogs);
-            System.out.println("*********************");
 
         }
-        System.out.println("//////////////////////");
-        System.out.println(packetLogs);
-        System.out.println("/////////////");
         tripLog.setPacketLogs(packetLogs);
 
         // save to database
