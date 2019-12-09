@@ -5,6 +5,8 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.*;
+import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
+import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.maps.GeoApiContext;
@@ -17,6 +19,7 @@ import com.google.ortools.constraintsolver.RoutingModel;
 import com.google.ortools.constraintsolver.RoutingSearchParameters;
 import com.google.ortools.constraintsolver.main;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
 import java.util.*;
@@ -26,31 +29,16 @@ import java.util.logging.Logger;
 @EnableAutoConfiguration
 public class VrpWithCapacityConstraint {
 
+    @Autowired
+    private TripItineraryService tripItineraryService;
+
+    @Autowired
+    private ProducerService producerService;
+
     /** Minimal VRP.*/
     private static final Logger logger = Logger.getLogger(VrpWithCapacityConstraint.class.getName());
 
     static class DataModel {
-
-
-        public final String[] addresses = new String[]{
-            "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
-            "1921+Elvis+Presley+Blvd+Memphis+TN",
-            "149+Union+Avenue+Memphis+TN",
-            "1034+Audubon+Drive+Memphis+TN",
-            "1532+Madison+Ave+Memphis+TN",
-            "706+Union+Ave+Memphis+TN",
-            "3641+Central+Ave+Memphis+TN",
-            "926+E+McLemore+Ave+Memphis+TN",
-            "4339+Park+Ave+Memphis+TN",
-            "600+Goodwyn+St+Memphis+TN",
-            "2000+North+Pkwy+Memphis+TN",
-            "262+Danny+Thomas+Pl+Memphis+TN",
-            "125+N+Front+St+Memphis+TN",
-            "5959+Park+Ave+Memphis+TN",
-            "814+Scott+St+Memphis+TN",
-            "1005+Tillman+St+Memphis+TN"
-    };
-
 
 //        Distance matrix
 
@@ -74,6 +62,9 @@ public class VrpWithCapacityConstraint {
         {27191,14469,10406,10534,7093,9676,5879,13164,10304,6422,3933,9268,9915,16666,1288,0}
         };
 
+        Data d = (new Data());
+        public final String[] addresses = d.getAddr();
+
 
       /*  GenerateMatrix matGenerator = new GenerateMatrix();
         Data d = matGenerator.createData();
@@ -89,7 +80,7 @@ public class VrpWithCapacityConstraint {
         public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8, 8};
 
         //        public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-        public final long[] vehicleCapacities = {60,60,60,60};
+        public final long[] vehicleCapacities = {20,20,20,20};
 //        public final int vehicleNumber = vehicleList.getNoOfVehicle();
         public final int vehicleNumber = 4;
 
@@ -100,40 +91,43 @@ public class VrpWithCapacityConstraint {
     }
 
     /// @brief Print the solution.
-    static TripItinerary printSolution(
-            DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address) throws Exception {
+     public void printSolution(
+            DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address,ArrayList<Packet> packets) throws Exception {
 
         String[] addr = address;
-        HashMap<String, Set<String>> Locationcord = new HashMap();
+//        HashMap<String, Set<String>> Locationcord = new HashMap();
 
-        TripItinerary tripItinerary = new TripItinerary();
         Shipment shipment = new Shipment();
-
-        tripItinerary.setPlannedStartTime("9 AM");
-        tripItinerary.getPlannedStartTime();
-
-        tripItinerary.setPlannedEndTime("5 PM");
-        tripItinerary.getPlannedEndTime();
+        Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
         VehicleList vehicleList = new VehicleList();
 //        logger.info((""+ vehicleList.listofvehicle));
 
-
         // Inspect solution.
         long totalDistance = 0;
         long totalLoad = 0;
+
         for (int i = 0; i < data.vehicleNumber; ++i) {
+
+            TripItinerary tripItinerary = new TripItinerary();
+            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
+            tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
+            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
+
             long index = routing.start(i);
             logger.info("Route for Vehicle " + i + ":");
 
-            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+//            tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+            tripItinerary.setVehicle(vehicle); // temporary only
 
             long routeDistance = 0;
             long routeLoad = 0;
             String route = "";
-            String response = "";
-            Set<String> latlongarr = new HashSet<String>();
+//            String response = "";
+//            Set<String> latlongarr = new HashSet<String>();
+            ArrayList<Packet> PacketArray = new ArrayList();
+
             while (!routing.isEnd(index)) {
                 long nodeIndex = manager.indexToNode(index);
                 routeLoad += data.demands[(int) nodeIndex];
@@ -144,10 +138,9 @@ public class VrpWithCapacityConstraint {
 
                 route += nodeIndex + " Load(" + routeLoad + ")  -> " + "Address" + addr[(int) nodeIndex] + "-->";
 //                response = geocode(addr[(int) nodeIndex],data.Key);
-                System.out.println(latlongarr.size());
-                latlongarr.add(response);
+//                latlongarr.add(response);
 
-                tripItinerary.setPackets((List<Packet>) shipment.getPacketList().get((int) (nodeIndex-1)));
+                PacketArray.add(packets.get((int) (nodeIndex)));
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
@@ -159,33 +152,29 @@ public class VrpWithCapacityConstraint {
                 tripItinerary.setTripExpense(tripexpense);
 
             }
-
+            tripItinerary.setPackets(PacketArray);
             tripItinerary.setAlgorithm("VrpwithCapacityConstraint");
             tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
 
-            tripItinerary.getPackets(); // get order list optimized as per dilivery order
-            tripItinerary.getPlannedTotalDistance(); // get distance of the route
-            tripItinerary.getVehicle(); // get the vehicle details
-            tripItinerary.getOccupiedVolume(); // get occupied volume
-            tripItinerary.getTripExpense(); // get trip expense
-            tripItinerary.getOriginAddress(); // get origin address
-            tripItinerary.getAlgorithm(); // get name of algo
 
-            Locationcord.put("Vehicle:" + i,latlongarr);
+//            Locationcord.put("Vehicle:" + i,latlongarr);
 
             route += manager.indexToNode(routing.end(i));
             logger.info(route);
             logger.info("Distance of the route: " + routeDistance + "m");
             totalDistance += routeDistance;
             totalLoad += routeLoad;
-            logger.info("Array of lat & long" + latlongarr);
-            logger.info("Key value" + Locationcord);
+//            logger.info("Array of lat & long" + latlongarr);
+//            logger.info("Key value" + Locationcord);
+
+            tripItineraryService.saveTripItinerary(tripItinerary);
+            producerService.sendMessageJSON(tripItinerary);
+
         }
+
         logger.info("Total distance of all routes: " + totalDistance + "m");
         logger.info("Total load of all routes: " + totalLoad);
 
-
-        return tripItinerary;
     }
 
     static void matPrint(int[][] distmat, int[][] timemat, String[] address) {
@@ -219,7 +208,7 @@ public class VrpWithCapacityConstraint {
     }
 
 
-    public void FinalResult() throws Exception {
+    public void FinalResult(ArrayList<Packet> packets) throws Exception {
         // Instantiate the data problem.
         final DataModel data = new DataModel();
 
@@ -264,7 +253,7 @@ public class VrpWithCapacityConstraint {
         Assignment solution = routing.solveWithParameters(searchParameters);
 
         // Print solution on console.
-        printSolution(data, routing, manager, solution,data.addresses);
+        printSolution(data, routing, manager, solution,data.addresses,packets);
 
 //    //    Prints distance and time matrices when using generate matrix to generate distance and time-travel matrix
 //        matPrint(data.distmat,data.timemat,data.addresses);

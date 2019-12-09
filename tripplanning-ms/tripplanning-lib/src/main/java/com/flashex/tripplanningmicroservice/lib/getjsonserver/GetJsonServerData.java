@@ -9,7 +9,7 @@ public class GetJsonServerData {
 
     public VehicleList processJsonData() throws JsonProcessingException {
 
-        String request = "http://localhost:3000/vehicle";
+        String request = "http://localhost:80/vehicles";
         String inline = Urllib.urlopen(request);
         //         get data from json server
         VehicleList fleetdetails = new ObjectMapper().readValue(inline, VehicleList.class);

@@ -1,6 +1,6 @@
 [
   {
-    "tripItineraryId": "7c7pTvSSE9oT9R5q1vaP",
+    "tripItineraryId": "TRIP01NOV2019A",
     "packets": [
       {
         "packetId": "6e495bb9-f6a1-484e-a262-06dabc928355",
@@ -439,7 +439,7 @@
     "algorithm": "VrpWithCapacityConstraint"
   },
   {
-    "tripItineraryId": "OuoFoWpZY1DvRAkozfGh",
+    "tripItineraryId": "TRIP01NOV2019B",
     "packets": [
       {
         "packetId": "a3c01d58-c1a4-4674-81b9-593b9ea7ccd4",
