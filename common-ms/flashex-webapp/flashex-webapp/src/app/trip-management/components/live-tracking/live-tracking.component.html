@@ -19,13 +19,16 @@
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button>
+                    <p>Trip Started at : {{id.tripStart}}</p><br>
 
-                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br><br> Trip Started at : {{id.tripStart}} <br><br> Trip Ended at : {{id.tripEnd}}</p>
-                    <div>
-                        <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button>
+                    <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}</p><br>
+                    <p> Trip Ended at : {{id.tripEnd}}</p>
 
-                        <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button>
-                    </div>
+
+
+                    <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button>
+
                 </mat-expansion-panel>
             </div>
         </mat-sidenav>
