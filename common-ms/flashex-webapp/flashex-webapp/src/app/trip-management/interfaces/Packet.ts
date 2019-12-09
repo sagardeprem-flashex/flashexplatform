@@ -5,13 +5,14 @@ export interface IPacket {
   deliveryDescription: string;
   packetType: string;
   priority: string;
-  status: string;
+  currentStatus: string;
+  // status: IStatus[];
   weight: number;
   length: number;
   breadth: number;
   height: number;
   costOfPacket: number;
-  receivedDate: Date;
+  receivedDate: string;
   estimatedDeliveryDate: Date;
   actualDeliveryDate: Date;
   deliveryAddress: {
@@ -29,6 +30,15 @@ export interface IPacket {
       emailId: string,
       phoneNumber: number
   };
+  statusList: [{
+    statusValue: string;
+    timeStamp: Date;
+  }];
 }
+
+// export interface IStatus {
+// statusValue: string;
+// timeStamp: Date;
+// }
 
 

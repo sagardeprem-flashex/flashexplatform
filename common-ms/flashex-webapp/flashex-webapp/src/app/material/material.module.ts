@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatRippleModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
+
 import {
   MatSidenavModule,
   MatProgressBarModule,
@@ -16,10 +18,12 @@ import {
   MatPaginatorModule,
   MatSelectModule,
   MatProgressSpinnerModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSortModule,
+  MatStepperModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
-import { MatStepperModule } from '@angular/material';
+
 import { MatIconModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -46,7 +50,9 @@ const MaterialComponents = [
   MatSelectModule,
   MatProgressSpinnerModule,
   MatTooltipModule,
-  MatPasswordStrengthModule
+  MatPasswordStrengthModule,
+  MatSortModule,
+  MatRippleModule
 ];
 
 @NgModule({

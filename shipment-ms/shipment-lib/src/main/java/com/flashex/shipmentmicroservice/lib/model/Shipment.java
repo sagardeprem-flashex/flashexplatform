@@ -1,17 +1,12 @@
 package com.flashex.shipmentmicroservice.lib.model;
 
-
-
 import com.datastax.driver.core.DataType;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

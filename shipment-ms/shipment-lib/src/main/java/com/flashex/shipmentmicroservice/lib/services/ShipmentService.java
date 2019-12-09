@@ -15,6 +15,10 @@ public class ShipmentService {
     @Autowired
     private ShipmentRepository shipmentRepository;
 
+    public ShipmentService(ShipmentRepository shipmentRepository) {
+        this.shipmentRepository = shipmentRepository;
+    }
+
     public List<Shipment> getAllShipments(){
         return shipmentRepository.findAll();
     }

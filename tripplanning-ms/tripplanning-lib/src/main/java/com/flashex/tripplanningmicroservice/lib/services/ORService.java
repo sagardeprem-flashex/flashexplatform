@@ -4,8 +4,6 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.TimeWindowDelivery;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstraint;
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
-import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.GenerateMatrix;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -14,7 +12,6 @@ import java.util.logging.Logger;
 //  This service belongs to VRP problem with capacity constraint
 
 @Service
-@EnableConfigurationProperties(ServiceProperties.class)
 public class ORService {
 
     private static final Logger logger = Logger.getLogger(ORService.class.getName());

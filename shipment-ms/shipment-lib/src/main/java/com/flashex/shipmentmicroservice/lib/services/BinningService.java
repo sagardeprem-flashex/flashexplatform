@@ -20,7 +20,7 @@ public class BinningService {
 
     // used for sending messages
     @Autowired
-    ProducerService producerService;
+    MessagingService producerService;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
@@ -102,7 +102,9 @@ public class BinningService {
                     shipment.setOriginAddress(getConfig().getOriginAddress());
 
                     logger.info("Number of packets in this shipment is ----------->: {} ", shipment.getPacketList().size());
-                    producerService.sendMessage(shipment);
+
+                    producerService.sendShipment(shipment);
+                    updatePacketStatus(shipment.getPacketList());
                     shipmentService.saveShipments(Collections.singletonList(shipment));
                 }
                 logger.info("$$ Bin {} with properties {} processed successfully ----------->",i, bins.get(i).getBinningStrategy());
@@ -122,6 +124,20 @@ public class BinningService {
             }
         }
 
+    }
+
+    public void updatePacketStatus(List<Packet> packets){
+        packets.forEach(packet -> {
+            KafkaStatusMessage message = new KafkaStatusMessage();
+            message.setPacketId(packet.getPacketId());
+            message.setTimeStamp(new Date());
+            message.setStatusValue("PROCESSING");
+            try {
+                producerService.sendUpdates(message);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     // create a bin based on a certain grouping/binning strategy and sorting strategy

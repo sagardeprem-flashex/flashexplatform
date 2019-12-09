@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Data {
-        public String API_Key;
+        public String API_Key = "xyz";
         public static String[] addr = new String[]{};
 
         public String getAPI_Key() {

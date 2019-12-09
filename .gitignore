@@ -30,3 +30,7 @@ build/
 ### VS Code ###
 .vscode/
 
+### mvn files ###
+/mvnw
+/mvnw.bat
+mvnw.cmd

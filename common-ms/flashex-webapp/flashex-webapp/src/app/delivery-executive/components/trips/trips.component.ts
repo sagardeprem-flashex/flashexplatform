@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { TripService } from 'src/app/trip-management/services/trip.service';
+import { TripItineraryService } from '../../services/trip-itinerary.service';
+import { TokenStorageService } from '../../../shared/services/token-storage.service';
 import { Router } from '@angular/router';
-import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+
+declare let L;
+declare let tomtom: any;
+
 
 @Component({
   selector: 'app-trips',
@@ -35,16 +39,17 @@ export class TripsComponent implements OnInit {
     latitude: 12.95381,
     longitude: 77.6375593
   };
-  public routes = [];
   public startTime;
   public details;
   public id;
   public listofOrders;
   public tripDetails;
+  public routes = [];
+  step = 0;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-              private tripService: TripService, private router: Router,
-              private tokenStorage: TokenStorageService) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher, private tripService: TripItineraryService,
+              private tokenStorage: TokenStorageService, private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -53,6 +58,15 @@ export class TripsComponent implements OnInit {
 
   private mobileQueryListener: () => void;
   ngOnInit() {
+    setTimeout(() => {
+      const map = tomtom.L.map('map', {
+        key: 'bvlnbSj7Eu5i41bgOFAlfWPZEuPkDcug',
+        basePath: '/assets/sdk',
+        center: [52.360306, 4.876935],
+        zoom: 15
+      });
+    }, 500);
+
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
     this.tripService.behaviourSubject.subscribe(data => {
@@ -75,6 +89,15 @@ export class TripsComponent implements OnInit {
     }
 
   }
+
+  // getRandomColor() {
+  //   this.dataSource.forEach((element, i) => {
+  //     const color = Math.floor(0x1000000 * Math.random()).toString(16);
+  //     const generatedColor = '#' + ('000000' + color).slice(-6);
+  //     this.colors.push(generatedColor);
+
+  //   });
+  // }
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/auth/login']);

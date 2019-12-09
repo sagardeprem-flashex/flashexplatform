@@ -1,18 +1,44 @@
-.card {
+/* .card {
     max-width: 250px;
     margin-left: 2em;
     margin-top: 17px
-}
+} */
 
-img {
+
+/* img {
     height: 30vh;
     margin-left: 0vh;
     width: 245px;
-}
+} */
 
 .mat-typography {
     display: inline-flex;
-    margin: 2vh 3% 2vh 3%;
+    /* margin: 2vh 3% 2vh 3%; */
     width: 94%;
     justify-content: space-between;
+}
+
+
+/* .background {
+    background-image: url('../../../../assets/images/locations1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+} */
+
+.example-ripple-container {
+    cursor: pointer;
+    margin-top: 25px;
+    background-color: #fff;
+    text-align: center;
+    /* width: 20%; */
+    height: 40%;
+    /* line-height: 300px; */
+    /* user-select: none; */
+    transition: all .7s ease-in-out;
+    /* -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent; */
 }

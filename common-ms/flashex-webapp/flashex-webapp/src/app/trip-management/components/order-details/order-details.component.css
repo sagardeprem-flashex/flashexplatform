@@ -1,3 +1,4 @@
+
 img {
   width: 13rem;
   height: 4rem;
@@ -8,7 +9,7 @@ img {
 
  table {
   width: 100%;
-  padding: 3em
+  padding: 20px
 }
 
 tr.example-detail-row {
@@ -16,7 +17,7 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: powderblue;
+  background: #cfd8dc;
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
@@ -25,16 +26,20 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-row td {
   border-bottom-width: 0;
+  width: 10%
 }
 
 .example-element-detail {
   overflow: hidden;
   display: flex;
+  height: 15em;
+
 }
 
 .example-element-diagram {
   min-width: 80px;
-  /* border: 2px solid black; */
+  /* border: 2px so
+lid black; */
   padding: 8px;
   font-weight: lighter;
   margin: 8px 0;
@@ -49,14 +54,35 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description {
 
-  min-width: 80px;
+  width:40%;
+
   /* border: 2px solid black; */
   padding: 8px;
   font-weight: lighter;
   margin: 8px 0;
-  height: 104px;
+  height: 150px;
+  background: powderblue;
+  overflow-wrap: break-word;
+  width: 150px
 }
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.priorityClass{
+
+  font-weight: bolder
+}
+
+td{
+width: 25%
+}
+
+.status{
+  display: inline
+}
+.example-element-weight{
+overflow-wrap: break-word;
+width:400px;
 }

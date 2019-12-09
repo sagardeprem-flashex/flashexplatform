@@ -25,10 +25,7 @@ public Data createData() {
     Data d = (new Data());
     ArrayData data = new ArrayData();
     data.API_Key = d.getAPI_Key();
-    logger.info("API_key =================In GenMat=========================== "+d.getAPI_Key());
-
     data.addr = d.getAddr();
-    logger.info("Address array ======================================= "+ Arrays.toString(d.getAddr()));
 
    /* d.addr = new String[]{
             "3610+Hacks+Cross+Rd+Memphis+TN",   //depot
