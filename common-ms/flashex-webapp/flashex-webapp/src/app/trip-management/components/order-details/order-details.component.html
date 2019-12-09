@@ -69,9 +69,9 @@
                   {{statuslist.statusValue}}
               </div> -->
               <mat-horizontal-stepper>
-                <div *ngFor="let statuslists of element.statusList">
-                  {{statuslists.statusValue}}
-                  <mat-step label={{statuslists.statusValue}}> {{statuslists.timeStamp}}
+                <div *ngFor="let statuslist of element.statusList">
+                  {{statuslist.statusValue}}
+                  <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
                       <span matTooltip="Fill out your name"></span>
                   </mat-step>
 

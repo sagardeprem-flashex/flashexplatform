@@ -30,6 +30,7 @@ export interface IPacket {
       emailId: string,
       phoneNumber: number
   };
+
   // statusList: [{
   //   statusValue: string;
   //   timeStamp: Date;
