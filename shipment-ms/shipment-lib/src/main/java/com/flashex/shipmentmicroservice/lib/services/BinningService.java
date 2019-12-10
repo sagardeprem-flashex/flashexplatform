@@ -2,7 +2,6 @@ package com.flashex.shipmentmicroservice.lib.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.shipmentmicroservice.lib.model.*;
-import com.flashex.shipmentmicroservice.lib.repository.BinRepository;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +24,6 @@ public class BinningService {
 
     @Autowired
     BinnerConfigService binnerConfigService;
-
-    @Autowired
-    BinRepository binRepository;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
@@ -155,9 +151,6 @@ public class BinningService {
         bin.setCreatedOn(new Date());
         bin.setBinnedPackets(new ArrayList<>());
         bins.add(bin);
-        // save in reddis
-        binRepository.save(bin);
-        logger.info("$$ Bin fetched from Redis =================> {}", binRepository.findById(bin.getBinId()));
     }
 
     // gets properties from a packet to decide which bin it will go to
