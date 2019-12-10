@@ -1,0 +1,27 @@
+package com.flashex.shipmentmicroservice.lib.services;
+
+import com.flashex.shipmentmicroservice.lib.model.BinnerConfig;
+import com.flashex.shipmentmicroservice.lib.repository.BinnerConfigRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BinnerConfigService {
+
+    @Autowired
+    BinnerConfigRepository binnerConfigRepository;
+
+    public List<BinnerConfig> getAllConfig(){
+        return binnerConfigRepository.findAll();
+    }
+
+    public void saveConfig(BinnerConfig binnerConfig){
+        binnerConfigRepository.save(binnerConfig);
+    }
+
+    public BinnerConfig getCurrentConfig(){
+        return getAllConfig().get(getAllConfig().size()-1);
+    }
+}

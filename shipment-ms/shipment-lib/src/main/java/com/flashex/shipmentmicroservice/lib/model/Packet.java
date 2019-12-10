@@ -25,6 +25,7 @@ public class Packet {
     @PrimaryKey
     @PrimaryKeyColumn(name = "packetId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
+    @Indexed
     private String packetId;
     @CassandraType(type = DataType.Name.TEXT)
     private String productId;

@@ -76,3 +76,12 @@ services:
       MYSQL_DATABASE: userDb
     ports:
       - 3306:3306
+
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+      - 6379
+    environment:
+      HOSTNAME_COMMAND: "route -n | awk '/UG[ \t]/{print $$2}'"
+

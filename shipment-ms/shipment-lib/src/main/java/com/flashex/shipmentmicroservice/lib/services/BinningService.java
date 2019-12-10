@@ -2,6 +2,7 @@ package com.flashex.shipmentmicroservice.lib.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.shipmentmicroservice.lib.model.*;
+import com.flashex.shipmentmicroservice.lib.repository.BinRepository;
 import org.apache.commons.collections4.ListUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,12 @@ public class BinningService {
     // used for sending messages
     @Autowired
     MessagingService producerService;
+
+    @Autowired
+    BinnerConfigService binnerConfigService;
+
+    @Autowired
+    BinRepository binRepository;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
@@ -148,6 +155,9 @@ public class BinningService {
         bin.setCreatedOn(new Date());
         bin.setBinnedPackets(new ArrayList<>());
         bins.add(bin);
+        // save in reddis
+        binRepository.save(bin);
+        logger.info("$$ Bin fetched from Redis =================> {}", binRepository.findById(bin.getBinId()));
     }
 
     // gets properties from a packet to decide which bin it will go to
@@ -216,24 +226,26 @@ public class BinningService {
     // gives the config to create bins, hard coded for now
     public BinnerConfig getConfig(){
 
-        BinnerConfig config = new BinnerConfig();
-        config.setConfigDate(new Date());
-        config.setConfigId(UUID.randomUUID().toString());
-        config.setSortBy("RECEIVED_DATE");
-        List<String> groupStrategy = new ArrayList<>();
-        groupStrategy.add("PINCODE");
-        groupStrategy.add("PACKET_TYPE");
-        config.setGroupStrategy(groupStrategy);
-        config.setMaxShipmentSize(15);
-        DeliveryAddress origin = new DeliveryAddress();
-        origin.setAddressLine1("13610+Hacks+Cross+Rd+Memphis+TN");
-        origin.setCity("Bengaluru");
-        origin.setState("Karnataka");
-        origin.setLongitude(77.6132100821);
-        origin.setLatitude(12.9207427973);
-        origin.setPincode(560096);
-        config.setOriginAddress(origin);
-        return config;
+//        BinnerConfig config = new BinnerConfig();
+//        config.setConfigDate(new Date());
+//        config.setConfigId(UUID.randomUUID().toString());
+//        config.setSortBy("RECEIVED_DATE");
+//        List<String> groupStrategy = new ArrayList<>();
+//        groupStrategy.add("PINCODE");
+//        groupStrategy.add("PACKET_TYPE");
+//        config.setGroupStrategy(groupStrategy);
+//        config.setMaxShipmentSize(15);
+//        DeliveryAddress origin = new DeliveryAddress();
+//        origin.setAddressLine1("13610+Hacks+Cross+Rd+Memphis+TN");
+//        origin.setCity("Bengaluru");
+//        origin.setState("Karnataka");
+//        origin.setLongitude(77.6132100821);
+//        origin.setLatitude(12.9207427973);
+//        origin.setPincode(560096);
+//        config.setOriginAddress(origin);
+//
+//        return config;
+        return binnerConfigService.getCurrentConfig();
     }
 
 }
