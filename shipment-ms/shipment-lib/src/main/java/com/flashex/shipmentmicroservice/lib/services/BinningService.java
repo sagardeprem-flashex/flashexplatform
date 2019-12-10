@@ -225,26 +225,6 @@ public class BinningService {
 
     // gives the config to create bins, hard coded for now
     public BinnerConfig getConfig(){
-
-//        BinnerConfig config = new BinnerConfig();
-//        config.setConfigDate(new Date());
-//        config.setConfigId(UUID.randomUUID().toString());
-//        config.setSortBy("RECEIVED_DATE");
-//        List<String> groupStrategy = new ArrayList<>();
-//        groupStrategy.add("PINCODE");
-//        groupStrategy.add("PACKET_TYPE");
-//        config.setGroupStrategy(groupStrategy);
-//        config.setMaxShipmentSize(15);
-//        DeliveryAddress origin = new DeliveryAddress();
-//        origin.setAddressLine1("13610+Hacks+Cross+Rd+Memphis+TN");
-//        origin.setCity("Bengaluru");
-//        origin.setState("Karnataka");
-//        origin.setLongitude(77.6132100821);
-//        origin.setLatitude(12.9207427973);
-//        origin.setPincode(560096);
-//        config.setOriginAddress(origin);
-//
-//        return config;
         return binnerConfigService.getCurrentConfig();
     }
 
