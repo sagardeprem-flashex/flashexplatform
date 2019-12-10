@@ -22,8 +22,8 @@ public class SampleController {
     }
 
     @PostMapping(value = "/publishJSON")
-    public void sendMessageToKafkaTopicJSONT(@RequestBody KafkaStatusMessage message) throws JsonProcessingException {
-        this.producer.sendMessageJSONT(message);
+    public void sendMessageToKafkaTopicJSON(@RequestBody KafkaStatusMessage message) throws JsonProcessingException {
+        this.producer.sendMessageJSON(message);
     }
 }
 
