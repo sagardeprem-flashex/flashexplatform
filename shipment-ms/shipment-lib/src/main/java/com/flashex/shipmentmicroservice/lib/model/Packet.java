@@ -75,5 +75,7 @@ public class Packet {
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "status")
     private List<Status> statusList = new ArrayList<>();
 
-
+    public Date getReceivedDate(){
+        return this.statusList.get(0).getTimeStamp();
+    }
 }
