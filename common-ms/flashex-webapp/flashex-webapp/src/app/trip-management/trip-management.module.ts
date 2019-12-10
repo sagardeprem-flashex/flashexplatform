@@ -12,6 +12,7 @@ import { TripPlanningPropertiesComponent } from './components/trip-planning-prop
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -23,7 +24,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LiveTrackingComponent,
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
-    DashboardComponent
+    DashboardComponent,
+    SettingsComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     OrderDetailsComponent,
     LiveTrackingComponent,
     VehicleDetailsComponent,
-    TripPlanningPropertiesComponent
+    TripPlanningPropertiesComponent,
+    SettingsComponent
   ],
   providers: [TripItineraryService],
 

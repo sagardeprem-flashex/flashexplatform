@@ -1,0 +1,35 @@
+<div class="container" style="margin-top: 10vh">
+
+  <mat-card class="matcard">
+      <mat-card-header>
+          <mat-card-title>Edit Shipment Generation Configuration</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+          <div class="row col-sm-6" style="max-width:350px;">
+              <table>
+                  <tr>
+                    <th>Config-ID</th>
+                  </tr>
+                  <tr *ngFor="let config of shipmentConfig; index as index">
+                     <td>{{ config.configId }}</td>
+                  </tr>
+                  <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+
+                  <!-- <tr *ngFor="let entity of entities; index as index">
+                    <td>
+                      <editable (update)="updateField(index, 'name')">
+                        <ng-template viewMode>{{entity.name}}</ng-template>
+                        <ng-template editMode>
+                          <input [formControl]="getControl(index, 'name')" focusable>
+                        </ng-template>
+                      </editable>
+                    </td>
+                  </tr> -->
+                </table>
+          </div>
+      </mat-card-content>
+
+  </mat-card>
+
+</div>

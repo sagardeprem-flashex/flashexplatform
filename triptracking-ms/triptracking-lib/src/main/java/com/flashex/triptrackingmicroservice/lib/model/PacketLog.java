@@ -1,12 +1,14 @@
 package com.flashex.triptrackingmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
+import lombok.ToString;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
 import java.util.List;
 
 @UserDefinedType("packetlog")
+@ToString
 public class PacketLog {
 
     @CassandraType(type = DataType.Name.TEXT)
