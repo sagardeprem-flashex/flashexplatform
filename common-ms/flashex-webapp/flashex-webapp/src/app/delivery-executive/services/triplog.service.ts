@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-// import { IList } from '../interfaces/trip-itinerary';
-import { IList } from '../interfaces/triplog';
+// import { TripLog } from '../interfaces/trip-itinerary';
+import { TripLog } from '../interfaces/triplog';
 // import { ITripProperties } from '../interfaces/trip-planning-properties';
 
 @Injectable({
@@ -19,10 +19,10 @@ export class TriplogService {
 
   private dataSource = [];
   private dataOne;
-  public behaviourSubject = new BehaviorSubject<IList[]>(this.dataSource);
+  public behaviourSubject = new BehaviorSubject<TripLog[]>(this.dataSource);
 
   load() {
-    this.http.get<IList[]>(this.url).subscribe(
+    this.http.get<TripLog[]>(this.url).subscribe(
       data => {
         this.dataSource = data;
         this.behaviourSubject.next(this.dataSource);
@@ -39,5 +39,11 @@ export class TriplogService {
   updateTripLog(id: string, value: any): Observable<Object> {
     const options = {responseType: 'text' as 'json'};
     return this.http.put('triptracking-microservice-webservice/api/v1/updatelogs?id=' + id, value, options);
+  }
+  // tslint:disable-next-line: ban-types
+  updatePacketLog(id: string, value: any, tripPacketId: string): Observable<Object> {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.put('triptracking-microservice-webservice/api/v1/packetstatus?id=' + id +
+    '&tripPacketId=' + tripPacketId , value, options);
   }
 }

@@ -1,4 +1,4 @@
-export interface IList {
+export interface TripLog {
   tripItineraryId: string;
   tripStart: Date;
   tripEnd: Date;
