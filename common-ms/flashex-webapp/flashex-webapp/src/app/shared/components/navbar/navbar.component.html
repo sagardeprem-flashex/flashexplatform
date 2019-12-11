@@ -1,3 +1,15 @@
 <mat-toolbar color="primary">
-    <img src="../assets/images/logo.png" routerLink='/in'>
+    <img src="../assets/images/logo.png" routerLink='/admin'>
+    <div fxLayout="row" fxLayoutAlign="center center">
+
+        <span>{{userName}}</span>
+        <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon mat-list-icon>person</mat-icon>
+            </button>
+        <mat-menu #menu="matMenu">
+            <div> Role: {{role}}</div>
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+    </div>
+
 </mat-toolbar>

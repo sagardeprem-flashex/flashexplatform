@@ -15,6 +15,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -40,7 +41,8 @@ import { AgmDirectionModule } from 'agm-direction';
     AgmCoreModule.forRoot({
       apiKey: ''
    }),
-   AgmDirectionModule
+   AgmDirectionModule,
+   SharedModule
 
   ],
   entryComponents: [
