@@ -32,8 +32,8 @@ export class ShipmentManagementService {
   private shipmentConfiguration = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);
 
-  // private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
-  private configUrl = 'http://localhost:3000/config';
+  private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
+  // private configUrl = 'http://localhost:3000/config';
   public configSubject = new BehaviorSubject<IShipmentConfig[]>(this.shipmentConfiguration);
 
   load() {

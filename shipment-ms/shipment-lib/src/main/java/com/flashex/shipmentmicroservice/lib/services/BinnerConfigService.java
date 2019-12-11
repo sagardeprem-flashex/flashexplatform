@@ -13,12 +13,16 @@ public class BinnerConfigService {
     @Autowired
     BinnerConfigRepository binnerConfigRepository;
 
+    @Autowired
+    BinningService binningService;
+
     public List<BinnerConfig> getAllConfig(){
         return binnerConfigRepository.findAll();
     }
 
     public void saveConfig(BinnerConfig binnerConfig){
         binnerConfigRepository.save(binnerConfig);
+//        binningService.refreshBins();
     }
 
     public BinnerConfig getCurrentConfig(){

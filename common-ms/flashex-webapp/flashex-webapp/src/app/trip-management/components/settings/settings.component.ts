@@ -99,13 +99,14 @@ export class SettingsComponent implements OnInit {
 
     this.updatedConfig.configDate = new Date();
     this.updatedConfig.maxShipmentSize = this.maxShipmentSize;
+    this.updatedConfig.groupStrategy = [];
     if (this.pincodeChecked) {
       this.updatedConfig.groupStrategy.push('PINCODE');
     }
     if (this.orderTypeChecked) {
       this.updatedConfig.groupStrategy.push('PACKET_TYPE');
     }
-    if (this.priorityChecked){
+    if (this.priorityChecked) {
       this.updatedConfig.groupStrategy.push('PRIORITY');
     }
     this.shipmentManagementService.updateConfig(this.updatedConfig);

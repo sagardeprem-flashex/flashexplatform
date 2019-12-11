@@ -30,6 +30,9 @@ public class BinningService {
     // Local list of bins
     private static List<Bin> bins = new ArrayList<>();
 
+    // config
+    private BinnerConfig binnerConfig;
+
     public List<Bin> getBins() {
         return bins;
     }
@@ -82,9 +85,16 @@ public class BinningService {
                 int nPackets = getConfig().getMaxShipmentSize()*nShipments;
                 binPacketsSize.add(nPackets);
 
+                logger.info(" showing nPackets -----> {}",nPackets);
+
                 logger.info("$$ A total of {} packets can be shipped now ----------->", nPackets);
+                logger.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                logger.debug("$$ Showing all packets in the bin  ----------->  {}", bins.get(i).getBinnedPackets());
                 logger.debug("$$ Showing packets that can be shipped now  ----------->  {}", bins.get(i).getBinnedPackets().subList(0,nPackets));
                 // pick only those packets which make up the exact shipment size
+
+                logger.info("Maximum shipment size is {}", getConfig().getMaxShipmentSize());
+                logger.debug("Sublist being sent out >>>>>>>>>>>>>>>> {}",bins.get(i).getBinnedPackets().subList(0,nPackets));
                 List<List<Packet>> generatedPacketLists = ListUtils.partition(bins.get(i).getBinnedPackets().subList(0,nPackets),getConfig().getMaxShipmentSize());
 
                 // print the sublists
@@ -94,6 +104,7 @@ public class BinningService {
 
                 logger.info("$$ Number of shipments being generated----------->: {}", generatedPacketLists.size());
                 logger.info("$$ This must be equal to {} ", nShipments);
+                logger.info("Debugging generated packetlists -------> {}", generatedPacketLists );
 
                 // generate shipments from the packet lists
                 for(int j = 0; j<generatedPacketLists.size(); j++){
@@ -101,15 +112,15 @@ public class BinningService {
                     // create a new shipment from the packet list
                     Shipment shipment = new Shipment();
                     shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
+                    logger.info("Packet list numnber {} -------> {}", j, generatedPacketLists.get(j));
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
                     shipment.setOriginAddress(getConfig().getOriginAddress());
 
                     logger.info("Number of packets in this shipment is ----------->: {} ", shipment.getPacketList().size());
-
+                    shipmentService.saveShipments(Collections.singletonList(shipment));
                     producerService.sendShipment(shipment);
                     updatePacketStatus(shipment.getPacketList());
-                    shipmentService.saveShipments(Collections.singletonList(shipment));
                 }
                 logger.info("$$ Bin {} with properties {} processed successfully ----------->",i, bins.get(i).getBinningStrategy());
 
@@ -168,7 +179,9 @@ public class BinningService {
             } else if(groupByField.equals("PACKET_TYPE")){
                 packetProperty.add(packet.getPacketType());
                 logger.info("found type-----> {}", packetProperty);
-           }
+           } else if(groupByField.equals("PRIORITY")){
+                packetProperty.add(packet.getPriority());
+            }
         }
         return packetProperty;
     }
@@ -213,7 +226,7 @@ public class BinningService {
 
         List<Packet> sortedPackets = packetList;
         if(sortBy=="RECEIVED_DATE"){
-            sortedPackets.sort(Comparator.comparing(Packet::getReceivedDate));
+            sortedPackets.sort(Comparator.comparing(Packet::receivedDate));
         }
         // more to come
         return sortedPackets;
@@ -222,7 +235,31 @@ public class BinningService {
 
     // gives the config to create bins, hard coded for now
     public BinnerConfig getConfig(){
-        return binnerConfigService.getCurrentConfig();
+        if(binnerConfig == null){
+            binnerConfig = binnerConfigService.getCurrentConfig();
+        }
+
+        return binnerConfig;
     }
 
+    public void updateConfig(){
+        this.binnerConfig = binnerConfigService.getCurrentConfig();
+    }
+
+    // refreshes bins if config is changed,  dropped
+//    public void refreshBins(){
+//
+//        List<Bin> refreshedBins = new ArrayList<>();
+//        bins.forEach(bin -> {
+//            refreshedBins.add(bin);
+//        });
+//
+//        bins.clear();
+//
+//        refreshedBins.forEach(bin -> {
+//            bin.getBinnedPackets().forEach(packet -> {
+//                binPacket(packet);
+//            });
+//        });
+//    }
 }
