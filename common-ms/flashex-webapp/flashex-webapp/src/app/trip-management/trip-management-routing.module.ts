@@ -13,18 +13,18 @@ const tripRoutes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthguardService],
-    data: {
-      expectedRole: 'ROLE_ADMIN'
-    },
+    // canActivate: [AuthguardService],
+    // data: {
+    //   expectedRole: 'ROLE_ADMIN'
+    // },
     children: [
       {
         path: 'tripitinerary',
         component: TripDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'triptrack',
@@ -37,18 +37,18 @@ const tripRoutes: Routes = [
       {
         path: 'orderdetail',
         component: OrderDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'vehicledetail',
         component: VehicleDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: '',

@@ -44,6 +44,9 @@
                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
                             <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
+
+
+
                         </div>
                         <div class='trip-details-container'>
                             <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">

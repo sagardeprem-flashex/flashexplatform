@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
+
 // import { timingSafeEqual } from 'crypto';
+
 
 @Component({
   selector: 'app-order-details',
@@ -26,18 +29,19 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 export class OrderDetailsComponent implements OnInit {
   public dataSource;
+  public statuslist: Status[];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus'];
+  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
 
-  constructor(private packetService: ShipmentManagementService) {
+  constructor(private packetService: ShipmentManagementService, public dialog: MatDialog) {
 
   }
   // tslint:disable-next-line: use-lifecycle-interface
@@ -59,7 +63,7 @@ export class OrderDetailsComponent implements OnInit {
         dt.statusList.forEach(d => {
           const obj = {
             statusValue : d.statusValue,
-            timeStamp : moment(d.timeStamp, 'YYYYMMDD').fromNow()
+            timeStamp : moment().format('M/D/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
         });
@@ -106,7 +110,7 @@ export class OrderDetailsComponent implements OnInit {
           };
           break;
         }
-      case 'PROCESSED' : {
+      case 'PROCESSING' : {
         return {
           color: 'orange'
         };
@@ -133,5 +137,15 @@ export class OrderDetailsComponent implements OnInit {
     }
   }
 
+  openDialog(statusList): void {
+    const dialogRef = this.dialog.open(StatusDialogComponent, {
+      width: '400px', data: {statusList}
+    });
+    console.log(statusList);
+  }
+}
 
+export interface Status {
+  statusValue: string;
+  timeStamp: Date;
 }

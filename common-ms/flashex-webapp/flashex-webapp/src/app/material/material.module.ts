@@ -20,7 +20,8 @@ import {
   MatProgressSpinnerModule,
   MatTooltipModule,
   MatSortModule,
-  MatStepperModule
+  MatStepperModule,
+  MatBadgeModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
@@ -52,7 +53,8 @@ const MaterialComponents = [
   MatTooltipModule,
   MatPasswordStrengthModule,
   MatSortModule,
-  MatRippleModule
+  MatRippleModule,
+  MatBadgeModule
 ];
 
 @NgModule({

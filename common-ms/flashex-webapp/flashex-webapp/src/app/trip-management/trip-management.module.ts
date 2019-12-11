@@ -12,6 +12,8 @@ import { TripPlanningPropertiesComponent } from './components/trip-planning-prop
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StepperDialogComponent } from './components/stepper-dialog/stepper-dialog.component';
+import { StatusDialogComponent } from './components/status-dialog/status-dialog.component';
 
 
 
@@ -23,7 +25,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LiveTrackingComponent,
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
-    DashboardComponent
+    DashboardComponent,
+    StepperDialogComponent,
+    StatusDialogComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     FormsModule
   ],
   entryComponents: [
-    TripPlanningPropertiesComponent
+    TripPlanningPropertiesComponent,
+    StatusDialogComponent
   ],
   exports: [
     HomeComponent,

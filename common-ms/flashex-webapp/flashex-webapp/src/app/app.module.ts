@@ -14,10 +14,11 @@ import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
 import { HAMMER_LOADER } from '@angular/platform-browser';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
