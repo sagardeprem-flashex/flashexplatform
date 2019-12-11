@@ -31,7 +31,7 @@ public class TripLogService {
         List<TripLog> savedTripLogs = new ArrayList<>();
 
         for (TripLog tripLog : tripLogs) {
-            tripLog.setTripItineraryId(UUID.randomUUID().toString());
+//            tripLog.setTripItineraryId(UUID.randomUUID().toString());
             savedTripLogs.add(this.tripLogRepository.save(tripLog));
         }
         return savedTripLogs;
