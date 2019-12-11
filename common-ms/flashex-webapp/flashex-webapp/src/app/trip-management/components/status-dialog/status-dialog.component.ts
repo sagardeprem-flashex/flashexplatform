@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
@@ -8,7 +8,12 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class StatusDialogComponent implements OnInit {
 
-  constructor() { }
+  // constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<StatusDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      console.log('in status dialog' + data);
+    }
 
   ngOnInit() {
   }

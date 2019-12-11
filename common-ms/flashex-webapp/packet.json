@@ -35,7 +35,7 @@
               "timeStamp": "2019-12-06T04:40:19.547+0000"
           },
           {
-            "statusValue": "PROCESSED",
+            "statusValue": "PROCESSING",
             "timeStamp": "2019-12-06T04:50:19.547+0000"
           },
           {
@@ -45,18 +45,6 @@
           {
             "statusValue": "DELIVERED",
             "timeStamp": "2019-12-07T010:40:19.547+0000"
-          },
-          {
-              "statusValue": "RECEIVED",
-              "timeStamp": "2019-12-06T04:40:19.547+0000"
-          },
-          {
-            "statusValue": "PROCESSED",
-            "timeStamp": "2019-12-06T04:50:19.547+0000"
-          },
-          {
-            "statusValue": "DISPATCHED",
-            "timeStamp": "2019-12-06T05:40:19.547+0000"
           }
       ]
   },
@@ -93,6 +81,10 @@
           {
               "statusValue": "RECEIVED",
               "timeStamp": "2019-12-06T04:40:05.760+0000"
+          },
+          {
+            "statusValue": "PROCESSING",
+            "timeStamp": "2019-12-06T04:50:19.547+0000"
           }
       ]
   },
@@ -237,6 +229,18 @@
           {
               "statusValue": "RECEIVED",
               "timeStamp": "2019-12-06T04:35:16.545+0000"
+          },
+          {
+            "statusValue": "PROCESSING",
+            "timeStamp": "2019-12-06T04:50:19.547+0000"
+          },
+          {
+            "statusValue": "DISPATCHED",
+            "timeStamp": "2019-12-06T05:40:19.547+0000"
+          },
+          {
+            "statusValue": "UNDELIVERED",
+            "timeStamp": "2019-12-07T010:40:19.547+0000"
           }
       ]
   },

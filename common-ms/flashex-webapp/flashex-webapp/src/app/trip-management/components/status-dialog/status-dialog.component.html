@@ -1,22 +1,31 @@
 
-<h2 mat-dialog-title>Updates of the Packet</h2>
+<div><mat-dialog-actions >
+  <h2 align="left">Delivery by FlashEx</h2>
+    <button mat-raised-button mat-dialog-close >
+      <div>close</div>
+
+    </button>
+</mat-dialog-actions></div>
 <mat-dialog-content class="mat-typography">
 
-  {{data}}
-  sudanshu;adfkaklfkjal;{{data.statusList}}
-    <div style="margin-top: 1vh">
-        <mat-vertical-stepper>
-          <mat-step>
-            <!-- <div *ngFor="let status of statusList" -->
-              {{data}}
+
+
+  <div style="margin-top: 1vh">
+    <h3 style="font-weight: bold">Packet Id: {{data.packet}}</h3>
+      <mat-vertical-stepper>
+        <div *ngFor="let statuslist of data.status">
+          <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
+
           </mat-step>
-          <!-- <div *ngFor="let statuslist of statusList">
-            <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
 
-            </mat-step> -->
+        </div>
+        </mat-vertical-stepper>
+  </div>
 
-          <!-- </div> -->
-          </mat-vertical-stepper>
-    </div>
+
+
+
+
+
 <mat-dialog-actions align="end">
 

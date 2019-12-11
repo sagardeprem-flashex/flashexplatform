@@ -34,6 +34,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-detail {
   overflow: hidden;
   display: flex;
+
   /* height: 25em; */
 
 }
@@ -99,5 +100,5 @@ width:400px;
 overflow-wrap: break-word;
 }
 mat-icon{
-color:accent;
+color:blue;
 }

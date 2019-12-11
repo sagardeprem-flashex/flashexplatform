@@ -61,7 +61,7 @@
       <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
 
 
-        <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=20>
+        <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=25>
 
           <table>
 
@@ -123,7 +123,7 @@
           </table>
         </div>
 
-        <div class="example-element-diagram" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=40>
+        <div class="example-element-diagram" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=50>
 
           <table class="packetDetailsTable">
 
@@ -143,25 +143,30 @@
                   {{element.weight}} kg(s)
               </td>
             </tr>
-            <!-- <tr>
+            <tr>
               <td>
                 <b>Packet Description</b>
               </td>
               <td style="word-break: break-all;">
                 <i>{{element.packetDescription}}</i>
               </td>
-            </tr> -->
-            <!-- <tr>
+            </tr>
+            <tr>
               <td >
-                <a (click)="openDialog(element.status)" matTooltip="click for updates">See all updates</a>
+
               </td>
-            </tr> -->
+            </tr>
 
           </table>
 
           </div>
 
-          <div style="margin-top: 1vh">
+          <div>
+              <mat-icon>track_changes</mat-icon>
+              <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="click for updates">See all updates</a>
+          </div>
+
+          <!-- <div style="margin-top: 1vh">
               <mat-vertical-stepper>
                 <div *ngFor="let statuslist of element.statusList">
                   <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
@@ -170,7 +175,7 @@
 
                 </div>
                 </mat-vertical-stepper>
-          </div>
+          </div> -->
 
 
 
