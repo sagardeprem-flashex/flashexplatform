@@ -1,12 +1,16 @@
-<mat-sidenav-container fullscreen>
-    <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth, paddingTop: '10vh' }" opened="true" (mouseenter)="increase()" (mouseleave)="decrease()" style="background-color:#ECEFF1">
+<app-navbar>
+</app-navbar>
+
+
+<mat-sidenav-container style="top:10vh;position: absolute;bottom:0vh;left: 0vh;right:0vh">
+    <mat-sidenav #sidenav mode="side" class="example-sidenav" [ngStyle]="{ 'width.em': sidenavWidth }" opened="true" (mouseenter)="increase()" (mouseleave)="decrease()" style="background-color:#ECEFF1">
         <mat-nav-list>
 
             <mat-list-item routerLink="/admin" routerLinkActive="active">
                 <mat-icon mat-list-icon>home</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Dashboard</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Home</h5>
                 </div>
             </mat-list-item>
 
@@ -14,14 +18,14 @@
                 <mat-icon mat-list-icon>details</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Show Orders</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Orders</h5>
                 </div>
             </mat-list-item>
             <mat-list-item routerLink="tripitinerary" routerLinkActive="is-active">
                 <mat-icon mat-list-icon>dashboard</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Trip Details</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Trip Planner Setting</h5>
                 </div>
             </mat-list-item>
             <mat-list-item routerLink="triptrack" routerLinkActive="active">
@@ -38,20 +42,22 @@
                     <h5 class="lead" style="font-size: 1em; font-weight: normal;">Vehicle Details</h5>
                 </div>
             </mat-list-item>
-            <!-- <mat-list-item routerLink="settings" routerLinkActive="active">
-                <mat-icon mat-list-icon>build</mat-icon>
+
+            <mat-list-item routerLink="trackgoogle" routerLinkActive="active">
+                <mat-icon mat-list-icon>gps_fixed</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Settings</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Track With Google</h5>
                 </div>
-            </mat-list-item> -->
+            </mat-list-item>
+            <!-- 
             <mat-list-item (click)="logout()">
                 <mat-icon mat-list-icon>person</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
                     <h5 class="lead" style="font-size: 1em; font-weight: normal;">Logout</h5>
                 </div>
-            </mat-list-item>
+            </mat-list-item> -->
 
         </mat-nav-list>
     </mat-sidenav>

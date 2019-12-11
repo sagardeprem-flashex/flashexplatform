@@ -2,8 +2,6 @@
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Trip Details</h1>
     <button style="margin-left: auto;" mat-icon-button matTooltip="Logout" (click)="logout()"><mat-icon style="font-size: 25px;">person</mat-icon></button>
-
-
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
 
@@ -12,7 +10,7 @@
             <mat-sidenav-container class="example-sidenav-container">
                 <mat-sidenav opened="false" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
                     <mat-nav-list class="sidenav">
-                        <a mat-list-item (click)="trip(nav.tripSequence-1)" *ngFor="let nav of dataSource"> {{nav.tripItineraryId}}</a>
+                        <a mat-list-item (click)="trips(i)" *ngFor="let nav of dataSource, let i = index"> {{nav.tripItineraryId}}</a>
                     </mat-nav-list>
                 </mat-sidenav>
 
@@ -22,25 +20,30 @@
                             <div fxLayout="row" fxLayoutAlign="start center">
                                 <div>
                                     <mat-list *ngIf='tripDetails!=null'>
-                                        <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item><span>Trip Start Time :</span> {{tripDetails.tripStartTime}}
-                                            <p> <button style="margin: 1em;" mat-raised-button color="primary">Start Trip</button></p>
+                                        <!-- <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
+                                            <mat-divider></mat-divider> -->
+                                        <mat-list-item><span>Trip Start Time :</span> {{tripDetails.plannedStartTime}}
+                                            <p> <button style="margin: 1em;" mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span>Start Location :</span> {{tripDetails.hubLocation}}</mat-list-item>
+                                        <mat-list-item><span>Start Location :</span> {{tripDetails.originAddress}}
+                                        </mat-list-item>
                                         <mat-divider></mat-divider>
                                         <mat-list-item><span>Order Type :</span> Perishable</mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span>Trip End Time :</span> {{tripDetails.tripEndTime}}</mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item><span> Trip Start Time :</span> </mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item><span>Delivery Status :</span>
-                                            <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
+                                        <mat-list-item><span>Trip End Time :</span> {{tripDetails.plannedEndTime}}
+                                            <p><button style="margin: 1em;" mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span>Actual Trip End Time :</span> </mat-list-item>
+                                        <mat-list-item><span> Actual Trip Start Time :
+                                                 {{tripDetails.tripStart}}</span> </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <!-- <mat-list-item><span>Delivery Status :</span>
+                                                <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
+                                            </mat-list-item>
+                                            <mat-divider></mat-divider> -->
+                                        <mat-list-item><span>Actual Trip End Time :
+                                                 {{tripDetails.tripEnd}}</span> </mat-list-item>
                                     </mat-list>
                                 </div>
                                 <div id="map"></div>
@@ -52,26 +55,26 @@
                                 <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
-                                            <p>{{listofOrders[i].name}}</p>
+                                            <p>{{listofOrders[i].packetId}}</p>
                                         </mat-panel-title>
                                         <mat-panel-description>
                                             <p>
                                                 <mat-icon style="font-size: 15px;
-                                                line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
-                                                {{listofOrders[i].contactNo}}</p>
-                                            <p> Order ID: AB12345</p>
+                                                    line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
+                                                {{listofOrders[i].deliveryAddress.pincode}}</p>
+                                            <p> Reciever's Name</p>
 
-                                            <!-- <mat-icon mat-card-avatar class="example-header-image"></mat-icon> -->
+
                                         </mat-panel-description>
 
                                     </mat-expansion-panel-header>
                                     <div>
                                         <span style="width: 50%; padding-left: 0ex;">
-                                            <p>Shipment ID: AB12345</p>
-                                            38, StackRoute NIIT, 4th B Cross Road, 5th Block, Koramangala, Bengalore.
-                                            <p><button mat-raised-button color="primary">Delivered</button>
-                                            </p>
-                                        </span>
+                                                <p>{{listofOrders[i].originAddress}}
+                                                </p>
+                                                <p><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders[i].packetId)" color="primary">Delivered : {{tripDetails.packetLogs.packetStatus}}</button>
+                                                </p>
+                                            </span>
                                         <table style="float: right; width: 50%; margin-top: -6em;">
                                             <tr>
                                                 <td>Reached to Hub</td>
