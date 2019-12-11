@@ -4,7 +4,7 @@ import { transition, animate, trigger, state, style } from '@angular/animations'
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 // import { timingSafeEqual } from 'crypto';
 
 @Component({
@@ -19,7 +19,7 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
     ]),
   ],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
   }]
 })
 
@@ -86,32 +86,32 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
-      let temp: IPacket;
-      data.forEach((d,j) => {
-        console.log("data:: ", d);
+      // const temp: IPacket;
+      data.forEach((d, j) => {
+        // console.log("data::", d);
         // temp = d;
         const updatedList = [];
         d.statusList.forEach((statusIterator, i) => {
-          const tranformedDate = statusIterator.timeStamp.split("+")[0].concat("+0530");
-          let now = new Date(tranformedDate);
-          let now1 = moment(now).fromNow();
-          console.log("date: ",now1);
+          const tranformedDate = statusIterator.timeStamp.split('+')[0].concat('+0530');
+          const now = new Date(tranformedDate);
+          const now1 = moment(now).fromNow();
+          // console.log("date:", now1);
           const obj = {
-              statusValue : statusIterator.statusValue,
-              timeStamp : now1
-            };
+            statusValue: statusIterator.statusValue,
+            timeStamp: now1
+          };
           updatedList.push(obj);
-          if(i === d.statusList.length-1) {
+          if (i === d.statusList.length - 1) {
             d.statusList = [].concat(updatedList);
             this.mydata.push(d);
           }
         });
-        if(j == data.length-1){
+        if (j === data.length - 1) {
           this.dataSource = new MatTableDataSource(this.mydata);
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
           this.packetList = data;
-          console.log("hello---------> ", this.packetList);
+          // console.log("hello---------> ", this.packetList);
         }
       });
     });
@@ -146,19 +146,19 @@ export class OrderDetailsComponent implements OnInit {
   statusColor(currentStatus) {
     switch (currentStatus) {
       case 'RECEIVED': {
-          return{
-            color: 'blue'
-          };
-          break;
-        }
-      case 'PROCESSED' : {
+        return {
+          color: 'blue'
+        };
+        break;
+      }
+      case 'PROCESSED': {
         return {
           color: 'orange'
         };
         break;
       }
       case 'DISPATCHED': {
-        return{
+        return {
           color: 'yellow'
         };
         break;
