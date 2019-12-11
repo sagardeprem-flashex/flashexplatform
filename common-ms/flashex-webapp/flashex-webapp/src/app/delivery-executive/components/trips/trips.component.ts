@@ -18,6 +18,36 @@ declare let tomtom: any;
 })
 export class TripsComponent implements OnInit {
 
+  // public lng;
+  // public lat;
+  // public dataSource;
+  // public orders;
+  // public location;
+  // public markers = [];
+  // public colors = [];
+  // public zoom = 10;
+  // public dir;
+  // public origin: any;
+  // public destination: any;
+  // public renderOptions = {
+  //   suppressMarkers: true,
+  // };
+  // public markerColor = [];
+  // public color;
+  // public storedColor = [];
+  // public url;
+  // public warehouse = {
+  //   latitude: 12.95381,
+  //   longitude: 77.6375593
+  // };
+  // public startTime;
+  // public details;
+  // public id;
+  // public listofOrders;
+  // public tripDetails;
+  // public routes = [];
+  // step = 0;
+
   mobileQuery: MediaQueryList;
   public dataSource;
   public details;

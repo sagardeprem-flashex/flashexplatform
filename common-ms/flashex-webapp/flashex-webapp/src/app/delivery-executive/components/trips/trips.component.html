@@ -21,7 +21,8 @@
                                 <div>
                                     <mat-list *ngIf='tripDetails!=null'>
                                         <!-- <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
-                                            <mat-divider></mat-divider> -->
+                                        <mat-divider></mat-divider> -->
+                                        <mat-divider></mat-divider>
                                         <mat-list-item><span>Trip Start Time :</span> {{tripDetails.plannedStartTime}}
                                             <p> <button style="margin: 1em;" mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
                                         </mat-list-item>
@@ -60,7 +61,7 @@
                                         <mat-panel-description>
                                             <p>
                                                 <mat-icon style="font-size: 15px;
-                                                    line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
+                                                line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
                                                 {{listofOrders[i].deliveryAddress.pincode}}</p>
                                             <p> Reciever's Name</p>
 
