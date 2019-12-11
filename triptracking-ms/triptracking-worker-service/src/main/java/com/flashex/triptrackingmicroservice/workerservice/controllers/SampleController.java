@@ -6,6 +6,8 @@ import com.flashex.triptrackingmicroservice.lib.model.TripItinerary;
 import com.flashex.triptrackingmicroservice.workerservice.messaging.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.flashex.triptrackingmicroservice.lib.model.KafkaStatusMessage;
+
 
 @RestController
 @RequestMapping(value = "/kafka")
