@@ -22,6 +22,9 @@ public class BinningService {
     @Autowired
     MessagingService producerService;
 
+    @Autowired
+    PacketService packetService;
+
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
     // Local list of bins
@@ -206,7 +209,7 @@ public class BinningService {
 
         List<Packet> sortedPackets = packetList;
         if(sortBy=="RECEIVED_DATE"){
-            sortedPackets.sort(Comparator.comparing(Packet::getReceivedDate));
+            sortedPackets.sort(Comparator.comparing(Packet::receivedDate));
         }
         // more to come
         return sortedPackets;
@@ -236,4 +239,9 @@ public class BinningService {
         return config;
     }
 
+    public void reprocess(KafkaReprocessMessage message){
+        Packet packet = packetService.findByPacketId(message.getPacketId());
+        binPacket(packet);
+
+    }
 }

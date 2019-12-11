@@ -36,47 +36,92 @@ export class OrderDetailsComponent implements OnInit {
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
-
+  public receivedDate: string;
   constructor(private packetService: ShipmentManagementService) {
 
   }
   // tslint:disable-next-line: use-lifecycle-interface
+  // ngOnInit() {
+  //   this.packetService.behaviourSubject.subscribe(data => {
+  //     let temp: IPacket;
+  //     data.forEach(d => {
+  //       temp = d;
+  //       // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+  //       // this.receivedDate = moment(temp.statusList[0].timeStamp).format('MMMM Do YYYY, h:mm:ss a');
+  //       const date = temp.statusList[0].timeStamp;
+  //       const tranformedDate = date.split("+")[0].concat("+0530");
+  //       // console.log(tranformedDate);
+  //       temp.receivedDate = moment(tranformedDate).fromNow();
+  //       // console.log("received Date: ", this.receivedDate);
+  //       // temp.receivedDate = moment().format('M/D/YYYY hh:mm:ss a');
+  //       temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
+  //       // temp.currentStatus = temp.statusList.timeStamp;
+  //       // console.log(temp.currentStatus);
+  //       // console.log(moment().format('LLLL'));
+  //       this.mydata.push(temp);
+  //     });
+  //     // console.log("received Date: ", this.receivedDate);
+
+  //     // this.mydata.forEach(dt => {
+  //     //   const updatedList = [];
+  //     //   dt.statusList.forEach(d => {
+  //     //     const obj = {
+  //     //       statusValue : d.statusValue,
+  //     //       timeStamp : moment(d.timeStamp, 'YYYYMMDD').fromNow()
+  //     //     };
+  //     //     updatedList.push(obj);
+  //     //   });
+  //     //   dt.statusList = updatedList;
+  //     // });
+
+  //     this.dataSource = new MatTableDataSource(this.mydata);
+  //     this.dataSource.sort = this.sort;
+  //     this.dataSource.paginator = this.paginator;
+  //     this.packetList = data;
+  //     console.log(this.packetList);
+
+  //   });
+  // }
+
+
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
       let temp: IPacket;
-      data.forEach(d => {
-        temp = d;
-        // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment().format('M/D/YYYY hh:mm:ss a');
-        temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
-        // console.log(temp.currentStatus);
-
-        this.mydata.push(temp);
-      });
-
-      this.mydata.forEach(dt => {
+      data.forEach((d,j) => {
+        console.log("data:: ", d);
+        // temp = d;
         const updatedList = [];
-        dt.statusList.forEach(d => {
+        d.statusList.forEach((statusIterator, i) => {
+          const tranformedDate = statusIterator.timeStamp.split("+")[0].concat("+0530");
+          let now = new Date(tranformedDate);
+          let now1 = moment(now).fromNow();
+          console.log("date: ",now1);
           const obj = {
-            statusValue : d.statusValue,
-            timeStamp : moment(d.timeStamp, 'YYYYMMDD').fromNow()
-          };
+              statusValue : statusIterator.statusValue,
+              timeStamp : now1
+            };
           updatedList.push(obj);
+          if(i === d.statusList.length-1) {
+            d.statusList = [].concat(updatedList);
+            this.mydata.push(d);
+          }
         });
-        dt.statusList = updatedList;
+        if(j == data.length-1){
+          this.dataSource = new MatTableDataSource(this.mydata);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.packetList = data;
+          console.log("hello---------> ", this.packetList);
+        }
       });
-
-      this.dataSource = new MatTableDataSource(this.mydata);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      this.packetList = data;
-      console.log(this.packetList);
-
     });
   }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim();
   }
+
+
 
   funColor(priority) {
 

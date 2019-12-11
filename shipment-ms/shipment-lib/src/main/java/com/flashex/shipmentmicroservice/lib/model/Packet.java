@@ -51,8 +51,8 @@ public class Packet {
 
 
     /** Date type variables**/
-    @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date receivedDate;
+//    @CassandraType(type = DataType.Name.TIMESTAMP)
+//    private Date receivedDate;
 //
 //    //to be updated by Trip Planning microservice
     @CassandraType(type = DataType.Name.TIMESTAMP)
@@ -74,6 +74,10 @@ public class Packet {
 
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "status")
     private List<Status> statusList = new ArrayList<>();
+
+    public Date receivedDate(){
+        return this.statusList.get(0).getTimeStamp();
+    }
 
 
 }
