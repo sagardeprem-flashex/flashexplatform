@@ -7,9 +7,7 @@ ul {
     padding-left: 0cm;
 }
 
-
 /* Typography */
-
 
 #mainBody h2 {
     font-size: 90px;
@@ -19,7 +17,7 @@ ul {
 
 #mainBody h3 {
     font-size: 28px;
-    letter-spacing:3px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: black;
     text-align: center;
@@ -34,7 +32,6 @@ ul {
     color: black;
     padding: 0%;
 }
-
 
 /* Section - Block */
 
@@ -76,8 +73,6 @@ ul {
 }
 
 img {
-    border: 1px solid black;
-    border-radius: 4px;
     overflow: hidden;
     padding: 0;
     width: 100%;
@@ -89,6 +84,7 @@ figcaption {
     text-align: center;
     margin: auto;
     font-size: 20px;
+    margin-top: 1em;
 }
 
 
@@ -109,7 +105,6 @@ figcaption {
     #mainBody h2 {
         font-size: 30px;
     }
-
     /* #mainBody .block {padding: 30px;} */
     #mainBody .parallax-one {
         padding-top: 100px;
@@ -129,8 +124,7 @@ figcaption {
     #mainBody h3 {
         font-size: 18px;
     }
-
-    #mainBody p{
+    #mainBody p {
         font-size: 15px;
     }
     .links {

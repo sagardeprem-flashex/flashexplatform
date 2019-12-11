@@ -1,11 +1,10 @@
-mat-form-field{
-  margin:auto;
-  width: 320px;
+mat-form-field {
+    margin: auto;
+    width: 320px;
 }
 
-.bodytag
-{
-  z-index: -5;
+.bodytag {
+    z-index: -5;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -19,26 +18,24 @@ mat-form-field{
     -webkit-background-size: cover;
 }
 
-
 .matcard {
-  padding: 16px;
-  border-radius: 4px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -45%);
+    padding: 16px;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
 }
 
-.mat-card-header
-{
-  width: inherit;
+.mat-card-header {
+    width: inherit;
 }
 
-mat-hint{
-  font-size: smaller;
+mat-hint {
+    font-size: smaller;
 }
 
 .validation {
-  margin-bottom: -1.5em;
-  padding-top: 1.5em;
+    margin-bottom: -1.5em;
+    padding-top: 1.5em;
 }

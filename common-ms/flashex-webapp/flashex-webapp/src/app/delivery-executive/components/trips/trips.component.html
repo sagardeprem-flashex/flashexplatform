@@ -22,6 +22,7 @@
                                     <mat-list *ngIf='tripDetails!=null'>
                                         <!-- <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
                                         <mat-divider></mat-divider> -->
+                                        <mat-divider></mat-divider>
                                         <mat-list-item><span>Trip Start Time :</span> {{tripDetails.plannedStartTime}}
                                             <p> <button style="margin: 1em;" mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
                                         </mat-list-item>
@@ -32,18 +33,18 @@
                                         <mat-list-item><span>Order Type :</span> Perishable</mat-list-item>
                                         <mat-divider></mat-divider>
                                         <mat-list-item><span>Trip End Time :</span> {{tripDetails.plannedEndTime}}
-                                            <!-- <p><button style="margin: 1em;" mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p> -->
+                                            <p><button style="margin: 1em;" mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
                                         <mat-list-item><span> Actual Trip Start Time :
-                                             {{tripDetails.tripStart}}</span> </mat-list-item>
+                                                 {{tripDetails.tripStart}}</span> </mat-list-item>
                                         <mat-divider></mat-divider>
                                         <!-- <mat-list-item><span>Delivery Status :</span>
-                                            <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
-                                        </mat-list-item>
-                                        <mat-divider></mat-divider> -->
+                                                <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
+                                            </mat-list-item>
+                                            <mat-divider></mat-divider> -->
                                         <mat-list-item><span>Actual Trip End Time :
-                                             {{tripDetails.tripEnd}}</span> </mat-list-item>
+                                                 {{tripDetails.tripEnd}}</span> </mat-list-item>
                                     </mat-list>
                                 </div>
                                 <div id="map"></div>
@@ -70,11 +71,11 @@
                                     </mat-expansion-panel-header>
                                     <div>
                                         <span style="width: 50%; padding-left: 0ex;">
-                                            <p>{{listofOrders[i].originAddress}}
-                                            </p>
-                                            <p><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, tripDetails.packetLogs.packetId)" color="primary">Delivered : {{tripDetails.packetLogs.packetStatus}}</button>
-                                            </p>
-                                        </span>
+                                                <p>{{listofOrders[i].originAddress}}
+                                                </p>
+                                                <p><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders[i].packetId)" color="primary">Delivered : {{tripDetails.packetLogs.packetStatus}}</button>
+                                                </p>
+                                            </span>
                                         <table style="float: right; width: 50%; margin-top: -6em;">
                                             <tr>
                                                 <td>Reached to Hub</td>

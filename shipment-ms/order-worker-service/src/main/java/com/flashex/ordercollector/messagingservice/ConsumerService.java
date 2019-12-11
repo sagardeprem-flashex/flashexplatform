@@ -23,7 +23,7 @@ public class ConsumerService {
     @Autowired
     private PacketService packetService;
 
-    @KafkaListener(topics = "Order", groupId = "group_id")
+    @KafkaListener(topics = "Order", groupId = "ordercollector")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         Packet packet = new ObjectMapper().readValue(message, Packet.class);

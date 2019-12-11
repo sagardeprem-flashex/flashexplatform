@@ -3,6 +3,7 @@ package com.flashex.triptrackingmicroservice.workerservice.messaging;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flashex.triptrackingmicroservice.lib.model.KafkaStatusMessage;
+import com.flashex.triptrackingmicroservice.lib.model.TripItinerary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,11 @@ public class Producer {
     public void sendMessageJSON(KafkaStatusMessage message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
         this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
+    }
+
+
+    public void sendMessageJSONTest(KafkaStatusMessage message) throws JsonProcessingException {
+        logger.info(String.format("$$ -> Producing message --> %s",message));
+        this.kafkaTemplateJSON.send("DeliveryStatus", new ObjectMapper().writeValueAsString(message));
     }
 }

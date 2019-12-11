@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { TriplogService } from '../../services/triplog.service';
 import { TokenStorageService } from '../../../shared/services/token-storage.service';
 import { Router } from '@angular/router';
-import { TripLog } from '../../interfaces/triplog';
+import { TriplogService } from 'src/app/trip-management/services/triplog.service';
+import {ITripLog, TripLog} from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
 
 declare let L;
@@ -50,22 +50,14 @@ export class TripsComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
   public dataSource;
-  public orders;
-  public location;
-  public markers = [];
-  public colors = [];
-  public color;
-  public marks = [];
-  public addressLine = [];
-  public tripLog: any;
-  public tripLogById;
   public details;
-  public id;
   public listofOrders;
   public tripDetails;
-  public tripStartTime = new Date();
   step = 0;
-  public snav: any;
+  public tripLog: any;
+  public tripLogById;
+  triplogss: Observable<ITripLog[]>;
+  public trip: any;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher, private tripService: TriplogService,
@@ -75,9 +67,6 @@ export class TripsComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.addListener(this.mobileQueryListener);
   }
-
-  // trip: TripLog = new TripLog();
-  public trip: any;
 
   private mobileQueryListener: () => void;
   ngOnInit() {
@@ -92,29 +81,25 @@ export class TripsComponent implements OnInit {
 
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
+
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
-      // console.log('mm', this.dataSource);
       this.trips(0);
+      console.log('inti da', this.trips[0]);
     });
   }
   trips(value) {
-    // console.log('g', value);
-    // console.log(this.dataSource);
-
+    console.log('vali', value);
     this.details = this.dataSource[value];
-    // console.log('ff', this.details);
+    console.log('deta', this.details);
     if (this.details) {
-      // this.details = this.details.orders[value].deliveryAddress;
       this.tripDetails = this.details;
       this.listofOrders = this.details.packetLogs;
-      // console.log('hh', this.tripDetails);
+      console.log('lis', this.listofOrders);
     }
 
   }
-
-   // get trip log by its id from backend
-   getTripLogById(id: string) {
+  getTripLogById(id: string) {
     this.tripService.getTripLog(id).subscribe(
       data => {
         this.tripLogById = data;
@@ -124,23 +109,23 @@ export class TripsComponent implements OnInit {
   }
   // update trip start time for particular trip with its id being fetched from UI
   updateTripStart(tripId) {
-    const data = new TripLog();
-    data.tripStart = new Date();
-    // tslint:disable-next-line: no-shadowed-variable
-    this.tripService.updateTripLog(tripId, data).subscribe( data => {
+    this.trip = new TripLog();
+    this.trip.tripStart = new Date();
+    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
     });
   }
   // update trip end time for particular trip with its id being fetched from UI
-  // updateTripEnd(tripId) {
-  //   this.trip.tripEnd = new Date();
-  //   this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-  //     this.tripLog = data;
-  //   });
-  // }
+  updateTripEnd(tripId) {
+    this.trip.tripEnd = new Date();
+    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
+      this.tripLog = data;
+    });
+  }
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
+    console.log('tr', tripId, ' pacl', tripPacketId);
     if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
       this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
     } else {
@@ -153,15 +138,6 @@ export class TripsComponent implements OnInit {
       }
     );
   }
-
-  // getRandomColor() {
-  //   this.dataSource.forEach((element, i) => {
-  //     const color = Math.floor(0x1000000 * Math.random()).toString(16);
-  //     const generatedColor = '#' + ('000000' + color).slice(-6);
-  //     this.colors.push(generatedColor);
-
-  //   });
-  // }
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/auth/login']);

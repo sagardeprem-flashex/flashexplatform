@@ -1,6 +1,7 @@
 package com.flashex.triptrackingmicroservice.lib.model;
 
 import com.datastax.driver.core.DataType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.UserDefinedType;
@@ -14,6 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @UserDefinedType("packet")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Packet {
 
     @CassandraType(type = DataType.Name.TEXT)
