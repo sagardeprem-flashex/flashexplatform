@@ -1,13 +1,19 @@
 <body style="background-color:#ECEFF1;height: 90%;">
-    <mat-toolbar class="example-toolbar">
-        <button style="margin: 0px;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>double_arrow</mat-icon></button>
-        <h1 style="margin-left: 8px;">Scheduled Trips: {{scheduledDate | date:'yyyy-MM-dd'}}</h1>
-        <br>
-        <!-- <p style="margin-left: auto;">Date: {{scheduledDate | date:'yyyy-MM-dd'}}</p> -->
-        <mat-radio-group style="margin-left: auto;" aria-label="Select an option">
-            <mat-radio-button value="1" routerLink="/admin/triptrack">TomTom Platform</mat-radio-button>
-            <mat-radio-button value="2" routerLink="/admin/trackgoogle">Google Platform</mat-radio-button>
+    <mat-toolbar class="example-toolbar" fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+            <button style="margin: 0px;" mat-icon-button (click)="sidenav.toggle()">                       <mat-icon>double_arrow</mat-icon>
+                </button> Scheduled Trips:
+            <span style="padding-left:0.5em;font-size:0.85em;"> 
+                    {{scheduledDate | date:'yyyy-MM-dd'}}
+                </span>
+
+        </div>
+        <mat-radio-group style="margin-left:auto;font-weight: normal;" aria-label="Select an option" fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-radio-button value="1" routerLink="/admin/triptrack"><span title="tomtom map platform" style="font-size:0.85em;padding-right:0.5em;height: 0.4em;width: 0.4em;">TomTom</span></mat-radio-button>
+            <mat-radio-button value="2" routerLink="/admin/trackgoogle" [checked]="true"><span title="google map platform" style="font-size:0.85em;height: 0.4em;width: 0.4em;">Google</span>
+            </mat-radio-button>
         </mat-radio-group>
+
 
     </mat-toolbar>
 
@@ -20,16 +26,15 @@
 
                     <mat-expansion-panel-header style="background-color:#ECEFF1;">
                         <mat-panel-title>
-                            <div style="width: 15px; height: 15px;left: 5px;margin-top: 1.5em;" [ngStyle]="{'background-color': colors[i]}"></div>
-                            <button mat-raised-button color="primary" (click)="trips(i)">Trip {{id.tripItineraryId}}</button>
+                            <button mat-raised-button style="border-style: solid;border-width: 0 0 0 1.5em;" [ngStyle]="{'border-color': colors[i]}" (click)="trips(i)">Trip {{id.tripItineraryId}}</button>
 
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
 
                     <!-- <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button> -->
-                    <p>Planned Trip Start at : {{id.plannedStartTime}}</p>
-                    <p>Actual Trip Started at : {{id.tripStart}}</p><br>
+                    <p>Planned Trip Start at : {{id.plannedStartTime | date:'medium'}}</p>
+                    <p>Actual Trip Started at : {{id.tripStart | date:'medium'}}</p><br>
 
 
 
@@ -60,9 +65,9 @@
 
 
 
-                    <p>Planned Trip End at : {{id.plannedEndTime}}</p>
+                    <p>Planned Trip End at : {{id.plannedEndTime | date:'medium'}}</p>
 
-                    <p> Actual Trip Ended at : {{id.tripEnd}}</p>
+                    <p> Actual Trip Ended at : {{id.tripEnd | date:'medium'}}</p>
 
                     <!-- <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button> -->
 
