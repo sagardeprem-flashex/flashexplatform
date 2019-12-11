@@ -1,9 +1,13 @@
 <body style="background-color:#ECEFF1;height: 90%;">
     <mat-toolbar class="example-toolbar">
         <button style="margin: 0px;" mat-icon-button (click)="sidenav.toggle()"><mat-icon>double_arrow</mat-icon></button>
-        <h1 style="margin-left: 8px;">Scheduled Trips</h1>
+        <h1 style="margin-left: 8px;">Scheduled Trips: {{scheduledDate | date:'yyyy-MM-dd'}}</h1>
         <br>
-        <p style="margin-left: auto;">Date: {{scheduledDate | date:'yyyy-MM-dd'}}</p>
+        <!-- <p style="margin-left: auto;">Date: {{scheduledDate | date:'yyyy-MM-dd'}}</p> -->
+        <mat-radio-group style="margin-left: auto;" aria-label="Select an option">
+            <mat-radio-button value="1" routerLink="/admin/triptrack">TomTom Platform</mat-radio-button>
+            <mat-radio-button value="2" routerLink="/admin/trackgoogle">Google Platform</mat-radio-button>
+        </mat-radio-group>
 
     </mat-toolbar>
 
