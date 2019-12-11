@@ -79,14 +79,14 @@
                 </agm-direction>
                 <div *ngFor="let id of dataSource, let j=index">
 
-                    <agm-marker *ngFor="let marker of markers, let j =index" [latitude]="marker.deliveryLocation.lat" [longitude]="marker.deliveryLocation.lng" [label]="{
+                    <agm-marker *ngFor="let marker of markers, let j =index" [latitude]="marker.deliveryAddress.latitude" [longitude]="marker.deliveryAddress.longitude" [label]="{
                     color: markerColor[j],
                     fontWeight: 'bold',
-                    text: marker.orderId.toString()}">
+                    text: marker.packetId}">
 
                         <agm-info-window [disableAutoPan]="false" #infoWindow>
                             <div>
-                                Order Id: {{marker.orderId}} <br> Delivery Address: {{marker.deliveryAddress}}
+                                Order Id: {{marker.packetId}} <br> Delivery Address: {{marker.deliveryAddress.addressLine1}}
                             </div>
                         </agm-info-window>
 
