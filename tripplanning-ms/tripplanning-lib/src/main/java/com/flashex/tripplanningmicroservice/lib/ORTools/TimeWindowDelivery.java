@@ -26,6 +26,9 @@ import com.google.protobuf.Duration;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -47,28 +50,28 @@ public class TimeWindowDelivery {
         static class DataModel {
 
 
-            public final long[][] timeMatrix =
-                {
-                {0, 22, 28, 17, 27, 27, 22, 23, 18, 21, 25, 28, 27, 13, 22, 23},
-                {22, 0, 11, 15, 10, 9, 14, 5, 15, 10, 13, 13, 10, 17, 16, 15},
-                {28, 11, 0, 22, 7, 4, 17, 7, 21, 14, 11, 7, 3, 23, 14, 15},
-                {17, 15, 21, 0, 15, 19, 5, 15, 1, 8, 16, 22, 20, 8, 12, 13},
-                {27, 10, 8, 16, 0, 6, 11, 7, 16, 10, 7, 9, 7, 20, 10, 10},
-                {27, 10, 4, 21, 6, 0, 16, 8, 21, 13, 11, 9, 6, 22, 15, 13},
-                {22, 14, 17, 6, 11, 16, 0, 12, 5, 4, 12, 20, 16, 13, 8, 9},
-                {23, 5, 8, 15, 7, 8, 12, 0, 15, 8, 12, 12, 9, 18, 13, 14},
-                {18, 16, 21, 1, 15, 19, 5, 15, 0, 8, 16, 22, 20, 8, 12, 13},
-                {21, 10, 14, 7, 10, 13, 4, 8, 7, 0, 11, 15, 13, 15, 7, 9},
-                {25, 13, 11, 16, 7, 11, 11, 12, 16, 10, 0, 12, 10, 17, 5, 6},
-                {28, 11, 6, 23, 8, 8, 18, 10, 22, 14, 10, 0, 4, 23, 13, 14},
-                {27, 10, 3, 20, 7, 6, 17, 10, 20, 13, 10, 6, 0, 21, 12, 13},
-                {13, 18, 24, 9, 21, 22, 13, 19, 9, 15, 18, 25, 22, 0, 15, 16},
-                {22, 16, 15, 13, 10, 15, 9, 14, 13, 9, 6, 15, 14, 15, 0, 1},
-                {23, 16, 15, 14, 11, 13, 10, 14, 14, 10, 6, 16, 15, 15, 1, 0}
-        };
+//            public final long[][] timeMatrix =
+//                {
+//                {0, 22, 28, 17, 27, 27, 22, 23, 18, 21, 25, 28, 27, 13, 22, 23},
+//                {22, 0, 11, 15, 10, 9, 14, 5, 15, 10, 13, 13, 10, 17, 16, 15},
+//                {28, 11, 0, 22, 7, 4, 17, 7, 21, 14, 11, 7, 3, 23, 14, 15},
+//                {17, 15, 21, 0, 15, 19, 5, 15, 1, 8, 16, 22, 20, 8, 12, 13},
+//                {27, 10, 8, 16, 0, 6, 11, 7, 16, 10, 7, 9, 7, 20, 10, 10},
+//                {27, 10, 4, 21, 6, 0, 16, 8, 21, 13, 11, 9, 6, 22, 15, 13},
+//                {22, 14, 17, 6, 11, 16, 0, 12, 5, 4, 12, 20, 16, 13, 8, 9},
+//                {23, 5, 8, 15, 7, 8, 12, 0, 15, 8, 12, 12, 9, 18, 13, 14},
+//                {18, 16, 21, 1, 15, 19, 5, 15, 0, 8, 16, 22, 20, 8, 12, 13},
+//                {21, 10, 14, 7, 10, 13, 4, 8, 7, 0, 11, 15, 13, 15, 7, 9},
+//                {25, 13, 11, 16, 7, 11, 11, 12, 16, 10, 0, 12, 10, 17, 5, 6},
+//                {28, 11, 6, 23, 8, 8, 18, 10, 22, 14, 10, 0, 4, 23, 13, 14},
+//                {27, 10, 3, 20, 7, 6, 17, 10, 20, 13, 10, 6, 0, 21, 12, 13},
+//                {13, 18, 24, 9, 21, 22, 13, 19, 9, 15, 18, 25, 22, 0, 15, 16},
+//                {22, 16, 15, 13, 10, 15, 9, 14, 13, 9, 6, 15, 14, 15, 0, 1},
+//                {23, 16, 15, 14, 11, 13, 10, 14, 14, 10, 6, 16, 15, 15, 1, 0}
+//        };
 
-            Data d = (new Data());
-            public final String[] addresses = d.getAddr();
+//            Data d = (new Data());
+//            public final String[] addresses = d.getAddr();
 
 //            ArrayList<Packet> templist = orService.getListofPackets();
 //            Shipment shipment = (new Shipment());
@@ -86,55 +89,87 @@ public class TimeWindowDelivery {
 //        private final GetJsonServerData getJsonServerData = new GetJsonServerData();
 //        VehicleList vehicleList = getJsonServerData.processJsonData();
 
-        public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8};
+//        public final long[] demands = {0, 1, 1, 2, 4, 2, 4, 8, 8, 1, 2, 1, 2, 4, 4, 8};
 //        public final long[] demands = {0, 8, 8, 2, 4};
 
 
-        public final long[][] timeWindows = {
-                {0, 50},    // depot
-                {0, 50},   // 1
-                {0, 50},// 2
-                {0, 50},   // 3
-                {0, 50},   // 4
-                {0, 50},    // 5
-                {0, 50},   // 6
-                {0, 50},   // 7
-                {0, 50},   // 8
-                {0, 50},    // 9
-                {0, 50},  // 10
-                {0, 50},  // 11
-                {0, 50},    // 12
-                {0, 50},   // 13
-                {0, 50},   // 14
-                {0, 50},  // 15
-            };
+//        public final long[][] timeWindows = {
+//                {0, 50},    // depot
+//                {0, 50},   // 1
+//                {0, 50},// 2
+//                {0, 50},   // 3
+//                {0, 50},   // 4
+//                {0, 50},    // 5
+//                {0, 50},   // 6
+//                {0, 50},   // 7
+//                {0, 50},   // 8
+//                {0, 50},    // 9
+//                {0, 50},  // 10
+//                {0, 50},  // 11
+//                {0, 50},    // 12
+//                {0, 50},   // 13
+//                {0, 50},   // 14
+//                {0, 50},  // 15
+//            };
 
 
-            public final int  vehicleNumber = 6;
+//            public final int  vehicleNumber = 6;
 //            public final int vehicleNumber = vehicleList.getNoOfVehicle();
 //            public final long[] vehicleCapacities = vehicleList.vehicleCapacity();
-            public final long[] vehicleCapacities = {60, 60, 40, 50, 50 , 50};
-            public final int  depot = 0;
+//            public final long[] vehicleCapacities = {60, 60, 40, 50, 50 , 50};
+//            public final int  depot = 0;
 
             DataModel() throws ParseException, JsonProcessingException {
             }
 
 
+            Data d = (new Data());
+
+            GenerateMatrix generateMatrix = new GenerateMatrix();
+
+            //      Generates Displacement matrix and take inputs from dbs
+
+            public final long[][] distanceMatrix = generateMatrix.createDisplacementMatrix(d.getShipment());
+
+            //      Generates Time matrix and take inputs from dbs
+            public final long[][] timeMatrix = generateMatrix.createTimeMatrix(d.getShipment(), 900);
+
+            public final String[] addresses = d.getShipment().getAllDeliveryAddresses();
+
+            public final long[] demands = d.createDemandArray(d.getShipment());
+
+            public final long[] vehicleCapacities = d.getVehicleList().vehicleCapacity();
+
+            public final int vehicleNumber = d.getVehicleList().getNoOfVehicle();
+            public final int depot = 0;
+
+            public final Shipment shipment = d.getShipment();
+            public final VehicleList vehicleList = d.getVehicleList();
+
+            // Generates the Time Window for each order in Shipment
+            public final long[][] timeWindows = d.createTimeWindow(0,120);
+
+
         }
 
         /// @brief Print the solution.
-         public void printSolution(
+         public List<TripItinerary> printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution,String[] address, ArrayList<Packet> packets) throws Exception {
 
             RoutingDimension timeDimension = routing.getMutableDimension("Time");
 
-        String[] addr = address; // use when using gentmat to run
+            String[] addr = address; // use when using gentmat to run
 //        HashMap<String, Set<String> > Locationcord = new HashMap();
-            Vehicle vehicle = new Vehicle(); // delete it this temp
+            Shipment shipment = data.shipment;
+//        Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
-            VehicleList vehicleList = (new VehicleList());
+            VehicleList vehicleList = data.vehicleList;
+//        logger.info((""+ vehicleList.listofvehicle));
+
             ArrayList<Packet> droppedPackets = new ArrayList();
+
+            List<TripItinerary> trips = new ArrayList<TripItinerary>();
 
             String droppedNodes = "Dropped nodes:";
             for (int node = 0; node < routing.size(); ++node) {
@@ -143,7 +178,10 @@ public class TimeWindowDelivery {
                 }
                 if (solution.value(routing.nextVar(node)) == node) {
                     droppedNodes += " " + manager.indexToNode(node);
-                    droppedPackets.add(packets.get(manager.indexToNode(node)));
+                    if(manager.indexToNode(node) != 0)
+                    {
+                        droppedPackets.add(packets.get(manager.indexToNode(node) - 1));
+                    }
                 }
             }
             logger.info("Array of dropped nodes :" + String.valueOf(droppedPackets));
@@ -155,19 +193,19 @@ public class TimeWindowDelivery {
 
             for (int i = 0; i < data.vehicleNumber; ++i) {
                 TripItinerary tripItinerary = new TripItinerary();
-                tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
-
-                tripItinerary.setDroppedpackets(droppedPackets);
-
-                tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
-
-                tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
+//            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
+                tripItinerary.setTripItineraryId(String.format("%035d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16)));
+//            tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
+                tripItinerary.setPlanGeneratedTime(Timestamp.valueOf(LocalDateTime.now()));
+                tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.now().plusHours(2)));
+//            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
+                tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.now().plusHours(7)));
 
                 long index = routing.start(i);
                 logger.info("Route for Vehicle " + i + ":");
 
-//                tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
-                tripItinerary.setVehicle(vehicle); // temporary only
+                tripItinerary.setVehicle(vehicleList.listofvehicle.get(i));  // set vehicle object
+//                tripItinerary.setVehicle(vehicle); // temporary only
 
                 String route = "";
 //                String response = "";
@@ -182,8 +220,10 @@ public class TimeWindowDelivery {
                     route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
                             + solution.max(timeVar)*100 + ") -> " + "Address" + addr[(int) nodeIndex] + "-->";
 
-
-                    PacketArray.add(packets.get((int) (nodeIndex)));
+                    if(nodeIndex != 0)
+                    {
+                        PacketArray.add(packets.get((int) (nodeIndex) - 1));
+                    }
 
                     long vehiclecapacity = data.vehicleCapacities[i]; // Total capacity of a vehicle
                     long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity); // gives occupied volume in percentage
@@ -203,9 +243,9 @@ public class TimeWindowDelivery {
                 }
 
                 tripItinerary.setPackets(PacketArray);
-                tripItinerary.setAlgorithm("VrpwithTimeWindowDelivery");
-                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
-
+                tripItinerary.setAlgorithm("VrpWithTimeWindowDelivery");
+//                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
+                tripItinerary.setOriginAddress(shipment.getOriginAddress());
 //                Locationcord.put("Vehicle:" + i,latlongarr);
 
                 IntVar timeVar = timeDimension.cumulVar(index);
@@ -223,22 +263,27 @@ public class TimeWindowDelivery {
 //                logger.info("Array of lat & long" + latlongarr);
 //                logger.info("Key value" + Locationcord);
 
-                tripItineraryService.saveTripItinerary(tripItinerary);
-                producerService.sendMessageJSON(tripItinerary);
 
+                tripItinerary.setDroppedpackets(droppedPackets);
+
+                if(tripItinerary.getPackets().size() != 0) {
+                    tripItineraryService.saveTripItinerary(tripItinerary);
+                    trips.add(tripItinerary);
+                }
             }
 
             logger.info("Total time of all routes: " + totalTime*100 + "m");
-
+            return trips;
         }
 
-        static void matPrint(int[][] distmat, int[][] timemat, String[] address) {
-            long[][] dist_mat = new long[distmat.length][distmat.length];
-            long[][] time_mat = new long[timemat.length][timemat.length];
+        static void matPrint(long[][] distmat, long[][] timemat, String[] address) {
 
-            for (int i = 0, j = 0; i < dist_mat.length || j < time_mat.length; i = Math.min(dist_mat.length + 1, i + 1), j = Math.min(time_mat.length + 1, j + 1)) {
-            System.out.println(dist_mat[i].length + " Distance Matrix " + Arrays.toString(distmat[i]) + "\n" +
-                    time_mat[i].length + " Time Travel " + Arrays.toString(timemat[i]) + "\n");
+    //        long[][] dist_mat = new long[distmat.length][distmat.length];
+    //        long[][] time_mat = new long[timemat.length][timemat.length];
+
+            for (int i = 0; i < distmat.length; i++) {
+                System.out.println(distmat[i].length + " Distance Matrix " + Arrays.toString(distmat[i]) + "\n" +
+                        timemat[i].length + " Time Travel " + Arrays.toString(timemat[i]) + "\n");
             }
             String[] addr = address;
             System.out.println(Arrays.toString(addr));
@@ -262,7 +307,7 @@ public class TimeWindowDelivery {
         }
 
 
-        public void FinalResult(ArrayList<Packet> packets) throws Exception {
+        public List<TripItinerary> FinalResult(ArrayList<Packet> packets, long setPenalty) throws Exception {
             // Instantiate the data problem.
             final DataModel data = new DataModel();
 
@@ -301,7 +346,8 @@ public class TimeWindowDelivery {
             }
 
 //            adding disjunction
-            long penalty = 50;
+//            long penalty = 50;
+            long penalty = setPenalty;
             for (int i = 1; i < data.timeMatrix.length; ++i) {
                 routing.addDisjunction(new long[] {manager.nodeToIndex(i)}, penalty);
             }
@@ -314,10 +360,11 @@ public class TimeWindowDelivery {
                             .build();
             Assignment solution = routing.solveWithParameters(searchParameters);
 
-             printSolution(data, routing, manager, solution,data.addresses,packets);
-
 //                Prints distance and time matrices
-//        matPrint(data.distmat,data.timemat,data.addresses);  // use with google api only
+            matPrint(data.distanceMatrix , new GenerateMatrix().createTimeMatrix(data.shipment, 900),data.addresses);  // use with google api only
+
+            return printSolution(data, routing, manager, solution,data.addresses,packets);
+
         }
 
     }

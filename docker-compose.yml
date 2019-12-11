@@ -190,6 +190,7 @@ services:
       - config-server
       - discovery-server
       - gateway
+      - vehicle-json-server
 
 
   triptracking-loadbalancer:
@@ -241,10 +242,11 @@ services:
       - gateway
 
   vehicle-json-server:
-    image: clue/json-server
-    container_name: vehicles-json-server
-    network_mode: host
+    image: vimagick/json-server
+    command: -H 0.0.0.0 -p 3000 -w /data/db.json
+    container_name: vehicle-json-server
+    # network_mode: host
     ports:
-      - 80:80
-    volumes: 
-      - ./tripplanning-ms/vehicle.json:/data/db.json
+      - 3000:3000
+    volumes:
+    - ./tripplanning-ms/vehicle.json:/data/db.json

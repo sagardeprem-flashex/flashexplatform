@@ -2,6 +2,7 @@ package com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix;
 
 import com.flashex.tripplanningmicroservice.lib.model.Packet;
 import com.flashex.tripplanningmicroservice.lib.model.Shipment;
+import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,9 @@ public class Data {
         public String API_Key = "xyz";
         public static String[] addr = new String[]{};
 
-        private Shipment shipment;
+        private static Shipment shipment;
+
+        private static VehicleList vehicleList;
 
 //        private long[] demands;
 
@@ -39,13 +42,38 @@ public class Data {
                 Data.addr = addr;
         }
 
+        public static Shipment getShipment() {
+                return shipment;
+        }
+
+        public static void setShipment(Shipment shipment) {
+                Data.shipment = shipment;
+        }
+
+        public static VehicleList getVehicleList() {
+                return vehicleList;
+        }
+
+        public static void setVehicleList(VehicleList vehicleList) {
+                Data.vehicleList = vehicleList;
+        }
+
         public long[] createDemandArray(Shipment shipment) {
 
                 long[] demandArray = new long[shipment.getPacketList().size()+1];
-                for (int i = 1; i<=shipment.getPacketList().size(); i++) {
-                        demandArray[i] = (long) (shipment.getPacketList().get(i).getHeight() * shipment.getPacketList().get(i).getBreadth() * shipment.getPacketList().get(i).getLength());
+                for (int i = 1; i<shipment.getPacketList().size()+1; i++) {
+                        demandArray[i] = (long) (shipment.getPacketList().get(i-1).getHeight() * shipment.getPacketList().get(i-1).getBreadth() * shipment.getPacketList().get(i-1).getLength());
                 }
                 demandArray[0] = 0;
                 return demandArray;
+        }
+
+        public long[][] createTimeWindow(int startTime, int endTime) {
+                long[][] timeWindow = new long[shipment.getPacketList().size()+1][2];
+                for(int i=0; i<shipment.getPacketList().size()+1; i++) {
+                        timeWindow[i][0] = startTime;
+                        timeWindow[i][1] = endTime;
+                }
+                return timeWindow;
         }
 }

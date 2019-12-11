@@ -5,10 +5,14 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstrain
 import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithDroppingVisit;
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Data;
 import com.flashex.tripplanningmicroservice.lib.model.Packet;
+import com.flashex.tripplanningmicroservice.lib.model.Shipment;
+import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
+import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 //  This service belongs to VRP problem with capacity constraint
@@ -49,19 +53,28 @@ public class ORService {
         data.setAddr(address);
     }
 
+    //  Sends the shipment data to the algorithms
+    public void settingShipment (Shipment shipment) {
+        data.setShipment(shipment);
+    }
+    // Sets the vehicle list from the json server
+    public void settingVehicleDetails (VehicleList vehicleList) {
+        data.setVehicleList(vehicleList);
+    }
+
 //    VRP with capacity constraint function
-    public void VrpfunctionWithCapCons(ArrayList<Packet> packets) throws Exception {
-        vrpWithCapacityConstraint.FinalResult(packets);
+    public List<TripItinerary> VrpfunctionWithCapCons(ArrayList<Packet> packets) throws Exception {
+        return vrpWithCapacityConstraint.FinalResult(packets);
     }
 
 //    VRP with Dropping nodes function
-    public void VrpfuncWithDropNode(ArrayList<Packet> packets) throws Exception {
-        vrpWithDroppingVisit.FinalResult(packets);
+    public List<TripItinerary> VrpfuncWithDropNode(ArrayList<Packet> packets, long penalty) throws Exception {
+        return vrpWithDroppingVisit.FinalResult(packets, penalty);
     }
 
 //    VRP with Time window constraint
-    public void TimeWindowConsFunction(ArrayList<Packet> packets) throws Exception {
-        timeWindowDelivery.FinalResult(packets);
+    public List<TripItinerary> TimeWindowConsFunction(ArrayList<Packet> packets, long penalty) throws Exception {
+        return timeWindowDelivery.FinalResult(packets, penalty);
     }
 
 }

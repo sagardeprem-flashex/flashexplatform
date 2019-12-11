@@ -304,7 +304,7 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-tab>
-    <mat-tab label='Other Algorithms'>
+    <!-- <mat-tab label='Other Algorithms'>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
           <mat-expansion-panel-header>
@@ -313,10 +313,6 @@
           </mat-expansion-panel-header>
           <mat-card>
             <mat-card-content>
-                <!-- <mat-button-toggle-group name="selectedOptimization">
-                    <mat-button-toggle value="distance">Distance</mat-button-toggle>
-                    <mat-button-toggle value="time">Duration</mat-button-toggle>
-                </mat-button-toggle-group> -->
                 <mat-tab-group>
                     <mat-tab label='Summary'>
                         <div class='summary-container'>
@@ -335,7 +331,6 @@
                                 </mat-progress-spinner>
                                 <div class='progress-spinner-data'>
                                     <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
-                                    <!-- <p class="mat-body-2">Occupied</p> -->
                                 </div>
                             </div>
                             <div class='vehicle-details-container'>
@@ -370,7 +365,6 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
                             <ng-template matStepperIcon="edit">
                                 <mat-icon>chevron_right</mat-icon>
                             </ng-template>
@@ -378,7 +372,7 @@
                                 <mat-icon>expand_more</mat-icon>
                             </ng-template>
                         </mat-vertical-stepper>
-                    </mat-tab>
+                    </mat-tab> -->
                 </mat-tab-group>
                         <!-- <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">

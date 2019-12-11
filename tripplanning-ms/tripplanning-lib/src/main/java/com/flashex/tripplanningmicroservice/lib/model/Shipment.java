@@ -15,23 +15,39 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Shipment {
+
     /** String variables **/
-    private String shipmentId;
-    private DeliveryAddress originAddress;
-    /** Integer variables**/
+    public String shipmentId;
+
     /** Date variables **/
-    private Date shipmentDate;
+    public Date shipmentDate;
+
+    public DeliveryAddress originAddress;
+
     /** Objects from local package **/
-    private ArrayList<Packet> packetList;
+    public ArrayList<Packet> packetList;
+
 
     public String[] getAllDeliveryAddresses(){
+
         int packetlistsize = this.packetList.size();
         String[] address = new String[packetlistsize+1];
 
-        for(int i=1; i<=packetlistsize; i++){
-            address[i] = this.packetList.get(i-1).getDeliveryAddress().getAddressLine1().replaceAll(", ","+").replaceAll(" ","+") + "+" +
-                    this.packetList.get(i-1).getDeliveryAddress().getCity()+ "+" +
-                    this.packetList.get(i-1).getDeliveryAddress().getState() + "+" +
+//        for(int i=1; i<=packetlistsize; i++){
+//            address[i] = this.packetList.get(i-1).getDeliveryAddress().getAddressLine1().replaceAll(", ","+").replaceAll(" ","+") + "+" +
+//                    this.packetList.get(i-1).getDeliveryAddress().getCity()+ "+" +
+//                    this.packetList.get(i-1).getDeliveryAddress().getState() + "+" +
+//                    this.packetList.get(i-1).getDeliveryAddress().getPincode();
+//        }
+
+        address[0] = this.originAddress.getAddressLine1()+","+
+                this.originAddress.getCity()+","+this.originAddress.getState()+","+
+                this.originAddress.getState()+","+this.originAddress.getPincode();
+
+        for(int i=1; i<packetlistsize+1; i++){
+            address[i] = this.packetList.get(i-1).getDeliveryAddress().getAddressLine1() + "," +
+                    this.packetList.get(i-1).getDeliveryAddress().getCity()+ "," +
+                    this.packetList.get(i-1).getDeliveryAddress().getState() + "," +
                     this.packetList.get(i-1).getDeliveryAddress().getPincode();
         }
         return address;

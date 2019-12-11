@@ -38,6 +38,11 @@ public class Shipment {
     @CassandraType(type = DataType.Name.TIMESTAMP)
     public Date shipmentDate;
 
+
+    @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
+    public DeliveryAddress originAddress;
+
+
     /** Objects from local package **/
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "packet")
     public ArrayList<Packet> packetList;

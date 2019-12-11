@@ -235,9 +235,15 @@ public class GenerateMatrix {
 
     //This code generates the displacement matrix for the orders based on the latitude and longitude
     public long[][] createDisplacementMatrix(Shipment shipment) {
+
+        logger.info("Shipments inside Displacement matrix: ---------------------------------> "+ shipment);
+
         int noOfPackets = shipment.getPacketList().size();
+        logger.info("noOfPackets --------------------> "+noOfPackets);
         ArrayList<Packet> packetList = shipment.getPacketList();
         long[][] dispMatrix = new long[noOfPackets+1][noOfPackets+1];
+
+        logger.info("Shipment origin address: ---------------------------------> "+ shipment.getOriginAddress());
 
         DeliveryAddress originAddress = shipment.getOriginAddress();
 
@@ -249,10 +255,12 @@ public class GenerateMatrix {
                 lats[i] = originAddress.getLatitude();
                 longs[i] = originAddress.getLongitude();
             } else {
-                lats[i] = packetList.get(i).getDeliveryAddress().getLatitude();
-                longs[i] = packetList.get(i).getDeliveryAddress().getLongitude();
+                lats[i] = packetList.get(i-1).getDeliveryAddress().getLatitude();
+                longs[i] = packetList.get(i-1).getDeliveryAddress().getLongitude();
             }
         }
+
+        logger.info("lats and longs --------------------------> "+lats+"--------"+longs+"lenght"+lats.length);
 
         for (int i=0; i<lats.length; i++) {
             for (int j=i; j<longs.length; j++) {
@@ -261,6 +269,10 @@ public class GenerateMatrix {
             }
         }
 
+        for (int i =0; i<dispMatrix.length; i++ )
+        {
+            logger.info("Displacement matrix  "+i+" -------------------------------------> : "+ dispMatrix[i].toString());
+        }
         return dispMatrix;
 
     }
