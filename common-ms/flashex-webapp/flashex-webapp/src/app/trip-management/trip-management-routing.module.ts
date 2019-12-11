@@ -7,6 +7,7 @@ import { TripDetailsComponent } from './components/trip-details/trip-details.com
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AuthguardService } from '../shared/services/authguard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 
 
 const tripRoutes: Routes = [
@@ -49,6 +50,14 @@ const tripRoutes: Routes = [
         // data: {
         //   expectedRole: 'ROLE_ADMIN'
         // }
+      },
+      {
+        path: 'trackgoogle',
+        component: LiveTrackingGoogleComponent,
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
       },
       {
         path: '',

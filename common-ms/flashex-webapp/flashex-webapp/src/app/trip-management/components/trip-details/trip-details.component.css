@@ -3,17 +3,17 @@ mat-card {
 }
 
 .dropdown {
-  width: 50%;
+    width: 50%;
 }
 
 .toolbar {
-  display: inline-flex;
-  justify-content: space-between;
-  width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .toolbar-title {
-  width: 100%;
+    width: 100%;
 }
 
 .mat-title {
@@ -30,10 +30,6 @@ mat-card {
     flex-direction: column;
     justify-content: center;
     margin: 8vh 0 0 0;
-}
-
-.trips-container {
-    margin-top: 10vh;
 }
 
 .title-part {

@@ -30,5 +30,7 @@ public class Vehicle {
     private String availability;
     @CassandraType(type = DataType.Name.TEXT)
     private String vehicleCrew;
+    @CassandraType(type = DataType.Name.TEXT)
+    private String vehicleImage;
 
 }

@@ -12,6 +12,11 @@ import { TripPlanningPropertiesComponent } from './components/trip-planning-prop
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { SharedModule } from '../shared/shared.module';
+
 
 
 
@@ -23,7 +28,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LiveTrackingComponent,
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
-    DashboardComponent
+    DashboardComponent,
+    LiveTrackingGoogleComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +37,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
+   }),
+   AgmDirectionModule,
+   SharedModule
+
   ],
   entryComponents: [
     TripPlanningPropertiesComponent

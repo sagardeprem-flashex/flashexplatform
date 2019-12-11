@@ -32,13 +32,13 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
       data.forEach(d => {
-        if (d.algorithm === 'VrpwithTimeWindowDelivery') {
+        if (d.algorithm === 'VrpWithTimeWindowDelivery') {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
-        if (d.algorithm === 'VrpwithCapacityConstraint') {
+        if (d.algorithm === 'VrpWithCapacityConstraint') {
           this.vrpWithCCTrips.unshift(d);
         } else
-        if (d.algorithm === 'VrpwithDroppingVisit') {
+        if (d.algorithm === 'VrpWithDroppingVisit') {
           this.vrpWithDVTrips.unshift(d);
         } else {
           this.otherTrips.unshift(d);

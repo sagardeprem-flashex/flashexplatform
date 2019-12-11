@@ -31,7 +31,7 @@ export class TripItineraryService {
 
   private tripItineraryUrl = 'tripplanning-microservice-webservice/api/v1/tripitinerary';
 
-  private vehiclesListUrl = 'http://localhost:80/vehicles';
+  private vehiclesListUrl = 'http://vehicle-json-server:3000/vehicles';
 
   // private optimizationPropertiesUrl = 'http://gateway:8080/tripplanning-microservice-webservice/api/v1/optprops';
 

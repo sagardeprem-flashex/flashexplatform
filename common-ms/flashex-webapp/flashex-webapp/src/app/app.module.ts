@@ -17,7 +17,7 @@ import { HAMMER_LOADER } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

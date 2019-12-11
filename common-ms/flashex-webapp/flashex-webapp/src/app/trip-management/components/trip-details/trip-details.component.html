@@ -1,18 +1,18 @@
 <div class="trips-container">
-  <div class="toolbar">
-    <mat-toolbar class="toolbar-title">Upcoming Orders</mat-toolbar>
-    <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
-    <mat-form-field class="dropdown">
-      <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
-        <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
-          {{algo}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div class="toolbar">
+        <mat-toolbar class="toolbar-title">Upcoming Orders</mat-toolbar>
+        <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
+        <mat-form-field class="dropdown">
+            <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
+                    {{algo}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
-  <mat-tab-group>
-  <!-- <mat-toolbar>
+    <mat-tab-group>
+        <!-- <mat-toolbar>
     <div class='table-header'>
       <p class="title-part mat-body-2">TripId</p>
       <span class="space-filler"></span>
@@ -24,7 +24,7 @@
     <mat-expansion-panel *ngFor="let trip of timeWindowDeliveryTrips; let i = index">
       <mat-expansion-panel-header>
         <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-        <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
+        <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-card>
         <mat-card-content>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class='origin-address-container'>
-                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.address}}</p>
+                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
                         <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                     </div>
                     <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -85,17 +85,17 @@
                             <button mat-button matStepperNext>Next</button>
                         </mat-step>
 
-                        <!-- Icon overrides. -->
-                        <ng-template matStepperIcon="edit">
-                            <mat-icon>chevron_right</mat-icon>
-                        </ng-template>
-                        <ng-template matStepperIcon="done">
-                            <mat-icon>expand_more</mat-icon>
-                        </ng-template>
-                    </mat-vertical-stepper>
-                </mat-tab>
-            </mat-tab-group>
-                    <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
             <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
               {{order.deliveryAddress}}<br><br>
               <button mat-button matStepperPrevious>Back</button>
@@ -119,7 +119,7 @@
         <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-            <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
+            <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-card>
             <mat-card-content>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                         <div class='origin-address-container'>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.address}}</p>
+                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
                             <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                         </div>
                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -180,17 +180,17 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
-                            <ng-template matStepperIcon="edit">
-                                <mat-icon>chevron_right</mat-icon>
-                            </ng-template>
-                            <ng-template matStepperIcon="done">
-                                <mat-icon>expand_more</mat-icon>
-                            </ng-template>
-                        </mat-vertical-stepper>
-                    </mat-tab>
-                </mat-tab-group>
-                        <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
                   {{order.deliveryAddress}}<br><br>
                   <button mat-button matStepperPrevious>Back</button>
@@ -214,7 +214,7 @@
         <mat-expansion-panel *ngFor="let trip of vrpWithDVTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-            <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
+            <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-card>
             <mat-card-content>
@@ -253,7 +253,7 @@
                             </div>
                         </div>
                         <div class='origin-address-container'>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.address}}</p>
+                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
                             <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                         </div>
                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -275,17 +275,17 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
-                            <ng-template matStepperIcon="edit">
-                                <mat-icon>chevron_right</mat-icon>
-                            </ng-template>
-                            <ng-template matStepperIcon="done">
-                                <mat-icon>expand_more</mat-icon>
-                            </ng-template>
-                        </mat-vertical-stepper>
-                    </mat-tab>
-                </mat-tab-group>
-                        <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
                   {{order.deliveryAddress}}<br><br>
                   <button mat-button matStepperPrevious>Back</button>
@@ -304,19 +304,15 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-tab>
-    <mat-tab label='Other Algorithms'>
+    <!-- <mat-tab label='Other Algorithms'>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-            <mat-panel-description>{{trip.plannedStartTime | date:'short'}}  </mat-panel-description>
+            <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
           </mat-expansion-panel-header>
           <mat-card>
             <mat-card-content>
-                <!-- <mat-button-toggle-group name="selectedOptimization">
-                    <mat-button-toggle value="distance">Distance</mat-button-toggle>
-                    <mat-button-toggle value="time">Duration</mat-button-toggle>
-                </mat-button-toggle-group> -->
                 <mat-tab-group>
                     <mat-tab label='Summary'>
                         <div class='summary-container'>
@@ -335,7 +331,6 @@
                                 </mat-progress-spinner>
                                 <div class='progress-spinner-data'>
                                     <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
-                                    <!-- <p class="mat-body-2">Occupied</p> -->
                                 </div>
                             </div>
                             <div class='vehicle-details-container'>
@@ -348,7 +343,7 @@
                             </div>
                         </div>
                         <div class='origin-address-container'>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.address}}</p>
+                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
                             <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                         </div>
                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -370,7 +365,6 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
                             <ng-template matStepperIcon="edit">
                                 <mat-icon>chevron_right</mat-icon>
                             </ng-template>
@@ -380,25 +374,11 @@
                         </mat-vertical-stepper>
                     </mat-tab>
                 </mat-tab-group>
-                        <!-- <mat-vertical-stepper>
-                <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
-                  {{order.deliveryAddress}}<br><br>
-                  <button mat-button matStepperPrevious>Back</button>
-                  <button mat-button matStepperNext>Next</button>
-                </mat-step>
-
-                <ng-template matStepperIcon="edit">
-                  <mat-icon>chevron_right</mat-icon>
-                </ng-template>
-                <ng-template matStepperIcon="done">
-                  <mat-icon>expand_more</mat-icon>
-                </ng-template>
-              </mat-vertical-stepper> -->
                 </mat-card-content>
               </mat-card>
             </mat-expansion-panel>
         </mat-accordion>
-    </mat-tab>
+    </mat-tab> -->
   </mat-tab-group>
     <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
     <mat-card-subtitle>TripId#{{trip.tripItineraryId}}</mat-card-subtitle>
