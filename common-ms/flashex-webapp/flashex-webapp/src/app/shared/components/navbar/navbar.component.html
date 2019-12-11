@@ -7,8 +7,11 @@
                 <mat-icon mat-list-icon>person</mat-icon>
             </button>
         <mat-menu #menu="matMenu">
-            <div> Role: {{role}}</div>
-            <button mat-menu-item (click)="logout()">Logout</button>
+            <div style="width: 10em;">
+                <p style="margin-left: 0.5rem;"> Role: {{role}}</p>
+                <hr>
+                <button mat-stroked-button style="font-size: 1em;margin-left:1em; width: 8em;" (click)="logout()">Logout</button>
+            </div>
         </mat-menu>
     </div>
 
