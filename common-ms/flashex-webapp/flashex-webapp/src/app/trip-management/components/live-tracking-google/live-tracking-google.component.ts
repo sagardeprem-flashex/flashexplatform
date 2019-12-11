@@ -68,13 +68,14 @@ export class LiveTrackingGoogleComponent implements OnInit {
     });
   }
   trips(value) {
+    // console.log('value', value);
     this.routes = [];
     const tripItinerary = this.dataSource[value];
 
-    if (tripItinerary && tripItinerary.orders) {
-      this.markers = tripItinerary.orders;
-      this.lat = tripItinerary.packetLogs[2].deliveryAddress.latitude;
-      this.lng = tripItinerary.packetLogs[2].deliveryAddress.longitude;
+    if (tripItinerary && tripItinerary.packetLogs) {
+      this.markers = tripItinerary.packetLogs;
+      this.lat = tripItinerary.packetLogs[1].deliveryAddress.latitude;
+      this.lng = tripItinerary.packetLogs[1].deliveryAddress.longitude;
       this.zoom = 12;
       this.origin = { lat: this.warehouse.latitude, lng: this.warehouse.longitude };
       this.destination = {
@@ -92,6 +93,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
           lng: tripItinerary.packetLogs[j + 1].deliveryAddress.longitude
         };
         this.routes.push({ origin: this.origin, dest: this.destination });
+        // console.log('route', this.routes);
       }
     }
   }
