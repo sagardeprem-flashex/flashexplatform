@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ITripLog } from '../interfaces/triplog';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,8 @@ export class TriplogService {
   }
 
   private url = 'triptracking-microservice-webservice/api/v1/triplogs';
-  private updateUrl = 'triptracking-microservice-webservice/api/v1/updatelogs';
 
   private dataSource = [];
-  private dataOne;
   public behaviourSubject = new BehaviorSubject<ITripLog[]>(this.dataSource);
 
   load() {
@@ -37,5 +35,11 @@ export class TriplogService {
   updateTripLog(id: string, value: any): Observable<Object> {
     const options = {responseType: 'text' as 'json'};
     return this.http.put('triptracking-microservice-webservice/api/v1/updatelogs?id=' + id, value, options);
+  }
+  // tslint:disable-next-line: ban-types
+  updatePacketLog(id: string, value: any, tripPacketId: string): Observable<Object> {
+    const options = {responseType: 'text' as 'json'};
+    return this.http.put('triptracking-microservice-webservice/api/v1/packetstatus?id=' + id +
+    '&tripPacketId=' + tripPacketId , value, options);
   }
 }

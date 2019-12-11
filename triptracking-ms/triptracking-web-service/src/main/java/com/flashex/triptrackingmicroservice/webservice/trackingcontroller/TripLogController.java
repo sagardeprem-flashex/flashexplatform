@@ -42,4 +42,9 @@ public class TripLogController {
     public TripLog updateLogs(@RequestParam UUID id, @RequestBody TripLog tripLog){
         return tripLogService.updateTripLog(id,tripLog);
     }
+
+    @PutMapping("/packetstatus")
+    public TripLog updatePacketLogs(@RequestParam UUID id, String tripPacketId, @RequestBody TripLog tripLog){
+        return tripLogService.updatePacketLog(id,tripLog,tripPacketId);
+    }
 }

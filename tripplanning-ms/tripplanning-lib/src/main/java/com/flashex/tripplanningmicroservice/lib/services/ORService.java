@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 //  This service belongs to VRP problem with capacity constraint
 
 @Service
-@EnableConfigurationProperties(ServiceProperties.class)
 public class ORService {
 
     private static final Logger logger = Logger.getLogger(ORService.class.getName());

@@ -1,18 +1,18 @@
 <div class="trips-container">
-  <div class="toolbar">
-    <mat-toolbar class="toolbar-title">Upcoming Orders</mat-toolbar>
-    <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
-    <mat-form-field class="dropdown">
-      <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
-        <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
-          {{algo}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div class="toolbar">
+        <mat-toolbar class="toolbar-title">Upcoming Orders</mat-toolbar>
+        <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
+        <mat-form-field class="dropdown">
+            <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
+                    {{algo}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
-  <mat-tab-group>
-  <!-- <mat-toolbar>
+    <mat-tab-group>
+        <!-- <mat-toolbar>
     <div class='table-header'>
       <p class="title-part mat-body-2">TripId</p>
       <span class="space-filler"></span>
@@ -85,17 +85,17 @@
                             <button mat-button matStepperNext>Next</button>
                         </mat-step>
 
-                        <!-- Icon overrides. -->
-                        <ng-template matStepperIcon="edit">
-                            <mat-icon>chevron_right</mat-icon>
-                        </ng-template>
-                        <ng-template matStepperIcon="done">
-                            <mat-icon>expand_more</mat-icon>
-                        </ng-template>
-                    </mat-vertical-stepper>
-                </mat-tab>
-            </mat-tab-group>
-                    <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
             <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
               {{order.deliveryAddress}}<br><br>
               <button mat-button matStepperPrevious>Back</button>
@@ -180,17 +180,17 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
-                            <ng-template matStepperIcon="edit">
-                                <mat-icon>chevron_right</mat-icon>
-                            </ng-template>
-                            <ng-template matStepperIcon="done">
-                                <mat-icon>expand_more</mat-icon>
-                            </ng-template>
-                        </mat-vertical-stepper>
-                    </mat-tab>
-                </mat-tab-group>
-                        <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
                   {{order.deliveryAddress}}<br><br>
                   <button mat-button matStepperPrevious>Back</button>
@@ -275,17 +275,17 @@
                                 <button mat-button matStepperNext>Next</button>
                             </mat-step>
 
-                            <!-- Icon overrides. -->
-                            <ng-template matStepperIcon="edit">
-                                <mat-icon>chevron_right</mat-icon>
-                            </ng-template>
-                            <ng-template matStepperIcon="done">
-                                <mat-icon>expand_more</mat-icon>
-                            </ng-template>
-                        </mat-vertical-stepper>
-                    </mat-tab>
-                </mat-tab-group>
-                        <!-- <mat-vertical-stepper>
+                                        <!-- Icon overrides. -->
+                                        <ng-template matStepperIcon="edit">
+                                            <mat-icon>chevron_right</mat-icon>
+                                        </ng-template>
+                                        <ng-template matStepperIcon="done">
+                                            <mat-icon>expand_more</mat-icon>
+                                        </ng-template>
+                                    </mat-vertical-stepper>
+                                </mat-tab>
+                            </mat-tab-group>
+                            <!-- <mat-vertical-stepper>
                 <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
                   {{order.deliveryAddress}}<br><br>
                   <button mat-button matStepperPrevious>Back</button>
