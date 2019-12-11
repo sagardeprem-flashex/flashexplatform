@@ -3,19 +3,22 @@ mat-form-field {
     width: 320px;
 }
 
-.bodytag {
+.bodytag
+{
     z-index: -5;
     overflow: hidden;
-    position: relative;
     width: 100%;
     background-image: url("../../../../assets/images/longexposurebackgroundimage.jpg");
-    /* background-attachment: fixed; */
-    height: 96.5vh;
+    background-attachment: fixed;
+    height: 103.6vh;
     margin-top: -5ch;
     justify-content: center;
     background-size: 60vh;
     -moz-background-size: cover;
     -webkit-background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin-top: -5rem;
 }
 
 .matcard {
