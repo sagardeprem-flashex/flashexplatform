@@ -19,7 +19,7 @@ describe('LiveTrackingGoogleComponent', () => {
       declarations: [ LiveTrackingGoogleComponent ],
       imports: [MaterialModule,
         AgmCoreModule.forRoot({
-          apiKey: ''
+          apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
         }),
         HttpClientModule,
         BrowserAnimationsModule,

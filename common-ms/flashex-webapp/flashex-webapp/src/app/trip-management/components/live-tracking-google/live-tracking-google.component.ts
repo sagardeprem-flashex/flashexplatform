@@ -17,7 +17,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
   public tripLogById;
   public tripLog: any;
 
-  public location;
+  // public location;
   public markers = [];
   public colors = [];
   public zoom = 10;
@@ -50,39 +50,50 @@ export class LiveTrackingGoogleComponent implements OnInit {
       this.url = '../../../../assets/images/warehouse.png';
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < data.length; i++) {
-        const location = this.dataSource[i];
+        const tripItinerary = this.dataSource[i];
 
-        // console.log(location.orders.length)
-        if (location && location.orders) {
+        // console.log(tripItinerary.orders.length)
+        if (tripItinerary && tripItinerary.packetLogs) {
           const genColor = this.colors;
           // tslint:disable-next-line: prefer-for-of
-          for (let k = 0; k < location.orders.length; k++) {
+          for (let k = 0; k < tripItinerary.packetLogs.length; k++) {
             this.markerColor.push(genColor[i]);
           }
-          this.markers.push(location.orders);
-          this.lat = location.orders[1].deliveryLocation.lat;
-          this.lng = location.orders[1].deliveryLocation.lng;
+          this.markers.push(tripItinerary.packetLogs);
+          this.lat = tripItinerary.packetLogs[1].deliveryAddress.latitude;
+          this.lng = tripItinerary.packetLogs[1].deliveryAddress.longitude;
         }
       }
       this.markers = [].concat.apply([], this.markers);
     });
   }
   trips(value) {
+    // console.log('value', value);
     this.routes = [];
-    const location = this.dataSource[value];
+    const tripItinerary = this.dataSource[value];
 
-    if (location && location.orders) {
-      this.markers = location.orders;
-      this.lat = location.orders[2].deliveryLocation.lat;
-      this.lng = location.orders[2].deliveryLocation.lng;
+    if (tripItinerary && tripItinerary.packetLogs) {
+      this.markers = tripItinerary.packetLogs;
+      this.lat = tripItinerary.packetLogs[1].deliveryAddress.latitude;
+      this.lng = tripItinerary.packetLogs[1].deliveryAddress.longitude;
       this.zoom = 12;
       this.origin = { lat: this.warehouse.latitude, lng: this.warehouse.longitude };
-      this.destination = { lat: location.orders[0].deliveryLocation.lat, lng: location.orders[0].deliveryLocation.lng };
+      this.destination = {
+        lat: tripItinerary.packetLogs[0].deliveryAddress.latitude,
+        lng: tripItinerary.packetLogs[0].deliveryAddress.longitude
+      };
       this.routes.push({ origin: this.origin, dest: this.destination });
-      for (let j = 0; j < location.orders.length - 1; j++) {
-        this.origin = { lat: location.orders[j].deliveryLocation.lat, lng: location.orders[j].deliveryLocation.lng };
-        this.destination = { lat: location.orders[j + 1].deliveryLocation.lat, lng: location.orders[j + 1].deliveryLocation.lng };
+      for (let j = 0; j < tripItinerary.packetLogs.length - 1; j++) {
+        this.origin = {
+          lat: tripItinerary.packetLogs[j].deliveryAddress.latitude,
+          lng: tripItinerary.packetLogs[j].deliveryAddress.longitude
+        };
+        this.destination = {
+          lat: tripItinerary.packetLogs[j + 1].deliveryAddress.latitude,
+          lng: tripItinerary.packetLogs[j + 1].deliveryAddress.longitude
+        };
         this.routes.push({ origin: this.origin, dest: this.destination });
+        // console.log('route', this.routes);
       }
     }
   }
@@ -121,11 +132,11 @@ export class LiveTrackingGoogleComponent implements OnInit {
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
-    if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Delhivery' }];
     } else {
       /* tslint:disable:no-string-literal */
-      this.trip['packetLogs'] = [{packetStatus : 'Delivered'}];
+      this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
     }
     this.tripLogService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
       data => {
