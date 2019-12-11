@@ -26,13 +26,14 @@ export class ShipmentManagementService {
   }
 
   // private url = 'http://localhost:6010/api/v1/packets';
-  private url = 'shipment-microservice-webservice/api/v1/packets';
-  // private url = '  http://localhost:3000/packet';
+  // private url = 'shipment-microservice-webservice/api/v1/packets';
+  private url = 'http://localhost:8200/packets';
   private dataSource = [];
   private shipmentConfiguration = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);
 
-  private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
+  // private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
+  private configUrl = 'http://localhost:3000/config';
   public configSubject = new BehaviorSubject<IShipmentConfig[]>(this.shipmentConfiguration);
 
   load() {
@@ -58,4 +59,16 @@ export class ShipmentManagementService {
       }
     );
   }
+
+  updateConfig(config: IShipmentConfig) {
+    this.http.put(this.configUrl, config).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        this.errormsg = error.message;
+      }
+    );
+  }
 }
+

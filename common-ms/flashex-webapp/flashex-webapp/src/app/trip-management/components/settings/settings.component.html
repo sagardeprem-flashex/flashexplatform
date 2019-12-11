@@ -1,34 +1,107 @@
 <div class="container" style="margin-top: 10vh">
 
   <mat-card class="matcard">
-      <mat-card-header>
-          <mat-card-title>Edit Shipment Generation Configuration</mat-card-title>
-      </mat-card-header>
+    <mat-card-header color="accent">
+      <mat-card-title>Edit Shipment Generation Configuration</mat-card-title>
+    </mat-card-header>
 
-      <mat-card-content>
-          <div class="row col-sm-6" style="max-width:350px;">
-              <table>
-                  <tr>
-                    <th>Config-ID</th>
-                  </tr>
-                  <tr *ngFor="let config of shipmentConfig; index as index">
-                     <td>{{ config.configId }}</td>
-                  </tr>
-                  <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+    <mat-card-content>
 
-                  <!-- <tr *ngFor="let entity of entities; index as index">
-                    <td>
-                      <editable (update)="updateField(index, 'name')">
-                        <ng-template viewMode>{{entity.name}}</ng-template>
-                        <ng-template editMode>
-                          <input [formControl]="getControl(index, 'name')" focusable>
-                        </ng-template>
-                      </editable>
-                    </td>
-                  </tr> -->
-                </table>
-          </div>
-      </mat-card-content>
+      <table>
+        <tr>
+          <th> Binning Properties </th>
+          <th> Enable/Disable </th>
+        </tr>
+
+        <tr>
+          <td> Pincode </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="pincodeChecked"
+              (change)="togglePincode($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+        <tr>
+          <td> Order Type </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="orderTypeChecked"
+              (change)="toggleType($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+        <tr>
+          <td> Priority </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="priorityChecked" [disabled]="false"
+              (change)="togglePriority($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td> Volume </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="true"
+              (change)="toggle($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+        <mat-divider class="divider"></mat-divider>
+        <tr>
+          <td> Maximum Shipment Size </td>
+          <td>
+            <mat-slider class="example-margin" [disabled]="true" [invert]="false" [max]="max" [min]="min" [step]="step"
+              [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [(ngModel)]="maxShipmentSize"
+              [vertical]="vertical">
+            </mat-slider>
+            {{maxShipmentSize}}
+          </td>
+        </tr>
+        <mat-divider class="divider"></mat-divider>
+        <tr>
+          <td>Warehouse Address</td>
+          <td>
+        <tr>
+          <td>
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Street" value="shipmentConfig.originAdress.addressline1">
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+              <input matInput placeholder="City" value="Bengaluru">
+            </mat-form-field>
+
+            <mat-form-field class="form-field">
+              <input matInput placeholder="State" value="Karnataka">
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Pincode" value="560096">
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Latitude" value="77.00">
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field">
+              <input matInput placeholder="Longitude" value="77.00">
+            </mat-form-field>
+          </td>
+        </tr>
+        </td>
+        </tr>
+
+      </table>
+      <button mat-raised-button color="accent" [disabled]="changeOfConfig" (click)="updateConfig()">
+        Save Changes
+      </button>
+    </mat-card-content>
 
   </mat-card>
 

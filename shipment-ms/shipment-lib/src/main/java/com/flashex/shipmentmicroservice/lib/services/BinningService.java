@@ -44,6 +44,7 @@ public class BinningService {
         // show all bins
         logger.info("$$ Current size of bins ----------->: {}", bins.size());
 
+        logger.info("Config---------> {}", getConfig().getGroupStrategy());
         // get binning properties to decide which bin to add to
         logger.info("$$ Retrieving properties to decide bin----------->");
         List<String> packetProperties = getPacketProperties(packet);
@@ -158,12 +159,15 @@ public class BinningService {
 
         List<String> groupBy = getConfig().getGroupStrategy();
         List<String> packetProperty = new ArrayList<>();
-
+        logger.info("In packet properties ------->{}", groupBy);
         for(String groupByField: groupBy){
-            if(groupByField=="PINCODE"){
+            logger.info("In loop, finding groupBy ---------> {}",groupByField  );
+            if(groupByField.equals("PINCODE")){
                 packetProperty.add(Long.toString(packet.getDeliveryAddress().getPincode()));
-            } else if(groupByField=="PACKET_TYPE"){
+                logger.info("found pincode----> {}", packetProperty);
+            } else if(groupByField.equals("PACKET_TYPE")){
                 packetProperty.add(packet.getPacketType());
+                logger.info("found type-----> {}", packetProperty);
            }
         }
         return packetProperty;

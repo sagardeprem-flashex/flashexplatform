@@ -24,4 +24,8 @@ public class BinnerConfigController {
         binnerConfigService.saveConfig(binnerConfig);
     }
 
+    @PutMapping("/binner-config")
+    public void updateConfig(@RequestBody BinnerConfig binnerConfig){
+        binnerConfigService.saveConfig(binnerConfig);
+    }
 }
