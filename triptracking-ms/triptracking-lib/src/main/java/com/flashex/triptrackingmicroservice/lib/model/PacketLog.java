@@ -21,6 +21,24 @@ public class PacketLog {
     private String deliveryDescription;
 
     private String packetStatus;
+    private String customerName;
+    private long phoneNumber;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getPacketId() {
         return packetId;

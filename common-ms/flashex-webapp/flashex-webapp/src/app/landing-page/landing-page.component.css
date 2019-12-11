@@ -17,7 +17,7 @@ ul {
 
 #mainBody h3 {
     font-size: 28px;
-    letter-spacing:3px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: black;
     text-align: center;
@@ -52,14 +52,15 @@ ul {
     width: 100%;
     background-image: url("../../assets/images/longexposurebackgroundimage.jpg");
     background-attachment: fixed;
-    height: 100vh;
-    margin-top: -5ch;
+    height: 103vh;
+    /* margin-top: auto; */
     justify-content: center;
     background-size: 60vh;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
+    margin-top: -5rem;
 }
 
 #flashex-title {
@@ -105,7 +106,6 @@ figcaption {
     #mainBody h2 {
         font-size: 30px;
     }
-
     /* #mainBody .block {padding: 30px;} */
     #mainBody .parallax-one {
         padding-top: 100px;
@@ -125,8 +125,7 @@ figcaption {
     #mainBody h3 {
         font-size: 18px;
     }
-
-    #mainBody p{
+    #mainBody p {
         font-size: 15px;
     }
     .links {
@@ -137,6 +136,7 @@ figcaption {
 .footer {
     background-color: #cfd8dc;
     width: 100%;
+    margin-bottom: -15px;
 }
 
 .container {

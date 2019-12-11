@@ -19,6 +19,7 @@ export class LiveTrackingComponent implements OnInit {
   public addressLine = [];
   public tripLog: any;
   public tripLogById;
+  public scheduledDate = new Date();
   public tripStartTime = new Date();
   public centerMap;
   public markerIcon = ['../../../../assets/mapIcon/78753.svg',
@@ -32,11 +33,12 @@ export class LiveTrackingComponent implements OnInit {
     '../../../../assets/mapIcon/9.svg',
     '../../../../assets/mapIcon/10.svg'
   ];
+  triplogss: Observable<ITripLog[]>;
+  public trip: any;
+  displayedColumns: string[] = ['orderId', 'status'];
 
   constructor(private tripService: TriplogService) { }
-  triplogss: Observable<ITripLog[]>;
   // trip: TripLog = new TripLog();
-  public trip: any;
 
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {

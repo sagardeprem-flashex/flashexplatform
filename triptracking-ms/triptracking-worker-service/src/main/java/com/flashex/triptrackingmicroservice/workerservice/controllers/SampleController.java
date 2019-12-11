@@ -1,6 +1,7 @@
 package com.flashex.triptrackingmicroservice.workerservice.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.flashex.triptrackingmicroservice.lib.model.KafkaStatusMessage;
 import com.flashex.triptrackingmicroservice.lib.model.TripItinerary;
 import com.flashex.triptrackingmicroservice.workerservice.messaging.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
