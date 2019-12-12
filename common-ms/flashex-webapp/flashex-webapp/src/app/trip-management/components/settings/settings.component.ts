@@ -116,6 +116,9 @@ export class SettingsComponent implements OnInit {
     this.settingsDialogRef.close();
   }
 
+  close(): void {
+    this.settingsDialogRef.close();
+  }
   onSubmit() {
 
     this.updatedConfig.configDate = new Date();

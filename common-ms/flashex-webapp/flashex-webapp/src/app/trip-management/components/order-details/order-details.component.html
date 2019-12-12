@@ -1,11 +1,13 @@
 <div class="mat-elevation-z8" style="margin-top:10vh">
-  <mat-toolbar>
-    <span>Orders</span>
-    <span class="settings">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <div>Orders</div>
+    <!-- <span class="settings"> -->
+     <div> 
       <button mat-mini-fab color="primary" (click)="openConfig()">
         <mat-icon>build</mat-icon>
       </button>
-    </span>
+    </div>
+    <!-- </span> -->
   </mat-toolbar>
   <!-- <mat-form-field style="width: 50%; font:bolder; padding-top: 2em; padding-left: 2em; margin-top: 10vh">
 <div class="mat-elevation-z8">

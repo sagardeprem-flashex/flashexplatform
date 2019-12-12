@@ -138,7 +138,7 @@ export class OrderDetailsComponent implements OnInit {
   }
   openConfig(): void {
     const dialogRef = this.dialog.open(SettingsComponent, {
-      width: '60vw',
+      width: '400px',
       height: '70vh',
       data: {}
     });

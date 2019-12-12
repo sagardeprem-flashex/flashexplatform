@@ -26,12 +26,19 @@ table {
 .form-field{
   width: 60%;
 }
-
+/* 
 .td, .th{
   width: 50%;
   padding: 0%;
-}
+} */
 
 .divider{
   width: 10px;
+}
+.mat-card{
+  margin-top: 5px;
+}
+.button{
+  margin: 0 auto;
+  display: table;
 }
