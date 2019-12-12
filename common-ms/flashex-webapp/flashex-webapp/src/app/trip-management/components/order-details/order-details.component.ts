@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
-import { SettingsComponent } from '../settings/settings.component';
 // import { timingSafeEqual } from 'crypto';
 
 @Component({
@@ -38,10 +37,7 @@ export class OrderDetailsComponent implements OnInit {
   public expandedElement: any;
   public expandedDetail: any;
 
-  constructor(
-    private packetService: ShipmentManagementService,
-    public dialog: MatDialog
-    ) {
+  constructor(private packetService: ShipmentManagementService) {
 
   }
   // tslint:disable-next-line: use-lifecycle-interface
@@ -135,17 +131,6 @@ export class OrderDetailsComponent implements OnInit {
         break;
       }
     }
-  }
-  openConfig(): void {
-    const dialogRef = this.dialog.open(SettingsComponent, {
-      width: '400px',
-      height: '70vh',
-      data: {}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 
 

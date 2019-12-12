@@ -39,6 +39,8 @@ public class Packet {
 
 
     /** Date type variables**/
+    @CassandraType(type = DataType.Name.TIMESTAMP)
+    private Date receivedDate;
 //
 //    //to be updated by Trip Planning microservice
     private Date estimatedDeliveryDate;

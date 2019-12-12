@@ -22,16 +22,10 @@ public class BinningService {
     @Autowired
     MessagingService producerService;
 
-    @Autowired
-    BinnerConfigService binnerConfigService;
-
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
     // Local list of bins
     private static List<Bin> bins = new ArrayList<>();
-
-    // config
-    private BinnerConfig binnerConfig;
 
     public List<Bin> getBins() {
         return bins;
@@ -47,7 +41,6 @@ public class BinningService {
         // show all bins
         logger.info("$$ Current size of bins ----------->: {}", bins.size());
 
-        logger.info("Config---------> {}", getConfig().getGroupStrategy());
         // get binning properties to decide which bin to add to
         logger.info("$$ Retrieving properties to decide bin----------->");
         List<String> packetProperties = getPacketProperties(packet);
@@ -85,16 +78,9 @@ public class BinningService {
                 int nPackets = getConfig().getMaxShipmentSize()*nShipments;
                 binPacketsSize.add(nPackets);
 
-                logger.info(" showing nPackets -----> {}",nPackets);
-
                 logger.info("$$ A total of {} packets can be shipped now ----------->", nPackets);
-                logger.info("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                logger.debug("$$ Showing all packets in the bin  ----------->  {}", bins.get(i).getBinnedPackets());
                 logger.debug("$$ Showing packets that can be shipped now  ----------->  {}", bins.get(i).getBinnedPackets().subList(0,nPackets));
                 // pick only those packets which make up the exact shipment size
-
-                logger.info("Maximum shipment size is {}", getConfig().getMaxShipmentSize());
-                logger.debug("Sublist being sent out >>>>>>>>>>>>>>>> {}",bins.get(i).getBinnedPackets().subList(0,nPackets));
                 List<List<Packet>> generatedPacketLists = ListUtils.partition(bins.get(i).getBinnedPackets().subList(0,nPackets),getConfig().getMaxShipmentSize());
 
                 // print the sublists
@@ -104,7 +90,6 @@ public class BinningService {
 
                 logger.info("$$ Number of shipments being generated----------->: {}", generatedPacketLists.size());
                 logger.info("$$ This must be equal to {} ", nShipments);
-                logger.info("Debugging generated packetlists -------> {}", generatedPacketLists );
 
                 // generate shipments from the packet lists
                 for(int j = 0; j<generatedPacketLists.size(); j++){
@@ -112,15 +97,15 @@ public class BinningService {
                     // create a new shipment from the packet list
                     Shipment shipment = new Shipment();
                     shipment.setPacketList(sortPacketList(generatedPacketLists.get(j), getConfig().getSortBy()));
-                    logger.info("Packet list numnber {} -------> {}", j, generatedPacketLists.get(j));
                     shipment.setShipmentDate(new Date());
                     shipment.setShipmentId(UUID.randomUUID().toString());
                     shipment.setOriginAddress(getConfig().getOriginAddress());
 
                     logger.info("Number of packets in this shipment is ----------->: {} ", shipment.getPacketList().size());
-                    shipmentService.saveShipments(Collections.singletonList(shipment));
+
                     producerService.sendShipment(shipment);
                     updatePacketStatus(shipment.getPacketList());
+                    shipmentService.saveShipments(Collections.singletonList(shipment));
                 }
                 logger.info("$$ Bin {} with properties {} processed successfully ----------->",i, bins.get(i).getBinningStrategy());
 
@@ -170,18 +155,13 @@ public class BinningService {
 
         List<String> groupBy = getConfig().getGroupStrategy();
         List<String> packetProperty = new ArrayList<>();
-        logger.info("In packet properties ------->{}", groupBy);
+
         for(String groupByField: groupBy){
-            logger.info("In loop, finding groupBy ---------> {}",groupByField  );
-            if(groupByField.equals("PINCODE")){
+            if(groupByField=="PINCODE"){
                 packetProperty.add(Long.toString(packet.getDeliveryAddress().getPincode()));
-                logger.info("found pincode----> {}", packetProperty);
-            } else if(groupByField.equals("PACKET_TYPE")){
+            } else if(groupByField=="PACKET_TYPE"){
                 packetProperty.add(packet.getPacketType());
-                logger.info("found type-----> {}", packetProperty);
-           } else if(groupByField.equals("PRIORITY")){
-                packetProperty.add(packet.getPriority());
-            }
+           }
         }
         return packetProperty;
     }
@@ -226,7 +206,7 @@ public class BinningService {
 
         List<Packet> sortedPackets = packetList;
         if(sortBy=="RECEIVED_DATE"){
-            sortedPackets.sort(Comparator.comparing(Packet::receivedDate));
+            sortedPackets.sort(Comparator.comparing(Packet::getReceivedDate));
         }
         // more to come
         return sortedPackets;
@@ -235,31 +215,25 @@ public class BinningService {
 
     // gives the config to create bins, hard coded for now
     public BinnerConfig getConfig(){
-        if(binnerConfig == null){
-            binnerConfig = binnerConfigService.getCurrentConfig();
-        }
 
-        return binnerConfig;
+        BinnerConfig config = new BinnerConfig();
+        config.setConfigDate(new Date());
+        config.setConfigId(UUID.randomUUID().toString());
+        config.setSortBy("RECEIVED_DATE");
+        List<String> groupStrategy = new ArrayList<>();
+        groupStrategy.add("PINCODE");
+        groupStrategy.add("PACKET_TYPE");
+        config.setGroupStrategy(groupStrategy);
+        config.setMaxShipmentSize(15);
+        DeliveryAddress origin = new DeliveryAddress();
+        origin.setAddressLine1("13610+Hacks+Cross+Rd+Memphis+TN");
+        origin.setCity("Bengaluru");
+        origin.setState("Karnataka");
+        origin.setLongitude(77.6132100821);
+        origin.setLatitude(12.9207427973);
+        origin.setPincode(560096);
+        config.setOriginAddress(origin);
+        return config;
     }
 
-    public void updateConfig(){
-        this.binnerConfig = binnerConfigService.getCurrentConfig();
-    }
-
-    // refreshes bins if config is changed,  dropped
-//    public void refreshBins(){
-//
-//        List<Bin> refreshedBins = new ArrayList<>();
-//        bins.forEach(bin -> {
-//            refreshedBins.add(bin);
-//        });
-//
-//        bins.clear();
-//
-//        refreshedBins.forEach(bin -> {
-//            bin.getBinnedPackets().forEach(packet -> {
-//                binPacket(packet);
-//            });
-//        });
-//    }
 }

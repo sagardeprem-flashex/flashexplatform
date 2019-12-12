@@ -26,9 +26,4 @@ public class ShipmentGeneration {
         log.info("$$ Shipments scheduled job executed -----------> ");
     }
 
-    @Scheduled(cron = "0 0 8 * * *")
-    public void updateConfig(){
-        binningService.updateConfig();
-    }
-
 }

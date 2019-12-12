@@ -49,6 +49,10 @@ public class Packet {
     @CassandraType(type = DataType.Name.FLOAT)
     private float costOfPacket;
 
+
+    /** Date type variables**/
+    @CassandraType(type = DataType.Name.TIMESTAMP)
+    private Date receivedDate;
     //
 //    //to be updated by Trip Planning microservice
     @CassandraType(type = DataType.Name.TIMESTAMP)
