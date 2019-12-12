@@ -31,10 +31,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
   public color;
   public storedColor = [];
   public url;
-  public warehouse = {
-    latitude: 12.95381,
-    longitude: 77.6375593
-  };
+  public warehouse;
   public routes = [];
 
   displayedColumns: string[] = ['orderId', 'status'];
@@ -51,7 +48,11 @@ export class LiveTrackingGoogleComponent implements OnInit {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < data.length; i++) {
         const tripItinerary = this.dataSource[i];
-
+        this.warehouse = {
+          latitude: tripItinerary.originAddress.latitude,
+          longitude: tripItinerary.originAddress.longitude
+        };
+        console.log('ware', this.warehouse);
         // console.log(tripItinerary.orders.length)
         if (tripItinerary && tripItinerary.packetLogs) {
           const genColor = this.colors;

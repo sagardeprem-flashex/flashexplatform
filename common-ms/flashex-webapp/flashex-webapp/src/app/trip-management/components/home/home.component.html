@@ -32,7 +32,7 @@
                 <mat-icon mat-list-icon>gps_fixed</mat-icon>
                 <div fxFlex="10"></div>
                 <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Track Your Trips</h5>
+                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Live Tracking</h5>
                 </div>
             </mat-list-item>
             <mat-list-item style="color: rgb(140, 140, 140);" routerLink="vehicledetail" routerLinkActive="active">
@@ -42,23 +42,6 @@
                     <h5 class="lead" style="font-size: 1em; font-weight: normal;">Vehicle Details</h5>
                 </div>
             </mat-list-item>
-
-            <mat-list-item style="color: rgb(140, 140, 140);" routerLink="trackgoogle" routerLinkActive="active">
-                <mat-icon mat-list-icon>near_me</mat-icon>
-                <div fxFlex="10"></div>
-                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Track With Google</h5>
-                </div>
-            </mat-list-item>
-            <!-- 
-            <mat-list-item (click)="logout()">
-                <mat-icon mat-list-icon>person</mat-icon>
-                <div fxFlex="10"></div>
-                <div *ngIf="sidenavWidth > 6" class="sidenav-item">
-                    <h5 class="lead" style="font-size: 1em; font-weight: normal;">Logout</h5>
-                </div>
-            </mat-list-item> -->
-
         </mat-nav-list>
     </mat-sidenav>
     <router-outlet></router-outlet>
