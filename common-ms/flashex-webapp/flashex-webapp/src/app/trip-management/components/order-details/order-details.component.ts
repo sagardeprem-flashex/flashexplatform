@@ -86,12 +86,12 @@ export class OrderDetailsComponent implements OnInit {
   funColor(priority) {
 
 
-    if (priority === 'HIGH') {
+    if (priority === 'PREMIUM') {
       return {
 
         color: 'red'
       };
-    } else if (priority === 'MEDIUM') {
+    } else if (priority === 'ORDINARY') {
       return {
         color: 'orange'
       };
