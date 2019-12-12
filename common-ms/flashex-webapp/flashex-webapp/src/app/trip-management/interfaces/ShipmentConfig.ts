@@ -11,5 +11,5 @@ export interface IShipmentConfig {
     latitude: number,
     longitude: number,
     pincode: number
-  }
+  };
 }

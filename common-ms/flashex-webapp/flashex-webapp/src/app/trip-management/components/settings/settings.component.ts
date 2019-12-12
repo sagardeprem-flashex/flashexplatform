@@ -50,7 +50,7 @@ export class SettingsComponent implements OnInit {
     public settingsDialogRef: MatDialogRef<SettingsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IShipmentConfig
   ) {
-
+    this.settingsDialogRef.disableClose = true;
   }
 
   ngOnInit() {
@@ -136,6 +136,7 @@ export class SettingsComponent implements OnInit {
       this.updatedConfig.groupStrategy.push('PRIORITY');
     }
     this.shipmentManagementService.updateConfig(this.updatedConfig);
+    this.settingsDialogRef.close();
   }
 }
 
