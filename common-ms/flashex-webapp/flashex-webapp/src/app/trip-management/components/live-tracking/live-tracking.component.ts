@@ -36,6 +36,8 @@ export class LiveTrackingComponent implements OnInit {
   triplogss: Observable<ITripLog[]>;
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
+  public warehouse;
+
 
   constructor(private tripService: TriplogService) { }
   // trip: TripLog = new TripLog();
@@ -58,6 +60,11 @@ export class LiveTrackingComponent implements OnInit {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
         this.marks = [];
+        this.warehouse = [
+          this.dataSource[i].originAddress.latitude,
+          this.dataSource[i].originAddress.longitude
+        ];
+        console.log('ware', this.warehouse);
         const packets = this.dataSource[i].packetLogs;
         // store delivery address and latitude and longitude to marks
         // tslint:disable-next-line: prefer-for-of
@@ -69,6 +76,15 @@ export class LiveTrackingComponent implements OnInit {
           this.marks.push(mark);
           this.addressLine.push(address);
         }
+        const warehouseMarker: any = tomtom.L.marker(this.warehouse, {
+          icon: tomtom.L.icon({
+            iconUrl: '../../../../assets/images/warehouse.png',
+            iconSize: [40, 40],
+            iconAnchor: [30, 30],
+            popupAnchor: [0, -30]
+          }),
+        }).addTo(map);
+        warehouseMarker.bindPopup(this.addressLine[i]).openPopup();
         // add marker to the map and attached delivery address to each marker
         // tslint:disable-next-line: prefer-for-of
         for (let m = 0; m < this.marks.length; m++) {
