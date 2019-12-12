@@ -41,4 +41,6 @@ public class BinnerConfig {
     @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
     public DeliveryAddress originAddress;
 
+    @CassandraType(type = DataType.Name.FLOAT)
+    private float relaxation;
 }

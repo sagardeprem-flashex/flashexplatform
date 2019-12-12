@@ -31,6 +31,7 @@ export class SettingsComponent implements OnInit {
   changeOfConfig = false;
   tickInterval = 1;
   maxShipmentSize = 15;
+  relaxation = 1.0;
   color = 'accent';
   pincodeChecked = true;
   orderTypeChecked = true;

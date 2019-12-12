@@ -4,6 +4,7 @@ export interface IShipmentConfig {
   groupStrategy: string[];
   sortBy: string;
   maxShipmentSize: number;
+  relaxation: number;
   originAddress: {
     addressLine1: string,
     city: string,

@@ -5,6 +5,7 @@ import com.flashex.shipmentmicroservice.lib.repository.BinnerConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class BinnerConfigService {
     }
 
     public void saveConfig(BinnerConfig binnerConfig){
+        binnerConfig.setConfigDate(new Date());
         binnerConfigRepository.save(binnerConfig);
 //        binningService.refreshBins();
     }
