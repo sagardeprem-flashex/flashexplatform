@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Sanitizer } from '@angular/core';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { TokenStorageService } from '../../../shared/services/token-storage.service';
 import { Router } from '@angular/router';
-import { TriplogService } from 'src/app/trip-management/services/triplog.service';
+import * as moment from 'moment';
+import { TriplogService } from '../../../trip-management/services/triplog.service';
 import {ITripLog, TripLog} from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
 
@@ -18,36 +19,6 @@ declare let tomtom: any;
 })
 export class TripsComponent implements OnInit {
 
-  // public lng;
-  // public lat;
-  // public dataSource;
-  // public orders;
-  // public location;
-  // public markers = [];
-  // public colors = [];
-  // public zoom = 10;
-  // public dir;
-  // public origin: any;
-  // public destination: any;
-  // public renderOptions = {
-  //   suppressMarkers: true,
-  // };
-  // public markerColor = [];
-  // public color;
-  // public storedColor = [];
-  // public url;
-  // public warehouse = {
-  //   latitude: 12.95381,
-  //   longitude: 77.6375593
-  // };
-  // public startTime;
-  // public details;
-  // public id;
-  // public listofOrders;
-  // public tripDetails;
-  // public routes = [];
-  // step = 0;
-
   mobileQuery: MediaQueryList;
   public dataSource;
   public details;
@@ -58,6 +29,10 @@ export class TripsComponent implements OnInit {
   public tripLogById;
   triplogss: Observable<ITripLog[]>;
   public trip: any;
+  public authority;
+  public role;
+  public userName;
+  public scheduledDate = new Date();
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher, private tripService: TriplogService,
@@ -70,6 +45,15 @@ export class TripsComponent implements OnInit {
 
   private mobileQueryListener: () => void;
   ngOnInit() {
+    this.authority = this.tokenStorage.getAuthorities();
+    if (this.authority[0] === 'ROLE_ADMIN') {
+      this.role = 'Manager';
+
+    } else if (this.authority[0] === 'ROLE_USER') {
+      this.role = 'Delivery Executive';
+
+    }
+    this.userName = this.tokenStorage.getUsername();
     setTimeout(() => {
       const map = tomtom.L.map('map', {
         key: 'bvlnbSj7Eu5i41bgOFAlfWPZEuPkDcug',
@@ -85,18 +69,18 @@ export class TripsComponent implements OnInit {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
       this.trips(0);
-      console.log('inti da', this.trips[0]);
     });
   }
   trips(value) {
-    console.log('vali', value);
+    // console.log('vali', value);
     this.details = this.dataSource[value];
-    console.log('deta', this.details);
+    // console.log('deta', this.details);
     if (this.details) {
       this.tripDetails = this.details;
       this.listofOrders = this.details.packetLogs;
-      console.log('lis', this.listofOrders);
+      // console.log('lis', this.listofOrders);
     }
+    // toggle();
 
   }
   getTripLogById(id: string) {
