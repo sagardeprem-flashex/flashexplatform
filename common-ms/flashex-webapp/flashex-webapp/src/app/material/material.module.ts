@@ -21,7 +21,13 @@ import {
   MatTooltipModule,
   MatSortModule,
   MatStepperModule,
+<<<<<<< HEAD
+  MatSlideToggleModule,
+  MatSliderModule,
   MatRadioModule
+=======
+  MatRadioModule
+>>>>>>> 99d146ead008e74470c5b36cc3a5d039a547fc80
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
@@ -54,6 +60,8 @@ const MaterialComponents = [
   MatPasswordStrengthModule,
   MatSortModule,
   MatRippleModule,
+  MatSlideToggleModule,
+  MatSliderModule,
   MatRadioModule
 ];
 

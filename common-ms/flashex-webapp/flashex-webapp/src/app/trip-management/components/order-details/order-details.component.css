@@ -86,3 +86,8 @@ width: 25%
 overflow-wrap: break-word;
 width:400px;
 }
+
+.settings{
+  display: block;
+  margin-left: 80% ;
+}

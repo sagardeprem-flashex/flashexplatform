@@ -1,0 +1,113 @@
+<div class="container">
+  <h1 mat-dialog-title color="accent">
+    Configure Shipment Generation
+  </h1>
+  <mat-card class="matcard">
+    <mat-card-content>
+      <mat-card-subtitle> <mat-icon color="primary"> category</mat-icon>Binning Strategy </mat-card-subtitle>
+      <table>
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <th color="accent"> Binning Properties </th>
+          <th color="accent"> Enable/Disable </th>
+        </tr>
+
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <td> Pincode </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="pincodeChecked"
+              (change)="togglePincode($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <td> Order Type </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="orderTypeChecked"
+              (change)="toggleType($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <td> Priority </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="priorityChecked" [disabled]="false"
+              (change)="togglePriority($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+
+
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <td> Volume </td>
+          <td>
+            <mat-slide-toggle class="example-margin" [color]="color" [checked]="checked" [disabled]="true"
+              (change)="toggle($event)">
+            </mat-slide-toggle>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-content>
+      <table>
+        <tr fxLayout="row" fxLayoutAlign="space-around center">
+          <td>
+            <mat-card-subtitle> Maximum Shipment Size </mat-card-subtitle>
+          </td>
+          <td>
+            <mat-slider class="example-margin" [disabled]="true" [invert]="false" [max]="max" [min]="min" [step]="step"
+              [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [(ngModel)]="maxShipmentSize"
+              [vertical]="vertical">
+            </mat-slider>
+            {{maxShipmentSize}}
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-content>
+      <mat-card-subtitle> <mat-icon color="accent"> my_location</mat-icon> Warehouse Location</mat-card-subtitle>
+      <form [formGroup]="originAddress" (ngSubmit)="onSubmit()">
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Street" formControlName="addressLine1">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="City" formControlName="city">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="State" formControlName="state">
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Pincode" formControlName="pincode">
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Latitude" formControlName="latitude">
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Longitude" formControlName="longitude">
+        </mat-form-field>
+      </form>
+
+    </mat-card-content>
+
+  </mat-card>
+  <mat-card-actions>
+    <button type="submit" mat-raised-button color="primary" [disabled]="changeOfConfig" (click)="onSubmit()">
+      Save Changes
+    </button>
+    <button mat-raised-button color="accent" (click)="close()"> Cancel </button>
+  </mat-card-actions>
+</div>

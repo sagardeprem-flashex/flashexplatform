@@ -7,6 +7,7 @@ import { TripDetailsComponent } from './components/trip-details/trip-details.com
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
 import { AuthguardService } from '../shared/services/authguard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 
 
@@ -14,42 +15,50 @@ const tripRoutes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthguardService],
-    data: {
-      expectedRole: 'ROLE_ADMIN'
-    },
+    // canActivate: [AuthguardService],
+    // data: {
+    //   expectedRole: 'ROLE_ADMIN'
+    // },
     children: [
       {
         path: 'tripitinerary',
         component: TripDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'triptrack',
         component: LiveTrackingComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'orderdetail',
         component: OrderDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'vehicledetail',
         component: VehicleDetailsComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: 'trackgoogle',
