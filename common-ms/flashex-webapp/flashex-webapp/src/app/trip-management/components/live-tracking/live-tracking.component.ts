@@ -31,11 +31,32 @@ export class LiveTrackingComponent implements OnInit {
     '../../../../assets/mapIcon/7.svg',
     '../../../../assets/mapIcon/8.svg',
     '../../../../assets/mapIcon/9.svg',
+    '../../../../assets/mapIcon/10.svg',
+    '../../../../assets/mapIcon/2.svg',
+    '../../../../assets/mapIcon/3.svg',
+    '../../../../assets/mapIcon/4.svg',
+    '../../../../assets/mapIcon/5.svg',
+    '../../../../assets/mapIcon/6.svg',
+    '../../../../assets/mapIcon/7.svg',
+    '../../../../assets/mapIcon/8.svg',
+    '../../../../assets/mapIcon/9.svg',
+    '../../../../assets/mapIcon/10.svg',
+    '../../../../assets/mapIcon/2.svg',
+    '../../../../assets/mapIcon/3.svg',
+    '../../../../assets/mapIcon/4.svg',
+    '../../../../assets/mapIcon/5.svg',
+    '../../../../assets/mapIcon/6.svg',
+    '../../../../assets/mapIcon/7.svg',
+    '../../../../assets/mapIcon/8.svg',
+    '../../../../assets/mapIcon/9.svg',
     '../../../../assets/mapIcon/10.svg'
   ];
+  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange'];
   triplogss: Observable<ITripLog[]>;
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
+  public warehouse;
+
 
   constructor(private tripService: TriplogService) { }
   // trip: TripLog = new TripLog();
@@ -58,6 +79,10 @@ export class LiveTrackingComponent implements OnInit {
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
         this.marks = [];
+        this.warehouse = [
+          this.dataSource[i].originAddress.latitude,
+          this.dataSource[i].originAddress.longitude
+        ];
         const packets = this.dataSource[i].packetLogs;
         // store delivery address and latitude and longitude to marks
         // tslint:disable-next-line: prefer-for-of
@@ -69,6 +94,15 @@ export class LiveTrackingComponent implements OnInit {
           this.marks.push(mark);
           this.addressLine.push(address);
         }
+        const warehouseMarker: any = tomtom.L.marker(this.warehouse, {
+          icon: tomtom.L.icon({
+            iconUrl: '../../../../assets/images/warehouse.png',
+            iconSize: [40, 40],
+            iconAnchor: [30, 30],
+            popupAnchor: [0, -30]
+          }),
+        }).addTo(map);
+        warehouseMarker.bindPopup(this.addressLine[i]).openPopup();
         // add marker to the map and attached delivery address to each marker
         // tslint:disable-next-line: prefer-for-of
         for (let m = 0; m < this.marks.length; m++) {
@@ -83,15 +117,27 @@ export class LiveTrackingComponent implements OnInit {
           marker.bindPopup(this.addressLine[i]).openPopup();
 
         }
+        const routeColor2 = this.routeColors[i];
+        const wareRoutes = this.warehouse.join(',').concat(':').concat(this.marks[0].join(','));
+        tomtom.routing().locations(wareRoutes)
+          // tslint:disable-next-line: only-arrow-functions
+          .go().then(function(routeJson) {
+            const route = tomtom.L.geoJson(routeJson, {
+              style: { color: routeColor2, opacity: 0.5, weight: 5 }
+            }).addTo(map);
+            map.fitBounds(route.getBounds(), { padding: [5, 5] });
+          });
+        // tslint:disable-next-line: prefer-for-of
         for (let n = 0; n < this.marks.length - 1; n++) {
           // store origin and destination for routes
+          const routeColor = this.routeColors[i];
           let routes = [];
           routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
           tomtom.routing().locations(routes)
             // tslint:disable-next-line: only-arrow-functions
             .go().then(function(routeJson) {
               const route = tomtom.L.geoJson(routeJson, {
-                style: { color: 'blue', opacity: 0.5, weight: 5 }
+                style: { color: routeColor, opacity: 0.5, weight: 5 }
               }).addTo(map);
               map.fitBounds(route.getBounds(), { padding: [5, 5] });
             });
@@ -136,11 +182,11 @@ export class LiveTrackingComponent implements OnInit {
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
-    if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Delhivery' }];
     } else {
       /* tslint:disable:no-string-literal */
-      this.trip['packetLogs'] = [{packetStatus : 'Delivered'}];
+      this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
     }
     this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
       data => {

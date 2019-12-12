@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class VehicleList {
 
-    public ArrayList<Vehicle> listofvehicle;
+    public List<Vehicle> listofvehicle;
 
     public int getNoOfVehicle(){
         int vehiclelistsize = this.listofvehicle.size();

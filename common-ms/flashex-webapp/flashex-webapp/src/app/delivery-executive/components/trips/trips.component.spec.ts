@@ -4,8 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '../../../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { TripItineraryService } from '../../services/trip-itinerary.service';
-import { RouterTestingModule } from '@angular/router/testing';
+import { TriplogService } from '../../services/triplog.service';
+import {RouterTestingModule} from '@angular/router/testing';
 
 
 describe('TripsComponent', () => {
@@ -22,7 +22,7 @@ describe('TripsComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule
       ],
-      providers: [TripItineraryService]
+      providers: [TriplogService]
     })
     .compileComponents();
   }));

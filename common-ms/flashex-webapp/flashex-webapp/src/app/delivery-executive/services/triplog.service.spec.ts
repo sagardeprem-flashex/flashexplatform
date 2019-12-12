@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TripItineraryService } from './trip-itinerary.service';
+import { TriplogService } from './triplog.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('TripItineraryService', () => {
@@ -9,7 +9,7 @@ describe('TripItineraryService', () => {
   }));
 
   it('should be created', () => {
-    const service: TripItineraryService = TestBed.get(TripItineraryService);
+    const service: TriplogService = TestBed.get(TriplogService);
     expect(service).toBeTruthy();
   });
 });
