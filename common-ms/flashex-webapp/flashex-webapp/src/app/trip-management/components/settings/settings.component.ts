@@ -4,6 +4,7 @@ import { ShipmentManagementService } from '../../services/shipment-management.se
 import { IShipmentConfig } from '../../interfaces/ShipmentConfig';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-settings',
@@ -34,11 +35,19 @@ export class SettingsComponent implements OnInit {
   pincodeChecked = true;
   orderTypeChecked = true;
   priorityChecked = false;
+  originAddress = new FormGroup({
+    addressLine1: new FormControl(''),
+    city: new FormControl(''),
+    state: new FormControl(''),
+    pincode: new FormControl(''),
+    latitude: new FormControl(''),
+    longitude: new FormControl('')
+  });
   // });
 
   constructor(
     private shipmentManagementService: ShipmentManagementService,
-    public dialogRef: MatDialogRef<SettingsComponent>,
+    public settingsDialogRef: MatDialogRef<SettingsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IShipmentConfig
   ) {
 
@@ -54,7 +63,19 @@ export class SettingsComponent implements OnInit {
             this.pincodeChecked = true;
           } else if (strategy === 'PACKET_TYPE') {
             this.orderTypeChecked = true;
+          } else if (strategy === 'PRIORITY') {
+            this.priorityChecked = true;
           }
+        }
+        if (this.shipmentConfig !== null) {
+          this.originAddress = new FormGroup({
+            addressLine1: new FormControl(this.shipmentConfig.originAddress.addressLine1),
+            city: new FormControl(this.shipmentConfig.originAddress.city),
+            state: new FormControl(this.shipmentConfig.originAddress.state),
+            pincode: new FormControl(this.shipmentConfig.originAddress.pincode),
+            latitude: new FormControl(this.shipmentConfig.originAddress.latitude),
+            longitude: new FormControl(this.shipmentConfig.originAddress.longitude)
+          });
         }
       },
       error => {
@@ -92,13 +113,15 @@ export class SettingsComponent implements OnInit {
 
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.settingsDialogRef.close();
   }
 
-  updateConfig() {
+  onSubmit() {
 
     this.updatedConfig.configDate = new Date();
     this.updatedConfig.maxShipmentSize = this.maxShipmentSize;
+    this.updatedConfig.originAddress = this.originAddress.value;
+    console.log(this.updatedConfig.originAddress);
     this.updatedConfig.groupStrategy = [];
     if (this.pincodeChecked) {
       this.updatedConfig.groupStrategy.push('PINCODE');

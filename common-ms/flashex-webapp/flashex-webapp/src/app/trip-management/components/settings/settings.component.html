@@ -64,41 +64,39 @@
         <tr>
           <td>Warehouse Address</td>
           <td>
-        <tr>
-          <td>
-            <mat-form-field class="form-field">
-              <input matInput placeholder="Street" value="shipmentConfig.originAdress.addressline1">
-            </mat-form-field>
+            <form [formGroup]="originAddress"  (ngSubmit)="onSubmit()">
+              <mat-form-field class="form-field">
+                <input matInput placeholder="Street" formControlName="addressLine1">
+              </mat-form-field>
 
-            <mat-form-field class="form-field">
-              <input matInput placeholder="City" value="Bengaluru">
-            </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput placeholder="City" formControlName="city">
+              </mat-form-field>
 
-            <mat-form-field class="form-field">
-              <input matInput placeholder="State" value="Karnataka">
-            </mat-form-field>
-
-
-            <mat-form-field class="form-field">
-              <input matInput placeholder="Pincode" value="560096">
-            </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput placeholder="State" formControlName="state">
+              </mat-form-field>
 
 
-            <mat-form-field class="form-field">
-              <input matInput placeholder="Latitude" value="77.00">
-            </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput placeholder="Pincode" formControlName="pincode">
+              </mat-form-field>
 
 
-            <mat-form-field class="form-field">
-              <input matInput placeholder="Longitude" value="77.00">
-            </mat-form-field>
+              <mat-form-field class="form-field">
+                <input matInput placeholder="Latitude" formControlName="latitude">
+              </mat-form-field>
+
+
+              <mat-form-field class="form-field">
+                <input matInput placeholder="Longitude" formControlName="longitude">
+              </mat-form-field>
+            </form>
           </td>
-        </tr>
-        </td>
         </tr>
 
       </table>
-      <button mat-raised-button color="accent" [disabled]="changeOfConfig" (click)="updateConfig()">
+      <button type="submit" mat-raised-button color="accent" [disabled]="changeOfConfig" (click)="onSubmit()">
         Save Changes
       </button>
     </mat-card-content>

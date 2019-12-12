@@ -26,8 +26,8 @@ export class ShipmentManagementService {
   }
 
   // private url = 'http://localhost:6010/api/v1/packets';
-  // private url = 'shipment-microservice-webservice/api/v1/packets';
-  private url = 'http://localhost:8200/packets';
+  private url = 'shipment-microservice-webservice/api/v1/packets';
+  // private url = 'http://localhost:8200/packets';
   private dataSource = [];
   private shipmentConfiguration = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);
