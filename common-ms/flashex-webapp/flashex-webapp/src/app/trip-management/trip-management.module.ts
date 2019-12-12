@@ -12,6 +12,10 @@ import { TripPlanningPropertiesComponent } from './components/trip-planning-prop
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StepperDialogComponent } from './components/stepper-dialog/stepper-dialog.component';
+import { StatusDialogComponent } from './components/status-dialog/status-dialog.component';
+
+
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
@@ -31,7 +35,9 @@ import { SettingsComponent } from './components/settings/settings.component';
     TripPlanningPropertiesComponent,
     DashboardComponent,
     LiveTrackingGoogleComponent,
-    SettingsComponent
+    SettingsComponent,
+    StepperDialogComponent,
+    StatusDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -49,7 +55,8 @@ import { SettingsComponent } from './components/settings/settings.component';
   ],
   entryComponents: [
     TripPlanningPropertiesComponent,
-    SettingsComponent
+    SettingsComponent,
+    StatusDialogComponent
   ],
   exports: [
     HomeComponent,

@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,7 +15,7 @@ describe('HomeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent, NavbarComponent],
-      imports: [RouterTestingModule, HttpClientTestingModule, MaterialModule, BrowserAnimationsModule]
+      imports: [RouterTestingModule , HttpClientTestingModule, MaterialModule, BrowserAnimationsModule, SharedModule]
     })
       .compileComponents();
   }));
