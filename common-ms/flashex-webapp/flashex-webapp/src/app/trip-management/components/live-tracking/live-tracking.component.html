@@ -82,6 +82,35 @@
 
         <mat-sidenav-content>
             <div id="map"></div>
+            <div *ngFor="let trip of dataSource">
+                <div *ngIf="trip.tripStart.length>0" style="min-width: 250px;
+                        background-color:#ECEFF1;
+                        color: blue;
+                        text-align: center;
+                        border-radius: 2px;
+                        padding: 16px;
+                        position: fixed;
+                        z-index: 1;
+                        left: 50%;
+                        font-size: 17px;
+                      ">Trip Started
+                    <div *ngFor="let packet of trip.packetLogs">
+                        <div *ngIf="packet.packetStatus.length>0" style="min-width: 250px;
+                            background-color:#ECEFF1;
+                            color: blue;
+                            text-align: center;
+                            border-radius: 2px;
+                            padding: 16px;
+                            position: fixed;
+                            z-index: 1;
+                            left: 50%;
+                            font-size: 17px;
+                          ">Order Delivered
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </mat-sidenav-content>
     </mat-sidenav-container>
 </body>

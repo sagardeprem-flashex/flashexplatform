@@ -8,7 +8,6 @@ import { TokenStorageService } from '../shared/services/token-storage.service';
 })
 export class LandingPageComponent implements OnInit {
   constructor() { }
-
   ngOnInit() {
   }
 }
