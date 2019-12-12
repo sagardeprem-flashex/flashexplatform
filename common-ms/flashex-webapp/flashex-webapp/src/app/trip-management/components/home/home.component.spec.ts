@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from 'src/app/shared/components/navbar/navbar.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -12,10 +13,10 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
-      imports: [RouterTestingModule , HttpClientTestingModule, MaterialModule, BrowserAnimationsModule]
+      declarations: [HomeComponent, NavbarComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, MaterialModule, BrowserAnimationsModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
