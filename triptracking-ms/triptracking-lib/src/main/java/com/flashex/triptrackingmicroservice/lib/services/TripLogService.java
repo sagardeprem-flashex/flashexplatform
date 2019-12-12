@@ -22,7 +22,7 @@ public class TripLogService {
         return tripLogRepository.findAll();
     }
 
-    public TripLog getTripLog(UUID id){
+    public TripLog getTripLog(String id){
         return tripLogRepository.findById(id).orElse(null);
     }
 
@@ -36,14 +36,14 @@ public class TripLogService {
         }
         return savedTripLogs;
     }
-    public TripLog updateTripLog(UUID id, TripLog tripLog) {
+    public TripLog updateTripLog(String  id, TripLog tripLog) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());
         TripLog updateTripLog = tripLogRepository.save(tripLog1);
         return updateTripLog;
     }
-    public TripLog updatePacketLog(UUID id, TripLog tripLog, String tripPacketId) {
+    public TripLog updatePacketLog(String id, TripLog tripLog, String tripPacketId) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());
