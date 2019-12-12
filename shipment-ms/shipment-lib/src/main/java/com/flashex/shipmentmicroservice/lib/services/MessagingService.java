@@ -23,7 +23,8 @@ public class MessagingService {
 
     public void sendShipment(Shipment message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Producing message --> %s",message));
-        if(message.getPacketList().size()>0){
+        if(message.getPacketList().size() != 0){
+            logger.info("Sufficient orders available to be shipped ------------- {}", new ObjectMapper().writeValueAsString(message));
             this.kafkaTemplateJSON.send("Batches", new ObjectMapper().writeValueAsString(message));
         }
     }

@@ -3,6 +3,7 @@ package com.flashex.ordercollector.messagingservice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
+import com.flashex.shipmentmicroservice.lib.model.PacketDummy;
 import com.flashex.shipmentmicroservice.lib.model.Status;
 import com.flashex.shipmentmicroservice.lib.services.PacketService;
 import org.slf4j.Logger;
@@ -26,7 +27,19 @@ public class ConsumerService {
     @KafkaListener(topics = "Order", groupId = "ordercollector")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
-        Packet packet = new ObjectMapper().readValue(message, Packet.class);
+        PacketDummy packetDummy = new ObjectMapper().readValue(message, PacketDummy.class);
+        Packet packet = new Packet();
+        packet.setPacketId(packetDummy.getPacketId());
+        packet.setBreadth(packetDummy.getBreadth());
+        packet.setDeliveryAddress(packetDummy.getDeliveryAddress().get(0));
+        packet.setDeliveryDescription(packetDummy.getDeliveryDescription());
+        packet.setHeight(packetDummy.getHeight());
+        packet.setWeight(packetDummy.getWeight());
+        packet.setCostOfPacket(packetDummy.getCostOfPacket());
+        packet.setCustomer(packetDummy.getCustomer());
+        packet.setPacketType(packetDummy.getPacketType());
+        packet.setLength(packetDummy.getLength());
+        packet.setEstimatedDeliveryDate(packetDummy.getEstimatedDeliveryDate());
         packetService.savePackets(Collections.singletonList(packet));
     }
 }
