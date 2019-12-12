@@ -28,8 +28,10 @@ export class SettingsComponent implements OnInit {
   max = 20;
   min = 5;
   steps = 1;
+  stepsRelax = 0.01;
   changeOfConfig = false;
   tickInterval = 1;
+  tickIntervalRelax = 1;
   maxShipmentSize = 15;
   relaxation = 1.0;
   color = 'accent';
@@ -38,6 +40,8 @@ export class SettingsComponent implements OnInit {
   priorityChecked = false;
   volumeChecked = false;
   thumbLabel = true;
+  minRelaxation = 0.5;
+  maxRelaxation = 1.0;
   originAddress = new FormGroup({
     addressLine1: new FormControl(''),
     city: new FormControl(''),
@@ -135,6 +139,7 @@ export class SettingsComponent implements OnInit {
     this.updatedConfig.configDate = new Date();
     this.updatedConfig.maxShipmentSize = this.maxShipmentSize;
     this.updatedConfig.originAddress = this.originAddress.value;
+    this.updatedConfig.relaxation = this.relaxation;
     console.log(this.updatedConfig.originAddress);
     this.updatedConfig.groupStrategy = [];
     if (this.pincodeChecked) {

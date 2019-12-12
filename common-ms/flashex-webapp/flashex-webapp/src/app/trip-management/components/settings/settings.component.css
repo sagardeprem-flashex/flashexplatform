@@ -42,3 +42,18 @@ table {
   margin: 0 auto;
   display: table;
 }
+.mat-icon{
+  color: primary;
+}
+.align{
+  position: absolute;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.mat-form-field{
+  width:100%;
+  padding: 0 ;
+  margin: 0;
+}
