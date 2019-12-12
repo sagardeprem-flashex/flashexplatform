@@ -138,13 +138,17 @@ public class TimeWindowDelivery {
 
             public final long[] demands = d.createDemandArray(d.getShipment());
 
-            public final long[] vehicleCapacities = d.getVehicleList().vehicleCapacity();
+            public final long[] vehicleCapacities = d.getAlgosVehicleList()[2].vehicleCapacity();
 
-            public final int vehicleNumber = d.getVehicleList().getNoOfVehicle();
+            public final int vehicleNumber = d.getAlgosVehicleList()[2].getNoOfVehicle();
             public final int depot = 0;
 
             public final Shipment shipment = d.getShipment();
-            public final VehicleList vehicleList = d.getVehicleList();
+            public VehicleList vehicleList = d.getAlgosVehicleList()[2];
+
+            public void setAlgosVehicle(VehicleList vehicleList) {
+                d.setAlgoVehicles(vehicleList, 2);
+            }
 
             // Generates the Time Window for each order in Shipment
             public final long[][] timeWindows = d.createTimeWindow(0,120);
@@ -170,6 +174,7 @@ public class TimeWindowDelivery {
             ArrayList<Packet> droppedPackets = new ArrayList();
 
             List<TripItinerary> trips = new ArrayList<TripItinerary>();
+            List<Vehicle> updatedVehicles = new ArrayList<>(vehicleList.getListofvehicle());
 
             String droppedNodes = "Dropped nodes:";
             for (int node = 0; node < routing.size(); ++node) {
@@ -269,8 +274,15 @@ public class TimeWindowDelivery {
                 if(tripItinerary.getPackets().size() != 0) {
                     tripItineraryService.saveTripItinerary(tripItinerary);
                     trips.add(tripItinerary);
+                    vehicleList.getListofvehicle().forEach(vehicle -> {
+                        if(vehicle.getVehicleId().equals(tripItinerary.getVehicle().getVehicleId())) {
+                            updatedVehicles.remove(vehicle);
+                        }
+                    });
                 }
             }
+
+            data.setAlgosVehicle(new VehicleList(updatedVehicles));
 
             logger.info("Total time of all routes: " + totalTime*100 + "m");
             return trips;

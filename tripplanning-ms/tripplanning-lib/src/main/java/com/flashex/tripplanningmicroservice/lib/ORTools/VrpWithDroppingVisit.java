@@ -35,6 +35,9 @@ public class VrpWithDroppingVisit {
     @Autowired
     private ProducerService producerService;
 
+    @Autowired
+    GetJsonServerData getJsonServerData;
+
     /** Minimal VRP.*/
 
     private static final Logger logger = Logger.getLogger(VrpWithDroppingVisit.class.getName());
@@ -103,13 +106,17 @@ public class VrpWithDroppingVisit {
 
         public final long[] demands = d.createDemandArray(d.getShipment());
 
-        public final long[] vehicleCapacities = d.getVehicleList().vehicleCapacity();
+        public final long[] vehicleCapacities = d.getAlgosVehicleList()[1].vehicleCapacity();
 
-        public final int vehicleNumber = d.getVehicleList().getNoOfVehicle();
+        public final int vehicleNumber = d.getAlgosVehicleList()[1].getNoOfVehicle();
         public final int depot = 0;
 
         public final Shipment shipment = d.getShipment();
-        public final VehicleList vehicleList = d.getVehicleList();
+        public VehicleList vehicleList = d.getAlgosVehicleList()[1];
+
+        public void setAlgosVehicle(VehicleList vehicleList) {
+            d.setAlgoVehicles(vehicleList, 1);
+        }
     }
 
     /// @brief Print the solution.
@@ -127,6 +134,7 @@ public class VrpWithDroppingVisit {
 //        logger.info((""+ vehicleList.listofvehicle));
 
         List<TripItinerary> trips = new ArrayList<TripItinerary>();
+        List<Vehicle> updatedVehicles = new ArrayList<>(vehicleList.getListofvehicle());
 
         ArrayList<Packet> droppedPackets = new ArrayList();
 
@@ -225,11 +233,18 @@ public class VrpWithDroppingVisit {
 //            logger.info("Key value" + Locationcord);
             tripItinerary.setDroppedpackets(droppedPackets);
 
+
             if(tripItinerary.getPackets().size() != 0) {
                 tripItineraryService.saveTripItinerary(tripItinerary);
                 trips.add(tripItinerary);
+                vehicleList.getListofvehicle().forEach(vehicle -> {
+                    if(vehicle.getVehicleId().equals(tripItinerary.getVehicle().getVehicleId())) {
+                        updatedVehicles.remove(vehicle);
+                    }
+                });
             }
         }
+        data.setAlgosVehicle(new VehicleList(updatedVehicles));
         logger.info("Total Distance of all routes: " + totalDistance + "m");
         logger.info("Total Load of all routes: " + totalLoad);
         return trips;
