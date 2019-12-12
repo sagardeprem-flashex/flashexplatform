@@ -61,14 +61,14 @@
       <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
 
 
-        <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=25>
+        <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=30>
 
           <table>
 
             <tr>
               <td>
                   <!-- <b>Customer</b> -->
-                  <mat-icon style="font-size:2.5em">account_circle</mat-icon>
+                  <mat-icon style="font-size:2.5em" matTooltip="Customer Name">account_circle</mat-icon>
               </td>
               <td>
               {{element.customer.firstName}} {{element.customer.middleName}} {{element.customer.lastName}}
@@ -77,7 +77,7 @@
             <tr>
               <td>
                   <!-- <b>Address Line</b> -->
-                  <mat-icon style="font-size:2.5em">map</mat-icon>
+                  <mat-icon style="font-size:2.5em" matTooltip="Address">map</mat-icon>
               </td>
               <td>
                   {{element.deliveryAddress.addressLine1}}<br>
@@ -114,7 +114,7 @@
             </tr>
             <tr>
               <td>
-                  <mat-icon style="font-size:2em">perm_phone_msg</mat-icon>
+                  <mat-icon style="font-size:2em" matTooltip="Contact"> perm_phone_msg</mat-icon>
               </td>
               <td>
                +91-{{element.customer.phoneNumber}}
@@ -161,9 +161,12 @@
 
           </div>
 
-          <div>
-              <mat-icon>track_changes</mat-icon>
-              <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="click for updates">See all updates</a>
+          <div class="update">
+
+              <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="click for updates">
+                  <mat-icon style="font-size:3em">track_changes</mat-icon>
+              </a>
+
           </div>
 
           <!-- <div style="margin-top: 1vh">
