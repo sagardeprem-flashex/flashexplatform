@@ -9,7 +9,7 @@ img {
 
  table {
   width: 100%;
-  padding: 20px;
+  padding: 15px;
   cursor: pointer;
 }
 
@@ -46,7 +46,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   /* background: powderblue; */
   /* border: 2px so
 lid black; */
-  padding: 8px;
+  padding: 10px;
   font-weight: lighter;
 }
 
@@ -82,9 +82,9 @@ lid black; */
   font-weight: bolder
 }
 
-td{
-width: 25%
-}
+/* td{
+width: 5%
+} */
 
 .status{
   display: inline
@@ -105,7 +105,7 @@ color:blue;
 
 .update{
   width: 60%;
-  font-size: 1.1em;
+  font-size: 1em;
   /* background: powderblue; */
   /* border: 2px so
 lid black; */
@@ -115,6 +115,7 @@ lid black; */
   margin-left: 7em;
 
 }
- .mat-tooltip {
+/deep/ .mat-tooltip {
   font-size: 14px;
 }
+

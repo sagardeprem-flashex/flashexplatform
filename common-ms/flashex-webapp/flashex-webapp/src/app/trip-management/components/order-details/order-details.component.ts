@@ -139,7 +139,7 @@ export class OrderDetailsComponent implements OnInit {
 
   openDialog(statusList, packetId): void {
     const dialogRef = this.dialog.open(StatusDialogComponent, {
-      width: '400px', data: {status: statusList, packet: packetId}
+       data: {status: statusList, packet: packetId}
     });
     console.log(statusList);
   }

@@ -12,7 +12,7 @@ export class StatusDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<StatusDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      console.log('in status dialog' + data);
+      // console.log('in status dialog' + data);
     }
 
   ngOnInit() {
