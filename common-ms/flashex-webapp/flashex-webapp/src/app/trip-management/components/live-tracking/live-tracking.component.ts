@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TriplogService } from '../../services/triplog.service';
-import { TripLog, ITripLog} from '../../interfaces/triplog';
+import { TripLog, ITripLog } from '../../interfaces/triplog';
 import { Observable } from 'rxjs';
-
 declare let tomtom: any;
 @Component({
   selector: 'app-live-tracking',
@@ -20,13 +19,28 @@ export class LiveTrackingComponent implements OnInit {
   public addressLine = [];
   public tripLog: any;
   public tripLogById;
+  public scheduledDate = new Date();
   public tripStartTime = new Date();
-
+  public centerMap;
+  public markerIcon = ['../../../../assets/mapIcon/78753.svg',
+    '../../../../assets/mapIcon/2.svg',
+    '../../../../assets/mapIcon/3.svg',
+    '../../../../assets/mapIcon/4.svg',
+    '../../../../assets/mapIcon/5.svg',
+    '../../../../assets/mapIcon/6.svg',
+    '../../../../assets/mapIcon/7.svg',
+    '../../../../assets/mapIcon/8.svg',
+    '../../../../assets/mapIcon/9.svg',
+    '../../../../assets/mapIcon/10.svg'
+  ];
+  triplogss: Observable<ITripLog[]>;
+  public trip: any;
+  displayedColumns: string[] = ['orderId', 'status'];
+  public warehouse;
 
 
   constructor(private tripService: TriplogService) { }
-  triplogss: Observable<ITripLog[]>;
-  trip: TripLog = new  TripLog();
+  // trip: TripLog = new TripLog();
 
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {
@@ -40,42 +54,65 @@ export class LiveTrackingComponent implements OnInit {
       const map = tomtom.L.map('map', {
         key: 'bvlnbSj7Eu5i41bgOFAlfWPZEuPkDcug',
         basePath: '/assets/sdk',
-        center: [12.9538477, 77.3507303],
+        center: this.centerMap,
         zoom: 11,
       });
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
+        this.marks = [];
+        this.warehouse = [
+          this.dataSource[i].originAddress.latitude,
+          this.dataSource[i].originAddress.longitude
+        ];
+        console.log('ware', this.warehouse);
         const packets = this.dataSource[i].packetLogs;
         // store delivery address and latitude and longitude to marks
         // tslint:disable-next-line: prefer-for-of
         for (let j = 0; j < packets.length; j++) {
           const deliveryAddress = packets[j].deliveryAddress;
           const mark = [deliveryAddress.latitude, deliveryAddress.longitude];
+          this.centerMap = mark;
           const address = deliveryAddress.addressLine1;
           this.marks.push(mark);
           this.addressLine.push(address);
         }
-      }
-      // add marker to the map and attached delivery address to each marker
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < this.marks.length; i++) {
-        const marker: any = tomtom.L.marker(this.marks[i], {
+        const warehouseMarker: any = tomtom.L.marker(this.warehouse, {
+          icon: tomtom.L.icon({
+            iconUrl: '../../../../assets/images/warehouse.png',
+            iconSize: [40, 40],
+            iconAnchor: [30, 30],
+            popupAnchor: [0, -30]
+          }),
         }).addTo(map);
-        marker.bindPopup(this.addressLine[i]).openPopup();
+        warehouseMarker.bindPopup(this.addressLine[i]).openPopup();
+        // add marker to the map and attached delivery address to each marker
+        // tslint:disable-next-line: prefer-for-of
+        for (let m = 0; m < this.marks.length; m++) {
+          const marker: any = tomtom.L.marker(this.marks[m], {
+            icon: tomtom.L.icon({
+              iconUrl: this.markerIcon[i],
+              iconSize: [40, 40],
+              iconAnchor: [30, 30],
+              popupAnchor: [0, -30]
+            }),
+          }).addTo(map);
+          marker.bindPopup(this.addressLine[i]).openPopup();
 
-      }
-      for (let i = 0; i < this.marks.length - 23; i++) {
-        // store origin and destination for routes
-        const routes = this.marks[i].join(',').concat(':').concat(this.marks[i + 1].join(','));
-        tomtom.routing().locations(routes)
-          // tslint:disable-next-line: only-arrow-functions
-          .go().then(function(routeJson) {
-            const route = tomtom.L.geoJson(routeJson, {
-              style: { color: 'red', opacity: 0.6, weight: 6 }
-            }).addTo(map);
-            map.fitBounds(route.getBounds(), { padding: [5, 5] });
-          });
+        }
+        for (let n = 0; n < this.marks.length - 1; n++) {
+          // store origin and destination for routes
+          let routes = [];
+          routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
+          tomtom.routing().locations(routes)
+            // tslint:disable-next-line: only-arrow-functions
+            .go().then(function(routeJson) {
+              const route = tomtom.L.geoJson(routeJson, {
+                style: { color: 'blue', opacity: 0.5, weight: 5 }
+              }).addTo(map);
+              map.fitBounds(route.getBounds(), { padding: [5, 5] });
+            });
 
+        }
       }
     }, 500);
   }
@@ -88,7 +125,7 @@ export class LiveTrackingComponent implements OnInit {
       this.colors.push(generatedColor);
     });
   }
-
+  // get trip log by its id from backend
   getTripLogById(id: string) {
     this.tripService.getTripLog(id).subscribe(
       data => {
@@ -97,21 +134,34 @@ export class LiveTrackingComponent implements OnInit {
       }
     );
   }
-   updateTripStart(tripId) {
-     this.trip = new TripLog();
-     this.trip.tripStart = new Date();
-    //  this.trip.tripEnd = new Date();
-     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-       this.tripLog = data;
-     });
-   }
-   updateTripEnd(tripId) {
-    // this.trip = new TripLog();
+  // update trip start time for particular trip with its id being fetched from UI
+  updateTripStart(tripId) {
+    this.trip = new TripLog();
+    this.trip.tripStart = new Date();
+    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
+      this.tripLog = data;
+    });
+  }
+  // update trip end time for particular trip with its id being fetched from UI
+  updateTripEnd(tripId) {
     this.trip.tripEnd = new Date();
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
     });
   }
+
+  // update packet status of particular packet id inside a particular trip itinerary
+  updatePacketLog(tripId, tripPacketId) {
+    if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
+    } else {
+      /* tslint:disable:no-string-literal */
+      this.trip['packetLogs'] = [{packetStatus : 'Delivered'}];
+    }
+    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
+      data => {
+        this.tripLog = data;
+      }
+    );
+  }
 }
-
-

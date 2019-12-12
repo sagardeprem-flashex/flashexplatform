@@ -1,5 +1,6 @@
 package com.flashex.triptrackingmicroservice.lib.model;
 import com.datastax.driver.core.DataType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.CassandraType;
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @Table("tripitinerary")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TripItinerary {
     @PrimaryKeyColumn(name = "tripItineraryId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
@@ -38,9 +40,8 @@ public class TripItinerary {
 
     @CassandraType(type = DataType.Name.FLOAT)
     private float occupiedVolume;
-
-    @CassandraType(type = DataType.Name.TEXT)
-    private String originAddress;
+    @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
+    private DeliveryAddress originAddress;
 
     @CassandraType(type = DataType.Name.TEXT)
     private String algorithm;

@@ -16,6 +16,13 @@ import { StepperDialogComponent } from './components/stepper-dialog/stepper-dial
 import { StatusDialogComponent } from './components/status-dialog/status-dialog.component';
 
 
+import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
+import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
+import { SharedModule } from '../shared/shared.module';
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +34,8 @@ import { StatusDialogComponent } from './components/status-dialog/status-dialog.
     TripPlanningPropertiesComponent,
     DashboardComponent,
     StepperDialogComponent,
-    StatusDialogComponent
+    StatusDialogComponent,
+    LiveTrackingGoogleComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +43,13 @@ import { StatusDialogComponent } from './components/status-dialog/status-dialog.
     HttpClientModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
+   }),
+   AgmDirectionModule,
+   SharedModule
+
   ],
   entryComponents: [
     TripPlanningPropertiesComponent,

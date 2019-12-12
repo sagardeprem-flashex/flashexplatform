@@ -1,46 +1,44 @@
 .vehicle-card {
-  max-width: 400px;
-  margin: 5vh 0 5vh 2.5%;
-  /* padding: 0; */
+    max-width: 400px;
+    margin: 5vh 0 5vh 2.5%;
+    /* padding: 0; */
 }
 
 .vehicle-header-image {
-  /* background-image: url('https://loremflickr.com/640/480/vehicle'); */
-  background-size: cover;
+    /* background-image: url('https://loremflickr.com/640/480/vehicle'); */
+    background-size: cover;
 }
+
 
 /* .images {
   height: inherit;
   width: inherit;
 } */
 
-.container {
-  margin-top: 10vh;
-}
-
 .page-title {
-  margin: 2vh 3% 2vh 3%;
-  width: 94%;
-  padding-top: 2vh;
+    margin: 2vh 3% 2vh 3%;
+    width: 94%;
+    padding-top: 2vh;
 }
 
 .details-container-flex {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .card-contents {
-  padding: 0 10% 0 10%;
+    padding: 0 10% 0 10%;
 }
 
 .title-part {
-  color: gray;
+    color: gray;
 }
 
 .card-contents .mat-body-1 {
-  padding: 0 0 0 1rem;
+    padding: 0 0 0 1rem;
 }
+
 
 /* .vehicles-card-container {
   display: flex;
