@@ -51,7 +51,7 @@ export class LiveTrackingComponent implements OnInit {
     '../../../../assets/mapIcon/9.svg',
     '../../../../assets/mapIcon/10.svg'
   ];
-  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange']
+  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange'];
   triplogss: Observable<ITripLog[]>;
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
@@ -135,7 +135,7 @@ export class LiveTrackingComponent implements OnInit {
           routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
           tomtom.routing().locations(routes)
             // tslint:disable-next-line: only-arrow-functions
-            .go().then(function (routeJson) {
+            .go().then(function(routeJson) {
               const route = tomtom.L.geoJson(routeJson, {
                 style: { color: routeColor, opacity: 0.5, weight: 5 }
               }).addTo(map);
