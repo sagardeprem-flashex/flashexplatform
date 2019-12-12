@@ -32,26 +32,9 @@ export class LiveTrackingComponent implements OnInit {
     '../../../../assets/mapIcon/8.svg',
     '../../../../assets/mapIcon/9.svg',
     '../../../../assets/mapIcon/10.svg',
-    '../../../../assets/mapIcon/2.svg',
-    '../../../../assets/mapIcon/3.svg',
-    '../../../../assets/mapIcon/4.svg',
-    '../../../../assets/mapIcon/5.svg',
-    '../../../../assets/mapIcon/6.svg',
-    '../../../../assets/mapIcon/7.svg',
-    '../../../../assets/mapIcon/8.svg',
-    '../../../../assets/mapIcon/9.svg',
-    '../../../../assets/mapIcon/10.svg',
-    '../../../../assets/mapIcon/2.svg',
-    '../../../../assets/mapIcon/3.svg',
-    '../../../../assets/mapIcon/4.svg',
-    '../../../../assets/mapIcon/5.svg',
-    '../../../../assets/mapIcon/6.svg',
-    '../../../../assets/mapIcon/7.svg',
-    '../../../../assets/mapIcon/8.svg',
-    '../../../../assets/mapIcon/9.svg',
-    '../../../../assets/mapIcon/10.svg'
   ];
-  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange'];
+  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange', 'lightblue',
+    'lightred', 'black'];
   triplogss: Observable<ITripLog[]>;
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
@@ -78,6 +61,10 @@ export class LiveTrackingComponent implements OnInit {
       });
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
+        let p = 0 + i;
+        if (p > 10) {
+          p = 0;
+        }
         this.marks = [];
         this.warehouse = [
           this.dataSource[i].originAddress.latitude,
@@ -108,7 +95,7 @@ export class LiveTrackingComponent implements OnInit {
         for (let m = 0; m < this.marks.length; m++) {
           const marker: any = tomtom.L.marker(this.marks[m], {
             icon: tomtom.L.icon({
-              iconUrl: this.markerIcon[i],
+              iconUrl: this.markerIcon[p],
               iconSize: [40, 40],
               iconAnchor: [30, 30],
               popupAnchor: [0, -30]
@@ -130,7 +117,7 @@ export class LiveTrackingComponent implements OnInit {
         // tslint:disable-next-line: prefer-for-of
         for (let n = 0; n < this.marks.length - 1; n++) {
           // store origin and destination for routes
-          const routeColor = this.routeColors[i];
+          const routeColor = this.routeColors[p];
           let routes = [];
           routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
           tomtom.routing().locations(routes)

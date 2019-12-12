@@ -58,7 +58,8 @@ public class ORService {
     }
     // Sets the vehicle list from the json server
     public void settingVehicleDetails (VehicleList vehicleList) {
-        data.setVehicleList(vehicleList);
+        data.setAllVehicleList(vehicleList);
+        data.setAlgosVehicleList(new VehicleList[]{vehicleList, vehicleList, vehicleList});
     }
 
 //    VRP with capacity constraint function
