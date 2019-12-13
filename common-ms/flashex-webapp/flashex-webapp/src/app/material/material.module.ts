@@ -23,11 +23,11 @@ import {
   MatStepperModule,
   MatRadioModule,
   MatSlideToggleModule,
-  MatSliderModule
+  MatSliderModule,
+  MatIconModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
-import { MatIconModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
@@ -59,7 +59,8 @@ const MaterialComponents = [
   MatRadioModule,
   MatSlideToggleModule,
   MatSliderModule,
-  MatRadioModule
+  MatRadioModule,
+  MatIconModule
 ];
 
 @NgModule({

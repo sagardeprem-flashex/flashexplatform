@@ -62,6 +62,11 @@
         <tr fxLayout="row" fxLayoutAlign="space-around center" *ngIf="priorityChecked">
           <td>
             Priority Relaxation
+            <button mat-icon-button color="primary" aria-label="information icon">
+                <span title="Controls processing time. A value of 1.0 is equivalent to an Ordinary order">
+                  <mat-icon>info</mat-icon>
+                </span>
+              </button>
           </td>
           <td>
             <mat-slider class="example-margin" [invert]="false" [max]="maxRelaxation" [min]="minRelaxation"
