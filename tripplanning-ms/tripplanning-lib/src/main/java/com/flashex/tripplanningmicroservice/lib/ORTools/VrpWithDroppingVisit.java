@@ -127,7 +127,6 @@ public class VrpWithDroppingVisit {
 //        HashMap<String, Set<String>> Locationcord = new HashMap();
 
         Shipment shipment = data.shipment;
-//        Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
         VehicleList vehicleList = data.vehicleList;

@@ -1,8 +1,10 @@
 package com.flashex.tripplanningmicroservice.workerservice.schedules;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
 import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
 import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.bingdm.DataModel;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +19,8 @@ import java.util.logging.Logger;
 @Service
 public class VehicleFetcher {
 
+//    DataModel dataModel = new DataModel();
+
     @Autowired
     GetJsonServerData getJsonServerData;
 
@@ -25,7 +29,10 @@ public class VehicleFetcher {
 
     private final Logger logger = Logger.getLogger(VehicleFetcher.class.getName());
 
-//    @Scheduled(cron = "0 0 0/24 ? * * ")
+    public VehicleFetcher() throws JsonProcessingException {
+    }
+
+    //    @Scheduled(cron = "0 0 0/24 ? * * ")
     @Scheduled(cron = "0 * 6 * * *")
     public void fetchVehicles() throws IOException {
 
@@ -37,6 +44,8 @@ public class VehicleFetcher {
         VehicleList vehicleList = new VehicleList();
         vehicleList.setListofvehicle(vehicles);
         orService.settingVehicleDetails(vehicleList);
+        DataModel.setVehicleList(vehicleList,0);
+
         logger.info("Vehicle List has been updated!");
     }
 }

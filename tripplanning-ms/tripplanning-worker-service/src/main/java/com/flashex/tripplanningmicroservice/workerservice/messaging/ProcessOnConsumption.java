@@ -1,23 +1,18 @@
 package com.flashex.tripplanningmicroservice.workerservice.messaging;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.tripplanningmicroservice.lib.getjsonserver.GetJsonServerData;
+import com.flashex.tripplanningmicroservice.lib.ORTools.bingsupport.algorithms.VrpWithCapacityConstraintWithBing;
 import com.flashex.tripplanningmicroservice.lib.model.Shipment;
 import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
-import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
-import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import com.flashex.tripplanningmicroservice.lib.model.bingdm.DataModel;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
 import com.flashex.tripplanningmicroservice.workerservice.schedules.VehicleFetcher;
-import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,6 +25,9 @@ public class ProcessOnConsumption {
 
     @Autowired
     ProducerService producerService;
+
+    @Autowired
+    VrpWithCapacityConstraintWithBing vrpWithCapacityConstraintWithBing;
 
     @Autowired
     VehicleFetcher vehicleFetcher;
@@ -45,6 +43,7 @@ public class ProcessOnConsumption {
 //        String[] deliveryAddresses = shipmentReceived.getAllDeliveryAddresses();
 //        logger.info("deliveryAddresses -------------------------> "+deliveryAddresses);
         orService.settingShipment(shipmentReceived);
+        DataModel dataModel = new DataModel(shipmentReceived, 0);
 
         if (this.counter == 0){
             vehicleFetcher.fetchVehicles();
@@ -64,8 +63,12 @@ public class ProcessOnConsumption {
         List<TripItinerary> timeWindowTrips = orService.TimeWindowConsFunction(shipmentReceived.getPacketList(), 50);
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-        for(int i=0; i<capConstraintTrips.size(); i++) {
-            producerService.sendMessageJSON(capConstraintTrips.get(i));
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Capacity Constraint with Bing: Starts here>>>>>>>>>>>>>>>>>>>>>>>>>");
+        List<TripItinerary> capConstraintTripsWithBing = vrpWithCapacityConstraintWithBing.FinalResult(dataModel);
+        logger.info("<<<<<<<<<<<<<<<<<<<<<<Capacity Constraint with Bing: Ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        for(int i=0; i<capConstraintTripsWithBing.size(); i++) {
+            producerService.sendMessageJSON(capConstraintTripsWithBing.get(i));
         }
     }
 
