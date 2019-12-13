@@ -74,7 +74,7 @@ export class OrderDetailsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.packetList = data;
-      console.log(this.packetList);
+      //console.log(this.packetList);
 
     });
   }
@@ -141,7 +141,7 @@ export class OrderDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(StatusDialogComponent, {
        data: {status: statusList, packet: packetId}
     });
-    console.log(statusList);
+   // console.log(statusList);
   }
 }
 
