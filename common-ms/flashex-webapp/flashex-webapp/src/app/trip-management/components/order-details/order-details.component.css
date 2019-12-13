@@ -10,7 +10,8 @@ img {
  table {
   width: 100%;
   padding: 15px;
-  cursor: pointer;
+  /* cursor: pointer; */
+
 }
 
 tr.example-detail-row {
@@ -48,6 +49,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 lid black; */
   padding: 10px;
   font-weight: lighter;
+
 }
 
 .example-element-symbol {
@@ -82,8 +84,9 @@ lid black; */
   font-weight: bolder
 }
 
-/* td{
-width: 5%
+/* td[rowspan]{
+vertical-align: top;
+text-align: left;
 } */
 
 .status{
@@ -99,26 +102,18 @@ width:400px;
 /* font-weight: bold; */
 overflow-wrap: break-word;
 }
-<<<<<<< HEAD
-mat-icon{
-color:accent;
-}
-=======
->>>>>>> 40f215fb1d87d62d646addddc19e39637c34a476
 
 .update{
   width: 60%;
-  font-size: 1em;
   /* background: powderblue; */
   /* border: 2px so
 lid black; */
 
-  font-weight: lighter;
+
   margin-top: 4.2em;
-  margin-left: 7em;
+  margin-left: 18em;
 
 }
 /deep/ .mat-tooltip {
   font-size: 14px;
 }
-

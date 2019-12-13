@@ -27,13 +27,9 @@ export class TripItineraryService {
     })
   };
 
-  private tripItineraryUrl = '../../../assets/tripsListFormat2.json';
+  // private tripItineraryUrl = '../../../assets/tripsListFormat2.json';
 
-<<<<<<< HEAD
-  // private tripItineraryUrl = 'tripplanning-microservice-webservice/api/v1/tripitinerary';
-=======
   private tripItineraryUrl = 'tripplanning-microservice-webservice/api/v1/tripitinerary';
->>>>>>> 40f215fb1d87d62d646addddc19e39637c34a476
   // private tripItineraryUrl = 'http://localhost:3000/tripItinerary';
 
   private vehiclesListUrl = 'http://vehicle-json-server:3000/vehicles';

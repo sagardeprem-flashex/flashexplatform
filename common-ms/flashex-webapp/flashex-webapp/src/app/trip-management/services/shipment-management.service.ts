@@ -23,16 +23,10 @@ export class ShipmentManagementService {
     this.loadConfig();
   }
 
-<<<<<<< HEAD
-  //  private url = 'http://localhost:6010/api/v1/packets';
- //  private url = 'shipment-microservice-webservice/api/v1/packets';
- private url = '  http://localhost:3000/packet';
-=======
-  private url = 'shipment-microservice-webservice/api/v1/packets';
-  // private url = '  http://localhost:3000/packet';
-  private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
+   private url = 'shipment-microservice-webservice/api/v1/packets';
+   // private url = '  http://localhost:3000/packet';
+   private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
 
->>>>>>> 40f215fb1d87d62d646addddc19e39637c34a476
   private dataSource = [];
   private shipmentConfiguration = [];
   public behaviourSubject = new BehaviorSubject<IPacket[]>(this.dataSource);

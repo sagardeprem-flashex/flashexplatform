@@ -35,7 +35,7 @@ export class OrderDetailsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'currentStatus'];
+  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public transformedData = [];
@@ -75,7 +75,7 @@ export class OrderDetailsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.packetList = data;
-      //console.log(this.packetList);
+      // console.log(this.packetList);
 
     });
   }
@@ -93,11 +93,11 @@ export class OrderDetailsComponent implements OnInit {
       };
     } else if (priority === 'ORDINARY') {
       return {
-        color: 'orange'
+        color: 'green'
       };
     } else {
       return {
-        color: 'green'
+        color: 'blue'
       };
     }
 
