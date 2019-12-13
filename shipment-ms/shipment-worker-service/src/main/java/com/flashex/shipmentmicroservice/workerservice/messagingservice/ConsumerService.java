@@ -3,6 +3,7 @@ package com.flashex.shipmentmicroservice.workerservice.messagingservice;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flashex.shipmentmicroservice.lib.model.Packet;
+import com.flashex.shipmentmicroservice.lib.model.PacketDummy;
 import com.flashex.shipmentmicroservice.lib.services.BinningService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,10 +27,20 @@ public class ConsumerService {
 
     @KafkaListener(topics = "Order", groupId = "shipment_gen")
     public void consume(String message) throws JsonProcessingException {
-        Packet packet = new ObjectMapper().readValue(message, Packet.class);
         logger.info(String.format("$$ ->Successfully parsed received order, binning received order -> %s",message));
-	// packetService.savePackets(Collections.singletonList(packet));
-        // logger.info(String.format("$$ ->Successfully saved to db ->"));
+        PacketDummy packetDummy = new ObjectMapper().readValue(message, PacketDummy.class);
+        Packet packet = new Packet();
+        packet.setPacketId(packetDummy.getPacketId());
+        packet.setBreadth(packetDummy.getBreadth());
+        packet.setDeliveryAddress(packetDummy.getDeliveryAddress().get(0));
+        packet.setDeliveryDescription(packetDummy.getDeliveryDescription());
+        packet.setHeight(packetDummy.getHeight());
+        packet.setWeight(packetDummy.getWeight());
+        packet.setCostOfPacket(packetDummy.getCostOfPacket());
+        packet.setCustomer(packetDummy.getCustomer());
+        packet.setPacketType(packetDummy.getPacketType());
+        packet.setLength(packetDummy.getLength());
+        packet.setEstimatedDeliveryDate(packetDummy.getEstimatedDeliveryDate());
         binningService.binPacket(packet);
     }
 }
