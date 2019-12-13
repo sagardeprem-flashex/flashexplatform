@@ -39,6 +39,7 @@ export class LiveTrackingComponent implements OnInit {
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
   public warehouse;
+  public tripDate = new Date().toDateString();
 
 
   constructor(private tripService: TriplogService) { }
@@ -49,6 +50,7 @@ export class LiveTrackingComponent implements OnInit {
       this.dataSource = data;
       this.getRandomColor();
     });
+
     // dom should create map container and then only tomtom will load map
     // on refreshing page map container is being created after tomtom already called
     // so time out is provided to wait for dom to be created

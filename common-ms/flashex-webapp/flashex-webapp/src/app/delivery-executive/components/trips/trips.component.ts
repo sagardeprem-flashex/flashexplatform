@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { TriplogService } from '../../../trip-management/services/triplog.service';
 import {ITripLog, TripLog} from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 declare let L;
 declare let tomtom: any;
