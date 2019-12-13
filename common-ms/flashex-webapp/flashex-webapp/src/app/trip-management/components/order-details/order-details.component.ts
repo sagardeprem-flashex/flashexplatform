@@ -57,10 +57,10 @@ export class OrderDetailsComponent implements OnInit {
       data.forEach(d => {
         temp = d;
         // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment(d.receivedDate).format('D/M/YYYY hh:mm:ss a');
+        temp.receivedDate = moment(d.receivedDate).format('M/D/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
 
-        dateValue = moment(d.receivedDate).format('D/M/YYYY');
+        dateValue = moment(d.receivedDate).format('M/D/YYYY');
         this.dateList.push(dateValue);
         // console.log(temp.currentStatus);
 
@@ -72,7 +72,7 @@ export class OrderDetailsComponent implements OnInit {
         dt.statusList.forEach(d => {
           const obj = {
             statusValue : d.statusValue,
-            timeStamp : moment(d.timeStamp).format('D/M/YYYY hh:mm:ss a')
+            timeStamp : moment(d.timeStamp).format('M/D/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
         });
