@@ -99,9 +99,12 @@ width:400px;
 /* font-weight: bold; */
 overflow-wrap: break-word;
 }
+<<<<<<< HEAD
 mat-icon{
 color:accent;
 }
+=======
+>>>>>>> 40f215fb1d87d62d646addddc19e39637c34a476
 
 .update{
   width: 60%;

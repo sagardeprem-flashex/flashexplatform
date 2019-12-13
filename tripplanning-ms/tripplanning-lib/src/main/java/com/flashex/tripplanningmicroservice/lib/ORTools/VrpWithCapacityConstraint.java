@@ -28,6 +28,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @EnableAutoConfiguration
 public class VrpWithCapacityConstraint {
@@ -101,13 +102,18 @@ public class VrpWithCapacityConstraint {
 
         public final long[] demands = d.createDemandArray(d.getShipment());
 
-        public final long[] vehicleCapacities = d.getVehicleList().vehicleCapacity();
+        public final long[] vehicleCapacities = d.getAlgosVehicleList()[0].vehicleCapacity();
 
-        public final int vehicleNumber = d.getVehicleList().getNoOfVehicle();
+        public final int vehicleNumber = d.getAlgosVehicleList()[0].getNoOfVehicle();
         public final int depot = 0;
 
         public final Shipment shipment = d.getShipment();
-        public final VehicleList vehicleList = d.getVehicleList();
+        public VehicleList vehicleList = d.getAlgosVehicleList()[0];
+
+        public void setAlgosVehicle(VehicleList vehicleList) {
+            d.setAlgoVehicles(vehicleList, 0);
+        }
+
     }
 
     /// @brief Print the solution.
@@ -129,6 +135,7 @@ public class VrpWithCapacityConstraint {
         long totalLoad = 0;
 
         List<TripItinerary> trips = new ArrayList<TripItinerary>();
+        List<Vehicle> updatedVehicles = new ArrayList<>(vehicleList.getListofvehicle());
 
         for (int i = 0; i < data.vehicleNumber; ++i) {
 
@@ -202,9 +209,19 @@ public class VrpWithCapacityConstraint {
             if(tripItinerary.getPackets().size() != 0) {
                 tripItineraryService.saveTripItinerary(tripItinerary);
                 trips.add(tripItinerary);
+                vehicleList.getListofvehicle().forEach(vehicle -> {
+                    if(vehicle.getVehicleId().equals(tripItinerary.getVehicle().getVehicleId())) {
+                        updatedVehicles.remove(vehicle);
+                    }
+                });
             }
 
         }
+
+        data.setAlgosVehicle(new VehicleList(updatedVehicles));
+        updatedVehicles.forEach(vehicle -> {
+            logger.info("Updated vehicle list ----------------> "+vehicle.getVehicleId());
+        });
 
         logger.info("Total distance of all routes: " + totalDistance + "m");
         logger.info("Total load of all routes: " + totalLoad);

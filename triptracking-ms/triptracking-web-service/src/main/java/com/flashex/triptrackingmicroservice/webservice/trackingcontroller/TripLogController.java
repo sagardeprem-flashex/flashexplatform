@@ -29,7 +29,7 @@ public class TripLogController {
     }
 
     @GetMapping("/triplog")
-    public TripLog getTripLogById( @RequestParam UUID id){
+    public TripLog getTripLogById( @RequestParam String id){
         return tripLogService.getTripLog(id);
     }
 
@@ -39,12 +39,12 @@ public class TripLogController {
     }
 
     @PutMapping("/updatelogs")
-    public TripLog updateLogs(@RequestParam UUID id, @RequestBody TripLog tripLog){
+    public TripLog updateLogs(@RequestParam String id, @RequestBody TripLog tripLog){
         return tripLogService.updateTripLog(id,tripLog);
     }
 
     @PutMapping("/packetstatus")
-    public TripLog updatePacketLogs(@RequestParam UUID id, String tripPacketId, @RequestBody TripLog tripLog){
+    public TripLog updatePacketLogs(@RequestParam String id, String tripPacketId, @RequestBody TripLog tripLog){
         return tripLogService.updatePacketLog(id,tripLog,tripPacketId);
     }
 }

@@ -1,179 +1,167 @@
-
-<div class="mat-elevation-z8" style="margin-top:0vh">
-  <mat-toolbar>Orders
+<div class="mat-elevation-z8">
+  <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
+    <div>Orders</div>
+    <div>
+      <button mat-button color="accent" (click)="openConfig()" [disableRipple]="true">
+        <mat-icon color="accent">build</mat-icon>
+      </button>
+    </div>
   </mat-toolbar>
   <!-- <mat-form-field style="width: 50%; font:bolder; padding-top: 2em; padding-left: 2em; margin-top: 10vh">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search"
       >
   </mat-form-field> -->
 
-<div  fxLayout="row" fxLayoutAlign="space-between center" >
+  <div fxLayout="row" fxLayoutAlign="space-between center">
     <mat-form-field style="width: 50%;padding-left: 1em">
-        <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search" style="color: black"
-        >
+      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search" style="color: black">
     </mat-form-field>
-  <mat-paginator [pageSizeOptions]="[5, 10, 50, 100]" showFirstLastButtons>
-  </mat-paginator>
-</div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 50, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
 
-<table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-  <ng-container matColumnDef="packetId">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Packet Id </th>
-    <td mat-cell *matCellDef="let element" style="font-weight: bold"> {{element.packetId}} </td>
-  </ng-container>
+  <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="packetId">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Packet Id </th>
+      <td mat-cell *matCellDef="let element" style="font-weight: bold"> {{element.packetId}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="receivedDate">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Received Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.receivedDate}} </td>
-  </ng-container>
+    <ng-container matColumnDef="receivedDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Received Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.receivedDate | date: 'short'}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="packetType">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Type
-        <button mat-icon-button color="accent" aria-label="information icon" >
-            <span title="Type of the packet received. It can be Flammable, Perishable, Regular, Fragile etc."><mat-icon>info</mat-icon></span>
-          </button>
-    </th>
-    <td mat-cell *matCellDef="let element"> {{element.packetType}} </td>
-  </ng-container>
+    <ng-container matColumnDef="packetType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Type
+        <button mat-icon-button color="primary" aria-label="information icon" >
+          <span title="Type of the packet received. It can be Flammable, Perishable, Regular, Fragile etc.">
+            <mat-icon>info</mat-icon>
+          </span>
+        </button>
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.packetType}} </td>
+    </ng-container>
 
-  <!-- <ng-container matColumnDef="priority">
+    <!-- <ng-container matColumnDef="priority">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Priority </th>
     <td mat-cell *matCellDef="let element" [ngStyle]="funColor(element.priority)" class="priorityClass"> {{element.priority}} </td>
   </ng-container> -->
 
-  <ng-container matColumnDef="currentStatus">
+    <ng-container matColumnDef="currentStatus">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Status
-        <button mat-icon-button color="accent" aria-label="information icon">
-          <span title="Status of the Packet. It can be Received, Processing, Dispatched, Delivered, Undelivered etc."><mat-icon>info</mat-icon></span>
+        <button mat-icon-button color="primary" aria-label="information icon">
+          <span title="Status of the Packet. It can be Received, Processing, Dispatched, Delivered, Undelivered etc.">
+            <mat-icon>info</mat-icon>
+          </span>
         </button>
       </th>
-      <td mat-cell *matCellDef="let element" [ngStyle]="statusColor(element.currentStatus)" class="priorityClass" > {{element.currentStatus}} </td>
+      <td mat-cell *matCellDef="let element" [ngStyle]="statusColor(element.currentStatus)" class="priorityClass">
+        {{element.currentStatus}} </td>
     </ng-container>
 
-  <!-- <ng-container matColumnDef="packetDescription" style="white-space:nowrap;width: 10px; overflow:hidden; text-overflow: ellipsis; ">
+    <!-- <ng-container matColumnDef="packetDescription" style="white-space:nowrap;width: 10px; overflow:hidden; text-overflow: ellipsis; ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Description </th>
     <td mat-cell *matCellDef="let element" style="overflow:hidden; text-overflow: ellipsis; width: 150px"> {{element.packetDescription}} </td>
   </ng-container> -->
 
-  <div>
-  <ng-container matColumnDef="expandedDetail" >
-    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-      <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
+    <div>
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
 
-        <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=30>
+            <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=30>
 
-          <table>
+              <table>
 
-            <col width="2em">
-            <col width="10em">
-            <tr>
-              <td>
-                  <!-- <b>Customer</b> -->
-                  <mat-icon style="font-size:1.8em; margin-right: .1em" matTooltip="Customer Name">account_circle</mat-icon>
-              </td>
-              <td>
-              {{element.customer.firstName}} {{element.customer.middleName}} {{element.customer.lastName}}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                  <!-- <b>Address Line</b> -->
-                  <mat-icon style="font-size:1.8em" matTooltip="Address">map</mat-icon>
-              </td>
-              <td>
-                  {{element.deliveryAddress.addressLine1}}<br>
-                  {{element.deliveryAddress.city}}<br>
-                  {{element.deliveryAddress.state}}<br>
-                  {{element.deliveryAddress.pincode}}
+                <col width="2em">
+                <col width="10em">
+                <tr>
+                  <td>
+                    <!-- <b>Customer</b> -->
+                    <mat-icon style="font-size:1.8em; margin-right: .1em" matTooltip="Customer Name">account_circle
+                    </mat-icon>
+                  </td>
+                  <td>
+                    {{element.customer.firstName}} {{element.customer.middleName}} {{element.customer.lastName}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <!-- <b>Address Line</b> -->
+                    <mat-icon style="font-size:1.8em" matTooltip="Address">map</mat-icon>
+                  </td>
+                  <td>
+                    {{element.deliveryAddress.addressLine1}}<br>
+                    {{element.deliveryAddress.city}}<br>
+                    {{element.deliveryAddress.state}}<br>
+                    {{element.deliveryAddress.pincode}}
 
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                  <!-- <b>City</b> -->
-              </td>
-              <td>
+                  </td>
+                </tr>
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                  <!-- <b>State</b> -->
-              </td>
-              <td>
+                <tr>
+                  <td>
+                    <mat-icon style="font-size:1.8em" matTooltip="Contact"> perm_phone_msg</mat-icon>
+                  </td>
+                  <td>
+                    +91-{{element.customer.phoneNumber}}
+                  </td>
+                </tr>
+              </table>
+            </div>
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                  <!-- <b>Pincode</b> -->
-              </td>
-              <td>
+            <div class="example-element-diagram" fxLayoutAlign="space-around center" fxFlex=50>
+              <!-- fxFlex="row wrap" -->
+              <table class="packetDetailsTable">
+                <col width="10em">
+                <col width="4em">
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                  <mat-icon style="font-size:1.8em" matTooltip="Contact"> perm_phone_msg</mat-icon>
-              </td>
-              <td>
-               +91-{{element.customer.phoneNumber}}
-              </td>
-            </tr>
-          </table>
-        </div>
+                <tr>
+                  <td>
+                    <mat-icon style="font-size:1.8em" matTooltip="Dimensions">straighten</mat-icon>
+                    <!-- <b>Dimensions </b><i>(l X b X h)</i> -->
+                  </td>
+                  <td>
+                    {{element.length}}" X {{element.breadth}}" X {{element.height}}"
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-icon style="font-size:1.8em" matTooltip="Weight">fitness_center</mat-icon>
+                  </td>
+                  <td>
+                    {{element.weight}} kg(s)
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-icon style="font-size:1.8em" matTooltip="Order Info">description</mat-icon>
+                  </td>
+                  <td style="word-break: break-all;">
+                    <i>{{element.packetDescription.slice(0,40)}}</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
 
-        <div class="example-element-diagram"  fxLayoutAlign="space-around center" fxFlex=50>
-            <!-- fxFlex="row wrap" -->
-          <table class="packetDetailsTable">
-              <col width="10em">
-              <col width="4em">
+                  </td>
+                </tr>
 
-            <tr>
-              <td>
-                <b>Dimensions </b><i>(l X b X h)</i>
-              </td>
-              <td>
-                  {{element.length}}" X {{element.breadth}}" X {{element.height}}"
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>Weight</b>
-              </td>
-              <td>
-                  {{element.weight}} kg(s)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>Packet Description</b>
-              </td>
-              <td style="word-break: break-all;">
-                <i>{{element.packetDescription.slice(0,40)}}</i>
-              </td>
-            </tr>
-            <tr>
-              <td >
+              </table>
 
-              </td>
-            </tr>
+            </div>
 
-          </table>
+            <div class="update">
 
-          </div>
-
-          <div class="update">
-
-              <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="see the updates on the status">
-                  <mat-icon style="font-size:3em">track_changes</mat-icon>
+              <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="View all updates">
+                <mat-icon style="font-size:3em">track_changes</mat-icon>
               </a>
 
-          </div>
+            </div>
 
-          <!-- <div style="margin-top: 1vh">
+            <!-- <div style="margin-top: 1vh">
               <mat-vertical-stepper>
                 <div *ngFor="let statuslist of element.statusList">
                   <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
@@ -186,20 +174,22 @@
 
 
 
-                    </div>
+          </div>
 
-                </td>
+        </td>
 
-            </ng-container>
+      </ng-container>
 
 
-        </div>
+    </div>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 
-    </table>
+  </table>
 
 </div>

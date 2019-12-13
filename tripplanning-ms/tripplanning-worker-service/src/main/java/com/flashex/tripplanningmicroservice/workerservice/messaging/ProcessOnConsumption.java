@@ -8,11 +8,16 @@ import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
 import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import com.flashex.tripplanningmicroservice.lib.services.ProducerService;
+import com.flashex.tripplanningmicroservice.workerservice.schedules.VehicleFetcher;
+import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,9 +26,13 @@ public class ProcessOnConsumption {
 
     private final ORService orService;
     private final Logger logger = LoggerFactory.getLogger(Consumer.class);
+    private static int counter = 0;
 
     @Autowired
     ProducerService producerService;
+
+    @Autowired
+    VehicleFetcher vehicleFetcher;
 
     public ProcessOnConsumption(ORService orService) {
         this.orService = orService;
@@ -37,16 +46,11 @@ public class ProcessOnConsumption {
 //        logger.info("deliveryAddresses -------------------------> "+deliveryAddresses);
         orService.settingShipment(shipmentReceived);
 
-        GetJsonServerData getJsonServerData = new GetJsonServerData();
-        List<Vehicle> vehicles = getJsonServerData.processJsonData();
+        if (this.counter == 0){
+            vehicleFetcher.fetchVehicles();
 
-        logger.info("Vehicles List ---------------> "+vehicles);
-
-        VehicleList vehicleList = new VehicleList(vehicles);
-
-        logger.info("VehicleList ---------------> "+vehicleList);
-
-        orService.settingVehicleDetails(vehicleList);
+            this.counter++;
+        }
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:1 starts here>>>>>>>>>>>>>>>>>>");
         List<TripItinerary> capConstraintTrips = orService.VrpfunctionWithCapCons(shipmentReceived.getPacketList());

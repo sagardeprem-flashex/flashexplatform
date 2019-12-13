@@ -20,6 +20,7 @@ import { LiveTrackingGoogleComponent } from './components/live-tracking-google/l
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { SharedModule } from '../shared/shared.module';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -33,9 +34,10 @@ import { SharedModule } from '../shared/shared.module';
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
     DashboardComponent,
+    LiveTrackingGoogleComponent,
+    SettingsComponent,
     StepperDialogComponent,
     StatusDialogComponent,
-    LiveTrackingGoogleComponent
   ],
   imports: [
     CommonModule,
@@ -53,6 +55,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   entryComponents: [
     TripPlanningPropertiesComponent,
+    SettingsComponent,
     StatusDialogComponent
   ],
   exports: [
@@ -61,7 +64,8 @@ import { SharedModule } from '../shared/shared.module';
     OrderDetailsComponent,
     LiveTrackingComponent,
     VehicleDetailsComponent,
-    TripPlanningPropertiesComponent
+    TripPlanningPropertiesComponent,
+    SettingsComponent
   ],
   providers: [TripItineraryService],
 

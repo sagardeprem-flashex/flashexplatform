@@ -1,55 +1,75 @@
+<mat-toolbar class="navbar" color="primary">
+    <img src="../assets/images/logo.png" routerLink='/admin'>
+    <div fxLayout="row" fxLayoutAlign="center center">
+
+        <span>{{userName}}</span>
+        <button mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon  class= "person" mat-list-icon>person</mat-icon>
+                </button>
+        <mat-menu #menu="matMenu">
+            <div style="width: 10em;">
+                <p style="padding-left: 15px;"> {{role}}</p>
+                <hr>
+                <button mat-stroked-button style="font-size: 1em;margin-left:1em; width: 8em;" (click)="logout()">Logout</button>
+            </div>
+        </mat-menu>
+    </div>
+
+</mat-toolbar>
 <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Trip Details</h1>
-    <button style="margin-left: auto;" mat-icon-button matTooltip="Logout" (click)="logout()"><mat-icon style="font-size: 25px;">person</mat-icon></button>
+    <br>
+    <p style="margin-left: auto; font-size: 0.85em;">{{scheduledDate| date:'longDate'}}</p>
+    <!-- <button style="margin-left: auto;" mat-icon-button matTooltip="Logout" (click)="logout()"><mat-icon style="font-size: 25px;">person</mat-icon></button> -->
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
-
     <mat-tab label="Today">
         <div class="example-small-box mat-elevation-z4">
             <mat-sidenav-container class="example-sidenav-container">
                 <mat-sidenav opened="false" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
                     <mat-nav-list class="sidenav">
-                        <a mat-list-item (click)="trips(i)" *ngFor="let nav of dataSource, let i = index"> {{nav.tripItineraryId}}</a>
+                        <a mat-list-item (click)="trips(i); snav.toggle()" *ngFor="let nav of dataSource, let i = index" matTooltip="{{nav.tripItineraryId}}">TRIP: 
+                            {{nav.tripItineraryId.slice(0,10).concat("...")}}</a>
                     </mat-nav-list>
                 </mat-sidenav>
 
                 <mat-sidenav-content>
                     <mat-tab-group>
                         <mat-tab label="Trip Summary">
-                            <div fxLayout="row" fxLayoutAlign="start center">
-                                <div>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <!-- ---------------- -->
+                                <div style="display: inline-grid;">
+                                    <mat-list-item style="padding: 10px;"><span>Start Location </span>
+                                        <p matTooltip="{{tripDetails.originAddress}}">WearHouse-1, Koramangala</p>
+                                    </mat-list-item>
+                                    <mat-divider></mat-divider>
                                     <mat-list *ngIf='tripDetails!=null'>
-                                        <!-- <mat-list-item><span>Trip Code :</span>FLEET1{{tripDetails.tripItineraryId}}</mat-list-item>
-                                        <mat-divider></mat-divider> -->
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item><span>Trip Start Time :</span> {{tripDetails.plannedStartTime}}
-                                            <p> <button style="margin: 1em;" mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
+                                        <mat-list-item><span>Start Time </span> {{tripDetails.plannedStartTime| date: 'short'}}
+                                            <p> <button mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span>Start Location :</span> {{tripDetails.originAddress}}
+
+                                        <mat-list-item><span>Order Type  </span> Perishable</mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item><span>Actual Start Time </span>
+                                            <p>
+                                                {{tripDetails.tripStart|date: 'short'}}</p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span>Order Type :</span> Perishable</mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <mat-list-item><span>Trip End Time :</span> {{tripDetails.plannedEndTime}}
-                                            <p><button style="margin: 1em;" mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p>
+                                        <mat-list-item><span>End Time </span> {{tripDetails.plannedEndTime|date:'short'}}
+                                            <p><button mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
-                                        <mat-list-item><span> Actual Trip Start Time :
-                                                 {{tripDetails.tripStart}}</span> </mat-list-item>
-                                        <mat-divider></mat-divider>
-                                        <!-- <mat-list-item><span>Delivery Status :</span>
-                                                <mat-progress-bar mode="determinate" value="40" color="accent"></mat-progress-bar>
-                                            </mat-list-item>
-                                            <mat-divider></mat-divider> -->
-                                        <mat-list-item><span>Actual Trip End Time :
-                                                 {{tripDetails.tripEnd}}</span> </mat-list-item>
+                                        <mat-list-item><span>Actual End Time</span>
+                                            <p>
+                                                {{tripDetails.tripEnd|date:'short'}}</p>
+                                        </mat-list-item>
                                     </mat-list>
                                 </div>
+                                <!-- ------------------ -->
                                 <div id="map"></div>
                             </div>
-
                         </mat-tab>
                         <mat-tab label="Order Details">
                             <mat-accordion class="example-headers-align" *ngFor="let order of listofOrders; let i = index">
@@ -62,8 +82,8 @@
                                             <p>
                                                 <mat-icon style="font-size: 15px;
                                                 line-height: 2; width: 15px;"><i class="material-icons">phone</i></mat-icon>
-                                                {{listofOrders[i].deliveryAddress.pincode}}</p>
-                                            <p> Reciever's Name</p>
+                                                {{listofOrders[i].phoneNumber}}</p>
+                                            <p> {{listofOrders[i].customerName}}</p>
 
 
                                         </mat-panel-description>
@@ -71,9 +91,10 @@
                                     </mat-expansion-panel-header>
                                     <div>
                                         <span style="width: 50%; padding-left: 0ex;">
-                                                <p>{{listofOrders[i].originAddress}}
+                                                <p>{{listofOrders[i].deliveryAddress.addressLine1}}  ,{{listofOrders[i].deliveryAddress.city}}
                                                 </p>
-                                                <p><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders[i].packetId)" color="primary">Delivered : {{tripDetails.packetLogs.packetStatus}}</button>
+                                                <p><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders[i].packetId)" color="primary">Delivered 
+                                                    {{listofOrders[i].packetStatus}}</button>
                                                 </p>
                                             </span>
                                         <table style="float: right; width: 50%; margin-top: -6em;">
