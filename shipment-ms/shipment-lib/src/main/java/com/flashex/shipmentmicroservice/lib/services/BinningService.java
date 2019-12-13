@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class BinningService {
@@ -79,10 +80,19 @@ public class BinningService {
                 logger.info("$$ Size of bin {} before shipment generation and cleaning ----------->: {}", i, binSize);
 
                 // number of shipments that can be generated
-                int nShipments = (int) Math.floor(binSize/getConfig().getMaxShipmentSize());
+                int nShipments;
+                if(isPremium(bins.get(i))){
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    logger.info("This is a Premium Shipment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    nShipments = (int) Math.floor(binSize/(getConfig().getMaxShipmentSize()*getConfig().getRelaxation()));
+                }else {
+                    nShipments = (int) Math.floor(binSize/getConfig().getMaxShipmentSize());
+                }
 
                 // total packets in nShipments
                 int nPackets = getConfig().getMaxShipmentSize()*nShipments;
+
                 binPacketsSize.add(nPackets);
 
                 logger.info(" showing nPackets -----> {}",nPackets);
@@ -245,6 +255,17 @@ public class BinningService {
     public void updateConfig(){
         this.binnerConfig = binnerConfigService.getCurrentConfig();
     }
+
+    public Boolean isPremium(Bin bin){
+        AtomicReference<Boolean> premium = new AtomicReference<>(false);
+        bin.getBinningStrategy().forEach(strategy ->{
+            if(strategy.equals("PREMIUM")){
+                premium.set(true);
+            }
+        });
+        return premium.get();
+    }
+
 
     // refreshes bins if config is changed,  dropped
 //    public void refreshBins(){
