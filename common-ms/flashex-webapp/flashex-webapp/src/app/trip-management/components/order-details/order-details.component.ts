@@ -83,7 +83,6 @@ export class OrderDetailsComponent implements OnInit {
   //   });
   // }
 
-
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
       // const temp: IPacket;
