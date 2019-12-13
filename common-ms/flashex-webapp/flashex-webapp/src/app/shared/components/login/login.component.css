@@ -14,7 +14,7 @@ button {
     width: 100%;
     background-image: url("../../../../assets/images/longexposurebackgroundimage.jpg");
     background-attachment: fixed;
-    height: 103.6vh;
+    height: 100vh;
     /* margin-top: auto; */
     justify-content: center;
     background-size: 60vh;
@@ -22,7 +22,6 @@ button {
     -webkit-background-size: cover;
     background-repeat: no-repeat;
     background-position: top center;
-    margin-top: -5rem;
 }
 
 .matcard {
