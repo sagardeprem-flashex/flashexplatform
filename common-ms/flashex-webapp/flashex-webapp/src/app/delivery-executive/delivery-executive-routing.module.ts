@@ -7,10 +7,10 @@ import { UserguardService } from '../shared/services/userguard.service';
 const deliveryRoutes: Routes = [
   {
     path: 'user', component: TripsComponent,
-    canActivate: [UserguardService],
-    data: {
-      expectedRole: 'ROLE_USER'
-    },
+    // canActivate: [UserguardService],
+    // data: {
+    //   expectedRole: 'ROLE_USER'
+    // },
     children: [
       {
         path: 'navigation', component: NavigationComponent,

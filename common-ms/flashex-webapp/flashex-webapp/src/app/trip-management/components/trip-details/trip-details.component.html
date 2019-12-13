@@ -19,70 +19,70 @@
       <p class="title-part mat-body-2">Start Date</p>
     </div>
   </mat-toolbar> -->
-    <mat-tab label='VRP with Capacity constraint'>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-            <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-card>
-            <mat-card-content>
-                <!-- <mat-button-toggle-group name="selectedOptimization">
+        <mat-tab label='VRP with Capacity constraint'>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                        <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card>
+                        <mat-card-content>
+                            <!-- <mat-button-toggle-group name="selectedOptimization">
                     <mat-button-toggle value="distance">Distance</mat-button-toggle>
                     <mat-button-toggle value="time">Duration</mat-button-toggle>
                 </mat-button-toggle-group> -->
-                <mat-tab-group>
-                    <mat-tab label='Summary'>
-                        <div class='summary-container'>
-                            <div class="trip-summary-container">
-                                <p class='mat-title'>Trip Summary</p>
-                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
-                            </div>
-                            <div class='trip-details-container'>
-                                <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
-                                </mat-progress-spinner>
-                                <div class='progress-spinner-data'>
-                                    <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
-                                </div>
-                            </div>
-                            <div class='vehicle-details-container'>
-                                <p class='mat-title'>Vehicle Details</p>
-                                <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
-                            </div>
-                        </div>
-                        <div class='origin-address-container'>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
-                        </div>
-                        <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
-                          <p class="title-part mat-body-2">Dropped Nodes:</p>
-                          <div *ngFor='let drop of trip.droppedPackets'>
-                            <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
-                            <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
-                          </div>
-                          <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label='Orders'>
-                        <mat-vertical-stepper>
-                            <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
-                                <br><br>
-                                <button mat-button matStepperPrevious>Back</button>
-                                <button mat-button matStepperNext>Next</button>
-                            </mat-step>
+                            <mat-tab-group>
+                                <mat-tab label='Summary'>
+                                    <div class='summary-container'>
+                                        <div class="trip-summary-container">
+                                            <p class='mat-title'>Trip Summary</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
+                                        </div>
+                                        <div class='trip-details-container'>
+                                            <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
+                                            </mat-progress-spinner>
+                                            <div class='progress-spinner-data'>
+                                                <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
+                                            </div>
+                                        </div>
+                                        <div class='vehicle-details-container'>
+                                            <p class='mat-title'>Vehicle Details</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class='origin-address-container'>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
+                                    </div>
+                                    <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
+                                        <p class="title-part mat-body-2">Dropped Nodes:</p>
+                                        <div *ngFor='let drop of trip.droppedPackets'>
+                                            <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
+                                            <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
+                                        </div>
+                                        <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label='Orders'>
+                                    <mat-vertical-stepper>
+                                        <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                            <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
+                                            <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
+                                            <br><br>
+                                            <button mat-button matStepperPrevious>Back</button>
+                                            <button mat-button matStepperNext>Next</button>
+                                        </mat-step>
 
                                         <!-- Icon overrides. -->
                                         <ng-template matStepperIcon="edit">
@@ -108,75 +108,75 @@
                   <mat-icon>expand_more</mat-icon>
                 </ng-template>
               </mat-vertical-stepper> -->
-                </mat-card-content>
-              </mat-card>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-tab>
-    <mat-tab label='VRP with Dropping Visits'>
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let trip of vrpWithDVTrips; let i = index">
-          <mat-expansion-panel-header>
-            <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-            <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-card>
-            <mat-card-content>
-                <!-- <mat-button-toggle-group name="selectedOptimization">
+                        </mat-card-content>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-tab>
+        <mat-tab label='VRP with Dropping Visits'>
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let trip of vrpWithDVTrips; let i = index">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                        <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card>
+                        <mat-card-content>
+                            <!-- <mat-button-toggle-group name="selectedOptimization">
                     <mat-button-toggle value="distance">Distance</mat-button-toggle>
                     <mat-button-toggle value="time">Duration</mat-button-toggle>
                 </mat-button-toggle-group> -->
-                <mat-tab-group>
-                    <mat-tab label='Summary'>
-                        <div class='summary-container'>
-                            <div class="trip-summary-container">
-                                <p class='mat-title'>Trip Summary</p>
-                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
-                            </div>
-                            <div class='trip-details-container'>
-                                <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
-                                </mat-progress-spinner>
-                                <div class='progress-spinner-data'>
-                                    <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
-                                </div>
-                            </div>
-                            <div class='vehicle-details-container'>
-                                <p class='mat-title'>Vehicle Details</p>
-                                <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
-                            </div>
-                        </div>
-                        <div class='origin-address-container'>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
-                        </div>
-                        <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
-                          <p class="title-part mat-body-2">Dropped Nodes:</p>
-                          <div *ngFor='let drop of trip.droppedPackets'>
-                            <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
-                            <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
-                          </div>
-                          <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label='Orders'>
-                        <mat-vertical-stepper>
-                            <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
-                                <br><br>
-                                <button mat-button matStepperPrevious>Back</button>
-                                <button mat-button matStepperNext>Next</button>
-                            </mat-step>
+                            <mat-tab-group>
+                                <mat-tab label='Summary'>
+                                    <div class='summary-container'>
+                                        <div class="trip-summary-container">
+                                            <p class='mat-title'>Trip Summary</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
+                                        </div>
+                                        <div class='trip-details-container'>
+                                            <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
+                                            </mat-progress-spinner>
+                                            <div class='progress-spinner-data'>
+                                                <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
+                                            </div>
+                                        </div>
+                                        <div class='vehicle-details-container'>
+                                            <p class='mat-title'>Vehicle Details</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class='origin-address-container'>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
+                                    </div>
+                                    <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
+                                        <p class="title-part mat-body-2">Dropped Nodes:</p>
+                                        <div *ngFor='let drop of trip.droppedPackets'>
+                                            <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
+                                            <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
+                                        </div>
+                                        <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label='Orders'>
+                                    <mat-vertical-stepper>
+                                        <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                            <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
+                                            <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
+                                            <br><br>
+                                            <button mat-button matStepperPrevious>Back</button>
+                                            <button mat-button matStepperNext>Next</button>
+                                        </mat-step>
 
                                         <!-- Icon overrides. -->
                                         <ng-template matStepperIcon="edit">
@@ -202,75 +202,75 @@
                   <mat-icon>expand_more</mat-icon>
                 </ng-template>
               </mat-vertical-stepper> -->
-                </mat-card-content>
-              </mat-card>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-tab>
-    <mat-tab label="Time Window Delivery">
-  <mat-accordion>
-    <mat-expansion-panel *ngFor="let trip of timeWindowDeliveryTrips; let i = index">
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
-        <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-card>
-        <mat-card-content>
-            <!-- <mat-button-toggle-group name="selectedOptimization">
+                        </mat-card-content>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-tab>
+        <mat-tab label="Time Window Delivery">
+            <mat-accordion>
+                <mat-expansion-panel *ngFor="let trip of timeWindowDeliveryTrips; let i = index">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                        <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-card>
+                        <mat-card-content>
+                            <!-- <mat-button-toggle-group name="selectedOptimization">
                 <mat-button-toggle value="distance">Distance</mat-button-toggle>
                 <mat-button-toggle value="time">Duration</mat-button-toggle>
             </mat-button-toggle-group> -->
-            <mat-tab-group>
-                <mat-tab label='Summary'>
-                    <div class='summary-container'>
-                        <div class="trip-summary-container">
-                            <p class='mat-title'>Trip Summary</p>
-                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
-                        </div>
-                        <!-- <div class='trip-details-container'>
+                            <mat-tab-group>
+                                <mat-tab label='Summary'>
+                                    <div class='summary-container'>
+                                        <div class="trip-summary-container">
+                                            <p class='mat-title'>Trip Summary</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
+                                        </div>
+                                        <!-- <div class='trip-details-container'>
                             <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
                             </mat-progress-spinner>
                             <div class='progress-spinner-data'>
                                 <p class="mat-body-2">{{trip.occupiedVolume}}% Occupied</p>
                             </div>
                         </div> -->
-                        <div class='vehicle-details-container'>
-                            <p class='mat-title'>Vehicle Details</p>
-                            <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                            <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
-                        </div>
-                    </div>
-                    <div class='origin-address-container'>
-                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
-                        <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
-                    </div>
-                    <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
-                      <p class="title-part mat-body-2">Dropped Nodes:</p>
-                      <div *ngFor='let drop of trip.droppedPackets'>
-                        <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
-                        <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
-                      </div>
-                      <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
-                    </div>
-                </mat-tab>
-                <mat-tab label='Orders'>
-                    <mat-vertical-stepper>
-                        <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                            <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                            <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
-                            <br><br>
-                            <button mat-button matStepperPrevious>Back</button>
-                            <button mat-button matStepperNext>Next</button>
-                        </mat-step>
+                                        <div class='vehicle-details-container'>
+                                            <p class='mat-title'>Vehicle Details</p>
+                                            <p class='mat-caption'><span class="title-part mat-body-2">VehicleID:</span> {{trip.vehicle.vehicleId}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Type:</span> {{trip.vehicle.vehicleType}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2">Trip Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class='origin-address-container'>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                        <p class='mat-body-1'><span class="title-part mat-body-2">Coordinates:</span> {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
+                                    </div>
+                                    <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
+                                        <p class="title-part mat-body-2">Dropped Nodes:</p>
+                                        <div *ngFor='let drop of trip.droppedPackets'>
+                                            <p class='mat-body-1'><span class="mat-body-2">OrderId#</span> {{drop.packetId}}</p>
+                                            <p class='mat-body-1'><span class="mat-body-2">Address:</span> {{drop.deliveryAddress.addressLine1}}, {{drop.deliveryAddress.city}}</p>
+                                        </div>
+                                        <p class='mat-body-1'><span class="mat-body-2">OrderId:</span> {{trip.vehicle.vehicleCrew}}</p>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab label='Orders'>
+                                    <mat-vertical-stepper>
+                                        <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                            <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
+                                            <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
+                                            <br><br>
+                                            <button mat-button matStepperPrevious>Back</button>
+                                            <button mat-button matStepperNext>Next</button>
+                                        </mat-step>
 
                                         <!-- Icon overrides. -->
                                         <ng-template matStepperIcon="edit">
@@ -296,12 +296,12 @@
               <mat-icon>expand_more</mat-icon>
             </ng-template>
           </mat-vertical-stepper> -->
-            </mat-card-content>
-          </mat-card>
-        </mat-expansion-panel>
-    </mat-accordion>
-    </mat-tab>
-    <!-- <mat-tab label='Other Algorithms'>
+                        </mat-card-content>
+                    </mat-card>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </mat-tab>
+        <!-- <mat-tab label='Other Algorithms'>
       <mat-accordion>
         <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
           <mat-expansion-panel-header>
@@ -320,7 +320,7 @@
                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance / 1000}} km</p>
+                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
                                 <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
                             </div>
                             <div class='trip-details-container'>
@@ -376,7 +376,7 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-tab> -->
-  </mat-tab-group>
+    </mat-tab-group>
     <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
     <mat-card-subtitle>TripId#{{trip.tripItineraryId}}</mat-card-subtitle>
     <mat-card-title>VehicleNumber#{{trip.tripItineraryId}}</mat-card-title>
