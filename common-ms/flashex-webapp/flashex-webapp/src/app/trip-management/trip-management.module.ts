@@ -42,8 +42,7 @@ import { SharedModule } from '../shared/shared.module';
       apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
    }),
    AgmDirectionModule,
-   SharedModule
-
+   SharedModule,
   ],
   entryComponents: [
     TripPlanningPropertiesComponent
