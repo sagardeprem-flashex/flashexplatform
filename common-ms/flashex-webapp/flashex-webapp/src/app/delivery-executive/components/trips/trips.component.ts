@@ -33,6 +33,7 @@ export class TripsComponent implements OnInit {
   public role;
   public userName;
   public scheduledDate = new Date();
+  public intialData;
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher, private tripService: TriplogService,
@@ -53,7 +54,7 @@ export class TripsComponent implements OnInit {
       this.role = 'Delivery Executive';
 
     }
-    this.userName = this.tokenStorage.getUsername();
+
     setTimeout(() => {
       const map = tomtom.L.map('map', {
         key: 'bvlnbSj7Eu5i41bgOFAlfWPZEuPkDcug',
@@ -67,9 +68,17 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
     this.tripService.behaviourSubject.subscribe(data => {
-      this.dataSource = data;
+      this.intialData = data;
       this.trips(0);
     });
+    this.userName = this.tokenStorage.getUsername();
+    if (this.userName === 'anurag') {
+      console.log('user', this.userName);
+      const i = 0;
+      this.dataSource = this.intialData;
+      console.log(this.dataSource);
+
+    }
   }
   trips(value) {
     // console.log('vali', value);

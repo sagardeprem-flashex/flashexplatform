@@ -14,10 +14,10 @@ const tripRoutes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    canActivate: [AuthguardService],
-    data: {
-      expectedRole: 'ROLE_ADMIN'
-    },
+    // canActivate: [AuthguardService],
+    // data: {
+    //   expectedRole: 'ROLE_ADMIN'
+    // },
     children: [
       {
         path: 'tripitinerary',

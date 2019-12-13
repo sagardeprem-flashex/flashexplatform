@@ -70,7 +70,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
     });
   }
   trips(value) {
-    // console.log('value', value);
+    console.log('value', value);
     this.routes = [];
     const tripItinerary = this.dataSource[value];
 

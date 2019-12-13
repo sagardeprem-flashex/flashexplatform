@@ -49,8 +49,8 @@ public class Consumer {
             packetLog.setDeliveryAddress(tripItinerary.getPackets().get(i).getDeliveryAddress());
             packetLog.setDeliveryDescription(tripItinerary.getPackets().get(i).getDeliveryDescription());
             packetLog.setPacketStatus("In-Transit");
-            packetLog.setCustomerName(tripItinerary.getPackets().get(i).getCustomer().firstName + tripItinerary.getPackets()
-            .get(i).getCustomer().middleName + tripItinerary.getPackets().get(i).getCustomer().lastName);
+            packetLog.setCustomerName(tripItinerary.getPackets().get(i).getCustomer().firstName + ' '+ tripItinerary.getPackets()
+            .get(i).getCustomer().middleName + ' ' + tripItinerary.getPackets().get(i).getCustomer().lastName);
             packetLog.setPhoneNumber(tripItinerary.getPackets().get(i).getCustomer().phoneNumber);
             packetLogs.add(packetLog);
 

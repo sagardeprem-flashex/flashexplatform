@@ -4,7 +4,7 @@
             <button style="margin: 0px;" mat-icon-button (click)="sidenav.toggle()">                       <mat-icon>double_arrow</mat-icon>
             </button> Scheduled Trips:
             <span style="padding-left:0.5em;font-size:0.85em;"> 
-                {{scheduledDate | date:'yyyy-MM-dd'}}
+                {{scheduledDate | date:'mediumDate'}}
             </span>
 
         </div>
@@ -32,46 +32,46 @@
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-
+                    <hr>
                     <!-- <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button> -->
-                    <p>Planned Trip Start at : {{id.plannedStartTime | date:'medium'}}</p>
-                    <p>Actual Trip Started at : {{id.tripStart | date:'medium'}}</p><br>
-
+                    <p>Planned Trip Start: {{id.plannedStartTime | date:'medium'}}</p>
+                    <p>Actual Trip Started : {{id.tripStart | date:'medium'}}</p><br>
+                    <hr>
 
 
                     <table mat-table [dataSource]="id.packetLogs " style="background-color: lightgray;">
 
                         <ng-container matColumnDef="orderId">
-                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Order Id </th>
-                            <td mat-cell fxFlex="150px" *matCellDef="let element"> {{element.packetId | slice: -6}} </td>
+                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef style="padding-top: 1em; font-size: 1.25em; text-align: center;"> Order Id </th>
+                            <td mat-cell fxFlex="150px" *matCellDef="let element" style="padding-top: 1em;text-align: center;"> {{element.packetId | slice: -6 | uppercase}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="status">
-                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Order Status </th>
-                            <td mat-cell fxFlex="150px" *matCellDef="let element"> {{element.packetStatus}} </td>
+                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef style="padding-top: 1em; font-size: 1.25em;text-align: center;"> Order Status </th>
+                            <td mat-cell fxFlex="150px " *matCellDef="let element " style="padding-top: 1em;text-align: center;"> {{element.packetStatus}} </td>
                         </ng-container>
 
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
                     </table>
 
 
 
 
 
-                    <!-- <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br> Order Status: {{order.packetStatus}}
-                        <button type="button" (click)="updatePacketLog(id.tripItineraryId, order.packetId)">Packet Status</button></p><br> -->
+                    <!-- <p *ngFor="let order of id.packetLogs; let i=i ndex "> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br> Order Status: {{order.packetStatus}}
+                        <button type="button " (click)="updatePacketLog(id.tripItineraryId, order.packetId) ">Packet Status</button></p><br> -->
 
 
+                    <hr>
 
+                    <p>Planned Trip End: {{id.plannedEndTime | date:'medium'}}</p>
 
-                    <p>Planned Trip End at : {{id.plannedEndTime | date:'medium'}}</p>
+                    <p> Actual Trip Ended : {{id.tripEnd | date:'medium'}}</p>
 
-                    <p> Actual Trip Ended at : {{id.tripEnd | date:'medium'}}</p>
-
-
-                    <!-- <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button> -->
+                    <hr>
+                    <!-- <button type="button " (click)="updateTripEnd(id.tripItineraryId) ">End Trip</button> -->
 
 
 
