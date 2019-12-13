@@ -23,7 +23,7 @@
   <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="packetId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Packet Id </th>
-      <td mat-cell *matCellDef="let element" style="font-weight: bold; cursor: pointer;"> {{element.packetId | slice:-6 |uppercase}} </td>
+      <td mat-cell *matCellDef="let element" style="font-weight: bold; cursor: pointer;">{{element.packetId | slice:-6 |uppercase}} </td>
     </ng-container>
 
     <ng-container matColumnDef="receivedDate">

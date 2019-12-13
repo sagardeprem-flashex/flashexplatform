@@ -7,6 +7,7 @@ import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { SettingsComponent } from '../settings/settings.component';
+import { distinct } from 'rxjs/operators';
 
 // import { timingSafeEqual } from 'crypto';
 
@@ -41,6 +42,9 @@ export class OrderDetailsComponent implements OnInit {
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
+  public dateList = [];
+
+
 
   constructor(private packetService: ShipmentManagementService, public dialog: MatDialog, public configDialog: MatDialog) {
 
@@ -49,11 +53,15 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
       let temp: IPacket;
+      let dateValue;
       data.forEach(d => {
         temp = d;
         // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment().format('M/D/YYYY hh:mm:ss a');
+        temp.receivedDate = moment(d.receivedDate).format('D/M/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
+
+        dateValue = moment(d.receivedDate).format('D/M/YYYY');
+        this.dateList.push(dateValue);
         // console.log(temp.currentStatus);
 
         this.mydata.push(temp);
@@ -64,18 +72,24 @@ export class OrderDetailsComponent implements OnInit {
         dt.statusList.forEach(d => {
           const obj = {
             statusValue : d.statusValue,
-            timeStamp : moment().format('M/D/YYYY hh:mm:ss a')
+            timeStamp : moment(d.timeStamp).format('D/M/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
         });
         dt.statusList = updatedList;
       });
 
+
+
       this.dataSource = new MatTableDataSource(this.mydata);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       this.packetList = data;
       // console.log(this.packetList);
+      console.log('date chya values ' + this.dateList);
+      this.dateList = [... new Set(this.dateList)];
+      console.log('date chya values ' + this.dateList);
+
 
     });
   }
@@ -152,7 +166,7 @@ export class OrderDetailsComponent implements OnInit {
 
 
   openDialog(statusList, packetId): void {
-    const dialogRef = this.dialog.open(StatusDialogComponent, {
+    const dialogRef = this.dialog.open(StatusDialogComponent, { width: '30em',
        data: {status: statusList, packet: packetId}
     });
    // console.log(statusList);
