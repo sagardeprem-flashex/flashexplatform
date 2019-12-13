@@ -12,10 +12,15 @@ import { TripPlanningPropertiesComponent } from './components/trip-planning-prop
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TripItineraryService } from './services/trip-itinerary.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StepperDialogComponent } from './components/stepper-dialog/stepper-dialog.component';
+import { StatusDialogComponent } from './components/status-dialog/status-dialog.component';
+
+
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 import { SharedModule } from '../shared/shared.module';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -29,7 +34,10 @@ import { SharedModule } from '../shared/shared.module';
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
     DashboardComponent,
-    LiveTrackingGoogleComponent
+    LiveTrackingGoogleComponent,
+    SettingsComponent,
+    StepperDialogComponent,
+    StatusDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +53,9 @@ import { SharedModule } from '../shared/shared.module';
    SharedModule,
   ],
   entryComponents: [
-    TripPlanningPropertiesComponent
+    TripPlanningPropertiesComponent,
+    SettingsComponent,
+    StatusDialogComponent
   ],
   exports: [
     HomeComponent,
@@ -53,7 +63,8 @@ import { SharedModule } from '../shared/shared.module';
     OrderDetailsComponent,
     LiveTrackingComponent,
     VehicleDetailsComponent,
-    TripPlanningPropertiesComponent
+    TripPlanningPropertiesComponent,
+    SettingsComponent
   ],
   providers: [TripItineraryService],
 

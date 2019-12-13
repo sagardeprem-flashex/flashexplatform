@@ -25,6 +25,7 @@ public class Packet {
     @PrimaryKey
     @PrimaryKeyColumn(name = "packetId",  ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     @CassandraType(type = DataType.Name.TEXT)
+    @Indexed
     private String packetId;
     @CassandraType(type = DataType.Name.TEXT)
     private String productId;
@@ -50,10 +51,6 @@ public class Packet {
     private float costOfPacket;
 
 
-    /** Date type variables**/
-    @CassandraType(type = DataType.Name.TIMESTAMP)
-    private Date receivedDate;
-//
 //    //to be updated by Trip Planning microservice
     @CassandraType(type = DataType.Name.TIMESTAMP)
     private Date estimatedDeliveryDate;
@@ -75,5 +72,8 @@ public class Packet {
     @CassandraType(type = DataType.Name.LIST, typeArguments = { DataType.Name.UDT }, userTypeName = "status")
     private List<Status> statusList = new ArrayList<>();
 
-
+    @JsonIgnore
+    public Date receivedDate(){
+        return this.statusList.get(0).getTimeStamp();
+    }
 }

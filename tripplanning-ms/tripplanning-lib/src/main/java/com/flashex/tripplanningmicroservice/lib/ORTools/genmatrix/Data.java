@@ -20,7 +20,9 @@ public class Data {
 
         private static Shipment shipment;
 
-        private static VehicleList vehicleList;
+        private static VehicleList allVehicleList;
+
+        private static VehicleList[] algosVehicleList = new VehicleList[3];
 
 //        private long[] demands;
 
@@ -50,12 +52,13 @@ public class Data {
                 Data.shipment = shipment;
         }
 
-        public static VehicleList getVehicleList() {
-                return vehicleList;
+
+        public static VehicleList getAllVehicleList() {
+                return allVehicleList;
         }
 
-        public static void setVehicleList(VehicleList vehicleList) {
-                Data.vehicleList = vehicleList;
+        public static void setAllVehicleList(VehicleList allVehicleList) {
+                Data.allVehicleList = allVehicleList;
         }
 
         public long[] createDemandArray(Shipment shipment) {
@@ -75,5 +78,17 @@ public class Data {
                         timeWindow[i][1] = endTime;
                 }
                 return timeWindow;
+        }
+
+        public static VehicleList[] getAlgosVehicleList() {
+                return algosVehicleList;
+        }
+
+        public static void setAlgosVehicleList(VehicleList[] algosVehicleList) {
+                Data.algosVehicleList = algosVehicleList;
+        }
+
+        public static void setAlgoVehicles(VehicleList vehicleList, int index){
+                Data.algosVehicleList[index] = vehicleList;
         }
 }
