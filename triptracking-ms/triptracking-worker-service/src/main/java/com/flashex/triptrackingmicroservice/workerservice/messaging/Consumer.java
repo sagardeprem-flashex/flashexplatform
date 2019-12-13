@@ -37,6 +37,10 @@ public class Consumer {
         tripLog.setPlannedStartTime(tripItinerary.getPlannedStartTime());
         tripLog.setPlannedEndTime(tripItinerary.getPlannedEndTime());
 
+        System.out.println("********************");
+        System.out.println(tripLog);
+        System.out.println("**************");
+
         // extract data from packets to packetlogs
         List<PacketLog> packetLogs = new ArrayList<>();
         for(int i=0; i<tripItinerary.getPackets().size(); i++){

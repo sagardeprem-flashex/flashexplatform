@@ -20,5 +20,6 @@ public class Vehicle {
     private int vehicleVolume;
     private String availability;
     private  String vehicleCrew;
+    private  String vehicleImage;
 
 }

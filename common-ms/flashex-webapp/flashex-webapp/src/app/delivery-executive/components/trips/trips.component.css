@@ -61,8 +61,10 @@ table {
 
 span {
     /* padding-left: 200px; */
-    font-size: medium;
+    font-size: 15px;
     color: #635e5e;
+    width: max-content;
+    margin: 5px;
 }
 
 b {
@@ -105,4 +107,25 @@ b {
 
 .mat-expansion-panel {
     padding: 0px 0px;
+}
+
+img {
+    width: 8.5rem;
+    height: 3.5rem;
+    display: block;
+    cursor: pointer;
+    outline: 0;
+}
+
+.navbar {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    height: 10vh;
+}
+
+.person {
+    font-size: 25px;
+    line-height: 2;
+    margin-bottom: 15px;
 }

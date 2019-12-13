@@ -7,6 +7,8 @@ import com.flashex.tripplanningmicroservice.lib.ORTools.VrpWithCapacityConstrain
 import com.flashex.tripplanningmicroservice.lib.ORTools.genmatrix.Urllib;
 import com.flashex.tripplanningmicroservice.lib.model.Vehicle;
 import com.flashex.tripplanningmicroservice.lib.model.VehicleList;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -18,13 +20,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+@Service
 public class GetJsonServerData {
 
     private String inline;
+    final Logger logger = Logger.getLogger(GetJsonServerData.class.getName());
 
-    public List<Vehicle> processJsonData() throws IOException {
+    @Autowired
+    Urllib urllib;
 
-        final Logger logger = Logger.getLogger(GetJsonServerData.class.getName());
+    public List<Vehicle> getAvailableVehicles() throws IOException {
 
         String request = "http://vehicle-json-server:3000/vehicles";
         String inline = Urllib.urlopen(request);
@@ -41,31 +46,23 @@ public class GetJsonServerData {
         }
         logger.info("No of available vehicles ------> "+availableVehicles.size());
         return availableVehicles;
+    }
 
-//        URL url = new URL("http://vehicle-json-server:3000/vehicles");
-//        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//        conn.setRequestMethod("GET");
-//        conn.connect();
-//        int responseCode = conn.getResponseCode();
-//
-//        if(responseCode != 200) {
-//            throw new RuntimeException("HttpResponseCode: "+ responseCode);
-//        }
-//        else
-//        {
-//            Scanner sc = new Scanner(url.openStream());
-//            while(sc.hasNext())
-//            {
-//                inline += sc.nextLine();
-//            }
-//            sc.close();
-//        }
-//
-//        logger.info("Obtained JSON response in string format ----------------> "+ inline+"--------");
-//        VehicleList fleetdetails = new ObjectMapper().readValue(inline, VehicleList.class);
-//
-//        logger.info("Fleet details after parsing ----------------> "+ fleetdetails);
-//        return fleetdetails;
+    public List<Vehicle> getAllVehicles() throws IOException {
 
+        String request = "http://vehicle-json-server:3000/vehicles";
+        String inline = Urllib.urlopen(request);
+        //         get data from json server
+        logger.info("Recieved vehicle data-----------------------> "+inline);
+        List<Vehicle> fleetdetails = new ObjectMapper().readValue(inline, new TypeReference<List<Vehicle>>(){});
+        logger.info("Fleet details after parsing ----------------> "+ fleetdetails);
+
+        return fleetdetails;
+    }
+
+    public void postListData(List<Vehicle> vehicles) throws IOException {
+
+        String request = "http://vehicle-json-server:3000/vehicles";
+        urllib.post(request, vehicles.toString());
     }
 }

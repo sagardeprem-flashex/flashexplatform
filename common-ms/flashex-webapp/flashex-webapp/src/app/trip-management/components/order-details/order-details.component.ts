@@ -1,11 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as moment from 'moment';
 import { IPacket } from '../../interfaces/Packet';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
+import { SettingsComponent } from '../settings/settings.component';
+
 // import { timingSafeEqual } from 'crypto';
+
 
 @Component({
   selector: 'app-order-details',
@@ -26,18 +30,20 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 export class OrderDetailsComponent implements OnInit {
   public dataSource;
+  public statuslist: Status[];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['receivedDate', 'packetType', 'priority', 'currentStatus'];
+  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
   public receivedDate: string;
-  constructor(private packetService: ShipmentManagementService) {
+
+  constructor(private packetService: ShipmentManagementService, public dialog: MatDialog, public configDialog: MatDialog) {
 
   }
   // tslint:disable-next-line: use-lifecycle-interface
@@ -98,6 +104,8 @@ export class OrderDetailsComponent implements OnInit {
           const obj = {
             statusValue: statusIterator.statusValue,
             timeStamp: now1
+            // statusValue : d.statusValue,
+            // timeStamp : moment().format('M/D/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
           if (i === d.statusList.length - 1) {
@@ -125,12 +133,12 @@ export class OrderDetailsComponent implements OnInit {
   funColor(priority) {
 
 
-    if (priority === 'HIGH') {
+    if (priority === 'PREMIUM') {
       return {
 
         color: 'red'
       };
-    } else if (priority === 'MEDIUM') {
+    } else if (priority === 'ORDINARY') {
       return {
         color: 'orange'
       };
@@ -145,12 +153,12 @@ export class OrderDetailsComponent implements OnInit {
   statusColor(currentStatus) {
     switch (currentStatus) {
       case 'RECEIVED': {
-        return {
-          color: 'blue'
-        };
-        break;
-      }
-      case 'PROCESSED': {
+          return{
+            color: 'blue'
+          };
+          break;
+        }
+      case 'PROCESSING' : {
         return {
           color: 'orange'
         };
@@ -177,5 +185,28 @@ export class OrderDetailsComponent implements OnInit {
     }
   }
 
+  openConfig(): void {
+    const dialogRef = this.configDialog.open(SettingsComponent, {
+      width: '415px',
+      height: '70vh',
+      data: {}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+
+  openDialog(statusList, packetId): void {
+    const dialogRef = this.dialog.open(StatusDialogComponent, {
+       data: {status: statusList, packet: packetId}
+    });
+    console.log(statusList);
+  }
+}
+
+export interface Status {
+  statusValue: string;
+  timeStamp: Date;
 }
