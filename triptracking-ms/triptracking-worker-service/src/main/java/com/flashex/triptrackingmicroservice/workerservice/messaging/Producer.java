@@ -27,14 +27,15 @@ public class Producer {
         this.kafkaTemplateString.send(TOPIC,message);
     }
 
-    public void sendMessageJSON(KafkaStatusMessage message) throws JsonProcessingException {
-        logger.info(String.format("$$ -> Producing message --> %s",message));
-        this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
-    }
+
+//    public void sendMessageJSON(KafkaStatusMessage message) throws JsonProcessingException {
+//        logger.info(String.format("$$ -> Producing message --> %s",message));
+//        this.kafkaTemplateJSON.send(TOPIC, new ObjectMapper().writeValueAsString(message));
+//    }
 
 
-    public void sendMessageJSONTest(KafkaStatusMessage message) throws JsonProcessingException {
-        logger.info(String.format("$$ -> Producing message --> %s",message));
-        this.kafkaTemplateJSON.send("DeliveryStatus", new ObjectMapper().writeValueAsString(message));
-    }
+//    public void sendMessageJSONTest(KafkaStatusMessage message) throws JsonProcessingException {
+//        logger.info(String.format("$$ -> Producing message --> %s",message));
+//        this.kafkaTemplateJSON.send("DeliveryStatus", new ObjectMapper().writeValueAsString(message));
+//    }
 }
