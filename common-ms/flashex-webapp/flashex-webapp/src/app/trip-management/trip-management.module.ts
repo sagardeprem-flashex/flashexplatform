@@ -50,8 +50,7 @@ import { SettingsComponent } from './components/settings/settings.component';
       apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
    }),
    AgmDirectionModule,
-   SharedModule
-
+   SharedModule,
   ],
   entryComponents: [
     TripPlanningPropertiesComponent,
