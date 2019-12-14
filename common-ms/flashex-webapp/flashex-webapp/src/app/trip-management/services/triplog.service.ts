@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ITripLog } from '../interfaces/triplog';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +14,8 @@ export class TriplogService {
   }
 
   private url = 'triptracking-microservice-webservice/api/v1/triplogs';
+  // private url = '../../../assets/tripsListFormat1.json';
+
 
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<ITripLog[]>(this.dataSource);
@@ -20,7 +23,9 @@ export class TriplogService {
   load() {
     this.http.get<ITripLog[]>(this.url).subscribe(
       data => {
-        this.dataSource = data;
+        for (let i = 0; i < 4; i++) {
+        this.dataSource[i] = data[i];
+        }
         this.behaviourSubject.next(this.dataSource);
       }
     );
