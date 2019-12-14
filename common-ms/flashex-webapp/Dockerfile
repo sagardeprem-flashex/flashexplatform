@@ -7,7 +7,7 @@ RUN ls -la
 RUN npm install -g @angular/cli
 RUN npm install
 RUN ls
-RUN ng build --prod
+RUN ng build
 
 # FROM maven:3.6.2-jdk-12 AS build`
 FROM prithivid/flashexdepends:latest AS build
