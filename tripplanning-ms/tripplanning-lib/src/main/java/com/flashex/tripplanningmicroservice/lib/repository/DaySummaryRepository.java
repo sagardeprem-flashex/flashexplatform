@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface DaySummaryRepository extends CassandraRepository<DaySummary,String> {
     @AllowFiltering
-    List<DaySummary> findAllByDateTimeBetween(Date fromDate, Date toDate);
+    List<DaySummary> findAllBySummaryDateBetween(Date fromDate, Date toDate);
 }

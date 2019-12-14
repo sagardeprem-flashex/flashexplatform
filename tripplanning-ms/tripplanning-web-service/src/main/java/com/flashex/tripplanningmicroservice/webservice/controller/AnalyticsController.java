@@ -22,4 +22,11 @@ public class AnalyticsController {
     public DaySummary getSummary(@RequestParam String date){
         return analyticsService.getSummaryForDay(date);
     }
+
+    @GetMapping("/generate-summary")
+    public DaySummary generateSummary(@RequestParam String date){
+        return analyticsService.createSummary(2019,12,12);
+    }
+
+
 }
