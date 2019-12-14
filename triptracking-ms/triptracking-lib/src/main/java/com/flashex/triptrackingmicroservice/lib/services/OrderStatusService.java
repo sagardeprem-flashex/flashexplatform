@@ -4,10 +4,12 @@ import com.flashex.triptrackingmicroservice.lib.model.KafkaStatusMessage;
 import com.flashex.triptrackingmicroservice.lib.model.Packet;
 import com.flashex.triptrackingmicroservice.lib.model.PacketLog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class OrderStatusService {
 
     @Autowired
