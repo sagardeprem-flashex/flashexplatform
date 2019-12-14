@@ -12,10 +12,7 @@ import java.util.List;
 @Service
 public class OrderStatusService {
 
-    @Autowired
     private KafkaStatusMessage KafkaStatusMessage;
-
-
 
     public void scheduledOrder(List<Packet> packets){
         packets.forEach(packet -> {
