@@ -4,7 +4,11 @@ import com.flashex.tripplanningmicroservice.lib.model.TripItinerary;
 import com.flashex.tripplanningmicroservice.lib.services.TripItineraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.tools.jconsole.JConsole;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,5 +35,11 @@ public class TripItineraryController {
     @GetMapping("/tripitinerary/{id}")
     public TripItinerary getSpecificTripItinerary(@PathVariable String id) {
         return tripItineraryService.getSpecificTripItinerary(id);
+    }
+
+    @GetMapping("/test")
+    public List<TripItinerary> getItinerariesByDate(
+            @RequestParam int year, @RequestParam int month, @RequestParam int day ){
+        return tripItineraryService.getTripsByDay(year, month, day);
     }
 }
