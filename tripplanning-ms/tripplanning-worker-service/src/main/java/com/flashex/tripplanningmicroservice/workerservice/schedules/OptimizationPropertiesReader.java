@@ -19,8 +19,8 @@ public class OptimizationPropertiesReader {
     @Autowired
     OptimizationPropertiesService propertiesService;
 
-//    @Scheduled(cron = "0 * 6 * * *")
-    @Scheduled(cron = "2 * * * * ?")
+//    @Scheduled(cron = "2 * * * * ?")
+    @Scheduled(cron = "0 * 6 * * *")
     public void optimizationPropsFetcher () {
         logger.info("Triggered Time ===============|> "+ LocalDateTime.now());
         latestOptimizationProperties = propertiesService.getAllProperties().get(0);
