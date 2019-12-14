@@ -11,6 +11,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserService} from '../shared/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './services/auth-interceptor';
+import { LandingPageComponent } from '../landing-page/landing-page.component';
 
 
 @NgModule({

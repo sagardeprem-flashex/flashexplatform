@@ -21,11 +21,13 @@ import {
   MatTooltipModule,
   MatSortModule,
   MatStepperModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatIconModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
-import { MatIconModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 
@@ -54,7 +56,11 @@ const MaterialComponents = [
   MatPasswordStrengthModule,
   MatSortModule,
   MatRippleModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSlideToggleModule,
+  MatSliderModule,
+  MatRadioModule,
+  MatIconModule
 ];
 
 @NgModule({
