@@ -22,6 +22,8 @@ import { AgmDirectionModule } from 'agm-direction';
 import { SharedModule } from '../shared/shared.module';
 import { SettingsComponent } from './components/settings/settings.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 
 
@@ -37,7 +39,7 @@ import { SettingsComponent } from './components/settings/settings.component';
     LiveTrackingGoogleComponent,
     SettingsComponent,
     StepperDialogComponent,
-    StatusDialogComponent,
+    StatusDialogComponent
   ],
   imports: [
     CommonModule,
@@ -46,11 +48,12 @@ import { SettingsComponent } from './components/settings/settings.component';
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxChartsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDk'
+      apiKey: 'AIzaSyBLw09tedbxbyfc0Fgpy9Z30XhK53ClJDkyui'
    }),
    AgmDirectionModule,
-   SharedModule,
+   SharedModule
   ],
   entryComponents: [
     TripPlanningPropertiesComponent,
