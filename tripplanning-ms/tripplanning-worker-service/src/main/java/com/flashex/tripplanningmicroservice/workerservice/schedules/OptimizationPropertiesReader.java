@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.logging.Logger;
 
@@ -23,7 +24,12 @@ public class OptimizationPropertiesReader {
     @Scheduled(cron = "0 * 6 * * *")
     public void optimizationPropsFetcher () {
         logger.info("Triggered Time ===============|> "+ LocalDateTime.now());
-        latestOptimizationProperties = propertiesService.getAllProperties().get(0);
+        if(propertiesService.getAllProperties().get(0) != null) {
+            latestOptimizationProperties = propertiesService.getAllProperties().get(0);
+        } else {
+            latestOptimizationProperties = new OptimizationProperties("1", "VRP with Capacity Constraint using Bing", Timestamp.valueOf(LocalDateTime.now()));
+            propertiesService.saveOptimizationProperties(latestOptimizationProperties);
+        }
         logger.info("Optimization Property ===============|> "+ latestOptimizationProperties.getAlgorithmSelected() + "LastUpdated ========|>" + latestOptimizationProperties.getLastUpdated());
     }
 
