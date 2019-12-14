@@ -26,7 +26,7 @@ public class BinningService {
     PacketService packetService;
 
     @Autowired
-    BinnerConfig binnerConfigService;
+    BinnerConfigService binnerConfigService;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
 
