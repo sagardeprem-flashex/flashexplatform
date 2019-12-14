@@ -4,7 +4,7 @@
             <button style="margin: 0px;" mat-icon-button (click)="sidenav.toggle()">                       <mat-icon>double_arrow</mat-icon>
             </button> Scheduled Trips:
             <span style="padding-left:0.5em;font-size:0.85em;"> 
-                {{scheduledDate | date:'yyyy-MM-dd'}}
+                {{scheduledDate | date:'mediumDate'}}
             </span>
 
         </div>
@@ -22,61 +22,53 @@
         <mat-sidenav class="sidenavbar" #sidenav opened mode="side" style="background-color:#ECEFF1;">
 
             <div *ngFor="let id of dataSource, let i=index">
-                <mat-expansion-panel style="background-color:#ECEFF1;">
+                <mat-expansion-panel style="background-color:#ECEFF1;" style="width: 100%;">
 
                     <mat-expansion-panel-header style="background-color:#ECEFF1;">
                         <mat-panel-title>
-                            <!-- <div style="width: 8px; height: 15px;left: 5px;margin-top: 1.5em;" [ngStyle]="{'background-color': colors[i]}"></div> -->
                             <p style="border-style: solid;border-width: 0 0 0 0.6em;background-color: #ECEFF1; padding-left: 0.4em;font-size:1rem;" [ngStyle]="{'border-color': colors[i]}">
                                 {{tripDate | slice: 0:3 | uppercase}}{{id.tripItineraryId | slice:-6}}</p>
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+                    <hr>
+                    <p> <span style="color: #A7A7A7;">Planned Trip Start :</span> {{id.plannedStartTime | date:'medium'}}</p>
+                    <p> <span style="color: #A7A7A7;">Actual Trip Started :</span> {{id.tripStart | date:'medium'}}</p><br>
+                    <hr>
 
-                    <!-- <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button> -->
-                    <p>Planned Trip Start at : {{id.plannedStartTime | date:'medium'}}</p>
-                    <p>Actual Trip Started at : {{id.tripStart | date:'medium'}}</p><br>
 
-
-
-                    <table mat-table [dataSource]="id.packetLogs " style="background-color: lightgray;">
+                    <table mat-table [dataSource]="id.packetLogs">
 
                         <ng-container matColumnDef="orderId">
-                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Order Id </th>
-                            <td mat-cell fxFlex="150px" *matCellDef="let element"> {{element.packetId | slice: -6}} </td>
+                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef style="padding-top: 1em; font-size: 1.25em; text-align: center;"> Order Id </th>
+                            <td mat-cell fxFlex="150px" *matCellDef="let element" style="padding-top: 1em;text-align: center;"> {{element.packetId | slice: -6 | uppercase}} </td>
                         </ng-container>
 
                         <ng-container matColumnDef="status">
-                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef> Order Status </th>
-                            <td mat-cell fxFlex="150px" *matCellDef="let element"> {{element.packetStatus}} </td>
+                            <th mat-header-cell fxFlex="150px" *matHeaderCellDef style="padding-top: 1em; font-size: 1.25em;text-align: center;"> Order Status </th>
+                            <td mat-cell fxFlex="150px " *matCellDef="let element " style="padding-top: 1em;text-align: center;">
+                                <div *ngIf="element.packetStatus === 'Delivered'; else elseblock" style="color: green;">{{element.packetStatus}}
+                                </div>
+                                <ng-template #elseblock>
+                                    {{element.packetStatus}}
+                                </ng-template>
+                            </td>
+
                         </ng-container>
 
 
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+                        <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns; " [ngClass]="{gray: even}"></tr>
                     </table>
 
 
+                    <hr>
 
+                    <p> <span style="color: #A7A7A7;">Planned Trip End :</span> {{id.plannedEndTime | date:'medium'}}</p>
 
+                    <p> <span style="color: #A7A7A7;">Actual Trip Ended :</span> {{id.tripEnd | date:'medium'}}</p>
 
-                    <!-- <p *ngFor="let order of id.packetLogs; let i = index"> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br> Order Status: {{order.packetStatus}}
-                        <button type="button" (click)="updatePacketLog(id.tripItineraryId, order.packetId)">Packet Status</button></p><br> -->
-
-
-
-
-                    <p>Planned Trip End at : {{id.plannedEndTime | date:'medium'}}</p>
-
-                    <p> Actual Trip Ended at : {{id.tripEnd | date:'medium'}}</p>
-
-
-                    <!-- <button type="button" (click)="updateTripEnd(id.tripItineraryId)">End Trip</button> -->
-
-
-
-
-
+                    <hr>
 
                 </mat-expansion-panel>
             </div>

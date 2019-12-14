@@ -37,6 +37,7 @@ public class TripLog {
 
     @CassandraType(type = DataType.Name.TIMESTAMP)
     private Date plannedEndTime;
+
     @CassandraType(type = DataType.Name.UDT, userTypeName = "deliveryAddress")
     private DeliveryAddress originAddress;
 

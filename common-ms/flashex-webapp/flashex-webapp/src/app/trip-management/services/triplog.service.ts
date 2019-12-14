@@ -16,7 +16,6 @@ export class TriplogService {
   private url = 'triptracking-microservice-webservice/api/v1/triplogs';
   // private url = '../../../assets/tripsListFormat1.json';
 
-
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<ITripLog[]>(this.dataSource);
 
@@ -24,7 +23,7 @@ export class TriplogService {
     this.http.get<ITripLog[]>(this.url).subscribe(
       data => {
         for (let i = 0; i < 4; i++) {
-        this.dataSource[i] = data[i];
+          this.dataSource[i] = data[i];
         }
         this.behaviourSubject.next(this.dataSource);
       }
@@ -38,13 +37,13 @@ export class TriplogService {
 
   // tslint:disable-next-line: ban-types
   updateTripLog(id: string, value: any): Observable<Object> {
-    const options = {responseType: 'text' as 'json'};
+    const options = { responseType: 'text' as 'json' };
     return this.http.put('triptracking-microservice-webservice/api/v1/updatelogs?id=' + id, value, options);
   }
   // tslint:disable-next-line: ban-types
   updatePacketLog(id: string, value: any, tripPacketId: string): Observable<Object> {
-    const options = {responseType: 'text' as 'json'};
+    const options = { responseType: 'text' as 'json' };
     return this.http.put('triptracking-microservice-webservice/api/v1/packetstatus?id=' + id +
-    '&tripPacketId=' + tripPacketId , value, options);
+      '&tripPacketId=' + tripPacketId, value, options);
   }
 }

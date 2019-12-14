@@ -6,13 +6,13 @@ export interface IPacket {
   packetType: string;
   priority: string;
   currentStatus: string;
+  receivedDate: string;
    statusList: IStatus[];
   weight: number;
   length: number;
   breadth: number;
   height: number;
   costOfPacket: number;
-  receivedDate: string;
   estimatedDeliveryDate: Date;
   actualDeliveryDate: Date;
   deliveryAddress: {
@@ -39,7 +39,7 @@ export interface IPacket {
 
 export interface IStatus {
 statusValue: string;
-timeStamp: Date;
+timeStamp: string;
 }
 
 

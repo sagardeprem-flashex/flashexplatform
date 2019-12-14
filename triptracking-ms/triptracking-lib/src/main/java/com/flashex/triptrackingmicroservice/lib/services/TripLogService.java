@@ -1,7 +1,5 @@
 package com.flashex.triptrackingmicroservice.lib.services;
 
-import com.flashex.triptrackingmicroservice.lib.model.PacketLog;
-import com.flashex.triptrackingmicroservice.lib.model.TripItinerary;
 import com.flashex.triptrackingmicroservice.lib.model.TripLog;
 import com.flashex.triptrackingmicroservice.lib.repository.TripLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,8 @@ public class TripLogService {
     @Autowired
     private TripLogRepository tripLogRepository;
 
+    @Autowired
+    private OrderStatusService orderStatusService;
 
 
 
@@ -36,12 +36,19 @@ public class TripLogService {
         }
         return savedTripLogs;
     }
-    public TripLog updateTripLog(String  id, TripLog tripLog) {
+    public TripLog updateTripLog(String id, TripLog tripLog) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
+        // triplog1 - from db -
+        if (tripLog1.getPlannedStartTime() == null && tripLog1.getPlannedEndTime()== null){
+            orderStatusService.dispatchedOrder(tripLog1.getPacketLogs());
+        }
+
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());
         TripLog updateTripLog = tripLogRepository.save(tripLog1);
+
         return updateTripLog;
+
     }
     public TripLog updatePacketLog(String id, TripLog tripLog, String tripPacketId) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
@@ -50,7 +57,15 @@ public class TripLogService {
         // extract data from packets to packetlogs
         for(int i=0; i<tripLog1.getPacketLogs().size(); i++){
             if(tripPacketId.equals(tripLog1.getPacketLogs().get(i).getPacketId())){
-                tripLog1.getPacketLogs().get(i).setPacketStatus(tripLog.getPacketLogs().get(0).getPacketStatus());
+                String status=  tripLog.getPacketLogs().get(0).getPacketStatus();
+                tripLog1.getPacketLogs().get(i).setPacketStatus(status);
+                if (status.equals("Delivered")) {
+                    orderStatusService.deliveredOrder(tripPacketId);
+                }
+                else if (status.equals("Undelivered")){
+                    orderStatusService.unDeliveredOrder(tripPacketId);
+
+                }
             }
 
         }
