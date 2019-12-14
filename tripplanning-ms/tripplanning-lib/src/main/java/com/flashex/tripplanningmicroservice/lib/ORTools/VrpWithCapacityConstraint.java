@@ -182,7 +182,7 @@ public class VrpWithCapacityConstraint {
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
-                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) / GenerateMatrix.scaleFactor;
 
                 tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long milage = 21;

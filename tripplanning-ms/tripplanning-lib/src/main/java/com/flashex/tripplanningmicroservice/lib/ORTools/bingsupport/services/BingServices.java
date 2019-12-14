@@ -57,13 +57,13 @@ public class BingServices {
 
         for(int i=0; i<distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().size(); i++){
             distMat[distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getDestinationIndex()][distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getOriginIndex()]
-                    = (long) distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getTravelDistance() * 1000;
+                    = (long) (distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getTravelDistance() * 1000);
         }
         logger.info("Generated Distance Matrix -----------------> "+ Arrays.deepToString(distMat));
 
         for(int i=0; i<distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().size(); i++){
             timeMat[distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getDestinationIndex()][distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getOriginIndex()]
-                    = (long) distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getTravelDuration() * 1000;
+                    = (long) (distanceMatrix.getResourceSets().get(0).getResources().get(0).getResults().get(i).getTravelDuration() * 1000);
         }
 
         sendsDistAndTimeMat.add(distMat);

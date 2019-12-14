@@ -24,7 +24,7 @@ public class OptimizationPropertiesReader {
     @Scheduled(cron = "0 * 6 * * *")
     public void optimizationPropsFetcher () {
         logger.info("Triggered Time ===============|> "+ LocalDateTime.now());
-        if(propertiesService.getAllProperties().get(0) != null) {
+        if(propertiesService.getAllProperties().size() != 0) {
             latestOptimizationProperties = propertiesService.getAllProperties().get(0);
         } else {
             latestOptimizationProperties = new OptimizationProperties("1", "VRP with Capacity Constraint using Bing", Timestamp.valueOf(LocalDateTime.now()));

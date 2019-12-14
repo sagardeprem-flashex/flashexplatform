@@ -240,7 +240,7 @@ public class TimeWindowDelivery {
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
-                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) / GenerateMatrix.scaleFactor * Data.getAvgVehicleSpeed();
                 tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long milage = 21;
                 long tripexpense = milage*solution.min(timeVar);
