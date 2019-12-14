@@ -16,3 +16,7 @@ button {
 .sidenavbar {
     width: min-content;
 }
+
+.gray {
+    background-color: #f5f5f5
+}

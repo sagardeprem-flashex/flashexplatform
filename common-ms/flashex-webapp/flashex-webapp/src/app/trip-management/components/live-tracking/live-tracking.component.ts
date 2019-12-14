@@ -39,6 +39,7 @@ export class LiveTrackingComponent implements OnInit {
   public warehouse;
   public tripDate = new Date().toDateString();
   public routeColor = ['red', 'blue', 'green', 'black'];
+
   constructor(private tripService: TriplogService) { }
   // trip: TripLog = new TripLog();
 
