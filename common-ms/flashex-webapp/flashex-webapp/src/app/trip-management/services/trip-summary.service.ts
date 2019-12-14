@@ -12,7 +12,8 @@ export class TripSummaryService {
 
   public handleError = [];
 
-  constructor(private http: HttpClient) { 
+  public date = '12-12-2019';
+  constructor(private http: HttpClient) {
     this.loadSummary();
   }
 
@@ -22,21 +23,27 @@ export class TripSummaryService {
     })
   };
 
-  private tripItineraryUrl = 'tripplanning-microservice-webservice/api/v1/summary';
+  private tripSummaryUrl = 'tripplanning-microservice-webservice/api/v1/generate-summary';
 
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<Itripsummary[]>(this.dataSource);
 
-    // get trip itinerary details
+  // get trip itinerary details
 
-    loadSummary() {
-      this.http.get<Itripsummary[]>(this.tripItineraryUrl).subscribe(data => {
-        this.dataSource = data;
-        this.behaviourSubject.next(this.dataSource);
-      },
+  loadSummary() {
+    this.http.get<Itripsummary[]>(this.tripSummaryUrl + '?date=' + this.date).subscribe(data => {
+      console.log(data);
+      this.dataSource = data;
+      this.behaviourSubject.next(this.dataSource);
+    },
       error => {
         this.handleError[0] = error;
+        console.log(error);
       });
 
-}
+  }
+
+  getSummary() {
+    return this.dataSource[0];
+  }
 }

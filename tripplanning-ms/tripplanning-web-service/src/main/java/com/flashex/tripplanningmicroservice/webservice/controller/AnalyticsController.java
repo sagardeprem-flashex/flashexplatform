@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -24,8 +26,11 @@ public class AnalyticsController {
     }
 
     @GetMapping("/generate-summary")
-    public DaySummary generateSummary(@RequestParam String date){
-        return analyticsService.createSummary(2019,12,12);
+    public List<DaySummary> generateSummary(@RequestParam String date){
+
+        List<DaySummary> summaries = new ArrayList<>();
+        summaries.add(analyticsService.createSummary(2019,12,12));
+        return summaries;
     }
 
 
