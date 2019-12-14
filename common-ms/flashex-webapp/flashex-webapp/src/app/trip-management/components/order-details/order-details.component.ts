@@ -111,28 +111,28 @@ export class OrderDetailsComponent implements OnInit {
 
       this.mydata.forEach(dt => {
         const updatedList = [];
-        d.statusList.forEach((statusIterator, i) => {
+        dt.statusList.forEach((statusIterator, i) => {
           const tranformedDate = statusIterator.timeStamp.split('+')[0].concat('+0530');
           const now = new Date(tranformedDate);
           const now1 = moment(now).fromNow();
           // console.log("date:", now1);
           const obj = {
-            statusValue : d.statusValue,
-            timeStamp : moment(d.timeStamp).format('M/D/YYYY hh:mm:ss a')
+            statusValue : dt.statusValue,
+            timeStamp : moment(dt.timeStamp).format('M/D/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
-          if (i === d.statusList.length - 1) {
-            d.statusList = [].concat(updatedList);
-            this.mydata.push(d);
+          if (i === dt.statusList.length - 1) {
+            dt.statusList = [].concat(updatedList);
+            this.mydata.push(dt);
           }
         });
-        if (j === data.length - 1) {
-          this.dataSource = new MatTableDataSource(this.mydata);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.packetList = data;
-          // console.log("hello---------> ", this.packetList);
-        }
+        // if (j === data.length - 1) {
+        //   this.dataSource = new MatTableDataSource(this.mydata);
+        //   this.dataSource.sort = this.sort;
+        //   this.dataSource.paginator = this.paginator;
+        //   this.packetList = data;
+        //   // console.log("hello---------> ", this.packetList);
+        // }
       });
 
 
