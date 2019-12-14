@@ -13,6 +13,7 @@ import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { AuthguardService } from './shared/services/authguard.service';
 import { HAMMER_LOADER } from '@angular/platform-browser';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HAMMER_LOADER } from '@angular/platform-browser';
     MaterialModule,
     TripManagementModule,
     DeliveryExecutiveModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    NgxChartsModule
   ],
   providers: [
     AuthguardService,
