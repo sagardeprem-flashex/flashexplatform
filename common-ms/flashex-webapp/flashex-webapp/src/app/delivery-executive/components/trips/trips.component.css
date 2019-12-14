@@ -61,7 +61,7 @@ table {
 
 span {
     /* padding-left: 200px; */
-    font-size: 15px;
+    font-size: 12px;
     color: #635e5e;
     width: max-content;
     margin: 5px;
@@ -128,4 +128,25 @@ img {
     font-size: 25px;
     line-height: 2;
     margin-bottom: 15px;
+}
+
+@media screen and (max-width: 425px) {
+    .status {
+        display: none;
+    }
+    div.fullview {
+        display: none;
+    }
+    mat-icon.material-icons {
+        display: none;
+    }
+    button.show {
+        display: contents;
+    }
+}
+
+@media screen and (min-width:426px) {
+    button.show {
+        display: none;
+    }
 }

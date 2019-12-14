@@ -7,6 +7,7 @@ import { IPacket } from '../../interfaces/Packet';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { SettingsComponent } from '../settings/settings.component';
+import { distinct } from 'rxjs/operators';
 
 // import { timingSafeEqual } from 'crypto';
 
@@ -35,13 +36,15 @@ export class OrderDetailsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'currentStatus'];
+  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
-  public receivedDate: string;
+  public dateList = [];
+
+
 
   constructor(private packetService: ShipmentManagementService, public dialog: MatDialog, public configDialog: MatDialog) {
 
@@ -91,10 +94,22 @@ export class OrderDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
-      // const temp: IPacket;
-      data.forEach((d, j) => {
-        // console.log("data::", d);
-        // temp = d;
+      let temp: IPacket;
+      let dateValue;
+      data.forEach(d => {
+        temp = d;
+        // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
+        temp.receivedDate = moment(d.receivedDate).format('M/D/YYYY hh:mm:ss a');
+        temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
+
+        dateValue = moment(d.receivedDate).format('M/D/YYYY');
+        this.dateList.push(dateValue);
+        // console.log(temp.currentStatus);
+
+        this.mydata.push(temp);
+      });
+
+      this.mydata.forEach(dt => {
         const updatedList = [];
         d.statusList.forEach((statusIterator, i) => {
           const tranformedDate = statusIterator.timeStamp.split('+')[0].concat('+0530');
@@ -102,10 +117,8 @@ export class OrderDetailsComponent implements OnInit {
           const now1 = moment(now).fromNow();
           // console.log("date:", now1);
           const obj = {
-            statusValue: statusIterator.statusValue,
-            timeStamp: now1
-            // statusValue : d.statusValue,
-            // timeStamp : moment().format('M/D/YYYY hh:mm:ss a')
+            statusValue : d.statusValue,
+            timeStamp : moment(d.timeStamp).format('M/D/YYYY hh:mm:ss a')
           };
           updatedList.push(obj);
           if (i === d.statusList.length - 1) {
@@ -121,6 +134,19 @@ export class OrderDetailsComponent implements OnInit {
           // console.log("hello---------> ", this.packetList);
         }
       });
+
+
+
+      this.dataSource = new MatTableDataSource(this.mydata);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      this.packetList = data;
+      // console.log(this.packetList);
+      console.log('date chya values ' + this.dateList);
+      this.dateList = [... new Set(this.dateList)];
+      console.log('date chya values ' + this.dateList);
+
+
     });
   }
 
@@ -140,11 +166,11 @@ export class OrderDetailsComponent implements OnInit {
       };
     } else if (priority === 'ORDINARY') {
       return {
-        color: 'orange'
+        color: 'green'
       };
     } else {
       return {
-        color: 'green'
+        color: 'blue'
       };
     }
 
@@ -199,10 +225,10 @@ export class OrderDetailsComponent implements OnInit {
 
 
   openDialog(statusList, packetId): void {
-    const dialogRef = this.dialog.open(StatusDialogComponent, {
+    const dialogRef = this.dialog.open(StatusDialogComponent, { width: '30em',
        data: {status: statusList, packet: packetId}
     });
-    console.log(statusList);
+   // console.log(statusList);
   }
 }
 

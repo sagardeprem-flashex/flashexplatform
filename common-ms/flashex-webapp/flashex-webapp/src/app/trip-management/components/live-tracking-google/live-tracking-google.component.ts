@@ -33,6 +33,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
   public url;
   public warehouse;
   public routes = [];
+  public tripDate = new Date().toDateString();
 
   displayedColumns: string[] = ['orderId', 'status'];
   public scheduledDate = new Date();

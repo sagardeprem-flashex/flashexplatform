@@ -2,7 +2,7 @@
     <img src="../assets/images/logo.png" routerLink='/admin'>
     <div fxLayout="row" fxLayoutAlign="center center">
 
-        <span>{{userName}}</span>
+        <span style="font-size: 20px;">{{userName}}</span>
         <button mat-button [matMenuTriggerFor]="menu">
                     <mat-icon  class= "person" mat-list-icon>person</mat-icon>
                 </button>
@@ -38,37 +38,39 @@
                     <mat-tab-group>
                         <mat-tab label="Trip Summary">
                             <div fxLayout="row" fxLayoutAlign="start start">
-                                <!-- ---------------- -->
-                                <div style="display: inline-grid;">
-                                    <mat-list-item style="padding: 10px;"><span>Start Location </span>
-                                        <p matTooltip="{{tripDetails.originAddress}}">WearHouse-1, Koramangala</p>
-                                    </mat-list-item>
-                                    <mat-divider></mat-divider>
+                                <div style="display: contents;">
                                     <mat-list *ngIf='tripDetails!=null'>
                                         <mat-list-item><span>Start Time </span> {{tripDetails.plannedStartTime| date: 'short'}}
-                                            <p> <button mat-raised-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="primary">Start Trip</button></p>
+                                            <p> <button style="float: right;" mat-stroked-button (click)="updateTripStart(tripDetails.tripItineraryId)" color="accent">Start</button></p>
                                         </mat-list-item>
-                                        <mat-divider></mat-divider>
-
-                                        <mat-list-item><span>Order Type  </span> Perishable</mat-list-item>
                                         <mat-divider></mat-divider>
                                         <mat-list-item><span>Actual Start Time </span>
                                             <p>
                                                 {{tripDetails.tripStart|date: 'short'}}</p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
+                                        <mat-list-item><span>Order Type  </span> Perishable</mat-list-item>
+                                        <mat-divider></mat-divider>
                                         <mat-list-item><span>End Time </span> {{tripDetails.plannedEndTime|date:'short'}}
-                                            <p><button mat-raised-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="primary">End Trip</button></p>
+                                            <p><button style="float: right;" mat-stroked-button (click)="updateTripEnd(tripDetails.tripItineraryId)" color="accent">End</button></p>
                                         </mat-list-item>
                                         <mat-divider></mat-divider>
                                         <mat-list-item><span>Actual End Time</span>
                                             <p>
-                                                {{tripDetails.tripEnd|date:'short'}}</p>
+                                                {{tripDetails.tripEnd|date:'short'}}
+                                            </p>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item><span>Start Location </span>
+                                            <p matTooltip="{{tripDetails.originAddress}}">WearHouse-1, Koramangala</p>
+                                        </mat-list-item>
+                                        <mat-divider></mat-divider>
+                                        <mat-list-item><button class="show" mat-raised-button>Show Map</button>
                                         </mat-list-item>
                                     </mat-list>
                                 </div>
-                                <!-- ------------------ -->
-                                <div id="map"></div>
+                                <div class="fullview" id="map"></div>
+                                <!-- <div class="mobileview" id="map"></div> -->
                             </div>
                         </mat-tab>
                         <mat-tab label="Order Details">
@@ -76,7 +78,7 @@
                                 <mat-expansion-panel hideToggle>
                                     <mat-expansion-panel-header>
                                         <mat-panel-title>
-                                            <p>{{listofOrders[i].packetId}}</p>
+                                            <p matTooltip="{{listofOrders[i].packetId}}">{{listofOrders[i].packetId.slice(0,8).concat("...")}}</p>
                                         </mat-panel-title>
                                         <mat-panel-description>
                                             <p>
@@ -97,7 +99,7 @@
                                                     {{listofOrders[i].packetStatus}}</button>
                                                 </p>
                                             </span>
-                                        <table style="float: right; width: 50%; margin-top: -6em;">
+                                        <table class="status" style="float: right; width: 50%; margin-top: -6em;">
                                             <tr>
                                                 <td>Reached to Hub</td>
                                                 <td>Out for delivery</td>
@@ -105,6 +107,8 @@
                                             </tr>
                                             <tr>
                                                 <td>
+
+
                                                     <mat-progress-bar color="accent" mode="determinate" value="100"></mat-progress-bar>
                                                 </td>
 
