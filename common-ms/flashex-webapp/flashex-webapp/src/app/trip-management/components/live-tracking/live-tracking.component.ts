@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TriplogService } from '../../services/triplog.service';
 import { TripLog, ITripLog } from '../../interfaces/triplog';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 declare let tomtom: any;
 @Component({
   selector: 'app-live-tracking',
@@ -40,7 +41,7 @@ export class LiveTrackingComponent implements OnInit {
   public tripDate = new Date().toDateString();
   public routeColor = ['red', 'blue', 'green', 'black'];
 
-  constructor(private tripService: TriplogService) { }
+  constructor(private tripService: TriplogService, private token: TokenStorageService) { }
   // trip: TripLog = new TripLog();
 
   ngOnInit() {
@@ -136,44 +137,5 @@ export class LiveTrackingComponent implements OnInit {
       const generatedColor = '#' + ('000000' + color).slice(-6);
       this.colors.push(generatedColor);
     });
-  }
-  // get trip log by its id from backend
-  getTripLogById(id: string) {
-    this.tripService.getTripLog(id).subscribe(
-      data => {
-        this.tripLogById = data;
-
-      }
-    );
-  }
-  // update trip start time for particular trip with its id being fetched from UI
-  updateTripStart(tripId) {
-    this.trip = new TripLog();
-    this.trip.tripStart = new Date();
-    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
-    });
-  }
-  // update trip end time for particular trip with its id being fetched from UI
-  updateTripEnd(tripId) {
-    this.trip.tripEnd = new Date();
-    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
-    });
-  }
-
-  // update packet status of particular packet id inside a particular trip itinerary
-  updatePacketLog(tripId, tripPacketId) {
-    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delivered' }];
-    } else {
-      /* tslint:disable:no-string-literal */
-      this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
-    }
-    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
-      data => {
-        this.tripLog = data;
-      }
-    );
   }
 }
