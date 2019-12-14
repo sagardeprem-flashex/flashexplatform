@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
       this.role = 'Delivery Executive';
 
     }
-    this.userName = this.tokenStorage.getUsername();
+    // this.userName = this.tokenStorage.getUsername();
   }
   logout() {
     this.tokenStorage.signOut();
