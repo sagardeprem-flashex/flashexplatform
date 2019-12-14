@@ -2,11 +2,10 @@ package com.flashex.triptrackingmicroservice.workerservice.messaging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flashex.triptrackingmicroservice.lib.model.Packet;
-import com.flashex.triptrackingmicroservice.lib.model.PacketLog;
-import com.flashex.triptrackingmicroservice.lib.model.TripItinerary;
-import com.flashex.triptrackingmicroservice.lib.model.TripLog;
+import com.flashex.triptrackingmicroservice.lib.model.*;
+import com.flashex.triptrackingmicroservice.lib.services.OrderStatusService;
 import com.flashex.triptrackingmicroservice.lib.services.TripLogService;
+import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,19 @@ public class Consumer {
     @Autowired
     TripLogService tripLogService;
 
+    @Autowired
+    OrderStatusService orderStatusService;
+
     @KafkaListener(topics = "TripItinerary", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
         logger.info(String.format("$$ -> Consumed Message -> %s",new ObjectMapper().readValue(message, TripItinerary.class)));
         TripItinerary tripItinerary = new ObjectMapper().readValue(message, TripItinerary.class);
 
-        // create a log
+        //updating scheduled delivery status
+       orderStatusService.scheduledOrder(tripItinerary.getPackets());
+
+       // create a log
         TripLog tripLog = new TripLog();
         tripLog.setTripItineraryId(tripItinerary.getTripItineraryId());
         tripLog.setOriginAddress(tripItinerary.getOriginAddress());
@@ -53,6 +58,7 @@ public class Consumer {
             .get(i).getCustomer().middleName + ' ' + tripItinerary.getPackets().get(i).getCustomer().lastName);
             packetLog.setPhoneNumber(tripItinerary.getPackets().get(i).getCustomer().phoneNumber);
             packetLogs.add(packetLog);
+
 
         }
         tripLog.setPacketLogs(packetLogs);

@@ -38,13 +38,17 @@ public class TripLogController {
         return tripLogService.saveTripLogs(tripLogs);
     }
 
+    // only start and end trip
     @PutMapping("/updatelogs")
     public TripLog updateLogs(@RequestParam String id, @RequestBody TripLog tripLog){
         return tripLogService.updateTripLog(id,tripLog);
     }
 
+
+    // for Delivered and Undelivered orders
     @PutMapping("/packetstatus")
     public TripLog updatePacketLogs(@RequestParam String id, String tripPacketId, @RequestBody TripLog tripLog){
+
         return tripLogService.updatePacketLog(id,tripLog,tripPacketId);
     }
 }

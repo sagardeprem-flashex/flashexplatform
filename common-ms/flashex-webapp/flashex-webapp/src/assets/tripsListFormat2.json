@@ -438,7 +438,8 @@
       "latitude": 12.9534628,
       "longitude": 77.6366707
     },
-    "algorithm": "VrpwithCapacityConstraint"
+    "algorithm": "VrpwithCapacityConstraint",
+    "droppedVisits":  {}
   },
   {
     "tripItineraryId": "TRIP01NOV2019B",
@@ -941,7 +942,8 @@
       "latitude": 12.9534628,
       "longitude": 77.6366707
     },
-    "algorithm": "VrpwithDroppingVisit"
+    "algorithm": "VrpwithDroppingVisit",
+    "droppedVisits":  {}
   }
 ]
 
