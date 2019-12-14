@@ -15,8 +15,8 @@ public class TripLogService {
     @Autowired
     private TripLogRepository tripLogRepository;
 
-
-
+    @Autowired
+    private OrderStatusService orderStatusService;
 
     public List<TripLog> getAllTripLog(){
         return tripLogRepository.findAll();
@@ -38,10 +38,15 @@ public class TripLogService {
     }
     public TripLog updateTripLog(String  id, TripLog tripLog) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
+        // triplog1 - from db -
+        orderStatusService.dispatchedOrder.forEach(tripLog -> ()));
+
+
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());
         TripLog updateTripLog = tripLogRepository.save(tripLog1);
         return updateTripLog;
+
     }
     public TripLog updatePacketLog(String id, TripLog tripLog, String tripPacketId) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);

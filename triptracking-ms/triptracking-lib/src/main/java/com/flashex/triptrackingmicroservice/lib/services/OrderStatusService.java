@@ -1,0 +1,54 @@
+package com.flashex.triptrackingmicroservice.lib.services;
+
+import com.flashex.triptrackingmicroservice.lib.model.KafkaStatusMessage;
+import com.flashex.triptrackingmicroservice.lib.model.Packet;
+import com.flashex.triptrackingmicroservice.lib.model.PacketLog;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+import java.util.List;
+
+public class OrderStatusService {
+
+    @Autowired
+    private KafkaStatusMessage KafkaStatusMessage;
+
+
+
+    public void scheduledOrder(List<Packet> packets){
+        packets.forEach(packet -> {
+            KafkaStatusMessage message = new KafkaStatusMessage();
+            message.setPacketId(packet.getPacketId());
+            message.setTimeStamp(new Date());
+            message.setStatusValue("SCHEDULED");
+        });
+    }
+
+    public void dispatchedOrder(List<PacketLog> packetLog){
+        packetLog.forEach(packet -> {
+            KafkaStatusMessage message = new KafkaStatusMessage();
+            message.setPacketId(packet.getPacketId());
+            message.setTimeStamp(new Date());
+            message.setStatusValue("DISPATCHED");
+    });
+    }
+
+    public void delieverdOrder(List<Packet> packets){
+        packets.forEach(packet -> {
+            KafkaStatusMessage message = new KafkaStatusMessage();
+            message.setPacketId(packet.getPacketId());
+            message.setTimeStamp(new Date());
+            message.setStatusValue("DELIVERED");
+        });
+    }
+
+    public void unDeliveredOrder(List<Packet> packets){
+        packets.forEach(packet -> {
+            KafkaStatusMessage message = new KafkaStatusMessage();
+            message.setPacketId(packet.getPacketId());
+            message.setTimeStamp(new Date());
+            message.setStatusValue("UNDELIVERED");
+        });
+    }
+
+}

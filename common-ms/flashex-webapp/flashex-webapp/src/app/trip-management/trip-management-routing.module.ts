@@ -54,10 +54,10 @@ const tripRoutes: Routes = [
       {
         path: 'trackgoogle',
         component: LiveTrackingGoogleComponent,
-        canActivate: [AuthguardService],
-        data: {
-          expectedRole: 'ROLE_ADMIN'
-        }
+        // canActivate: [AuthguardService],
+        // data: {
+        //   expectedRole: 'ROLE_ADMIN'
+        // }
       },
       {
         path: '',
