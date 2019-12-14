@@ -20,35 +20,41 @@ import java.util.logging.Logger;
 public class DataModel {
 
     static VehicleList[] vehicleList = new VehicleList[3];
+    static int avgVehicleSpeed = 40 * 60;  //should be km/min
+    static int scaleFactor = 1000;
 
     Shipment shipment;
     int depot;
     long[][] distanceMatrix;
     long[][] timeMatrix;
 
+
     public DataModel(Shipment shipment, int depot) throws JsonProcessingException {
         this.shipment = shipment;
         this.depot = depot;
 //        this.distanceMatrix = generateDistanceMatrix();
 //        this.timeMatrix = generateTimeMatrix();
-        this.distanceMatrix = generateDistanceMatrix(shipment);
-        this.timeMatrix = generateTimeMatrix(shipment);
+        ArrayList<long[][]> result = generateDistanceAndTimeMatrix(shipment);
+        this.distanceMatrix = result.get(0);
+        this.timeMatrix = result.get(1);
     }
 
-    public float[] getDemands() {
-        float[] demands = new float[shipment.getPacketList().size()];
+    public long[] getDemands() {
+        long[] demands = new long[shipment.getPacketList().size()+1];
+        demands[0] = 0;
         for(int i=0; i<shipment.getPacketList().size(); i++) {
             Packet packet = shipment.getPacketList().get(i);
-            demands[i] = packet.getHeight() * packet.getBreadth() * packet.getLength();
+            demands[i+1] = (long) (packet.getHeight() * packet.getBreadth() * packet.getLength());
         }
         return demands;
     }
 
     public String[] getAddresses() {
-        String[] addresses = new String[shipment.getPacketList().size()];
+        String[] addresses = new String[shipment.getPacketList().size()+1];
+        addresses[0] = shipment.getOriginAddress().getAddressLine1();
         for(int i=0; i<shipment.getPacketList().size(); i++){
             Packet packet = shipment.getPacketList().get(i);
-            addresses[i] = packet.getDeliveryAddress().getAddressLine1();
+            addresses[i+1] = packet.getDeliveryAddress().getAddressLine1();
         }
         return addresses;
     }
@@ -62,7 +68,7 @@ public class DataModel {
         return capacities;
     }
 
-    public long[][] generateDistanceMatrix (Shipment shipment) throws JsonProcessingException {
+    public ArrayList<long[][]> generateDistanceAndTimeMatrix (Shipment shipment) throws JsonProcessingException {
         List<DeliveryAddress> origins = new ArrayList<>();
         List<DeliveryAddress> destinations = new ArrayList<>();
         origins.add(shipment.getOriginAddress());
@@ -72,21 +78,10 @@ public class DataModel {
             destinations.add(shipment.getPacketList().get(i).getDeliveryAddress());
         }
         Logger.getLogger(DataModel.class.getName()).info("Origin and Destination addresses --------------------> " + origins + "-------"+ destinations);
-        long[][] distMat =  BingServices.requestDistanceMatrix(origins,destinations);
-        Logger.getLogger(DataModel.class.getName()).info("DistanceMatrix --------------------> " + Arrays.deepToString(distMat));
-        return distMat;
-    }
-
-    public long[][] generateTimeMatrix (Shipment shipment) throws JsonProcessingException {
-        List<DeliveryAddress> origins = new ArrayList<>();
-        List<DeliveryAddress> destinations = new ArrayList<>();
-        origins.add( shipment.getOriginAddress());
-        destinations.add(shipment.getOriginAddress());
-        for(int i=0;i<shipment.getPacketList().size(); i++) {
-            origins.add(shipment.getPacketList().get(i).getDeliveryAddress());
-            destinations.add(shipment.getPacketList().get(i).getDeliveryAddress());
-        }
-        return BingServices.requestTimeMatrix(origins,destinations);
+        ArrayList<long[][]> distAndTimeMat =  BingServices.requestDistanceAndTimeMatrix(origins,destinations);
+        Logger.getLogger(DataModel.class.getName()).info("DistanceMatrix --------------------> " + Arrays.deepToString(distAndTimeMat.get(0)));
+        Logger.getLogger(DataModel.class.getName()).info("TimeMatrix --------------------> " + Arrays.deepToString(distAndTimeMat.get(1)));
+        return distAndTimeMat;
     }
 
     public static void setVehicleList(VehicleList newVehicleList, int algoIndex) {
@@ -97,4 +92,28 @@ public class DataModel {
         return vehicleList[algoIndex];
     }
 
+    public long[][] createTimeWindow(int startTime, int endTime) {
+        long[][] timeWindow = new long[shipment.getPacketList().size()+1][2];
+        for(int i=0; i<shipment.getPacketList().size()+1; i++) {
+            timeWindow[i][0] = startTime;
+            timeWindow[i][1] = endTime;
+        }
+        return timeWindow;
+    }
+
+    public static int getScaleFactor() {
+        return scaleFactor;
+    }
+
+    public static void setScaleFactor(int scaleFactor) {
+        DataModel.scaleFactor = scaleFactor;
+    }
+
+    public static int getAvgVehicleSpeed() {
+        return avgVehicleSpeed;
+    }
+
+    public static void setAvgVehicleSpeed(int avgVehicleSpeed) {
+        DataModel.avgVehicleSpeed = avgVehicleSpeed;
+    }
 }

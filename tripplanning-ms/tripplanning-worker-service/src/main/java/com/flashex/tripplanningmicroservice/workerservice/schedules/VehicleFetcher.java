@@ -8,15 +8,14 @@ import com.flashex.tripplanningmicroservice.lib.model.bingdm.DataModel;
 import com.flashex.tripplanningmicroservice.lib.services.ORService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Service
+@Component
 public class VehicleFetcher {
 
 //    DataModel dataModel = new DataModel();
@@ -45,6 +44,8 @@ public class VehicleFetcher {
         vehicleList.setListofvehicle(vehicles);
         orService.settingVehicleDetails(vehicleList);
         DataModel.setVehicleList(vehicleList,0);
+        DataModel.setVehicleList(vehicleList,1);
+        DataModel.setVehicleList(vehicleList,2);
 
         logger.info("Vehicle List has been updated!");
     }

@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,14 +41,11 @@ public class VrpWithCapacityConstraintWithBing {
     public List<TripItinerary> printSolution(
             DataModel data, RoutingModel routing, RoutingIndexManager manager, Assignment solution, String[] address) throws Exception {
 
-        String[] addr = address;
-//        HashMap<String, Set<String>> Locationcord = new HashMap();
-
         Shipment shipment = data.getShipment();
 //        Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
-        VehicleList vehicleList = data.getVehicleList(0);
+        VehicleList vehicleList = DataModel.getVehicleList(0);
 //        logger.info((""+ vehicleList.listofvehicle));
 
         // Inspect solution.
@@ -56,16 +55,16 @@ public class VrpWithCapacityConstraintWithBing {
         List<TripItinerary> trips = new ArrayList<TripItinerary>();
         List<Vehicle> updatedVehicles = new ArrayList<>(vehicleList.getListofvehicle());
 
-        for (int i = 0; i < data.getVehicleList(0).getListofvehicle().size(); ++i) {
+        for (int i = 0; i < DataModel.getVehicleList(0).getListofvehicle().size(); ++i) {
 
             TripItinerary tripItinerary = new TripItinerary();
 //            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
             tripItinerary.setTripItineraryId(String.format("%035d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16)));
 //            tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
             tripItinerary.setPlanGeneratedTime(Timestamp.valueOf(LocalDateTime.now()));
-            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.now().plusHours(2)));
+            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(9,0))));
 //            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
-            tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.now().plusHours(7)));
+            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(13,0))));
 
             long index = routing.start(i);
             logger.info("Route for Vehicle " + i + ":");
@@ -88,7 +87,7 @@ public class VrpWithCapacityConstraintWithBing {
                 long occupiedvolume = (((vehiclecapacity - routeLoad)*100)/vehiclecapacity);
                 tripItinerary.setOccupiedVolume(occupiedvolume); // setting occupied volume
 
-                route += nodeIndex + " Load(" + routeLoad + ")  -> " + "Address" + addr[(int) nodeIndex] + "-->";
+                route += nodeIndex + " Load(" + routeLoad + ")  -> " + "Address" + address[(int) nodeIndex] + "-->";
 //                response = geocode(addr[(int) nodeIndex],data.Key);
 //                latlongarr.add(response);
 
@@ -101,11 +100,11 @@ public class VrpWithCapacityConstraintWithBing {
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
-                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i)/DataModel.getScaleFactor();
 
                 tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
-                long milage = 21;
-                long tripexpense = milage*routeDistance;
+                long mileage = 21;
+                long tripexpense = mileage*routeDistance;
                 tripItinerary.setTripExpense(tripexpense);
 
             }
@@ -137,10 +136,8 @@ public class VrpWithCapacityConstraintWithBing {
 
         }
 
-        data.setVehicleList(new VehicleList(updatedVehicles), 0);
-        updatedVehicles.forEach(vehicle -> {
-            logger.info("Updated vehicle list ----------------> "+vehicle.getVehicleId());
-        });
+        DataModel.setVehicleList(new VehicleList(updatedVehicles), 0);
+        updatedVehicles.forEach(vehicle -> logger.info("Updated vehicle list ----------------> "+vehicle.getVehicleId()));
 
         logger.info("Total distance of all routes: " + totalDistance + "m");
         logger.info("Total load of all routes: " + totalLoad);
@@ -156,8 +153,7 @@ public class VrpWithCapacityConstraintWithBing {
             System.out.println(distmat[i].length + " Distance Matrix " + Arrays.toString(distmat[i]) + "\n" +
                     timemat[i].length + " Time Travel " + Arrays.toString(timemat[i]) + "\n");
         }
-        String[] addr = address;
-        System.out.println(Arrays.toString(addr));
+        System.out.println(Arrays.toString(address));
     }
 
     private static String geocode(String address, String KEY) throws Exception {
@@ -166,22 +162,17 @@ public class VrpWithCapacityConstraintWithBing {
                 .apiKey(KEY)
                 .build();
         final GeocodingResult[] results;
-        try {
-            results = GeocodingApi.geocode(context, address).await();
-            final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            String response = gson.toJson(results[0].geometry.location);
+        results = GeocodingApi.geocode(context, address).await();
+        final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-            return response;
-        } catch (final Exception e) {
-            throw e;
-        }
+        return gson.toJson(results[0].geometry.location);
     }
 
 
     public List<TripItinerary> FinalResult(DataModel data) throws Exception {
         // Create Routing Index Manager
         RoutingIndexManager manager =
-                new RoutingIndexManager(data.getDistanceMatrix().length, data.getVehicleList(0).getListofvehicle().size(), data.getDepot());
+                new RoutingIndexManager(data.getDistanceMatrix().length, DataModel.getVehicleList(0).getListofvehicle().size(), data.getDepot());
 
         // Create Routing Model.
         RoutingModel routing = new RoutingModel(manager);
@@ -202,7 +193,7 @@ public class VrpWithCapacityConstraintWithBing {
         final int demandCallbackIndex = routing.registerUnaryTransitCallback((long fromIndex) -> {
             // Convert from routing variable Index to user NodeIndex.
             int fromNode = manager.indexToNode(fromIndex);
-            return (long) data.getDemands()[fromNode];
+            return data.getDemands()[fromNode];
         });
         routing.addDimensionWithVehicleCapacity(demandCallbackIndex, 0, // null capacity slack
                 data.getVehicleCapacity(0), // vehicle maximum capacities
