@@ -36,9 +36,9 @@ export class TripsComponent implements OnInit {
   public scheduledDate = new Date();
   public intialData;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher, private tripService: TriplogService,
-    private tokenStorage: TokenStorageService, private router: Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private tripService: TriplogService, private tokenStorage: TokenStorageService,
+              private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -71,12 +71,12 @@ export class TripsComponent implements OnInit {
     this.userName = this.tokenStorage.getUsername();
     this.tripService.behaviourSubject.subscribe(data => {
       if (data && data.length > 0) {
-        if (this.userName == 'anurag123') {
+        if (this.userName === 'anurag123') {
           this.dataSource[0] = data[0];
-        } else if (this.userName == 'anup123') {
+        } else if (this.userName === 'anup123') {
           this.dataSource[0] = data[1];
 
-        }  else if (this.userName == 'parth123') {
+        } else if (this.userName === 'parth123') {
           this.dataSource[0] = data[2];
 
         }
@@ -124,7 +124,7 @@ export class TripsComponent implements OnInit {
   updatePacketLog(tripId, tripPacketId) {
     console.log('tr', tripId, ' pacl', tripPacketId);
     if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery' }];
+      this.trip.packetLogs = [{ packetStatus: 'Delivered' }];
     } else {
       /* tslint:disable:no-string-literal */
       this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
