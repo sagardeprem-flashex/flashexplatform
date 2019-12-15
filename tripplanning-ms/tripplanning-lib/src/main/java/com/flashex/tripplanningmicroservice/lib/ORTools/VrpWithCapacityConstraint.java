@@ -191,7 +191,7 @@ public class VrpWithCapacityConstraint {
 
             }
             tripItinerary.setPackets(PacketArray);
-            tripItinerary.setAlgorithm("VrpWithCapacityConstraint");
+            tripItinerary.setAlgorithm("Vrp With Capacity Constraint");
 //            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
             logger.info("Origin Address ----------------------> Shipment: "+shipment.getOriginAddress()+" Data: "+data.d.getShipment().getOriginAddress());
             tripItinerary.setOriginAddress(shipment.getOriginAddress());

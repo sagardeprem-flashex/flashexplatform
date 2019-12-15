@@ -216,7 +216,7 @@ public class VrpWithDroppingVisit {
 
             }
             tripItinerary.setPackets(PacketArray);
-            tripItinerary.setAlgorithm("VrpWithDroppingVisit");
+            tripItinerary.setAlgorithm("Vrp With Dropping Visit");
 //            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
             tripItinerary.setOriginAddress(shipment.getOriginAddress());
 //            Locationcord.put("Vehicle:" + i,latlongarr);

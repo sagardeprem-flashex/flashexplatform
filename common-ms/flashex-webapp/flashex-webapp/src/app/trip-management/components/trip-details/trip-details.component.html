@@ -11,7 +11,7 @@
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel1"
   (select)="onSelect($event)">
-</ngx-charts-bar-vertical> -->
+</ngx-charts-bar-vertical>
 
 <ngx-charts-bar-vertical
   [view]="view"
@@ -85,7 +85,7 @@
                     <mat-expansion-panel-header>
                         <mat-panel-title>{{trip.tripItineraryId}}
                             {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
-                        </mat-panel-title> 
+                        </mat-panel-title>
                         <!-- added pipe to show trip ititnerary -->
                         <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                     </mat-expansion-panel-header>

@@ -17,13 +17,21 @@ export class TripDetailsComponent implements OnInit {
   public timeWindowDeliveryTrips = [];
   public vrpWithCCTrips = [];
   public vrpWithDVTrips = [];
-  public otherTrips = [];
+  public vrpWithCCTripsUsingBing = [];
+  public vrpWithDVTripsUsingBing = [];
+  public timeWindowDeliveryTripsUsingBing = [];
   public dataSource;
   public selectedAlgo;
   public orders;
   public userName;
   public properties: ITripProperties;
-  public algorithms = ['Time Window Delivery', 'VRP with Capacity constraint', 'VRP with Dropping Visit'];
+  public algorithms = [
+    'VRP with Capacity Constraint using Bing',
+    'VRP with Dropping Visit using Bing',
+    'Time Window Delivery using Bing',
+    'Time Window Delivery',
+    'VRP with Capacity Constraint',
+    'VRP with Dropping Visit'];
   public tripDate = new Date().toDateString; // trip ititnerary pipe
 
   single1: any[];
@@ -68,178 +76,184 @@ export class TripDetailsComponent implements OnInit {
       this.dataSource = data;
 
       data.forEach(d => {
-        if (d.algorithm === 'VrpWithTimeWindowDelivery') {
+        if (d.algorithm === 'Vrp With Time Window Delivery') {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
-          if (d.algorithm === 'VrpWithCapacityConstraint') {
-            this.vrpWithCCTrips.unshift(d);
-          } else
-            if (d.algorithm === 'VrpWithDroppingVisit') {
-              this.vrpWithDVTrips.unshift(d);
-            } else {
-              this.otherTrips.unshift(d);
-            }
-
+        if (d.algorithm === 'Vrp With Capacity Constraint') {
+          this.vrpWithCCTrips.unshift(d);
+        } else
+        if (d.algorithm === 'Vrp With Dropping Visit') {
+          this.vrpWithDVTrips.unshift(d);
+        } else
+        if (d.algorithm === 'Vrp With Capacity Constraint Using Bing') {
+          this.vrpWithCCTripsUsingBing.unshift(d);
+        } else
+        if (d.algorithm === 'Vrp With Dropping Visit using Bing') {
+          this.vrpWithDVTripsUsingBing.unshift(d);
+        } else
+        if (d.algorithm === 'Vrp With Time Window Delivery using Bing') {
+          this.timeWindowDeliveryTripsUsingBing.unshift(d);
+        }
       });
 
     });
 
     this.tripsummary.behaviourSubject.subscribe(data => {
       data.forEach((d) => {
-          d.distanceSummary.forEach(summary => {
-            this.distanceCover.push(summary);
-          });
+        d.distanceSummary.forEach(summary => {
+          this.distanceCover.push(summary);
+        });
 
-          d.timeSummary.forEach(summary => {
-            this.totaltTime.push(summary);
-          });
+        d.timeSummary.forEach(summary => {
+          this.totaltTime.push(summary);
+        });
 
-          d.costSummary.forEach(summary => {
-            this.totalExpense.push(summary);
-          });
+        d.costSummary.forEach(summary => {
+          this.totalExpense.push(summary);
+        });
 
-          d.nTrips.forEach(summary => {
-            this.nTrips.push(summary);
-          });
+        d.nTrips.forEach(summary => {
+          this.nTrips.push(summary);
+        });
 
-          d.algorithms.forEach(summary => {
-            this.algorithm.push(summary);
-          });
-        
-  
-    this.single1 = [
-      {
-        "name": this.algorithm[0],
-        "value": this.distanceCover[0]
+        d.algorithms.forEach(summary => {
+          this.algorithm.push(summary);
+        });
 
-      },
-      {
-        "name": this.algorithm[1],
-        "value": this.distanceCover[1]
 
-      },
-      {
-        "name": this.algorithm[2],
-        "value": this.distanceCover[2]
-      },
-      {
-        "name": this.algorithm[3],
-        "value": this.distanceCover[3]
-      },
-      {
-        "name": this.algorithm[4],
-        "value": this.distanceCover[4]
-      },
-      {
-        "name": this.algorithm[5],
-        "value": this.distanceCover[5]
-      }
-    ];
-    this.single2 = [
-      {
-        "name": this.algorithm[0],
-        "value": this.totaltTime[0]
-      },
-      {
-        "name": this.algorithm[1],
-        "value": this.totaltTime[1]
-      },
-      {
-        "name": this.algorithm[2],
-        "value": this.totaltTime[2]
-      },
-      {
-        "name": this.algorithm[3],
-        "value": this.totaltTime[3]
-      },
-      {
-        "name": this.algorithm[4],
-        "value": this.totaltTime[4]
-      },
-      {
-        "name": this.algorithm[5],
-        "value": this.totaltTime[5]
-      }
-    ];
+        this.single1 = [
+          {
+            name: this.algorithm[0],
+            value: this.distanceCover[0]
 
-    this.single3 = [
-      {
-        "name": this.algorithm[0],
-        "value": this.totalExpense[0]
-      },
-      {
-        "name": this.algorithm[1],
-        "value": this.totalExpense[1]
-      },
-      {
-        "name": this.algorithm[2],
-        "value": this.totalExpense[2]
-      },
-      {
-        "name": this.algorithm[3],
-        "value": this.totalExpense[3]
-      },
-      {
-        "name": this.algorithm[4],
-        "value": this.totalExpense[4]
-      },
-      {
-        "name": this.algorithm[5],
-        "value": this.totalExpense[5]
-      }
-    ];
+          },
+          {
+            name: this.algorithm[1],
+            value: this.distanceCover[1]
 
-    this.single4 = [
-      {
-        "name": this.algorithm[0],
-        "value": this.nTrips[0]
-      },
-      {
-        "name": this.algorithm[1],
-        "value": this.nTrips[1]
-      },
-      {
-        "name": this.algorithm[2],
-        "value": this.nTrips[2]
-      },
-      {
-        "name": this.algorithm[3],
-        "value": this.nTrips[3]
-      },
-      {
-        "name": this.algorithm[4],
-        "value": this.nTrips[4]
-      },
-      {
-        "name": this.algorithm[5],
-        "value": this.nTrips[5]
-      }
-    ];
-  });
-});
-  
-}
+          },
+          {
+            name: this.algorithm[2],
+            value: this.distanceCover[2]
+          },
+          {
+            name: this.algorithm[3],
+            value: this.distanceCover[3]
+          },
+          {
+            name: this.algorithm[4],
+            value: this.distanceCover[4]
+          },
+          {
+            name: this.algorithm[5],
+            value: this.distanceCover[5]
+          }
+        ];
+        this.single2 = [
+          {
+            name: this.algorithm[0],
+            value: this.totaltTime[0]
+          },
+          {
+            name: this.algorithm[1],
+            value: this.totaltTime[1]
+          },
+          {
+            name: this.algorithm[2],
+            value: this.totaltTime[2]
+          },
+          {
+            name: this.algorithm[3],
+            value: this.totaltTime[3]
+          },
+          {
+            name: this.algorithm[4],
+            value: this.totaltTime[4]
+          },
+          {
+            name: this.algorithm[5],
+            value: this.totaltTime[5]
+          }
+        ];
 
-    onSelect(event) {
-      console.log(event);
-    }
+        this.single3 = [
+          {
+            name: this.algorithm[0],
+            value: this.totalExpense[0]
+          },
+          {
+            name: this.algorithm[1],
+            value: this.totalExpense[1]
+          },
+          {
+            name: this.algorithm[2],
+            value: this.totalExpense[2]
+          },
+          {
+            name: this.algorithm[3],
+            value: this.totalExpense[3]
+          },
+          {
+            name: this.algorithm[4],
+            value: this.totalExpense[4]
+          },
+          {
+            name: this.algorithm[5],
+            value: this.totalExpense[5]
+          }
+        ];
 
-    changeAlgo(algo: string) {
-      this.selectedAlgo = algo;
-      this.tripService.selectedAlgo = this.selectedAlgo;
-      // console.log(this.selectedAlgo);
-    }
-
-    // openPropertiesDialog(): void {
-    //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
-    //     width: '65%',
-    //     data: {userName: this.userName, properties: this.properties}
-    //   });
-
-    //   dialogRef.afterClosed().subscribe(result => {
-    //     this.properties = this.tripService.planningProperties;
-    //     // console.log(this.tripService.planningProperties, this.properties);
-    //   });
-    // }
+        this.single4 = [
+          {
+            name: this.algorithm[0],
+            value: this.nTrips[0]
+          },
+          {
+            name: this.algorithm[1],
+            value: this.nTrips[1]
+          },
+          {
+            name: this.algorithm[2],
+            value: this.nTrips[2]
+          },
+          {
+            name: this.algorithm[3],
+            value: this.nTrips[3]
+          },
+          {
+            name: this.algorithm[4],
+            value: this.nTrips[4]
+          },
+          {
+            name: this.algorithm[5],
+            value: this.nTrips[5]
+          }
+        ];
+      });
+    });
 
   }
+
+  onSelect(event) {
+    console.log(event);
+  }
+
+  changeAlgo(algo: string) {
+    this.selectedAlgo = algo;
+    this.tripService.selectedAlgo = this.selectedAlgo;
+    // console.log(this.selectedAlgo);
+  }
+
+  // openPropertiesDialog(): void {
+  //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
+  //     width: '65%',
+  //     data: {userName: this.userName, properties: this.properties}
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.properties = this.tripService.planningProperties;
+  //     // console.log(this.tripService.planningProperties, this.properties);
+  //   });
+  // }
+
+}

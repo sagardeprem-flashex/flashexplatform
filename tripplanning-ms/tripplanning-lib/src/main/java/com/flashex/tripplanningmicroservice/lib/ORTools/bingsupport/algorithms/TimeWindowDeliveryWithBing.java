@@ -130,7 +130,7 @@ public class TimeWindowDeliveryWithBing {
             }
 
             tripItinerary.setPackets(PacketArray);
-            tripItinerary.setAlgorithm("VrpWithTimeWindowDeliveryUsingBing");
+            tripItinerary.setAlgorithm("Vrp With Time Window Delivery using Bing");
 //                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
             tripItinerary.setOriginAddress(shipment.getOriginAddress());
 //                Locationcord.put("Vehicle:" + i,latlongarr);
