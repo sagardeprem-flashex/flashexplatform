@@ -5,6 +5,7 @@ import { TripPlanningPropertiesComponent } from '../trip-planning-properties/tri
 import { ITripProperties } from '../../interfaces/trip-planning-properties';
 import { IItinerary } from '../../interfaces/trip-itinerary';
 import { TripSummaryService } from '../../services/trip-summary.service';
+import { Itripsummary } from '../../interfaces/trip-summary';
 
 @Component({
   selector: 'app-trip-details',
@@ -30,13 +31,14 @@ export class TripDetailsComponent implements OnInit {
   single3: any[];
   single4: any[];
 
+  summary: Itripsummary;
   public distanceCover = [];
   public totaltTime = [];
   public totalExpense = [];
-  public nTrips = []; 
+  public nTrips = [];
   public algorithm = [];
 
-  view: any[] = [700,400];
+  view: any[] = [300, 150];
 
   // options
   showXAxis = true;
@@ -45,21 +47,18 @@ export class TripDetailsComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  yAxisLabel = 'Total Distance';
-  xAxisLabel = 'Algorithm'
-  // yAxisLabel2 = 'Total Time';
-  // yAxisLabel3 = 'Total Expense';
-  // yAxisLabel4 = 'Total Trips';
+  yAxisLabel1 = 'Total Distance';
+  xAxisLabel = 'Algorithm';
+  yAxisLabel2 = 'Total Time';
+  yAxisLabel3 = 'Total Expense';
+  yAxisLabel4 = 'Total Trips';
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService,  private dialog: MatDialog) { }
+  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
 
-  onSelect(event) {
-    console.log(event);
-  }
 
   ngOnInit() {
     this.properties = this.tripService.planningProperties;
@@ -71,16 +70,15 @@ export class TripDetailsComponent implements OnInit {
       data.forEach(d => {
         if (d.algorithm === 'VrpWithTimeWindowDelivery') {
           this.timeWindowDeliveryTrips.unshift(d);
-        } 
-        else
-        if (d.algorithm === 'VrpWithCapacityConstraint') {
-          this.vrpWithCCTrips.unshift(d);
         } else
-        if (d.algorithm === 'VrpWithDroppingVisit') {
-          this.vrpWithDVTrips.unshift(d);
-        } else {
-          this.otherTrips.unshift(d);
-        }
+          if (d.algorithm === 'VrpWithCapacityConstraint') {
+            this.vrpWithCCTrips.unshift(d);
+          } else
+            if (d.algorithm === 'VrpWithDroppingVisit') {
+              this.vrpWithDVTrips.unshift(d);
+            } else {
+              this.otherTrips.unshift(d);
+            }
 
       });
 
@@ -107,108 +105,141 @@ export class TripDetailsComponent implements OnInit {
           d.algorithms.forEach(summary => {
             this.algorithm.push(summary);
           });
-        },
-      // )}
-    // );
-   
-    this.single1 = [
-    //   {
-    //     "name": this.algorithm[0],
-    //     "value": this.distanceCover[0]
-
-    //   },
-    //   {
-    //     "name": this.algorithm[1],
-    //     "value": this.distanceCover[1]
-
-    //   },
-    //   {
-    //     "name": this.algorithm[2],
-    //     "value": this.distanceCover[2]
-    //   }
-    // ]
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ]
-
-      )}
-    );
-
-    // this.single2 = [
-    //   {
-    //     "name": this.algorithm[0],
-    //     "value": this.totaltTime[0]
-    //   },
-    //   {
-    //     "name": this.algorithm[1],
-    //     "value": this.totaltTime[1]
-    //   },
-    //   {
-    //     "name": this.algorithm[2],
-    //     "value": this.totaltTime[2]
-    //   }
-    // ]
-
-    // this.single3 = [
-    //   {
-    //     "name": this.algorithm[0],
-    //     "value": this.totalExpense[0]
-    //   },
-    //   {
-    //     "name": this.algorithm[1],
-    //     "value": this.totalExpense[1]
-    //   },
-    //   {
-    //     "name": this.algorithm[2],
-    //     "value": this.totalExpense[2]
-    //   }
-    // ]
-
-    // this.single4 = [
-    //   {
-    //     "name": this.algorithm[0],
-    //     "value": this.nTrips[0]
-    //   },
-    //   {
-    //     "name": this.algorithm[1],
-    //     "value": this.nTrips[1]
-    //   },
-    //   {
-    //     "name": this.algorithm[2],
-    //     "value": this.nTrips[2]
-    //   }
-    // ]
-    // console.log(this.dataSource);
-}
-
+        
   
+    this.single1 = [
+      {
+        "name": this.algorithm[0],
+        "value": this.distanceCover[0]
 
-  changeAlgo(algo: string) {
-    this.selectedAlgo = algo;
-    this.tripService.selectedAlgo = this.selectedAlgo;
-    // console.log(this.selectedAlgo);
-  }
+      },
+      {
+        "name": this.algorithm[1],
+        "value": this.distanceCover[1]
 
-  // openPropertiesDialog(): void {
-  //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
-  //     width: '65%',
-  //     data: {userName: this.userName, properties: this.properties}
-  //   });
+      },
+      {
+        "name": this.algorithm[2],
+        "value": this.distanceCover[2]
+      },
+      {
+        "name": this.algorithm[3],
+        "value": this.distanceCover[3]
+      },
+      {
+        "name": this.algorithm[4],
+        "value": this.distanceCover[4]
+      },
+      {
+        "name": this.algorithm[5],
+        "value": this.distanceCover[5]
+      }
+    ];
+    this.single2 = [
+      {
+        "name": this.algorithm[0],
+        "value": this.totaltTime[0]
+      },
+      {
+        "name": this.algorithm[1],
+        "value": this.totaltTime[1]
+      },
+      {
+        "name": this.algorithm[2],
+        "value": this.totaltTime[2]
+      },
+      {
+        "name": this.algorithm[3],
+        "value": this.totaltTime[3]
+      },
+      {
+        "name": this.algorithm[4],
+        "value": this.totaltTime[4]
+      },
+      {
+        "name": this.algorithm[5],
+        "value": this.totaltTime[5]
+      }
+    ];
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.properties = this.tripService.planningProperties;
-  //     // console.log(this.tripService.planningProperties, this.properties);
-  //   });
-  // }
+    this.single3 = [
+      {
+        "name": this.algorithm[0],
+        "value": this.totalExpense[0]
+      },
+      {
+        "name": this.algorithm[1],
+        "value": this.totalExpense[1]
+      },
+      {
+        "name": this.algorithm[2],
+        "value": this.totalExpense[2]
+      },
+      {
+        "name": this.algorithm[3],
+        "value": this.totalExpense[3]
+      },
+      {
+        "name": this.algorithm[4],
+        "value": this.totalExpense[4]
+      },
+      {
+        "name": this.algorithm[5],
+        "value": this.totalExpense[5]
+      }
+    ];
 
+    this.single4 = [
+      {
+        "name": this.algorithm[0],
+        "value": this.nTrips[0]
+      },
+      {
+        "name": this.algorithm[1],
+        "value": this.nTrips[1]
+      },
+      {
+        "name": this.algorithm[2],
+        "value": this.nTrips[2]
+      },
+      {
+        "name": this.algorithm[3],
+        "value": this.nTrips[3]
+      },
+      {
+        "name": this.algorithm[4],
+        "value": this.nTrips[4]
+      },
+      {
+        "name": this.algorithm[5],
+        "value": this.nTrips[5]
+      }
+    ];
+  });
+});
+  
 }
+
+    onSelect(event) {
+      console.log(event);
+    }
+
+    changeAlgo(algo: string) {
+      this.selectedAlgo = algo;
+      this.tripService.selectedAlgo = this.selectedAlgo;
+      // console.log(this.selectedAlgo);
+    }
+
+    // openPropertiesDialog(): void {
+    //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
+    //     width: '65%',
+    //     data: {userName: this.userName, properties: this.properties}
+    //   });
+
+    //   dialogRef.afterClosed().subscribe(result => {
+    //     this.properties = this.tripService.planningProperties;
+    //     // console.log(this.tripService.planningProperties, this.properties);
+    //   });
+    // }
+
+  }

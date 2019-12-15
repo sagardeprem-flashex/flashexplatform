@@ -1,7 +1,7 @@
-export interface Itripsummary{
-  summaryId: String;
+export interface Itripsummary {
+  summaryId: string;
   summaryDate: Date;
-  algorithms:  String[];
+  algorithms: string[];
   distanceSummary: number[];
   timeSummary: number[];
   costSummary: number[];
