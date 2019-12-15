@@ -139,6 +139,22 @@ export class TripsComponent implements OnInit {
       }
     );
   }
+
+   // update packet status of particular packet id inside a particular trip itinerary
+   updatePacketUndelivered(tripId, tripPacketId) {
+    console.log('tr', tripId, ' pacl', tripPacketId);
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Undelivered' }];
+    } else {
+      /* tslint:disable:no-string-literal */
+      this.trip['packetLogs'] = [{ packetStatus: 'Undelivered' }];
+    }
+    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
+      data => {
+        this.tripLog = data;
+      }
+    );
+  }
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/auth/login']);
