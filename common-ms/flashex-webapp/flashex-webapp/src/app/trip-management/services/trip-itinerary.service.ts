@@ -86,9 +86,7 @@ export class TripItineraryService {
   updateOptimizationProperties(properties: ITripProperties) {
     this.http.put<ITripProperties>( this.optimizationPropertiesUrl,
                                     properties,
-                                    this.httpOptions).pipe(
-                                      catchError(this.handleError[0])
-                                    );
-    console.log('Sending the updated optimization -----> ', properties);
+                                    this.httpOptions);
+    console.log('Sending the updated optimization -----> ', properties.lastUpdated, properties.algorithmSelected, properties.propertiesId);
   }
 }
