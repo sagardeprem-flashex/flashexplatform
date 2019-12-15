@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flashex.shipmentmicroservice.lib.model.KafkaReprocessMessage;
 import com.flashex.shipmentmicroservice.lib.model.KafkaStatusMessage;
+import com.flashex.shipmentmicroservice.lib.services.BinningService;
 import com.flashex.shipmentmicroservice.lib.services.PacketService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,9 @@ public class ConsumerService {
     @Autowired
     private PacketService packetService;
 
+    @Autowired
+    private BinningService binningService;
+
     @KafkaListener(topics = "DeliveryStatus", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Consumed Message -> %s",message));
@@ -29,5 +33,6 @@ public class ConsumerService {
     public void reprocess(String message) throws JsonProcessingException {
         logger.info(String.format("$$ -> Reprocessed Message -> %s", message));
         KafkaReprocessMessage packetReprocessed = new ObjectMapper().readValue(message, KafkaReprocessMessage.class);
+        binningService.reprocess(packetReprocessed);
     }
 }

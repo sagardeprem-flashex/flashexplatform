@@ -41,6 +41,7 @@ public class ConsumerService {
         packet.setPacketType(packetDummy.getPacketType());
         packet.setLength(packetDummy.getLength());
         packet.setEstimatedDeliveryDate(packetDummy.getEstimatedDeliveryDate());
+        packet.setPriority(packetDummy.getPriority());
         binningService.binPacket(packet);
     }
 }
