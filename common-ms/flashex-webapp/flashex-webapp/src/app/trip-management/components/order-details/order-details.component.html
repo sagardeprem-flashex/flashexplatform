@@ -1,6 +1,12 @@
+<!-- <mat-tab-group>
+    <mat-tab label="First"> Content 1 </mat-tab>
+    <mat-tab label="Second"> Content 2 </mat-tab>
+    <mat-tab label="Third"> Content 3 </mat-tab>
+  </mat-tab-group> -->
 <div class="mat-elevation-z8">
   <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
-    <div>Orders</div>
+    <div>Orders
+    </div>
     <div>
       <button mat-button color="accent" (click)="openConfig()" [disableRipple]="true">
         <mat-icon color="accent" matTooltip="Configure shipment strategy">build</mat-icon>
@@ -11,26 +17,34 @@
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search"
       >
   </mat-form-field> -->
-
+<!--
+  <mat-tab-group>
+      <mat-tab *ngFor="let link of dateList" label={{link}}></mat-tab>
+  </mat-tab-group> -->
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <mat-form-field style="width: 50%;padding-left: 1em">
+    <mat-form-field style="width: 35%;padding-left: 1em">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search" style="color: black">
     </mat-form-field>
+    <mat-form-field  style="width: 22%;padding-left: 1em">
+        <input  [(ngModel)]="datepicked" matInput [matDatepicker]="dp3" (dateChange)="applyDateFilter($event.value)" placeholder="Choose a Date (MM/DD/YYYY)"  disabled>
+        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+      </mat-form-field>
+      <button mat-button (click)="resetForm()"  matTooltip="Reset Date">
+          <mat-icon >refresh</mat-icon>
+      </button>
     <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons>
     </mat-paginator>
   </div>
-
   <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="packetId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Packet Id </th>
       <td mat-cell *matCellDef="let element" style="font-weight: bold; cursor: pointer;">{{element.packetId | slice:-6 |uppercase}} </td>
     </ng-container>
-
     <ng-container matColumnDef="receivedDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Received Date </th>
       <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element.receivedDate | date: 'short'}} </td>
     </ng-container>
-
     <ng-container matColumnDef="packetType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Type
         <button mat-icon-button color="primary" aria-label="information icon" >
@@ -41,10 +55,8 @@
       </th>
       <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element.packetType}} </td>
     </ng-container>
-
     <ng-container matColumnDef="priority">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Priority
-
       <button mat-icon-button color="primary" aria-label="information icon" >
         <span title="Priority of the packet received. It can be Premium or Ordinary.">
           <mat-icon>info</mat-icon>
@@ -53,9 +65,8 @@
     </th>
     <td mat-cell *matCellDef="let element" [ngStyle]="funColor(element.priority)" style="cursor: pointer;"  class="priorityClass"> {{element.priority}} </td>
   </ng-container>
-
-    <ng-container matColumnDef="currentStatus">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Status
+    <ng-container matColumnDef="currentStatus" >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em; justify-content: center"> Status
         <button mat-icon-button color="primary" aria-label="information icon">
           <span title="Status of the Packet. It can be Received, Processing, Dispatched, Delivered, Undelivered etc.">
             <mat-icon>info</mat-icon>
@@ -65,22 +76,20 @@
       <td mat-cell *matCellDef="let element" [ngStyle]="statusColor(element.currentStatus)" class="priorityClass" style="cursor: pointer;">
         {{element.currentStatus}} </td>
     </ng-container>
-
+    <!-- <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef style="font-size: 1em;"></th>
+      <td mat-cell *matCellDef="let element" align= right style="font-weight: bold; cursor: pointer;"><mat-icon>expand_more</mat-icon></td>
+    </ng-container> -->
     <!-- <ng-container matColumnDef="packetDescription" style="white-space:nowrap;width: 10px; overflow:hidden; text-overflow: ellipsis; ">
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em"> Description </th>
     <td mat-cell *matCellDef="let element" style="overflow:hidden; text-overflow: ellipsis; width: 150px"> {{element.packetDescription}} </td>
   </ng-container> -->
-
     <div>
       <ng-container matColumnDef="expandedDetail">
         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
           <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-
-
             <div class="example-element-description" fxFlex="row wrap" fxLayoutAlign="space-around center" fxFlex=30>
-
               <table>
-
                 <col width="2em" style="height: 1.1em">
                 <col width="2em" style="height: 1.1em">
                 <tr>
@@ -103,11 +112,8 @@
                     {{element.deliveryAddress.city}}<br>
                     {{element.deliveryAddress.state}}<br>
                     {{element.deliveryAddress.pincode}}
-
-
                   </td>
                 </tr>
-
                 <tr>
                   <td>
                     <mat-icon style="font-size:1.8em" matTooltip="Contact"> perm_phone_msg</mat-icon>
@@ -118,19 +124,16 @@
                 </tr>
               </table>
             </div>
-
             <div class="example-element-diagram" fxLayoutAlign="space-around center" fxFlex=50>
               <!-- fxFlex="row wrap" -->
               <table class="packetDetailsTable">
                 <col width="5em" style="height: 1.1em">
                 <col width="3em" style="height: 1.1em">
-
                 <tr>
                   <td>
                     <mat-icon style="font-size:1.8em" matTooltip="Dimensions">straighten</mat-icon>
                     <!-- <b>Dimensions </b><i>(l X b X h)</i> -->
                   </td>
-
                   <td>
                     {{element.length}}" X {{element.breadth}}" X {{element.height}}"
                   </td>
@@ -153,51 +156,32 @@
                 </tr>
                 <tr>
                   <td>
-
                   </td>
                 </tr>
-
               </table>
-
             </div>
-
             <div class="update" style="cursor: pointer;">
-
               <a (click)="openDialog(element.statusList, element.packetId)" matTooltip="View all updates">
                 <mat-icon style="font-size:2.5em; color: accent; font-weight: lighter">track_changes</mat-icon>
               </a>
-
             </div>
-
             <!-- <div style="margin-top: 1vh">
               <mat-vertical-stepper>
                 <div *ngFor="let statuslist of element.statusList">
                   <mat-step label={{statuslist.statusValue}}> {{statuslist.timeStamp}}
-
                   </mat-step>
-
                 </div>
                 </mat-vertical-stepper>
           </div> -->
-
-
-
           </div>
-
         </td>
-
       </ng-container>
-
-
     </div>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
       [class.example-expanded-row]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-
   </table>
-
 </div>
