@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { TripLog } from '../../../trip-management/interfaces/triplog';
+
+declare let L;
+declare let tomtom: any;
 
 @Component({
   selector: 'app-navigation',
@@ -7,9 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  public tomtom;
+  constructor( public dialogRef: MatDialogRef<NavigationComponent>,
+               @Inject(MAT_DIALOG_DATA) public data: any) {
+                 this.tomtom = data;
+                }
 
   ngOnInit() {
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
 }
