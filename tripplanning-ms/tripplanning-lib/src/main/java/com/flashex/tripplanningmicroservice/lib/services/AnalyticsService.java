@@ -40,19 +40,19 @@ public class AnalyticsService {
         List<TripItinerary> trips = tripItineraryService.getTripsByDay(year,month,day);
 
         logger.info("Found these trips>>>>>>>>>>>>>>>");
-        logger.info("Trips -------------> {}", trips);
+//        logger.info("Trips -------------> {}", trips);
         DaySummary daySummary = new DaySummary();
         daySummary.setSummaryDate(new Date());
         daySummary.setSummaryId(UUID.randomUUID().toString());
 
         // set algorithms
         List<String> algorithms = new ArrayList<>();
-        algorithms.add("VrpWithCapacityConstraint");
-        algorithms.add("VrpWithCapacityConstraintUsingBing");
-        algorithms.add("VrpWithTimeWindowDelivery");
-        algorithms.add("VrpWithTimeWindowDeliveryUsingBing");
-        algorithms.add("VrpWithDroppingVisit");
-        algorithms.add("VrpWithDroppingVisitUsingBing");
+        algorithms.add("Vrp with Time Window Delivery");
+        algorithms.add("Vrp with Time Window Delivery using Bing");
+        algorithms.add("Vrp with Capacity Constraint");
+        algorithms.add("Vrp with Capacity Constraint using Bing");
+        algorithms.add("Vrp with Dropping Visit");
+        algorithms.add("Vrp with Dropping Visit using Bing");
         daySummary.setAlgorithms(algorithms);
 
         // get number of trips for each
@@ -75,6 +75,27 @@ public class AnalyticsService {
 
         daySummaryRepository.save(daySummary);
         return daySummary;
+    }
+
+    public List<Integer> getOrderSummary(List<TripItinerary> tripItineraries, List<String> algorithms){
+        List<Integer> orderSummary = new ArrayList<>();
+        for(int i=0; i<algorithms.size(); i++){
+            orderSummary.add(0);
+        }
+
+        for(int i=0; i<tripItineraries.size(); i++){
+            for(int algoIndex=0; algoIndex<algorithms.size(); algoIndex++){
+                // increment if a match is found
+                if(tripItineraries.get(i).getAlgorithm().equals(algorithms.get(algoIndex))){
+                    int currentOrders = orderSummary.get(algoIndex);
+                        orderSummary.set(algoIndex,currentOrders+tripItineraries.get(i).getPackets().size());
+
+                }
+            }
+        }
+
+        logger.info("Calculated Processed Packets summary -----------> {}", orderSummary);
+        return orderSummary;
     }
 
     public List<Float> getOccupancySummary(List<TripItinerary> tripItineraries, List<String> algorithms){
@@ -126,6 +147,7 @@ public class AnalyticsService {
         for(int i=0; i<tripItineraries.size(); i++){
             for(int algoIndex=0; algoIndex<algorithms.size(); algoIndex++){
                 // increment if a match is found
+//                logger.info("Trying to match ----> {} with {}------> {}",tripItineraries.get(i).getAlgorithm(),algorithms.get(algoIndex),tripItineraries.get(i).getAlgorithm().equals(algorithms.get(algoIndex)));
                 if(tripItineraries.get(i).getAlgorithm().equals(algorithms.get(algoIndex))){
                     int currentDropped = droppedPacketsSummary.get(algoIndex);
                     if(tripItineraries.get(i).getDroppedpackets() != null){
@@ -175,6 +197,7 @@ public class AnalyticsService {
                     Date startTime = tripItineraries.get(i).getPlannedStartTime();
                     Date endTime = tripItineraries.get(i).getPlannedEndTime();
                     // find the difference in hours
+                    logger.info("Start and end time {} , {}, {}, {}",startTime,startTime.getTime(),endTime,endTime.getTime());
                     long diff = Math.abs(startTime.getTime()-endTime.getTime());
                     float hours = TimeUnit.MILLISECONDS.toHours(diff);
                     timeSummary.set(algoIndex,currentTime+hours);

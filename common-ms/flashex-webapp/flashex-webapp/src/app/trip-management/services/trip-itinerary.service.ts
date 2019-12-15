@@ -72,7 +72,7 @@ export class TripItineraryService {
       } else {
         this.planningProperties = {
           propertiesId: '1',
-          algorithmSelected: 'Vrp With Capacity Constraint using Bing',
+          algorithmSelected: 'Vrp with Capacity Constraint using Bing',
           lastUpdated: this.date
         };
         console.log('Created in angular ----> ', this.planningProperties);
