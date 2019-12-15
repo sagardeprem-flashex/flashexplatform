@@ -191,6 +191,8 @@ public class BinningService {
                 logger.info("found type-----> {}", packetProperty);
            } else if(groupByField.equals("PRIORITY")){
                 packetProperty.add(packet.getPriority());
+                logger.info("found priority-----> {}", packet.getPriority());
+
             }
         }
         return packetProperty;
