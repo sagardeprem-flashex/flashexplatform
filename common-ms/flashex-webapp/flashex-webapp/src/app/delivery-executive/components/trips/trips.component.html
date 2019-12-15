@@ -1,14 +1,20 @@
 <mat-toolbar color="primary">
     <img style="margin-right:auto" src="../assets/images/logo.png" routerLink='/user'>
     <div>
-        <span>{{userName | uppercase | slice:0:-3}}</span>
+        <span style="font-size: small;">{{userName | uppercase | slice:0:-3}}</span>
         <button style="margin-left: auto;" mat-button [matMenuTriggerFor]="menu">
                     <mat-icon class="logout" mat-list-icon>person </mat-icon>
                 </button>
-        <mat-menu style="background-color: cadetblue;" #menu="matMenu">
-            <div fxLayout="column" fxLayoutAlign="space-evenly center" style="width: 30px;">
-                <p>{{role}}</p>
-                <button mat-stroked-button (click)="logout()">Logout</button>
+        <mat-menu #menu="matMenu" color="accent">
+            <div fxLayout="column" fxLayoutAlign="space-evenly center">
+                <div>
+                    <p>{{role}}</p>
+                </div>
+                <div>
+                    <span>
+                    <button mat-stroked-button (click)="logout()">Logout</button>
+                   </span>
+                </div>
             </div>
         </mat-menu>
     </div>
