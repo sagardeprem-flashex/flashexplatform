@@ -1,26 +1,31 @@
-<!-- <mat-toolbar class="navbar" color="primary">
-    <img src="../assets/images/logo.png" routerLink='/admin'>
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <span style="font-size: 17px;">
-            <span style="color: gray;">Executive:</span>
-        <span>{{userName}}</span>
-        <span> <mat-icon (click)="logout()">person</mat-icon></span>
-        </span>
-      
+<mat-toolbar color="primary">
+    <img style="margin-right:auto" src="../assets/images/logo.png" routerLink='/user'>
+    <div>
+        <button style="margin-left: auto;" mat-button [matMenuTriggerFor]="menu">
+                    <mat-icon class="logout" mat-list-icon>person </mat-icon>
+                </button>
+        <mat-menu style="background-color: cadetblue;" #menu="matMenu">
+            <div fxLayout="column" fxLayoutAlign="space-evenly center">
+                <p>{{userName}}</p>
+                <p>{{role}}</p>
+                <button mat-stroked-button (click)="logout()">Logout</button>
+            </div>
+        </mat-menu>
     </div>
-</mat-toolbar> -->
+
+</mat-toolbar>
 <mat-toolbar>
     <h1>Trip Details</h1>
     <p style="margin-left: auto; font-size: 0.85em;">{{scheduledDate| date:'mediumDate'}}</p>
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
     <mat-tab *ngFor="let tripDetail of dataSource" style="width: 100%;" label="TRIP: {{tripDetail.tripItineraryId.slice(0,20)}}">
-        <div fxLayout="row" fxLayoutAlign="start center">
+        <div>
             <div style="width: 100%;">
                 <mat-list>
                     <mat-list-item>
                         <span style="color:gray; font-size: 1em; ">Start Time:</span>
-                        <span style="margin: auto;">2:30 PM</span>
+                        <span style="margin: auto;">{{tripDetails.tripStart|date: 'shortTime'}}</span>
                         <p style="margin-left: auto;"> <button mat-flat-button color="primary" onclick="this.disabled=true" (click)="updateTripStart(tripDetails.tripItineraryId)">Start Trip</button></p>
                     </mat-list-item>
                     <mat-divider></mat-divider>
@@ -31,60 +36,53 @@
                     <mat-expansion-panel *ngFor="let listofOrders of tripDetail.packetLogs" hideToggle>
                         <mat-expansion-panel-header>
                             <div fxLayout="row" fxLayoutAlign="space-between center">
-                                <div>
-                                    <mat-panel-title>
-                                        <span>
-                                        <span style="color:gray; font-size: .9em; margin: auto; ">ID:</span>
-                                        <span style="margin: auto;" matTooltip="{{listofOrders.packetId}}">{{listofOrders.packetId.slice(0,8).concat("...")}}</span>
-                                        </span>
-                                    </mat-panel-title>
-                                </div>
-                                <div>
-                                    <mat-panel-description>
+                                <mat-panel-title>
+                                    <span>
+                                        <span style="color:gray; font-size: .9em;">ID: </span>
+                                    <span matTooltip="{{listofOrders.packetId}}">{{listofOrders.packetId.slice(0,8)}}</span>
+                                    </span>
+                                </mat-panel-title>
+                                <mat-panel-description>
 
-                                        <span><mat-icon style="font-size: medium;">account_circle</mat-icon></span>
-                                        <span style="margin-left: auto;"> {{listofOrders.customerName}}</span>
-                                    </mat-panel-description>
-                                </div>
+                                    <span><mat-icon style="font-size: medium;">account_circle</mat-icon></span>
+                                    <span> {{listofOrders.customerName}}</span>
+                                </mat-panel-description>
+
                             </div>
                         </mat-expansion-panel-header>
-                        <div>
+                        <div fxLayout="row" fxLayoutAlign="space-between end">
                             <div>
-                                <span><mat-icon style="font-size: medium;">phone</mat-icon></span>
-                                <span>{{listofOrders.phoneNumber}}</span>
+                                <p>
+                                    <span><mat-icon style="font-size: medium; color:gray;">phone</mat-icon></span>
+                                    <span>{{listofOrders.phoneNumber}}</span>
+                                </p>
+                                <span style="width: 50%; padding-left: 0ex;">
+                                        <p>{{listofOrders.deliveryAddress.addressLine1}}</p>
+                                            <p>{{listofOrders.deliveryAddress.city}}</p>
+
+                                </span>
                             </div>
-                            <span>                            
-                            <span style="width: 50%; padding-left: 0ex;">
-                                <span>{{listofOrders.deliveryAddress.addressLine1}}  ,{{listofOrders.deliveryAddress.city}}
-                                </span>
-                            <span style="margin-left: auto;"><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders.packetId)" color="primary">CheckOut</button>
-                                </span>
-                            </span>
-                            </span>
-                            <!-- <table class="status" style="float: right; width: 50%; margin-top: -6em;">
-                                <tr>
-                                    <td>Reached to Hub</td>
-                                    <td>Out for delivery</td>
-                                    <td>succesfully Delivered</td>
-                                </tr>
-                                <tr>
-                                    <td>
-
-
-                                        <mat-progress-bar color="accent" mode="determinate" value="100"></mat-progress-bar>
-                                    </td>
-
-                                    <td>
-                                        <mat-progress-bar color="accent" mode="determinate" value="100"></mat-progress-bar>
-                                    </td>
-                                    <td>
-                                        <mat-progress-bar color="accent" mode="determinate" value="0"></mat-progress-bar>
-                                    </td>
-                                </tr>
-                            </table> -->
+                            <div>
+                                <span style="margin-left: auto;"><button mat-raised-button  (click)= "updatePacketLog(tripDetails.tripItineraryId, listofOrders.packetId)" color="primary">CheckOut</button>
+                        </span>
+                            </div>
                         </div>
                     </mat-expansion-panel>
                 </mat-accordion>
+                <mat-list>
+                    <mat-list-item>
+                        <span style="color:gray; font-size: 1em; ">End Time:</span>
+                        <span style="margin: auto;">{{tripDetails.plannedEndTime|date:'shortTime'}}</span>
+                        <p style="margin-left: auto;"> <button mat-flat-button color="primary" onclick="this.disabled=true" (click)="updateTripEnd(tripDetails.tripItineraryId)">End Trip</button></p>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <span matTooltip="TomTom Map" style="margin-right: auto;" (click)="openDialog()"><mat-icon>directions</mat-icon></span>
+                        <span style="margin-left: auto;"><a href='https://www.google.com/maps'><img matTooltip="Google Map" class="google" src="../../../../assets/images/google.png" ></a></span>
+
+                    </mat-list-item>
+                </mat-list>
+
             </div>
 
             <!-- <div id="map"></div> -->

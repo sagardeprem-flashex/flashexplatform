@@ -8,6 +8,9 @@ import { TriplogService } from '../../../trip-management/services/triplog.servic
 import {ITripLog, TripLog} from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 declare let L;
 declare let tomtom: any;
@@ -38,7 +41,7 @@ export class TripsComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef,
               media: MediaMatcher, private tripService: TriplogService,
-              private tokenStorage: TokenStorageService, private router: Router) {
+              private tokenStorage: TokenStorageService, private router: Router, public dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -69,17 +72,9 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
     this.tripService.behaviourSubject.subscribe(data => {
-      this.intialData = data;
+      this.dataSource = data;
       this.trips(0);
     });
-    this.userName = this.tokenStorage.getUsername();
-    if (this.userName === 'anurag') {
-      console.log('user', this.userName);
-      const i = 0;
-      this.dataSource = this.intialData;
-      console.log(this.dataSource);
-
-    }
   }
   trips(value) {
     // console.log('vali', value);
@@ -136,7 +131,20 @@ export class TripsComponent implements OnInit {
     this.tokenStorage.signOut();
     this.router.navigate(['/auth/login']);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NavigationComponent, {
+      width: '250px',
+      data: tomtom
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }
+
 
 
 
