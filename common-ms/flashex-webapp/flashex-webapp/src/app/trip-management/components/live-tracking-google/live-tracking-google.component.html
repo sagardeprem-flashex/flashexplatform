@@ -26,14 +26,12 @@
 
                     <mat-expansion-panel-header style="background-color:#ECEFF1;">
                         <mat-panel-title>
-                            <!-- <div style="width: 8px; height: 15px;left: 5px;margin-top: 1.5em;" [ngStyle]="{'background-color': colors[i]}"></div> -->
                             <p style="border-style: solid;border-width: 0 0 0 0.6em;background-color: #ECEFF1; padding-left: 0.4em;font-size:1rem;" [ngStyle]="{'border-color': colors[i]}" (click)="trips(i)">
                                 {{tripDate | slice: 0:3 | uppercase}}{{id.tripItineraryId | slice:-6}}</p>
                             <br>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                     <hr>
-                    <!-- <button type="button" (click)="updateTripStart(id.tripItineraryId)">Start Trip</button> -->
                     <p> <span style="color: #A7A7A7;">Planned Trip Start :</span> {{id.plannedStartTime | date:'medium'}}</p>
                     <p> <span style="color: #A7A7A7;">Actual Trip Started :</span> {{id.tripStart | date:'medium'}}</p><br>
                     <hr>
@@ -49,11 +47,12 @@
                         <ng-container matColumnDef="status">
                             <th mat-header-cell fxFlex="150px" *matHeaderCellDef style="padding-top: 1em; font-size: 1.25em;text-align: center;"> Order Status </th>
                             <td mat-cell fxFlex="150px " *matCellDef="let element " style="padding-top: 1em;text-align: center;">
-                                <div *ngIf="element.packetStatus === 'Delivered'; else elseblock" style="color: green;">{{element.packetStatus}}
+                                <div *ngIf="element.packetStatus === 'Delivered'" style="color: green;">{{element.packetStatus}}
                                 </div>
-                                <ng-template #elseblock>
-                                    {{element.packetStatus}}
-                                </ng-template>
+                                <div *ngIf="element.packetStatus === 'Undelivered'" style="color:red;">{{element.packetStatus}}
+                                </div>
+                                <div *ngIf="element.packetStatus === 'Dispatched'" style="color:black;">{{element.packetStatus}}
+                                </div>
                             </td>
 
                         </ng-container>
@@ -63,14 +62,6 @@
                         <tr mat-row *matRowDef="let row; let even = even; columns: displayedColumns; " [ngClass]="{gray: even}"></tr>
                     </table>
 
-
-
-
-
-                    <!-- <p *ngFor="let order of id.packetLogs; let i=i ndex "> Order - {{order.packetId}} <br>Delivery Address: {{order.deliveryAddress.addressLine1}}<br> Order Status: {{order.packetStatus}}
-                        <button type="button " (click)="updatePacketLog(id.tripItineraryId, order.packetId) ">Packet Status</button></p><br> -->
-
-
                     <hr>
 
                     <p> <span style="color: #A7A7A7;">Planned Trip End :</span> {{id.plannedEndTime | date:'medium'}}</p>
@@ -78,12 +69,6 @@
                     <p> <span style="color: #A7A7A7;">Actual Trip Ended :</span> {{id.tripEnd | date:'medium'}}</p>
 
                     <hr>
-                    <!-- <button type="button " (click)="updateTripEnd(id.tripItineraryId) ">End Trip</button> -->
-
-
-
-
-
 
                 </mat-expansion-panel>
             </div>

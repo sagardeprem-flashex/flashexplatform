@@ -105,8 +105,8 @@ b {
 */
 
 img {
-    width: 8.5rem;
-    height: 3.5rem;
+    width: 6.1rem;
+    height: 2.5rem;
     display: block;
     cursor: pointer;
     outline: 0;
@@ -117,6 +117,15 @@ img {
     display: inline-flex;
     justify-content: space-between;
     height: 10vh;
+}
+
+.google {
+    width: 2em;
+    height: 2em;
+}
+
+.logout {
+    cursor: pointer;
 }
 
 

@@ -7,7 +7,10 @@ import * as moment from 'moment';
 import { TriplogService } from '../../../trip-management/services/triplog.service';
 import { ITripLog, TripLog } from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 declare let L;
 declare let tomtom: any;
@@ -35,10 +38,11 @@ export class TripsComponent implements OnInit {
   public userName;
   public scheduledDate = new Date();
   public intialData;
+  public tripDate = new Date().toDateString();
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-              private tripService: TriplogService, private tokenStorage: TokenStorageService,
-              private router: Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef,
+              media: MediaMatcher, private tripService: TriplogService,
+              private tokenStorage: TokenStorageService, private router: Router, public dialog: MatDialog) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -135,11 +139,40 @@ export class TripsComponent implements OnInit {
       }
     );
   }
+
+   // update packet status of particular packet id inside a particular trip itinerary
+   updatePacketUndelivered(tripId, tripPacketId) {
+    console.log('tr', tripId, ' pacl', tripPacketId);
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Undelivered' }];
+    } else {
+      /* tslint:disable:no-string-literal */
+      this.trip['packetLogs'] = [{ packetStatus: 'Undelivered' }];
+    }
+    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
+      data => {
+        this.tripLog = data;
+      }
+    );
+  }
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/auth/login']);
   }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NavigationComponent, {
+      width: '250px',
+      data: tomtom
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }
+
 
 
 
