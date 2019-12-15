@@ -132,6 +132,11 @@ img {
     background-color: rgb(211, 205, 205);
 }
 
+#map {
+    height: 64vh;
+    width: 98%;
+}
+
 
 /* .person {
     font-size: 25px;

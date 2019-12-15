@@ -92,7 +92,7 @@
                     </mat-list-item>
                     <mat-divider></mat-divider>
                     <mat-list-item>
-                        <span matTooltip="TomTom Map" style="margin-right: auto;" (click)="openDialog()"><mat-icon>directions</mat-icon></span>
+                        <span matTooltip="TomTom Map" style="margin-right: auto;" (click)="loadMap()"><mat-icon>directions</mat-icon></span>
                         <span style="margin-left: auto;"><a href='https://www.google.com/maps'><img matTooltip="Google Map" class="google" src="../../../../assets/images/google.png" ></a></span>
 
                     </mat-list-item>
@@ -100,7 +100,7 @@
 
             </div>
 
-            <!-- <div id="map"></div> -->
         </div>
     </mat-tab>
 </mat-tab-group>
+<div id="map" style="margin-left: 0.5em; margin-bottom: 2em;margin-right: 0.5em;"></div>
