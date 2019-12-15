@@ -8,6 +8,4 @@ export interface Itripsummary {
   droppedPacektsSummary: number[];
   nTrips: number[];
   volumeOccupancySummary: number[];
-
-
 }
