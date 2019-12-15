@@ -27,8 +27,8 @@ export class TripDetailsComponent implements OnInit {
   public orders;
   public userName;
   public properties: ITripProperties;
-  public algorithms = ['VRP with Capacity constraint', 'VRP with Dropping Visit', 'Time Window Delivery'];
-  public Bingalgorithm = ['VRP with Capacity constraint using Bing',
+  public algorithms = ['VRP with Capacity Constraint', 'VRP with Dropping Visit', 'Time Window Delivery'];
+  public Bingalgorithm = ['VRP with Capacity Constraint using Bing',
     'VRP with Dropping Visit using Bing',
     'Time Window Delivery using Bing'
   ];
@@ -249,6 +249,9 @@ export class TripDetailsComponent implements OnInit {
   changeAlgo(algo: string) {
     this.selectedAlgo = algo;
     this.tripService.selectedAlgo = this.selectedAlgo;
+    this.tripService.planningProperties.algorithmSelected = algo;
+    this.tripService.planningProperties.lastUpdated = new Date();
+    this.tripService.updateOptimizationProperties(this.tripService.selectedAlgo);
     // console.log(this.selectedAlgo);
   }
 
