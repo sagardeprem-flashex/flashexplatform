@@ -81,17 +81,24 @@ public class BinningService {
 
                 // number of shipments that can be generated
                 int nShipments;
+                int nPackets;
+
+                int maxShipmentSize = getConfig().getMaxShipmentSize();
+
                 if(isPremium(bins.get(i))){
                     logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     logger.info("This is a Premium Shipment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                    nShipments = (int) Math.floor(binSize/(getConfig().getMaxShipmentSize()*getConfig().getRelaxation()));
-                }else {
-                    nShipments = (int) Math.floor(binSize/getConfig().getMaxShipmentSize());
+                    maxShipmentSize = (int) Math.floor(maxShipmentSize* getConfig().getRelaxation());
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>Max size --- {} >>>>>>>>", maxShipmentSize);
                 }
+                nShipments = (int) Math.floor(binSize/maxShipmentSize);
 
                 // total packets in nShipments
-                int nPackets = getConfig().getMaxShipmentSize()*nShipments;
+
+
+                nPackets = maxShipmentSize*nShipments;
+
 
                 binPacketsSize.add(nPackets);
 
