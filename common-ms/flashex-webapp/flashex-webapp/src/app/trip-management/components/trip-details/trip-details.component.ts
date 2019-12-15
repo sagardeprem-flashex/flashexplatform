@@ -6,6 +6,7 @@ import { ITripProperties } from '../../interfaces/trip-planning-properties';
 import { IItinerary } from '../../interfaces/trip-itinerary';
 import { TripSummaryService } from '../../services/trip-summary.service';
 import { Itripsummary } from '../../interfaces/trip-summary';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-trip-details',
@@ -20,18 +21,18 @@ export class TripDetailsComponent implements OnInit {
   public vrpWithCCTripsUsingBing = [];
   public vrpWithDVTripsUsingBing = [];
   public timeWindowDeliveryTripsUsingBing = [];
+  public otherTrips = [];
   public dataSource;
   public selectedAlgo;
   public orders;
   public userName;
   public properties: ITripProperties;
-  public algorithms = [
-    'VRP with Capacity Constraint using Bing',
+  public algorithms = ['VRP with Capacity constraint', 'VRP with Dropping Visit', 'Time Window Delivery'];
+  public Bingalgorithm = ['VRP with Capacity constraint using Bing',
     'VRP with Dropping Visit using Bing',
-    'Time Window Delivery using Bing',
-    'Time Window Delivery',
-    'VRP with Capacity Constraint',
-    'VRP with Dropping Visit'];
+    'Time Window Delivery using Bing'
+  ];
+  Bing = true;
   public tripDate = new Date().toDateString; // trip ititnerary pipe
 
   single1: any[];
@@ -46,7 +47,7 @@ export class TripDetailsComponent implements OnInit {
   public nTrips = [];
   public algorithm = [];
 
-  view: any[] = [300, 150];
+  view: any[] = [300, 300];
 
   // options
   showXAxis = true;
@@ -62,7 +63,7 @@ export class TripDetailsComponent implements OnInit {
   yAxisLabel4 = 'Total Trips';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#009688', '#69F0AE']
   };
 
   constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
@@ -79,21 +80,23 @@ export class TripDetailsComponent implements OnInit {
         if (d.algorithm === 'Vrp With Time Window Delivery') {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
-        if (d.algorithm === 'Vrp With Capacity Constraint') {
-          this.vrpWithCCTrips.unshift(d);
-        } else
-        if (d.algorithm === 'Vrp With Dropping Visit') {
-          this.vrpWithDVTrips.unshift(d);
-        } else
-        if (d.algorithm === 'Vrp With Capacity Constraint Using Bing') {
-          this.vrpWithCCTripsUsingBing.unshift(d);
-        } else
-        if (d.algorithm === 'Vrp With Dropping Visit using Bing') {
-          this.vrpWithDVTripsUsingBing.unshift(d);
-        } else
-        if (d.algorithm === 'Vrp With Time Window Delivery using Bing') {
-          this.timeWindowDeliveryTripsUsingBing.unshift(d);
-        }
+          if (d.algorithm === 'Vrp With Capacity Constraint') {
+            this.vrpWithCCTrips.unshift(d);
+          } else
+            if (d.algorithm === 'Vrp With Dropping Visit') {
+              this.vrpWithDVTrips.unshift(d);
+            } else
+              if (d.algorithm === 'Vrp With Capacity Constraint using Bing') {
+                this.vrpWithCCTripsUsingBing.unshift(d);
+              } else
+                if (d.algorithm === 'Vrp With Dropping Visit using Bing') {
+                  this.vrpWithDVTripsUsingBing.unshift(d);
+                } else
+                  if (d.algorithm === 'Vrp With Time Window Delivery using Bing') {
+                    this.timeWindowDeliveryTripsUsingBing.unshift(d);
+                  } else {
+                    this.otherTrips.unshift(d);
+                  }
       });
 
     });
@@ -232,6 +235,11 @@ export class TripDetailsComponent implements OnInit {
       });
     });
 
+  }
+
+  public toggle(event: MatSlideToggleChange) {
+    console.log('toggle', event.checked);
+    this.Bing = event.checked;
   }
 
   onSelect(event) {
