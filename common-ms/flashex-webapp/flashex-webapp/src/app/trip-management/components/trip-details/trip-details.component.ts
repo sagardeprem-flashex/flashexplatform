@@ -6,6 +6,7 @@ import { ITripProperties } from '../../interfaces/trip-planning-properties';
 import { IItinerary } from '../../interfaces/trip-itinerary';
 import { TripSummaryService } from '../../services/trip-summary.service';
 import { Itripsummary } from '../../interfaces/trip-summary';
+import { MatSlideToggleChange } from '@angular/material';
 
 @Component({
   selector: 'app-trip-details',
@@ -24,6 +25,8 @@ export class TripDetailsComponent implements OnInit {
   public userName;
   public properties: ITripProperties;
   public algorithms = ['Time Window Delivery', 'VRP with Capacity constraint', 'VRP with Dropping Visit'];
+  public Bingalgorithm = [ 'Time Window Delivery with Bing OR Tools', 'VRP with Capacity constraint with Bing Bing OR Tools', 'VRP with Dropping visit with Bing OR Tools' ];
+  Bing = true;
   public tripDate = new Date().toDateString; // trip ititnerary pipe
 
   single1: any[];
@@ -218,6 +221,11 @@ export class TripDetailsComponent implements OnInit {
   });
 });
   
+}
+
+public toggle(event: MatSlideToggleChange) {
+  console.log('toggle', event.checked);
+  this.Bing = event.checked;
 }
 
     onSelect(event) {
