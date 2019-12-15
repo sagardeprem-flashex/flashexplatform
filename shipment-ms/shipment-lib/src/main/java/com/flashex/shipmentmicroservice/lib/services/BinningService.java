@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class BinningService {
@@ -82,10 +83,26 @@ public class BinningService {
                 logger.info("$$ Size of bin {} before shipment generation and cleaning ----------->: {}", i, binSize);
 
                 // number of shipments that can be generated
-                int nShipments = (int) Math.floor(binSize/getConfig().getMaxShipmentSize());
+                int nShipments;
+                int nPackets;
+
+                int maxShipmentSize = getConfig().getMaxShipmentSize();
+
+                if(isPremium(bins.get(i))){
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    logger.info("This is a Premium Shipment>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    maxShipmentSize = (int) Math.floor(maxShipmentSize* getConfig().getRelaxation());
+                    logger.info(">>>>>>>>>>>>>>>>>>>>>Max size --- {} >>>>>>>>", maxShipmentSize);
+                }
+                nShipments = (int) Math.floor(binSize/maxShipmentSize);
 
                 // total packets in nShipments
-                int nPackets = getConfig().getMaxShipmentSize()*nShipments;
+
+
+                nPackets = maxShipmentSize*nShipments;
+
+
                 binPacketsSize.add(nPackets);
 
                 logger.info(" showing nPackets -----> {}",nPackets);
@@ -184,6 +201,8 @@ public class BinningService {
                 logger.info("found type-----> {}", packetProperty);
            } else if(groupByField.equals("PRIORITY")){
                 packetProperty.add(packet.getPriority());
+                logger.info("found priority-----> {}", packet.getPriority());
+
             }
         }
         return packetProperty;
@@ -248,6 +267,17 @@ public class BinningService {
     public void updateConfig(){
         this.binnerConfig = binnerConfigService.getCurrentConfig();
     }
+
+    public Boolean isPremium(Bin bin){
+        AtomicReference<Boolean> premium = new AtomicReference<>(false);
+        bin.getBinningStrategy().forEach(strategy ->{
+            if(strategy.equals("PREMIUM")){
+                premium.set(true);
+            }
+        });
+        return premium.get();
+    }
+
 
     public void reprocess(KafkaReprocessMessage message){
         Packet packet = packetService.findByPacketId(message.getPacketId());

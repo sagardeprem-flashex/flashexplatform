@@ -86,4 +86,16 @@ public class PacketService {
     }
 
 
+    public String GetBase36(int length)
+    {
+        StringBuilder sb = new StringBuilder(length);
+        char[] _base62chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+                        .toCharArray();
+        Random _random = new Random();
+        for (int i=0; i<length; i++)
+            sb.append(_base62chars[_random.nextInt(36)]);
+
+        return sb.toString();
+    }
+
 }
