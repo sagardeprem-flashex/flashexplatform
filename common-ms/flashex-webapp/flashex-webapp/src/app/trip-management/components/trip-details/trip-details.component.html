@@ -1,3 +1,63 @@
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single1"
+  [gradient]="gradient"
+  [yAxis]="showYAxis"
+  [xAxis]='showXAxis'
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel1"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical> -->
+
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single2"
+  [gradient]="gradient"
+  [yAxis]="showYAxis"
+  [xAxis]='showXAxis'
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel2"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical>
+
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single3"
+  [gradient]="gradient"
+  [yAxis]="showYAxis"
+  [xAxis]='showXAxis'
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel3"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical>
+
+<ngx-charts-bar-vertical
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single4"
+  [gradient]="gradient"
+  [yAxis]="showYAxis"
+  [xAxis]='showXAxis'
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel4"
+  (select)="onSelect($event)">
+</ngx-charts-bar-vertical>
+
 <div class="trips-container">
     <div class="toolbar">
         <mat-toolbar class="toolbar-title">Trip Planner</mat-toolbar>
@@ -23,7 +83,10 @@
             <mat-accordion>
                 <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
                     <mat-expansion-panel-header>
-                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                        <mat-panel-title>{{trip.tripItineraryId}}
+                            {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
+                        </mat-panel-title> 
+                        <!-- added pipe to show trip ititnerary -->
                         <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-card>

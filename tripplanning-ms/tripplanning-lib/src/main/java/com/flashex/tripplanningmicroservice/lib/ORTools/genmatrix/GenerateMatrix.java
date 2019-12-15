@@ -215,6 +215,8 @@ public class GenerateMatrix {
 
         return time_mat;
     };
+
+    
     // Returns the displacement between two lat longs in Kilometers
     public double displacementCalculator(double lat1, double lon1, double lat2, double lon2) {
 

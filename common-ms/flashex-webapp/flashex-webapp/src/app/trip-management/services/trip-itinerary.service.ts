@@ -10,6 +10,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class TripItineraryService {
 
   public location;
@@ -43,6 +44,8 @@ export class TripItineraryService {
   private vehiclesData = [];
   public vehicleBehaviourSubject = new BehaviorSubject<IVehicle[]>(this.vehiclesData);
 
+  // get trip itinerary details
+
   load() {
     this.http.get<IItinerary[]>(this.tripItineraryUrl).subscribe(data => {
       this.dataSource = data;
@@ -51,6 +54,9 @@ export class TripItineraryService {
     error => {
       this.handleError[1] = error;
     });
+
+    // get vehicle details
+
     this.http.get<IVehicle[]>(this.vehiclesListUrl).subscribe(data => {
       this.vehiclesData = data;
       this.vehicleBehaviourSubject.next(this.vehiclesData);
