@@ -35,6 +35,7 @@ export class TripsComponent implements OnInit {
   public userName;
   public scheduledDate = new Date();
   public intialData;
+  public tripDate = new Date().toDateString();
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
               private tripService: TriplogService, private tokenStorage: TokenStorageService,

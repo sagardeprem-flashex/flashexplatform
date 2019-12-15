@@ -16,6 +16,7 @@ export class VehicleDetailsComponent implements OnInit {
   ngOnInit() {
       this.tripItineraryService.vehicleBehaviourSubject.subscribe(data => {
       this.vehicleDataSource = data;
+      console.log(this.vehicleDataSource);
     });
   }
 

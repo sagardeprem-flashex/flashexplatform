@@ -14,7 +14,8 @@
     <p style="margin-left: auto; font-size: 0.85em;">{{scheduledDate| date:'mediumDate'}}</p>
 </mat-toolbar>
 <mat-tab-group dynamicHeight>
-    <mat-tab *ngFor="let tripDetail of dataSource" style="width: 100%;" label="TRIP: {{tripDetail.tripItineraryId.slice(0,20)}}">
+    <mat-tab *ngFor="let tripDetail of dataSource" style="width: 100%;" label="
+    {{tripDate | slice: 0:3 | uppercase}}{{tripDetail.tripItineraryId | slice:-6}}">
         <div fxLayout="row" fxLayoutAlign="start center">
             <div style="width: 100%;">
                 <mat-list>
