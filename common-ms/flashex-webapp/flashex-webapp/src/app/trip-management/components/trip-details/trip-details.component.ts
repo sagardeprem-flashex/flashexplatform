@@ -41,7 +41,7 @@ export class TripDetailsComponent implements OnInit {
   public nTrips = [];
   public algorithm = [];
 
-  view: any[] = [300, 150];
+  view: any[] = [300, 300];
 
   // options
   showXAxis = true;
@@ -57,7 +57,7 @@ export class TripDetailsComponent implements OnInit {
   yAxisLabel4 = 'Total Trips';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA','#009688','#69F0AE']
   };
 
   constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
@@ -223,10 +223,10 @@ export class TripDetailsComponent implements OnInit {
   
 }
 
-public toggle(event: MatSlideToggleChange) {
-  console.log('toggle', event.checked);
-  this.Bing = event.checked;
-}
+    public toggle(event: MatSlideToggleChange) {
+      console.log('toggle', event.checked);
+      this.Bing = event.checked;
+    }
 
     onSelect(event) {
       console.log(event);
