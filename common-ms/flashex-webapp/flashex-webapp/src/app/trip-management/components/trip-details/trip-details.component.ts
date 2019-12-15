@@ -109,110 +109,110 @@ export class TripDetailsComponent implements OnInit {
   
     this.single1 = [
       {
-        "name": this.algorithm[0],
-        "value": this.distanceCover[0]
+        name: this.algorithm[0],
+        value: this.distanceCover[0]
 
       },
       {
-        "name": this.algorithm[1],
-        "value": this.distanceCover[1]
+        name: this.algorithm[1],
+        value: this.distanceCover[1]
 
       },
       {
-        "name": this.algorithm[2],
-        "value": this.distanceCover[2]
+        name: this.algorithm[2],
+        value: this.distanceCover[2]
       },
       {
-        "name": this.algorithm[3],
-        "value": this.distanceCover[3]
+        name: this.algorithm[3],
+        value: this.distanceCover[3]
       },
       {
-        "name": this.algorithm[4],
-        "value": this.distanceCover[4]
+        name: this.algorithm[4],
+        value: this.distanceCover[4]
       },
       {
-        "name": this.algorithm[5],
-        "value": this.distanceCover[5]
+        name: this.algorithm[5],
+        value: this.distanceCover[5]
       }
     ];
     this.single2 = [
       {
-        "name": this.algorithm[0],
-        "value": this.totaltTime[0]
+        name: this.algorithm[0],
+        value: this.totaltTime[0]
       },
       {
-        "name": this.algorithm[1],
-        "value": this.totaltTime[1]
+        name: this.algorithm[1],
+        value: this.totaltTime[1]
       },
       {
-        "name": this.algorithm[2],
-        "value": this.totaltTime[2]
+        name: this.algorithm[2],
+        value: this.totaltTime[2]
       },
       {
-        "name": this.algorithm[3],
-        "value": this.totaltTime[3]
+        name: this.algorithm[3],
+        value: this.totaltTime[3]
       },
       {
-        "name": this.algorithm[4],
-        "value": this.totaltTime[4]
+        name: this.algorithm[4],
+        value: this.totaltTime[4]
       },
       {
-        "name": this.algorithm[5],
-        "value": this.totaltTime[5]
+        name: this.algorithm[5],
+        value: this.totaltTime[5]
       }
     ];
 
     this.single3 = [
       {
-        "name": this.algorithm[0],
-        "value": this.totalExpense[0]
+        name: this.algorithm[0],
+        value: this.totalExpense[0]
       },
       {
-        "name": this.algorithm[1],
-        "value": this.totalExpense[1]
+        name: this.algorithm[1],
+        value: this.totalExpense[1]
       },
       {
-        "name": this.algorithm[2],
-        "value": this.totalExpense[2]
+        name: this.algorithm[2],
+        value: this.totalExpense[2]
       },
       {
-        "name": this.algorithm[3],
-        "value": this.totalExpense[3]
+        name: this.algorithm[3],
+        value: this.totalExpense[3]
       },
       {
-        "name": this.algorithm[4],
-        "value": this.totalExpense[4]
+        name: this.algorithm[4],
+        value: this.totalExpense[4]
       },
       {
-        "name": this.algorithm[5],
-        "value": this.totalExpense[5]
+        name: this.algorithm[5],
+        value: this.totalExpense[5]
       }
     ];
 
     this.single4 = [
       {
-        "name": this.algorithm[0],
-        "value": this.nTrips[0]
+        name: this.algorithm[0],
+        value: this.nTrips[0]
       },
       {
-        "name": this.algorithm[1],
-        "value": this.nTrips[1]
+        name: this.algorithm[1],
+        value: this.nTrips[1]
       },
       {
-        "name": this.algorithm[2],
-        "value": this.nTrips[2]
+        name: this.algorithm[2],
+        value: this.nTrips[2]
       },
       {
-        "name": this.algorithm[3],
-        "value": this.nTrips[3]
+        name: this.algorithm[3],
+        value: this.nTrips[3]
       },
       {
-        "name": this.algorithm[4],
-        "value": this.nTrips[4]
+        name: this.algorithm[4],
+        value: this.nTrips[4]
       },
       {
-        "name": this.algorithm[5],
-        "value": this.nTrips[5]
+        name: this.algorithm[5],
+        value: this.nTrips[5]
       }
     ];
   });
