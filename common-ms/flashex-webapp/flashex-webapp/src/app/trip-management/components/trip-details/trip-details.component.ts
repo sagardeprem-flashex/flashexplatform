@@ -57,6 +57,10 @@ export class TripDetailsComponent implements OnInit {
 
   constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService,  private dialog: MatDialog) { }
 
+  onSelect(event) {
+    console.log(event);
+  }
+
   ngOnInit() {
     this.properties = this.tripService.planningProperties;
     // console.log('Trip planning properties inside trip-details component-----> ');
@@ -108,22 +112,35 @@ export class TripDetailsComponent implements OnInit {
     // );
    
     this.single1 = [
-      {
-        "name": this.algorithm[0],
-        "value": this.distanceCover[0]
+    //   {
+    //     "name": this.algorithm[0],
+    //     "value": this.distanceCover[0]
 
-      },
-      {
-        "name": this.algorithm[1],
-        "value": this.distanceCover[1]
+    //   },
+    //   {
+    //     "name": this.algorithm[1],
+    //     "value": this.distanceCover[1]
 
-      },
-      {
-        "name": this.algorithm[2],
-        "value": this.distanceCover[2]
-      }
-    ]
-    
+    //   },
+    //   {
+    //     "name": this.algorithm[2],
+    //     "value": this.distanceCover[2]
+    //   }
+    // ]
+    {
+      "name": "Germany",
+      "value": 8940000
+    },
+    {
+      "name": "USA",
+      "value": 5000000
+    },
+    {
+      "name": "France",
+      "value": 7200000
+    }
+  ]
+
       )}
     );
 
@@ -174,9 +191,7 @@ export class TripDetailsComponent implements OnInit {
     // console.log(this.dataSource);
 }
 
-  onSelect(event) {
-    console.log(event);
-  }
+  
 
   changeAlgo(algo: string) {
     this.selectedAlgo = algo;
