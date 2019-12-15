@@ -26,6 +26,7 @@ export class TripDetailsComponent implements OnInit {
   public selectedAlgo;
   public orders;
   public userName;
+  public tripsDate = new Date().toDateString();
   public properties: ITripProperties;
   public algorithms = ['VRP with Capacity Constraint', 'VRP with Dropping Visit', 'Time Window Delivery'];
   public Bingalgorithm = ['VRP with Capacity Constraint using Bing',
@@ -76,23 +77,26 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
 
+      console.log(data);
+
       data.forEach(d => {
-        if (d.algorithm === 'Vrp With Time Window Delivery') {
+        console.log('Algos list ----------> ', d.algorithm);
+        if (d.algorithm === 'Vrp with Time Window Delivery') {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
-          if (d.algorithm === 'Vrp With Capacity Constraint') {
+          if (d.algorithm === 'Vrp with Capacity Constraint') {
             this.vrpWithCCTrips.unshift(d);
           } else
-            if (d.algorithm === 'Vrp With Dropping Visit') {
+            if (d.algorithm === 'Vrp with Dropping Visit') {
               this.vrpWithDVTrips.unshift(d);
             } else
-              if (d.algorithm === 'Vrp With Capacity Constraint using Bing') {
+              if (d.algorithm === 'Vrp with Capacity Constraint using Bing') {
                 this.vrpWithCCTripsUsingBing.unshift(d);
               } else
-                if (d.algorithm === 'Vrp With Dropping Visit using Bing') {
+                if (d.algorithm === 'Vrp with Dropping Visit using Bing') {
                   this.vrpWithDVTripsUsingBing.unshift(d);
                 } else
-                  if (d.algorithm === 'Vrp With Time Window Delivery using Bing') {
+                  if (d.algorithm === 'Vrp with Time Window Delivery using Bing') {
                     this.timeWindowDeliveryTripsUsingBing.unshift(d);
                   } else {
                     this.otherTrips.unshift(d);

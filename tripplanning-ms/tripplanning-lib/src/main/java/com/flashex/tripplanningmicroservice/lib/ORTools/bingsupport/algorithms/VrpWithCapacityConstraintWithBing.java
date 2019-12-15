@@ -109,7 +109,7 @@ public class VrpWithCapacityConstraintWithBing {
 
             }
             tripItinerary.setPackets(PacketArray);
-            tripItinerary.setAlgorithm("Vrp With Capacity Constraint Using Bing");
+            tripItinerary.setAlgorithm("Vrp with Capacity Constraint using Bing");
 //            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
             logger.info("Origin Address ----------------------> Shipment: "+shipment.getOriginAddress()+" Data: "+data.getShipment().getOriginAddress());
             tripItinerary.setOriginAddress(shipment.getOriginAddress());

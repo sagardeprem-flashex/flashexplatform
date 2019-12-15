@@ -106,8 +106,8 @@
                 <mat-accordion>
                     <mat-expansion-panel *ngFor="let trip of vrpWithCCTripsUsingBing; let i = index">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>{{trip.tripItineraryId}}
-                                {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
+                            <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
+                                {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice: -6}}
                             </mat-panel-title>
                             <!-- added pipe to show trip ititnerary -->
                             <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
@@ -123,7 +123,7 @@
                                         <div class='summary-container'>
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
-                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -203,7 +203,7 @@
                 <mat-accordion>
                     <mat-expansion-panel *ngFor="let trip of vrpWithDVTripsUsingBing; let i = index">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                            <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                             <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-card>
@@ -217,7 +217,7 @@
                                         <div class='summary-container'>
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
-                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -297,7 +297,7 @@
                 <mat-accordion>
                     <mat-expansion-panel *ngFor="let trip of timeWindowDeliveryTripsUsingBing; let i = index">
                         <mat-expansion-panel-header>
-                            <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                            <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                             <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                         </mat-expansion-panel-header>
                         <mat-card>
@@ -311,7 +311,7 @@
                                         <div class='summary-container'>
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
-                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -391,7 +391,7 @@
           <mat-accordion>
             <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
               <mat-expansion-panel-header>
-                <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                 <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-card>
@@ -401,7 +401,7 @@
                             <div class='summary-container'>
                                 <div class="trip-summary-container">
                                     <p class='mat-title'>Trip Summary</p>
-                                    <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                    <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -478,8 +478,8 @@
                             <mat-accordion>
                                 <mat-expansion-panel *ngFor="let trip of vrpWithCCTrips; let i = index">
                                     <mat-expansion-panel-header>
-                                        <mat-panel-title>{{trip.tripItineraryId}}
-                                            {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
+                                        <mat-panel-title>
+                                            {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                         </mat-panel-title>
                                         <!-- added pipe to show trip ititnerary -->
                                         <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
@@ -495,7 +495,7 @@
                                                     <div class='summary-container'>
                                                         <div class="trip-summary-container">
                                                             <p class='mat-title'>Trip Summary</p>
-                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -575,7 +575,7 @@
                             <mat-accordion>
                                 <mat-expansion-panel *ngFor="let trip of vrpWithDVTrips; let i = index">
                                     <mat-expansion-panel-header>
-                                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                                        <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                                         <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                                     </mat-expansion-panel-header>
                                     <mat-card>
@@ -589,7 +589,7 @@
                                                     <div class='summary-container'>
                                                         <div class="trip-summary-container">
                                                             <p class='mat-title'>Trip Summary</p>
-                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -669,7 +669,7 @@
                             <mat-accordion>
                                 <mat-expansion-panel *ngFor="let trip of timeWindowDeliveryTrips; let i = index">
                                     <mat-expansion-panel-header>
-                                        <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                                        <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                                         <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
                                     </mat-expansion-panel-header>
                                     <mat-card>
@@ -683,7 +683,7 @@
                                                     <div class='summary-container'>
                                                         <div class="trip-summary-container">
                                                             <p class='mat-title'>Trip Summary</p>
-                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                            <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                             <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -763,7 +763,7 @@
                       <mat-accordion>
                         <mat-expansion-panel *ngFor="let trip of otherTrips; let i = index">
                           <mat-expansion-panel-header>
-                            <mat-panel-title>{{trip.tripItineraryId}}</mat-panel-title>
+                            <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-panel-title>
                             <mat-panel-description>{{trip.planGeneratedTime | date:'short'}}  </mat-panel-description>
                           </mat-expansion-panel-header>
                           <mat-card>
@@ -773,7 +773,7 @@
                                         <div class='summary-container'>
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
-                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{trip.tripItineraryId}}</p>
+                                                <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
@@ -838,8 +838,8 @@
                 </div>
 
         <!-- <mat-card *ngFor="let trip of dataSource; let i = index" (click)="selected = i">
-        <mat-card-subtitle>TripId#{{trip.tripItineraryId}}</mat-card-subtitle>
-        <mat-card-title>VehicleNumber#{{trip.tripItineraryId}}</mat-card-title>
+        <mat-card-subtitle>TripId#{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-card-subtitle>
+        <mat-card-title>VehicleNumber#{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</mat-card-title>
         <mat-card-content *ngIf="i === selected">
           <mat-horizontal-stepper #stepper>
             <mat-step  *ngFor="let order of trip.orders" label="{{order.orderId}}" state="edit">
