@@ -29,7 +29,10 @@ public class PacketService {
 
             List<Status> statusList = new ArrayList<>();
             Status status = new Status();
-            status.setTimeStamp(new Date());
+            //Date Instance for IST
+            Date date=java.util.Calendar.getInstance().getTime();
+            status.setTimeStamp(date);
+            logger.info(">>>>>>>>>>>>>>>Date format >>>>>>>>>>>>"+ date);
             status.setStatusValue("RECEIVED");
             statusList.add(status);
             packet.setStatusList(statusList);

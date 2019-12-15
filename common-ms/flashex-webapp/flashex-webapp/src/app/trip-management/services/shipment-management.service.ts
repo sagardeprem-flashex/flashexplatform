@@ -23,10 +23,9 @@ export class ShipmentManagementService {
     this.loadConfig();
   }
 
-   private url = 'http://localhost:2400/packets';
-  //  private url = 'shipment-microservice-webservice/api/v1/packets';
-  // private url = '  http://localhost:3000/packet';
-  private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
+   private url = 'shipment-microservice-webservice/api/v1/packets';
+  //  private url = '  http://localhost:3000/packet';
+   private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
 
   private dataSource = [];
   private shipmentConfiguration = [];

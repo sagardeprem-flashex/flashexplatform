@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TriplogService } from '../../services/triplog.service';
 import { TripLog, ITripLog } from '../../interfaces/triplog';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 declare let tomtom: any;
 @Component({
   selector: 'app-live-tracking',
@@ -33,15 +34,14 @@ export class LiveTrackingComponent implements OnInit {
     '../../../../assets/mapIcon/9.svg',
     '../../../../assets/mapIcon/10.svg',
   ];
-  public routeColors = ['red', 'blue', 'grey', 'pink', 'green', 'indigo', 'orange', 'lightblue',
-    'lightred', 'black'];
   triplogss: Observable<ITripLog[]>;
   public trip: any;
   displayedColumns: string[] = ['orderId', 'status'];
   public warehouse;
+  public tripDate = new Date().toDateString();
+  public routeColor = ['red', 'blue', 'green', 'black'];
 
-
-  constructor(private tripService: TriplogService) { }
+  constructor(private tripService: TriplogService, private token: TokenStorageService) { }
   // trip: TripLog = new TripLog();
 
   ngOnInit() {
@@ -49,6 +49,7 @@ export class LiveTrackingComponent implements OnInit {
       this.dataSource = data;
       this.getRandomColor();
     });
+
     // dom should create map container and then only tomtom will load map
     // on refreshing page map container is being created after tomtom already called
     // so time out is provided to wait for dom to be created
@@ -61,10 +62,6 @@ export class LiveTrackingComponent implements OnInit {
       });
       // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this.dataSource.length; i++) {
-        let p = 0 + i;
-        if (p > 10) {
-          p = 0;
-        }
         this.marks = [];
         this.warehouse = [
           this.dataSource[i].originAddress.latitude,
@@ -95,7 +92,7 @@ export class LiveTrackingComponent implements OnInit {
         for (let m = 0; m < this.marks.length; m++) {
           const marker: any = tomtom.L.marker(this.marks[m], {
             icon: tomtom.L.icon({
-              iconUrl: this.markerIcon[p],
+              iconUrl: this.markerIcon[i],
               iconSize: [40, 40],
               iconAnchor: [30, 30],
               popupAnchor: [0, -30]
@@ -104,34 +101,33 @@ export class LiveTrackingComponent implements OnInit {
           marker.bindPopup(this.addressLine[i]).openPopup();
 
         }
-        const routeColor2 = this.routeColors[i];
+        const routesColor = this.routeColor[i];
         const wareRoutes = this.warehouse.join(',').concat(':').concat(this.marks[0].join(','));
         tomtom.routing().locations(wareRoutes)
           // tslint:disable-next-line: only-arrow-functions
           .go().then(function(routeJson) {
             const route = tomtom.L.geoJson(routeJson, {
-              style: { color: routeColor2, opacity: 0.5, weight: 5 }
+              style: { color: routesColor, opacity: 0.5, weight: 5 }
             }).addTo(map);
             map.fitBounds(route.getBounds(), { padding: [5, 5] });
           });
         // tslint:disable-next-line: prefer-for-of
         for (let n = 0; n < this.marks.length - 1; n++) {
           // store origin and destination for routes
-          const routeColor = this.routeColors[p];
           let routes = [];
           routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
           tomtom.routing().locations(routes)
             // tslint:disable-next-line: only-arrow-functions
             .go().then(function(routeJson) {
               const route = tomtom.L.geoJson(routeJson, {
-                style: { color: routeColor, opacity: 0.5, weight: 5 }
+                style: { color: routesColor, opacity: 0.5, weight: 5 }
               }).addTo(map);
               map.fitBounds(route.getBounds(), { padding: [5, 5] });
             });
 
         }
       }
-    }, 500);
+    }, 1000);
   }
 
   // provide different color to each trips and corresponding markers
@@ -141,44 +137,5 @@ export class LiveTrackingComponent implements OnInit {
       const generatedColor = '#' + ('000000' + color).slice(-6);
       this.colors.push(generatedColor);
     });
-  }
-  // get trip log by its id from backend
-  getTripLogById(id: string) {
-    this.tripService.getTripLog(id).subscribe(
-      data => {
-        this.tripLogById = data;
-
-      }
-    );
-  }
-  // update trip start time for particular trip with its id being fetched from UI
-  updateTripStart(tripId) {
-    this.trip = new TripLog();
-    this.trip.tripStart = new Date();
-    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
-    });
-  }
-  // update trip end time for particular trip with its id being fetched from UI
-  updateTripEnd(tripId) {
-    this.trip.tripEnd = new Date();
-    this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
-    });
-  }
-
-  // update packet status of particular packet id inside a particular trip itinerary
-  updatePacketLog(tripId, tripPacketId) {
-    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery' }];
-    } else {
-      /* tslint:disable:no-string-literal */
-      this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
-    }
-    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
-      data => {
-        this.tripLog = data;
-      }
-    );
   }
 }

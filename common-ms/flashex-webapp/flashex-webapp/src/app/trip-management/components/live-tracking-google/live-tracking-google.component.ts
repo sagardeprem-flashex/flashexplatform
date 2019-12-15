@@ -33,6 +33,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
   public url;
   public warehouse;
   public routes = [];
+  public tripDate = new Date().toDateString();
 
   displayedColumns: string[] = ['orderId', 'status'];
   public scheduledDate = new Date();
@@ -69,7 +70,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
     });
   }
   trips(value) {
-    // console.log('value', value);
+    console.log('value', value);
     this.routes = [];
     const tripItinerary = this.dataSource[value];
 
@@ -134,7 +135,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
     if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery' }];
+      this.trip.packetLogs = [{ packetStatus: 'Delivered' }];
     } else {
       /* tslint:disable:no-string-literal */
       this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];

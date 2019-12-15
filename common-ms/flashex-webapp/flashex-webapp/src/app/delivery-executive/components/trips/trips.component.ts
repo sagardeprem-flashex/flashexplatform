@@ -5,8 +5,9 @@ import { TokenStorageService } from '../../../shared/services/token-storage.serv
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { TriplogService } from '../../../trip-management/services/triplog.service';
-import {ITripLog, TripLog} from '../../../trip-management/interfaces/triplog';
+import { ITripLog, TripLog } from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 declare let L;
 declare let tomtom: any;
@@ -20,7 +21,7 @@ declare let tomtom: any;
 export class TripsComponent implements OnInit {
 
   mobileQuery: MediaQueryList;
-  public dataSource;
+  public dataSource = [];
   public details;
   public listofOrders;
   public tripDetails;
@@ -33,10 +34,11 @@ export class TripsComponent implements OnInit {
   public role;
   public userName;
   public scheduledDate = new Date();
+  public intialData;
 
-  constructor(changeDetectorRef: ChangeDetectorRef,
-              media: MediaMatcher, private tripService: TriplogService,
-              private tokenStorage: TokenStorageService, private router: Router) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private tripService: TriplogService, private tokenStorage: TokenStorageService,
+              private router: Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -53,7 +55,7 @@ export class TripsComponent implements OnInit {
       this.role = 'Delivery Executive';
 
     }
-    this.userName = this.tokenStorage.getUsername();
+
     setTimeout(() => {
       const map = tomtom.L.map('map', {
         key: 'bvlnbSj7Eu5i41bgOFAlfWPZEuPkDcug',
@@ -66,8 +68,19 @@ export class TripsComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
+    this.userName = this.tokenStorage.getUsername();
     this.tripService.behaviourSubject.subscribe(data => {
-      this.dataSource = data;
+      if (data && data.length > 0) {
+        if (this.userName === 'anurag123') {
+          this.dataSource[0] = data[0];
+        } else if (this.userName === 'anup123') {
+          this.dataSource[0] = data[1];
+
+        } else if (this.userName === 'parth123') {
+          this.dataSource[0] = data[2];
+
+        }
+      }
       this.trips(0);
     });
   }
@@ -110,11 +123,11 @@ export class TripsComponent implements OnInit {
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
     console.log('tr', tripId, ' pacl', tripPacketId);
-    if ( this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
-      this.trip.packetLogs = [{ packetStatus: 'Delhivery'}];
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Delivered' }];
     } else {
       /* tslint:disable:no-string-literal */
-      this.trip['packetLogs'] = [{packetStatus : 'Delivered'}];
+      this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
     }
     this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
       data => {

@@ -24,6 +24,9 @@ public class BinningService {
     MessagingService producerService;
 
     @Autowired
+    PacketService packetService;
+
+    @Autowired
     BinnerConfigService binnerConfigService;
 
     private  static final Logger logger = (Logger) LoggerFactory.getLogger(BinningService.class);
@@ -276,6 +279,11 @@ public class BinningService {
     }
 
 
+    public void reprocess(KafkaReprocessMessage message){
+        Packet packet = packetService.findByPacketId(message.getPacketId());
+        binPacket(packet);
+
+    }
     // refreshes bins if config is changed,  dropped
 //    public void refreshBins(){
 //
