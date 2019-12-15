@@ -18,6 +18,9 @@ export class TripDetailsComponent implements OnInit {
   public timeWindowDeliveryTrips = [];
   public vrpWithCCTrips = [];
   public vrpWithDVTrips = [];
+  public vrpWithCCTripsUsingBing = [];
+  public vrpWithDVTripsUsingBing = [];
+  public timeWindowDeliveryTripsUsingBing = [];
   public otherTrips = [];
   public dataSource;
   public selectedAlgo;
@@ -76,13 +79,19 @@ export class TripDetailsComponent implements OnInit {
         } else
           if (d.algorithm === 'VrpWithCapacityConstraint') {
             this.vrpWithCCTrips.unshift(d);
-          } else
+        } else
             if (d.algorithm === 'VrpWithDroppingVisit') {
               this.vrpWithDVTrips.unshift(d);
-            } else {
-              this.otherTrips.unshift(d);
+        } else
+          if (d.algorithm === 'Vrp With Capacity Constraint using Bing') {
+              this.vrpWithCCTripsUsingBing.unshift(d);
+        } else
+          if (d.algorithm === 'Vrp With Dropping Visit using Bing') {
+              this.vrpWithDVTripsUsingBing.unshift(d);
+        } else
+          if (d.algorithm === 'Vrp With Time Window Delivery using Bing') {
+              this.timeWindowDeliveryTripsUsingBing.unshift(d);
             }
-
       });
 
     });
