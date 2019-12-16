@@ -9,7 +9,7 @@ import { ITripLog, TripLog } from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { NavigationComponent } from '../navigation/navigation.component';
-import {OrderDeliveryListComponent} from '../order-delivery-list/order-delivery-list.component'
+import { OrderDeliveryListComponent } from '../order-delivery-list/order-delivery-list.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 declare let L;
@@ -60,12 +60,13 @@ export class TripsComponent implements OnInit {
   public addressLine = [];
   public routeColor = ['blue', 'red', 'green', 'black'];
   public lMap = false;
+  private mobileQueryListener: () => void;
 
 
 
   constructor(changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher, private tripService: TriplogService,
-    private tokenStorage: TokenStorageService, private router: Router, private _snackBar: MatSnackBar) {
+              media: MediaMatcher, private tripService: TriplogService,
+              private tokenStorage: TokenStorageService, private router: Router, private snackBar: MatSnackBar) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
@@ -73,19 +74,17 @@ export class TripsComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.openFromComponent(NavigationComponent, {
+    this.snackBar.openFromComponent(NavigationComponent, {
       duration: 3 * 1000
     });
   }
 
   startSnackBar() {
-    this._snackBar.openFromComponent(OrderDeliveryListComponent,{
+    this.snackBar.openFromComponent( OrderDeliveryListComponent, {
       duration: 3000
-    })
+    });
   }
 
-
-  private mobileQueryListener: () => void;
   ngOnInit() {
     this.authority = this.tokenStorage.getAuthorities();
     if (this.authority[0] === 'ROLE_ADMIN') {
@@ -240,7 +239,7 @@ export class TripsComponent implements OnInit {
         const wareRoutes = this.warehouse.join(',').concat(':').concat(this.marks[0].join(','));
         tomtom.routing().locations(wareRoutes)
           // tslint:disable-next-line: only-arrow-functions
-          .go().then(function (routeJson) {
+          .go().then(function(routeJson) {
             const route = tomtom.L.geoJson(routeJson, {
               style: { color: routesColor, opacity: 0.5, weight: 5 }
             }).addTo(map);
@@ -253,7 +252,7 @@ export class TripsComponent implements OnInit {
           routes = this.marks[n].join(',').concat(':').concat(this.marks[n + 1].join(','));
           tomtom.routing().locations(routes)
             // tslint:disable-next-line: only-arrow-functions
-            .go().then(function (routeJson) {
+            .go().then(function(routeJson) {
               const route = tomtom.L.geoJson(routeJson, {
                 style: { color: routesColor, opacity: 0.5, weight: 5 }
               }).addTo(map);
