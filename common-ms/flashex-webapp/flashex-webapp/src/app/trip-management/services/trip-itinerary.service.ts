@@ -32,6 +32,7 @@ export class TripItineraryService {
   // private tripItineraryUrl = '../../../assets/tripsListFormat2.json';
 
   private tripItineraryUrl = 'tripplanning-microservice-webservice/api/v1/tripitinerary';
+  // private tripItineraryUrl = 'http://localhost:3000/tripItinerary';
 
   private vehiclesListUrl = 'https://vehicle-json-server:3000/vehicles';
 
@@ -58,6 +59,7 @@ export class TripItineraryService {
 
     this.http.get<IVehicle[]>(this.vehiclesListUrl).subscribe(data => {
       this.vehiclesData = data;
+      console.log(this.vehiclesData);
       this.vehicleBehaviourSubject.next(this.vehiclesData);
     },
     error => {
