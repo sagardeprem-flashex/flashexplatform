@@ -32,4 +32,10 @@ public class TripItineraryController {
     public TripItinerary getSpecificTripItinerary(@PathVariable String id) {
         return tripItineraryService.getSpecificTripItinerary(id);
     }
+
+    @GetMapping("/test")
+    public List<TripItinerary> getItinerariesByDate(
+            @RequestParam int year, @RequestParam int month, @RequestParam int day ){
+        return tripItineraryService.getTripsByDay(year, month, day);
+    }
 }

@@ -14,7 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table("packet")
 @UserDefinedType("packet")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Packet {

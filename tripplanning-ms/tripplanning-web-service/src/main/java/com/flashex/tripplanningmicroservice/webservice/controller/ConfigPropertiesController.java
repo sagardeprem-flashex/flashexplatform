@@ -29,7 +29,7 @@ public class ConfigPropertiesController {
         this.optPropService.saveOptimizationProperties(properties);
     }
 
-    @PutMapping("/optprops/{id}")
+    @PutMapping("/optprops")
     public OptimizationProperties modifyProperties(@RequestBody OptimizationProperties properties) {
         return this.optPropService.updateProperties(properties);
     }

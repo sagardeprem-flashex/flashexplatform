@@ -152,7 +152,7 @@ export class TripsComponent implements OnInit {
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
-    console.log('tr', tripId, ' pacl', tripPacketId);
+    // console.log('tr', tripId, ' pacl', tripPacketId);
     if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
       this.trip.packetLogs = [{ packetStatus: 'Delivered' }];
     } else {
