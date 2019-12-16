@@ -70,15 +70,15 @@ export class TripsComponent implements OnInit {
 
 
   constructor(changeDetectorRef: ChangeDetectorRef,
-    private webSocketService: WebSocketService,
+              private webSocketService: WebSocketService,
               media: MediaMatcher, private tripService: TriplogService,
               private tokenStorage: TokenStorageService, private router: Router, private snackBar: MatSnackBar) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    // tslint:disable-next-line: deprecation
-                this.mobileQuery.addListener(this.mobileQueryListener);
-                this.webSocketService.initializeWebSocketConnection();
-              }
+              this.mobileQuery = media.matchMedia('(max-width: 600px)');
+              this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+              // tslint:disable-next-line: deprecation
+              this.mobileQuery.addListener(this.mobileQueryListener);
+              this.webSocketService.initializeWebSocketConnection();
+  }
 
   openSnackBar() {
     this.snackBar.openFromComponent(NavigationComponent, {
@@ -87,7 +87,7 @@ export class TripsComponent implements OnInit {
   }
 
   startSnackBar() {
-    this.snackBar.openFromComponent( OrderDeliveryListComponent, {
+    this.snackBar.openFromComponent(OrderDeliveryListComponent, {
       duration: 3000
     });
   }
@@ -122,13 +122,13 @@ export class TripsComponent implements OnInit {
       this.trips(0);
     });
 
-    if ( this.dataSource ) {
+    if (this.dataSource) {
       this.webSocketService.realtimeSubject.subscribe(d => {
         // let store = JSON.parse(d);
-        if ( typeof d === 'string' ) {
+        if (typeof d === 'string') {
           const st = JSON.parse(d);
           console.log('tripId:', typeof d);
-          const temp = lodash.find (this.dataSource, ['tripItineraryId', st.tripId]);
+          const temp = lodash.find(this.dataSource, ['tripItineraryId', st.tripId]);
           // console.log("temp: ",temp);
           if (st.startTime) {
             temp.tripStart = new Date();

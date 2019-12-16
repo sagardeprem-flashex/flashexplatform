@@ -38,18 +38,18 @@ const tripRoutes: Routes = [
       {
         path: 'orderdetail',
         component: OrderDetailsComponent,
-        // canActivate: [AuthguardService],
-        // data: {
-        //   expectedRole: 'ROLE_ADMIN'
-        // }
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
       },
       {
         path: 'vehicledetail',
         component: VehicleDetailsComponent,
-        // canActivate: [AuthguardService],
-        // data: {
-        //   expectedRole: 'ROLE_ADMIN'
-        // }
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
       },
       {
         path: 'trackgoogle',
