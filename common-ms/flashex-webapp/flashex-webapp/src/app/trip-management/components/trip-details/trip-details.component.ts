@@ -33,21 +33,20 @@ export class TripDetailsComponent implements OnInit {
     'Vrp with Dropping Visit using Bing',
     'Vrp with Time Window Delivery using Bing'
   ];
-  Bing = true;
+  Bing = false;
+  Default;
 
-  single1: any[];
-  single2: any[];
-  single3: any[];
-  single4: any[];
+  multi1 : any[];
+  multi2 : any[];
 
   summary: Itripsummary;
   public distanceCover = [];
-  public totaltTime = [];
+  public totalTime = [];
   public totalExpense = [];
   public nTrips = [];
   public algorithm = [];
 
-  view: any[] = [300, 300];
+  view: any[] = [700, 400];
 
   // options
   showXAxis = true;
@@ -56,14 +55,12 @@ export class TripDetailsComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  yAxisLabel1 = 'Total Distance';
+  yAxisLabel1 = 'units/day';
   xAxisLabel = 'Algorithm';
-  yAxisLabel2 = 'Total Time';
-  yAxisLabel3 = 'Total Expense';
-  yAxisLabel4 = 'Total Trips';
+
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#009688', '#69F0AE']
+    domain: ['#5AA454', '#A10A28', '#C7B42C'] // , '#AAAAAA', '#009688', '#69F0AE'
   };
 
   constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
@@ -114,7 +111,7 @@ export class TripDetailsComponent implements OnInit {
         });
 
         d.timeSummary.forEach(summary => {
-          this.totaltTime.push(summary);
+          this.totalTime.push(summary);
         });
 
         d.costSummary.forEach(summary => {
@@ -130,127 +127,173 @@ export class TripDetailsComponent implements OnInit {
         });
 
 
-        // distance
-        this.single1 = [
-          {
-            name: this.algorithm[0],
-            value: this.distanceCover[0]
+        this.multi1 = [
+        {
+          name: 'Distance',
+          series: [
+            {
+              name: this.algorithm[2],
+              value: this.distanceCover[2]
+            },
+            {
+              name: this.algorithm[0],
+              value: this.distanceCover[0]
+            },
+            {
+              name: this.algorithm[4],
+              value: this.distanceCover[4]
+            }
+          ]
+        },
+      
+        {
+          name: 'Time',
+          series: [
+            {
+              name: this.algorithm[2],
+              value: this.totalTime[2]
+            },
+            {
+              name: this.algorithm[0],
+              value: this.totalTime[0]
+            },
+            {
+              name: this.algorithm[4],
+              value: this.totalTime[4]
+            }
+          ]
+        },
+        {
+          name: 'Trips',
+          series: [
+            {
+              name: this.algorithm[2],
+              value: this.nTrips[2]
+            },
+            {
+              name: this.algorithm[0],
+              value: this.nTrips[0]
+            },
+            {
+              name: this.algorithm[4],
+              value: this.nTrips[4]
+            }
+          ]
+        },
+        {
+          name: 'Fuel Cost',
+          series: [
+            {
+              name: this.algorithm[2],
+              value: this.totalExpense[2]
+            },
+            {
+              name: this.algorithm[0],
+              value: this.totalExpense[0]
+            },
+            {
+              name: this.algorithm[4],
+              value: this.totalExpense[4]
+            }
+          ]
+        }
+      ];
 
-          },
-          {
-            name: this.algorithm[1],
-            value: this.distanceCover[1]
-
-          },
-          {
-            name: this.algorithm[2],
-            value: this.distanceCover[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.distanceCover[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.distanceCover[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.distanceCover[5]
-          }
-        ];
-        // time
-        this.single2 = [
-          {
-            name: this.algorithm[0],
-            value: this.totaltTime[0]
-          },
-          {
-            name: this.algorithm[1],
-            value: this.totaltTime[1]
-          },
-          {
-            name: this.algorithm[2],
-            value: this.totaltTime[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.totaltTime[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.totaltTime[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.totaltTime[5]
-          }
-        ];
-        console.log('Showing graph results -----> ', this.single2);
-
-        // total expense
-        this.single3 = [
-          {
-            name: this.algorithm[0],
-            value: this.totalExpense[0]
-          },
-          {
-            name: this.algorithm[1],
-            value: this.totalExpense[1]
-          },
-          {
-            name: this.algorithm[2],
-            value: this.totalExpense[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.totalExpense[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.totalExpense[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.totalExpense[5]
-          }
-        ];
-
-        this.single4 = [
-          {
-            name: this.algorithm[0],
-            value: this.nTrips[0]
-          },
-          {
-            name: this.algorithm[1],
-            value: this.nTrips[1]
-          },
-          {
-            name: this.algorithm[2],
-            value: this.nTrips[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.nTrips[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.nTrips[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.nTrips[5]
-          }
-        ];
+      this.multi2 = [
+        {
+          name: 'Distance',
+          series: [
+            {
+              name: this.algorithm[3],
+              value: this.distanceCover[3]
+            },
+            {
+              name: this.algorithm[1],
+              value: this.distanceCover[1]
+            },
+            {
+              name: this.algorithm[5],
+              value: this.distanceCover[5]
+            }
+          ]
+        },
+      
+        {
+          name: 'Time',
+          series: [
+            {
+              name: this.algorithm[3],
+              value: this.totalTime[3]
+            },
+            {
+              name: this.algorithm[1],
+              value: this.totalTime[1]
+            },
+            {
+              name: this.algorithm[5],
+              value: this.totalTime[5]
+            }
+          ]
+        },
+        {
+          name: 'Trips',
+          series: [
+            {
+              name: this.algorithm[3],
+              value: this.nTrips[3]
+            },
+            {
+              name: this.algorithm[1],
+              value: this.nTrips[1]
+            },
+            {
+              name: this.algorithm[5],
+              value: this.nTrips[5]
+            }
+          ]
+        },
+        {
+          name: 'Fuel Cost',
+          series: [
+            {
+              name: this.algorithm[3],
+              value: this.totalExpense[3]
+            },
+            {
+              name: this.algorithm[1],
+              value: this.totalExpense[1]
+            },
+            {
+              name: this.algorithm[5],
+              value: this.totalExpense[5]
+            }
+          ]
+        }
+      ];
+      
       });
     });
 
   }
 
-  public toggle(event: MatSlideToggleChange) {
-    console.log('toggle', event.checked);
-    this.Bing = event.checked;
-  }
+  Option1(){
+    let temp = this.Bing;
+    this.Bing =!temp;
+  };
+
+  Option2(){
+    alert('service not avaliable');
+  };
+
+  Option3(){
+    let temp = this.Bing;
+    this.Bing =!temp;
+  };
+
+  // public toggle(event: MatSlideToggleChange) {
+  //   console.log('toggle', event.checked);
+  //   this.Bing = event.checked;
+  // }
 
   onSelect(event) {
     console.log(event);

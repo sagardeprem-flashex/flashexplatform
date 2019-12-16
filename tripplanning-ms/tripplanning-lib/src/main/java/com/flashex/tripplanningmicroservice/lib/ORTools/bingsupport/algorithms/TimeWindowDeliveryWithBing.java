@@ -126,7 +126,7 @@ public class TimeWindowDeliveryWithBing {
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) * DataModel.getAvgVehicleSpeed() / DataModel.getScaleFactor();
                 long mileage = 21;
                 long fuelcost  = 70 ;
-                long tripexpense = mileage*avgVechiclespeed*solution.min(timeVar)*fuelcost;
+                long tripexpense = (avgVechiclespeed*solution.min(timeVar)*fuelcost)/(mileage);
                 tripItinerary.setTripExpense(tripexpense); // set total expense
             }
 

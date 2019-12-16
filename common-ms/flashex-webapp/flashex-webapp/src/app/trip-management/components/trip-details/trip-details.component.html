@@ -1,13 +1,57 @@
 <div class="trips-container">
     <div class="toolbar">
-        <mat-toolbar class="toolbar-title">Trip Planner</mat-toolbar>
+        <mat-toolbar class="toolbar-title">Trip Strategy Stting</mat-toolbar>
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
+    </div>
+
+    <div>
+        <mat-card>
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button (click)='Option1()' value="1">Bing</mat-radio-button>
+                <mat-radio-button (click)='Option2()' value="2">Google</mat-radio-button>
+                <mat-radio-button (click)='Option3()' value="3">Default</mat-radio-button>
+            </mat-radio-group>
+        </mat-card>
     </div>
 
     <mat-card>
         <h3>Comparison of various trip planning algorithms</h3>
 
-    <div class="graphsandlegend">
+        <div>
+            <div *ngIf="!Bing">
+                <ngx-charts-bar-vertical-2d
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="multi1"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    (select)="onSelect($event)">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+            <div *ngIf="Bing">
+                <ngx-charts-bar-vertical-2d
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="multi1"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    (select)="onSelect($event)">
+                </ngx-charts-bar-vertical-2d>
+            </div>
+        </div>
+    <!-- <div class="graphsandlegend">
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column" >
                 <div class="graph1">
                     <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
@@ -66,12 +110,12 @@
                                 <div>VRP with Dropping Visits using Bing</div>
                         </div>
                     </div>
-        </div>
+        </div> -->
     </mat-card>    
 
     <div fxLayout="row" fxLayoutAlign="end center">
         <div style="margin-right: 5%;">
-            <mat-slide-toggle [checked]='Bing' (change)="toggle($event)"><span title="Uses Microsoft Bing for Distance Matrix calculation">Bing</span></mat-slide-toggle>
+            <!-- <mat-slide-toggle [checked]='Bing' (change)="toggle($event)"><span title="Uses Microsoft Bing for Distance Matrix calculation">Bing</span></mat-slide-toggle> -->
         </div>
        
         <div *ngIf="Bing" style="width: 30%;" >

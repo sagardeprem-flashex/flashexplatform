@@ -244,7 +244,7 @@ public class TimeWindowDelivery {
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) / GenerateMatrix.scaleFactor * Data.getAvgVehicleSpeed();
                     long mileage = 21;
                     long fuelcost  = 70 ;
-                    long tripexpense = mileage*avgVechiclespeed*solution.min(timeVar)*fuelcost;
+                    long tripexpense = (avgVechiclespeed*solution.min(timeVar)*fuelcost)/(mileage);
                 tripItinerary.setTripExpense(tripexpense); // set total expense
                 }
 
