@@ -53,7 +53,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
           latitude: tripItinerary.originAddress.latitude,
           longitude: tripItinerary.originAddress.longitude
         };
-        console.log('ware', this.warehouse);
+        // console.log('ware', this.warehouse);
         // console.log(tripItinerary.orders.length)
         if (tripItinerary && tripItinerary.packetLogs) {
           const genColor = this.colors;
@@ -70,7 +70,7 @@ export class LiveTrackingGoogleComponent implements OnInit {
     });
   }
   trips(value) {
-    console.log('value', value);
+    // console.log('value', value);
     this.routes = [];
     const tripItinerary = this.dataSource[value];
 

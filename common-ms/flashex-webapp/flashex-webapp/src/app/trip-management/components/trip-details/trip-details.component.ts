@@ -76,10 +76,10 @@ export class TripDetailsComponent implements OnInit {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
 
-      console.log(data);
+      // console.log(data);
 
       data.forEach(d => {
-        console.log('Algos list ----------> ', d.algorithm);
+        // console.log('Algos list ----------> ', d.algorithm);
         if (d.algorithm === 'Vrp with Time Window Delivery') {
           this.timeWindowDeliveryTrips.unshift(d);
         } else
@@ -105,7 +105,10 @@ export class TripDetailsComponent implements OnInit {
     });
 
     this.tripsummary.behaviourSubject.subscribe(data => {
+      console.log("Fetching summary ------->", data);
+
       data.forEach((d) => {
+        console.log("In loop ---->", d)
         d.distanceSummary.forEach(summary => {
           this.distanceCover.push(summary);
         });
@@ -118,7 +121,7 @@ export class TripDetailsComponent implements OnInit {
           this.totalExpense.push(summary);
         });
 
-        d.nTrips.forEach(summary => {
+        d.ntrips.forEach(summary => {
           this.nTrips.push(summary);
         });
 
@@ -181,6 +184,7 @@ export class TripDetailsComponent implements OnInit {
             value: this.totaltTime[5]
           }
         ];
+        console.log('Showing graph results -----> ', this.single2);
 
         this.single3 = [
           {

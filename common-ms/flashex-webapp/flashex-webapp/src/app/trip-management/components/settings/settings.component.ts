@@ -86,7 +86,7 @@ export class SettingsComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
+        // console.log(error);
       }
     );
 
@@ -95,7 +95,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public togglePincode(event: MatSlideToggleChange) {
-    console.log('toggle', event.checked);
+    // console.log('toggle', event.checked);
     this.pincodeChecked = event.checked;
     if (this.pincodeChecked === false && this.orderTypeChecked === false && this.priorityChecked === false) {
       this.orderTypeChecked = true;
@@ -103,7 +103,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public toggleType(event: MatSlideToggleChange) {
-    console.log('toggle', event.checked);
+    // console.log('toggle', event.checked);
     this.orderTypeChecked = event.checked;
     if (this.pincodeChecked === false && this.orderTypeChecked === false && this.priorityChecked === false) {
       this.pincodeChecked = true;
@@ -111,7 +111,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public togglePriority(event: MatSlideToggleChange) {
-    console.log('toggle', event.checked);
+    // console.log('toggle', event.checked);
     this.priorityChecked = event.checked;
     if (this.pincodeChecked === false && this.orderTypeChecked === false && this.priorityChecked === false) {
       this.pincodeChecked = true;
@@ -119,7 +119,7 @@ export class SettingsComponent implements OnInit {
   }
 
   public toggleVolume(event: MatSlideToggleChange) {
-    console.log('toggle', event.checked);
+    // console.log('toggle', event.checked);
     this.volumeChecked = event.checked;
     if (this.pincodeChecked === false && this.orderTypeChecked === false && this.priorityChecked === false) {
       this.pincodeChecked = true;
@@ -140,7 +140,7 @@ export class SettingsComponent implements OnInit {
     this.updatedConfig.maxShipmentSize = this.maxShipmentSize;
     this.updatedConfig.originAddress = this.originAddress.value;
     this.updatedConfig.relaxation = this.relaxation;
-    console.log(this.updatedConfig.originAddress);
+    // console.log(this.updatedConfig.originAddress);
     this.updatedConfig.groupStrategy = [];
     if (this.pincodeChecked) {
       this.updatedConfig.groupStrategy.push('PINCODE');
