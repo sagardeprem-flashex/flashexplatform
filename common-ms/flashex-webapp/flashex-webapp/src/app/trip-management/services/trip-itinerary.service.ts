@@ -49,7 +49,7 @@ export class TripItineraryService {
     this.http.get<IItinerary[]>(this.tripItineraryUrl).subscribe(data => {
       this.dataSource = data;
       this.behaviourSubject.next(this.dataSource);
-      console.log('Obtained Trip itineraries from the db ---------------------->', data);
+      // console.log('Obtained Trip itineraries from the db ---------------------->', data);
     },
     error => {
       this.handleError[1] = error;
@@ -68,14 +68,14 @@ export class TripItineraryService {
     this.http.get<ITripProperties>(this.optimizationPropertiesUrl).subscribe(data => {
       if (data != null) {
         this.planningProperties = data[0];
-        console.log('Obtained from DB ----> ', this.planningProperties);
+        // console.log('Obtained from DB ----> ', this.planningProperties);
       } else {
         this.planningProperties = {
           propertiesId: '1',
           algorithmSelected: 'Vrp with Capacity Constraint using Bing',
           lastUpdated: this.date
         };
-        console.log('Created in angular ----> ', this.planningProperties);
+        // console.log('Created in angular ----> ', this.planningProperties);
       }
     },
     error => {
@@ -87,6 +87,8 @@ export class TripItineraryService {
     this.http.put<ITripProperties>( this.optimizationPropertiesUrl,
                                     properties,
                                     this.httpOptions);
-    console.log('Sending the updated optimization -----> ', properties.lastUpdated, properties.algorithmSelected, properties.propertiesId);
+    // console.log('Sending the updated optimization -----> ',
+    // properties.lastUpdated,
+    // properties.algorithmSelected, properties.propertiesId);
   }
 }

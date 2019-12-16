@@ -126,7 +126,8 @@ public class VrpWithDroppingVisitWithBing {
 
                 tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long mileage = 21;
-                long tripexpense = mileage*routeDistance;
+                long fuelcost = 70 ;
+                long tripexpense = mileage*routeDistance*fuelcost;
                 tripItinerary.setTripExpense(tripexpense);
 
             }

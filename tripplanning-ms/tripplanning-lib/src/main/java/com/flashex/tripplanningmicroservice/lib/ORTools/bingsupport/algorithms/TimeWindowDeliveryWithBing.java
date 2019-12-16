@@ -98,6 +98,7 @@ public class TimeWindowDeliveryWithBing {
 //                String response = "";
 //                Set<String> latlongarr = new HashSet<String>();
             ArrayList<Packet> PacketArray = new ArrayList();
+            long avgVechiclespeed = 40 ;
 
             while (!routing.isEnd(index)) {
                 IntVar timeVar = timeDimension.cumulVar(index);
@@ -123,9 +124,9 @@ public class TimeWindowDeliveryWithBing {
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
                 routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) * DataModel.getAvgVehicleSpeed() / DataModel.getScaleFactor();
-                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
                 long mileage = 21;
-                long tripexpense = mileage*solution.min(timeVar);
+                long fuelcost  = 70 ;
+                long tripexpense = mileage*avgVechiclespeed*solution.min(timeVar)*fuelcost;
                 tripItinerary.setTripExpense(tripexpense); // set total expense
             }
 
@@ -137,15 +138,17 @@ public class TimeWindowDeliveryWithBing {
 
             IntVar timeVar = timeDimension.cumulVar(index);
 
-            route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
-                    + solution.max(timeVar)*100 + ")";
+            route += manager.indexToNode(index) + " Time(" + solution.min(timeVar) + ","
+                    + solution.max(timeVar) + ")";
 
             logger.info(route);
-            logger.info("Time of the route: " + solution.min(timeVar)*100 + "m");
+            logger.info("Time of the route: " + solution.min(timeVar) + "m");
 
 
 
             totalTime += solution.min(timeVar);
+            tripItinerary.setPlannedTotalDistance((avgVechiclespeed*totalTime)/60); // set route distance
+
 
 //                logger.info("Array of lat & long" + latlongarr);
 //                logger.info("Key value" + Locationcord);

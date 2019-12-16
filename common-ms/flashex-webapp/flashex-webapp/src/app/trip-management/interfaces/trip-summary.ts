@@ -6,6 +6,6 @@ export interface Itripsummary {
   timeSummary: number[];
   costSummary: number[];
   droppedPacektsSummary: number[];
-  nTrips: number[];
+  ntrips: number[];
   volumeOccupancySummary: number[];
 }
