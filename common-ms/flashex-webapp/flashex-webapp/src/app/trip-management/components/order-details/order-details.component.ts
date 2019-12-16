@@ -66,7 +66,7 @@ export class OrderDetailsComponent implements OnInit {
       data.forEach(d => {
         temp = d;
         // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment(d.receivedDate).format('MM/DD/YYYY hh:mm:ss a');
+        temp.receivedDate = moment(d.statusList[0].timeStamp).format('MM/DD/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
 
         dateValue = moment(d.receivedDate).format('MM/DD/YYYY');
