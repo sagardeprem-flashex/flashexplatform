@@ -12,7 +12,7 @@ export class TripSummaryService {
 
   public handleError = [];
 
-  public date = '12-12-2019';
+  public date = '15-12-2019';
   constructor(private http: HttpClient) {
     this.loadSummary();
   }

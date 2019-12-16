@@ -27,9 +27,13 @@ public class AnalyticsController {
 
     @GetMapping("/generate-summary")
     public List<DaySummary> generateSummary(@RequestParam String date){
+        String[] values = date.split("-");
+        int day = Integer.parseInt(values[0]);
+        int month = Integer.parseInt(values[1]);
+        int year = Integer.parseInt(values[2]);
 
         List<DaySummary> summaries = new ArrayList<>();
-        summaries.add(analyticsService.createSummary(2019,12,12));
+        summaries.add(analyticsService.createSummary(year,month,day));
         return summaries;
     }
 

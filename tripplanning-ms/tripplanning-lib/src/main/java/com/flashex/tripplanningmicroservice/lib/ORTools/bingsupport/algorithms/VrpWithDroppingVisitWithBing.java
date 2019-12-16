@@ -88,7 +88,7 @@ public class VrpWithDroppingVisitWithBing {
             tripItinerary.setPlanGeneratedTime(Timestamp.valueOf(LocalDateTime.now()));
             tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(9,0))));
 //            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
-            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(13,0))));
+            tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(13,0))));
 
 
             long index = routing.start(i);

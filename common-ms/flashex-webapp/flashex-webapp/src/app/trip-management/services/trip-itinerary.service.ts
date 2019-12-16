@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { ITripProperties } from '../interfaces/trip-planning-properties';
 import { IItinerary } from '../interfaces/trip-itinerary';
 import { IVehicle } from '../interfaces/vehicle';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +71,7 @@ export class TripItineraryService {
       } else {
         this.planningProperties = {
           propertiesId: '1',
-          algorithmSelected: 'Vrp With Capacity Constraint using Bing',
+          algorithmSelected: 'Vrp with Capacity Constraint using Bing',
           lastUpdated: this.date
         };
         // console.log('Created in angular ----> ', this.planningProperties);
