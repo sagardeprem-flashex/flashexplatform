@@ -32,7 +32,7 @@
                 <mat-list>
                     <mat-list-item>
                         <span style="color:gray; font-size: 1em; ">Start Time:</span>
-                        <span style="margin: auto;">{{tripDetails.tripStart|date: 'shortTime'}}</span>
+                        <span style="margin: auto;">{{tripDetails.plannedStartTime|date: 'shortTime'}}</span>
                         <p style="margin-left: auto;"> <button mat-flat-button color="primary" onclick="this.disabled=true" (click)="updateTripStart(tripDetails.tripItineraryId); startSnackBar()">Start Trip</button></p>
                     </mat-list-item>
                     <mat-divider></mat-divider>
