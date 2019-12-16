@@ -23,7 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -127,7 +129,6 @@ public class VrpWithDroppingVisit {
 //        HashMap<String, Set<String>> Locationcord = new HashMap();
 
         Shipment shipment = data.shipment;
-//        Vehicle vehicle = new Vehicle(); // delete it this temp
 
 //      Setting vehicle details
         VehicleList vehicleList = data.vehicleList;
@@ -172,9 +173,9 @@ public class VrpWithDroppingVisit {
             tripItinerary.setTripItineraryId(String.format("%035d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16)));
 //            tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
             tripItinerary.setPlanGeneratedTime(Timestamp.valueOf(LocalDateTime.now()));
-            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.now().plusHours(2)));
+            tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(9,0))));
 //            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
-            tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.now().plusHours(7)));
+            tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(13,0))));
 
 
             long index = routing.start(i);
@@ -208,16 +209,17 @@ public class VrpWithDroppingVisit {
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
-                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
+                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) / GenerateMatrix.scaleFactor;
 
                 tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
-                long milage = 21;
-                long tripexpense = milage*routeDistance;
+                long mileage = 21;
+                long fuelcost = 70 ;
+                long tripexpense = mileage*routeDistance*fuelcost;
                 tripItinerary.setTripExpense(tripexpense);
 
             }
             tripItinerary.setPackets(PacketArray);
-            tripItinerary.setAlgorithm("VrpWithDroppingVisit");
+            tripItinerary.setAlgorithm("Vrp with Dropping Visit");
 //            tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
             tripItinerary.setOriginAddress(shipment.getOriginAddress());
 //            Locationcord.put("Vehicle:" + i,latlongarr);

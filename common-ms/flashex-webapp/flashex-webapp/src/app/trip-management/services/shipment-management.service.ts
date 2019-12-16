@@ -58,7 +58,7 @@ export class ShipmentManagementService {
   updateConfig(config: IShipmentConfig) {
     this.http.put(this.configUrl, config).subscribe(
       response => {
-        console.log(response);
+        // console.log(response);
       },
       error => {
         this.errormsg = error.message;

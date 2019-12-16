@@ -28,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -198,13 +200,10 @@ public class TimeWindowDelivery {
 
             for (int i = 0; i < data.vehicleNumber; ++i) {
                 TripItinerary tripItinerary = new TripItinerary();
-//            tripItinerary.setTripItineraryId(UUID.randomUUID().toString());
                 tripItinerary.setTripItineraryId(String.format("%035d", new BigInteger(UUID.randomUUID().toString().replace("-", ""), 16)));
-//            tripItinerary.setPlannedStartTime(new Date(2019, 9, 04, 9, 00,00));
                 tripItinerary.setPlanGeneratedTime(Timestamp.valueOf(LocalDateTime.now()));
-                tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.now().plusHours(2)));
-//            tripItinerary.setPlannedEndTime(new Date(2019, 9, 04, 17, 00,00));
-                tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.now().plusHours(7)));
+                tripItinerary.setPlannedStartTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(9,0))));
+                tripItinerary.setPlannedEndTime(Timestamp.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.of(13,0))));
 
                 long index = routing.start(i);
                 logger.info("Route for Vehicle " + i + ":");
@@ -216,6 +215,8 @@ public class TimeWindowDelivery {
 //                String response = "";
 //                Set<String> latlongarr = new HashSet<String>();
                 ArrayList<Packet> PacketArray = new ArrayList();
+                long avgVechiclespeed = 40 ;
+
 
                 while (!routing.isEnd(index)) {
                     IntVar timeVar = timeDimension.cumulVar(index);
@@ -240,30 +241,32 @@ public class TimeWindowDelivery {
 
                 long previousIndex = index;
                 index = solution.value(routing.nextVar(index));
-                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i);
-                tripItinerary.setPlannedTotalDistance(routeDistance); // set route distance
-                long milage = 21;
-                long tripexpense = milage*solution.min(timeVar);
+                routeDistance += routing.getArcCostForVehicle(previousIndex, index, i) / GenerateMatrix.scaleFactor * Data.getAvgVehicleSpeed();
+                    long mileage = 21;
+                    long fuelcost  = 70 ;
+                    long tripexpense = mileage*avgVechiclespeed*solution.min(timeVar)*fuelcost;
                 tripItinerary.setTripExpense(tripexpense); // set total expense
                 }
 
                 tripItinerary.setPackets(PacketArray);
-                tripItinerary.setAlgorithm("VrpWithTimeWindowDelivery");
+                tripItinerary.setAlgorithm("Vrp with Time Window Delivery");
 //                tripItinerary.setOriginAddress("117,Above SBI, Opposite Raheja Arcade,7th Block,Koramangala,Bengaluru,Karnataka,560095");
                 tripItinerary.setOriginAddress(shipment.getOriginAddress());
 //                Locationcord.put("Vehicle:" + i,latlongarr);
 
                 IntVar timeVar = timeDimension.cumulVar(index);
 
-                route += manager.indexToNode(index) + " Time(" + solution.min(timeVar)*100 + ","
-                        + solution.max(timeVar)*100 + ")";
+                route += manager.indexToNode(index) + " Time(" + solution.min(timeVar) + ","
+                        + solution.max(timeVar) + ")";
 
                 logger.info(route);
-                logger.info("Time of the route: " + solution.min(timeVar)*100 + "m");
+                logger.info("Time of the route: " + solution.min(timeVar) + "m");
 
 
 
                 totalTime += solution.min(timeVar);
+                tripItinerary.setPlannedTotalDistance((avgVechiclespeed*totalTime)/60); // set route distance
+
 
 //                logger.info("Array of lat & long" + latlongarr);
 //                logger.info("Key value" + Locationcord);
