@@ -43,7 +43,7 @@ export class TripsComponent implements OnInit {
   public tripId;
   public start = false;
   public end = false;
-  // public tripDate = new Date().toDateString();
+  public tripDate = new Date().toDateString();
   public warehouse;
   public centerMap;
   public marks = [];
@@ -105,8 +105,7 @@ export class TripsComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
-    // this.userName = this.tokenStorage.getUsername();
-    this.userName = 'anurag123';
+    this.userName = this.tokenStorage.getUsername();
     this.tripService.behaviourSubject.subscribe(data => {
       if (data && data.length > 0) {
         if (this.userName === 'anurag123') {
@@ -193,7 +192,6 @@ export class TripsComponent implements OnInit {
 
   // update trip end time for particular trip with its id being fetched from UI
   updateTripEnd(details, tripId) {
-    this.trip = new TripLog();
     this.trip.tripEnd = new Date();
     this.tripLog = details;
     this.tripLog.tripEnd = new Date();
@@ -212,19 +210,6 @@ export class TripsComponent implements OnInit {
 
     });
   }
-
-
-  // updateTripEnd(details, tripId) {
-  //   this.trip.tripEnd = new Date();
-  //   this.tripLog = details;
-  //   // console.log('bef so', this.tripLog)
-  //   this.tripLog.tripEnd= new Date();
-  //   // this.messsageService.initializeWebSocketConnectionEndTrip();
-  //   this.messsageService.sendDataToConnectionEndTrip("gggggg");
-  //   // this.tripServTice.updateTripLog(tripId, this.trip).subscribe(data => {
-  //   //   this.tripLog = data;
-  //   // });
-  // }
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
@@ -338,9 +323,6 @@ export class TripsComponent implements OnInit {
         }
       }
     }, 1000);
-
-
-
 
   }
 
