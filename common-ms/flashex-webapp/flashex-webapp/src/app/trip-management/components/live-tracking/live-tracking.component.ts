@@ -99,7 +99,7 @@ export class LiveTrackingComponent implements OnInit {
           const marker: any = tomtom.L.marker(this.marks[m], {
             icon: tomtom.L.icon({
               iconUrl: this.markerIcon[i],
-              iconSize: [40, 40],
+              iconSize: [30, 30],
               iconAnchor: [30, 30],
               popupAnchor: [0, -30]
             }),

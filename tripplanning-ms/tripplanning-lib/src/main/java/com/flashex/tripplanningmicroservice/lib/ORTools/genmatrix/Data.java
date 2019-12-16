@@ -22,6 +22,8 @@ public class Data {
 
         private static VehicleList allVehicleList;
 
+        private static int avgVehicleSpeed = 35 * 60; //speed in km/min
+
         private static VehicleList[] algosVehicleList = new VehicleList[3];
 
 //        private long[] demands;
@@ -90,5 +92,13 @@ public class Data {
 
         public static void setAlgoVehicles(VehicleList vehicleList, int index){
                 Data.algosVehicleList[index] = vehicleList;
+        }
+
+        public static int getAvgVehicleSpeed() {
+                return avgVehicleSpeed;
+        }
+
+        public static void setAvgVehicleSpeed(int avgVehicleSpeed) {
+                Data.avgVehicleSpeed = avgVehicleSpeed;
         }
 }

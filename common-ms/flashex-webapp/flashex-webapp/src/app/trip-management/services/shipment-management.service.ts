@@ -24,7 +24,7 @@ export class ShipmentManagementService {
   }
 
    private url = 'shipment-microservice-webservice/api/v1/packets';
-  //  private url = '  http://localhost:3000/packet';
+   //  private url = '  http://localhost:3000/packet';
    private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
 
   private dataSource = [];
@@ -58,7 +58,7 @@ export class ShipmentManagementService {
   updateConfig(config: IShipmentConfig) {
     this.http.put(this.configUrl, config).subscribe(
       response => {
-        console.log(response);
+        // console.log(response);
       },
       error => {
         this.errormsg = error.message;

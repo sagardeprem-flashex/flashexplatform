@@ -20,6 +20,8 @@ public class GenerateMatrix {
     @Autowired
     private ORService orService;
 
+    public static int scaleFactor = 1000;
+
 //    static Data d
     public Data createData() {
         Data d = (new Data());
@@ -213,8 +215,10 @@ public class GenerateMatrix {
 
         return time_mat;
     };
+
+    
     // Returns the displacement between two lat longs in Kilometers
-    public long displacementCalculator(double lat1, double lon1, double lat2, double lon2) {
+    public double displacementCalculator(double lat1, double lon1, double lat2, double lon2) {
 
         if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
@@ -229,7 +233,7 @@ public class GenerateMatrix {
             if (dist < 0) {
                 dist = -dist;
             }
-            return (long) dist;
+            return dist;
         }
     }
 
@@ -264,8 +268,8 @@ public class GenerateMatrix {
 
         for (int i=0; i<lats.length; i++) {
             for (int j=i; j<longs.length; j++) {
-                dispMatrix[i][j] = displacementCalculator(lats[i], longs[i], lats[j], longs[j]);
-                dispMatrix[j][i] = displacementCalculator(lats[i], longs[i], lats[j], longs[j]);
+                dispMatrix[i][j] = (long)(displacementCalculator(lats[i], longs[i], lats[j], longs[j]) * scaleFactor);
+                dispMatrix[j][i] = (long)(displacementCalculator(lats[i], longs[i], lats[j], longs[j]) * scaleFactor);
             }
         }
 
