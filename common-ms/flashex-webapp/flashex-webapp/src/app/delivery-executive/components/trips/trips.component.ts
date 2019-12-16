@@ -72,15 +72,12 @@ export class TripsComponent implements OnInit {
     this.mobileQuery.addListener(this.mobileQueryListener);
   }
 
-  openSnackBar() {
-      this._snackBar.openFromComponent(NavigationComponent, {
+  openSnackBar() {this._snackBar.openFromComponent(NavigationComponent, {
       duration: 3 * 1000
     });
   }
-
-  startSnackBar() {
-      this._snackBar.openFromComponent(OrderDeliveryListComponent,{
-      duration: 3000
+startSnackBar(){this._snackBar.openFromComponent(OrderDeliveryListComponent, {
+    duration:3000
     })
   }
 
