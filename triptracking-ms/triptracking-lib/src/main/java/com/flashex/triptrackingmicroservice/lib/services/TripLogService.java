@@ -39,7 +39,8 @@ public class TripLogService {
     public TripLog updateTripLog(String id, TripLog tripLog) {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
         // triplog1 - from db -
-        if (tripLog1.getPlannedStartTime() == null && tripLog1.getPlannedEndTime()== null){
+        
+        if (tripLog1.getTripStart() == null && tripLog1.getTripEnd()== null){
             orderStatusService.dispatchedOrder(tripLog1.getPacketLogs());
         }
 
