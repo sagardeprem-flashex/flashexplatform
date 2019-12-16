@@ -1,38 +1,64 @@
-<!-- <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
-    [yAxis]="showYAxis" [xAxis]='showXAxis' [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel1" (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
-
-<ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single2" [gradient]="gradient"
-    [yAxis]="showYAxis" [xAxis]='showXAxis' [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel2" (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
-
-<ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient"
-    [yAxis]="showYAxis" [xAxis]='showXAxis' [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel3" (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
-
-<ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single4" [gradient]="gradient"
-    [yAxis]="showYAxis" [xAxis]='showXAxis' [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel4" (select)="onSelect($event)">
-</ngx-charts-bar-vertical> -->
-
 <div class="trips-container">
     <div class="toolbar">
         <mat-toolbar class="toolbar-title">Trip Planner</mat-toolbar>
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
     </div>
 
-    <div style="display:inline-flex">
-        <div style="justify-content: center;">
+
+    <div class="graphsandlegend">
+            <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                <div fxLayout="row">
+                        <div style="background: red; color: red;">.....</div>
+                        <div>VRP with capacity constraint</div>
+                </div>
+                <div fxLayout="row">
+                        <div style="background: blue; color: blue;">.....</div>
+                        <div>VRP with Dropping Visits</div>
+                </div>
+                <div fxLayout="row">
+                        <div style="background: green; color: green;">.....</div>
+                        <div>Time Window Delivery</div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                <div class="graph1">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel1" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+                <div class="graph2">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single2" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel2" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                <div class="graph3">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel3" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+                <div class="graph4">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single4" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel4" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+        </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <div style="margin-right: 5%;">
             <mat-slide-toggle [checked]='Bing' (change)="toggle($event)"><span title="Uses Microsoft Bing for Distance Matrix calculation">Bing</span></mat-slide-toggle>
         </div>
 
-        <div *ngIf="Bing" style="justify-content: center;">
-            <mat-form-field class="dropdown">
+        <div *ngIf="Bing" style="width: 30%;" >
+            <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
-                <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
                     <mat-option *ngFor='let algo of Bingalgorithm' [value]='algo' (click)='changeAlgo(algo)'
                         style="color: black;">
@@ -48,10 +74,10 @@
             </mat-form-field>
         </div>
 
-        <div *ngIf="!Bing">
-            <mat-form-field class="dropdown">
+        <div *ngIf="!Bing" style="width: 30%;" >
+            <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
-                <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
                     <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)'
                         style="color: black;">
@@ -92,21 +118,16 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <div class='trip-details-container'>
                                                 <mat-progress-spinner class="progress-spinner-container" color='primary'
@@ -119,23 +140,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -154,11 +170,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -213,21 +228,15 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <div class='trip-details-container'>
                                                 <mat-progress-spinner class="progress-spinner-container" color='primary'
@@ -240,23 +249,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -275,11 +279,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -334,21 +337,16 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <!-- <div class='trip-details-container'>
                                 <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
@@ -360,23 +358,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -395,11 +388,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -449,9 +441,9 @@
                                 <div class="trip-summary-container">
                                     <p class='mat-title'>Trip Summary</p>
                                     <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
-                                    <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                                    <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                    <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                                    <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
                                     <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
@@ -487,9 +479,9 @@
                         </mat-tab>
                         <mat-tab label='Orders'>
                             <mat-vertical-stepper>
-                                <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                    <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                    <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
+                                <mat-step *ngFor="let packet of trip.packets" label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                    <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                    <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span> {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
                                     <br><br>
                                     <button mat-button matStepperPrevious>Back</button>
                                     <button mat-button matStepperNext>Next</button>
@@ -543,21 +535,16 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <div class='trip-details-container'>
                                                 <mat-progress-spinner class="progress-spinner-container" color='primary'
@@ -570,23 +557,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -605,11 +587,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -664,21 +645,16 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <div class='trip-details-container'>
                                                 <mat-progress-spinner class="progress-spinner-container" color='primary'
@@ -691,23 +667,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -726,11 +697,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -785,21 +755,16 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">TripItineraryId:</span>
+                                                        class="title-part mat-body-2" title="Trip ID"> <mat-icon> title</mat-icon></span>
                                                     {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
                                                 </p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start
-                                                        Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End
-                                                        Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total
-                                                        distance:</span> {{trip.plannedTotalDistance}} km</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm
-                                                        used:</span> {{trip.algorithm}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Start Time"><mat-icon> departure_board</mat-icon></span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned End
+                                                        Date"><mat-icon>done_all</mat-icon></span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
+
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Planned Total distance"><mat-icon>timeline</mat-icon></span> {{trip.plannedTotalDistance}} km</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Algorithm  used"><mat-icon> category</mat-icon></span> {{trip.algorithm}}</p>
                                             </div>
                                             <!-- <div class='trip-details-container'>
                                             <mat-progress-spinner class="progress-spinner-container" color='primary' mode="determinate" value="{{trip.occupiedVolume}}">
@@ -811,23 +776,18 @@
                                             <div class='vehicle-details-container'>
                                                 <p class='mat-title'>Vehicle Details</p>
                                                 <p class='mat-caption'><span
-                                                        class="title-part mat-body-2">VehicleID:</span>
+                                                        class="title-part mat-body-2" title="Vehicle ID"><strong>#</strong></span>
                                                     {{trip.vehicle.vehicleId}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Type:</span> {{trip.vehicle.vehicleType}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Volume:</span> {{trip.vehicle.vehicleVolume}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Vehicle
-                                                        Driver:</span> {{trip.vehicle.vehicleCrew}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Trip
-                                                        Expense:</span> {{trip.tripExpense | currency:'INR'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle Type"><mat-icon> local_shipping</mat-icon></span> {{trip.vehicle.vehicleType}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Volume"><mat-icon>inbox</mat-icon></span> {{trip.vehicle.vehicleVolume}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Vehicle  Driver"><mat-icon>person</mat-icon></span> {{trip.vehicle.vehicleCrew}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2" title="Trip Expense"> <mat-icon> money</mat-icon></span> {{trip.tripExpense | currency:'INR'}}</p>
                                             </div>
                                         </div>
                                         <div class='origin-address-container'>
-                                            <p class='mat-body-1'><span class="title-part mat-body-2">Warehouse
-                                                    Address:</span> {{trip.originAddress.addressLine1}}</p>
+                                            <p class='mat-body-1'><span class="title-part mat-body-2" title="Warehouse Address"><mat-icon> trip_origin</mat-icon></span> {{trip.originAddress.addressLine1}}</p>
                                             <p class='mat-body-1'><span
-                                                    class="title-part mat-body-2">Coordinates:</span>
+                                                    class="title-part mat-body-2" title="Coordinates"><mat-icon> place</mat-icon></span>
                                                 {{trip.originAddress.latitude}}, {{trip.originAddress.longitude}}</p>
                                         </div>
                                         <div *ngIf='trip.algorithm === "VrpwithDroppingVisit"' class='dropped-nodes'>
@@ -846,11 +806,10 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight:
-                                                    {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet
-                                                    Type: {{packet.packetType}}</p>
+                                                label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
+                                                    {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>
@@ -900,9 +859,9 @@
                                             <div class="trip-summary-container">
                                                 <p class='mat-title'>Trip Summary</p>
                                                 <p class='mat-caption'><span class="title-part mat-body-2">TripItineraryId:</span> {{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Date:</span> {{trip.plannedStartTime | date:'fullDate'}},{{trip.plannedStartTime | date:'shortTime'}} </p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Start Time:</span> {{trip.plannedStartTime | date:'h:mm a z'}}</p>
-                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}}</p>
+                                                <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Date:</span> {{trip.plannedEndTime | date:'fullDate'}},{{trip.plannedEndTime | date:'shortTime'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned End Time:</span> {{trip.plannedEndTime | date:'h:mm a z'}}</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Planned Total distance:</span> {{trip.plannedTotalDistance}} km</p>
                                                 <p class='mat-body-1'><span class="title-part mat-body-2">Algorithm used:</span> {{trip.algorithm}}</p>
@@ -938,9 +897,9 @@
                                     </mat-tab>
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
-                                            <mat-step *ngFor="let packet of trip.packets" label="Address: {{packet.deliveryAddress.addressLine1}}" state="edit">
-                                                <p class='mat-subheading-2'>PacketID: {{packet.packetId}}</p><br>
-                                                <p class='mat-body-1'>City: {{packet.deliveryAddress.city}}<br> Weight: {{packet.weight}} kg<br> Priority: {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
+                                            <mat-step *ngFor="let packet of trip.packets" label="Address : {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId | slice:-6 |uppercase}}</p><br>
+                                                <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span> {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
                                                 <br><br>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <button mat-button matStepperNext>Next</button>

@@ -73,7 +73,7 @@ public class ProcessOnConsumption {
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:2 ends here>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 starts here>>>>>>>>>>>>>>>>>>>>>>");
-        List<TripItinerary> timeWindowTrips = orService.TimeWindowConsFunction(shipmentReceived.getPacketList(), 50);
+        List<TripItinerary> timeWindowTrips = orService.TimeWindowConsFunction(shipmentReceived.getPacketList(), 50000);
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Method:3 ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Capacity Constraint with Bing: Starts here>>>>>>>>>>>>>>>>>>>>>>>>>");
@@ -85,7 +85,7 @@ public class ProcessOnConsumption {
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Dropping Visits with Bing: Ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Time Window with Bing: Starts here>>>>>>>>>>>>>>>>>>>>>>>>>");
-        List<TripItinerary> timeWindowTripsWithBing = timeWindowDeliveryWithBing.FinalResult(dataModel, 50);
+        List<TripItinerary> timeWindowTripsWithBing = timeWindowDeliveryWithBing.FinalResult(dataModel, 50000);
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Time Window with Bing: Ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         OptimizationProperties optProperties = OptimizationPropertiesReader.getLatestOptimizationProperties();
