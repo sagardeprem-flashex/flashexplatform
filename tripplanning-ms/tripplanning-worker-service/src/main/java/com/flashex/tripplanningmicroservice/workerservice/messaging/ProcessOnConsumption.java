@@ -85,7 +85,7 @@ public class ProcessOnConsumption {
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Dropping Visits with Bing: Ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Time Window with Bing: Starts here>>>>>>>>>>>>>>>>>>>>>>>>>");
-        List<TripItinerary> timeWindowTripsWithBing = timeWindowDeliveryWithBing.FinalResult(dataModel, 50);
+        List<TripItinerary> timeWindowTripsWithBing = timeWindowDeliveryWithBing.FinalResult(dataModel, 500);
         logger.info("<<<<<<<<<<<<<<<<<<<<<<Time Window with Bing: Ends here>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         OptimizationProperties optProperties = OptimizationPropertiesReader.getLatestOptimizationProperties();
