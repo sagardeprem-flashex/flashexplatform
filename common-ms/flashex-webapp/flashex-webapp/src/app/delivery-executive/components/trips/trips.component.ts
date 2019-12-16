@@ -95,22 +95,22 @@ export class TripsComponent implements OnInit {
     if ( this.dataSource ) {
       this.webSocketService.realtimeSubject.subscribe(d => {
         // let store = JSON.parse(d);
-        if(typeof d == "string"){
-          let st = JSON.parse(d);
-          console.log("tripId: ",typeof d)
-          let temp = lodash.find(this.dataSource, ['tripItineraryId',st.tripId]);
-          console.log("temp: ",temp);
-          if(st.startTime){
+        if ( typeof d === 'string' ) {
+          const st = JSON.parse(d);
+          console.log('tripId:', typeof d);
+          const temp = lodash.find (this.dataSource, ['tripItineraryId', st.tripId]);
+          // console.log("temp: ",temp);
+          if (st.startTime) {
             temp.tripStart = new Date();
             this.start = true;
           }
-          if(st.endTime){
-            console.log("fasfsdfdf-----")
+          if (st.endTime) {
+            // console.log('fasfsdfdf-----');
             temp.tripEnd = new Date();
             this.end = true;
           }
-          console.log("data::: ")
-          let ans = this.dataSource.indexOf(temp);
+          // console.log("data::: ")
+          const ans = this.dataSource.indexOf(temp);
           this.dataSource[ans] = temp;
           this.dataSource = this.dataSource;
         }
@@ -146,11 +146,12 @@ export class TripsComponent implements OnInit {
     this.tripLog = details;
     this.tripLog.tripStart = new Date();
     this.tripId = tripId;
-    let store = {
-      'tripId': tripId,
-      'startTime': true,
-      'endTime': false
-    }
+    const store = {
+      /* tslint:enable:no-string-literal */
+      tripId,
+      startTime: true,
+      endTime: false
+    };
     this.webSocketService.sendDataForStartTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
@@ -167,13 +168,14 @@ export class TripsComponent implements OnInit {
     this.tripLog = details;
     this.tripLog.tripEnd = new Date();
     this.tripId = tripId;
-    console.log("enddate:: ",this.tripLog);
+    // console.log('enddate::',this.tripLog);
 
-    let store = {
-      'tripId': tripId,
-      'startTime': false,
-      'endTime': true
-    }
+    const store = {
+      /* tslint:disable:no-string-literal */
+      tripId,
+      startTime: false,
+      endTime: true
+    };
     this.webSocketService.sendDataForEndTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = details;

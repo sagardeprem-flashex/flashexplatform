@@ -4,7 +4,7 @@ import { TripLog, ITripLog } from '../../interfaces/triplog';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { WebSocketService } from 'src/app/delivery-executive/services/websocket.service';
-import * as lodash from "lodash";
+import * as lodash from 'lodash';
 
 declare let tomtom: any;
 @Component({

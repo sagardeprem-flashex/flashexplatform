@@ -18,28 +18,30 @@ export class WebSocketService {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
    }
-  initializeWebSocketConnection(){
-    let that = this;
+
+   initializeWebSocketConnection() {
+    const that = this;
     this.stompClient.connect({}, function(frame) {
       that.stompClient.subscribe('/start/startdate', (tripLogMessage) => {
         this.that = tripLogMessage.body;
-        console.log("Websocket message received from spring ------ ", tripLogMessage, tripLogMessage.body);
-        if(tripLogMessage.body) {
+        // console.log("Websocket message received from spring ------ ", tripLogMessage, tripLogMessage.body);
+        if ( tripLogMessage.body ) {
           that.realtimeSubject.next(tripLogMessage.body);
         }
       });
-      that.stompClient.subscribe("/end/enddate", (tripLogMessage) => {
-      this.that = tripLogMessage.body;
-        if(tripLogMessage.body) {
+      that.stompClient.subscribe('/end/enddate', (tripLogMessage) => {
+        this.that = tripLogMessage.body;
+        if ( tripLogMessage.body ) {
           that.realtimeSubject.next(tripLogMessage.body);
         }
     });
   });
 }
-   sendDataForStartTrip(tripLog){
+
+   sendDataForStartTrip(tripLog) {
     this.stompClient.send('/app/starttrip', {}, tripLog);
   }
-  sendDataForEndTrip(tripLog){
+  sendDataForEndTrip(tripLog) {
     this.stompClient.send('/app/endtrip', {}, tripLog);
   }
 }
