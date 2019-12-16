@@ -92,7 +92,7 @@ export class TripsComponent implements OnInit {
       this.trips(0);
     });
 
-    if(this.dataSource){
+    if ( this.dataSource ) {
       this.webSocketService.realtimeSubject.subscribe(d => {
         // let store = JSON.parse(d);
         if(typeof d == "string"){

@@ -3,6 +3,9 @@ import { TriplogService } from '../../services/triplog.service';
 import { TripLog, ITripLog } from '../../interfaces/triplog';
 import { Observable } from 'rxjs';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
+import { WebSocketService } from 'src/app/delivery-executive/services/websocket.service';
+import * as lodash from "lodash";
+
 declare let tomtom: any;
 @Component({
   selector: 'app-live-tracking',
@@ -41,7 +44,9 @@ export class LiveTrackingComponent implements OnInit {
   public tripDate = new Date().toDateString();
   public routeColor = ['red', 'blue', 'green', 'black'];
 
-  constructor(private tripService: TriplogService, private token: TokenStorageService) { }
+  constructor(private webSocketService: WebSocketService, private tripService: TriplogService, private token: TokenStorageService) {
+      this.webSocketService.initializeWebSocketConnection();
+    }
   // trip: TripLog = new TripLog();
 
   ngOnInit() {
@@ -129,6 +134,25 @@ export class LiveTrackingComponent implements OnInit {
         }
       }
     }, 1000);
+
+    if ( this.dataSource) {
+      this.webSocketService.realtimeSubject.subscribe(data => {
+        if ( typeof data === 'string') {
+          const st = JSON.parse(data);
+          const temp = lodash.find(this.dataSource, ['tripItineraryId', st.tripId]);
+          if ( st.startTime) {
+            temp.tripStart = new Date();
+          }
+          if ( st.endTime ) {
+            temp.tripEnd = new Date();
+          }
+          const ans = this.dataSource.indexOf(temp);
+          this.dataSource[ans] = temp;
+          this.dataSource = this.dataSource;
+        }
+      });
+    }
+
   }
 
   // provide different color to each trips and corresponding markers
