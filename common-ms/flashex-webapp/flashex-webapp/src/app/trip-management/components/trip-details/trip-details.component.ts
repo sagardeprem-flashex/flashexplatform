@@ -105,10 +105,10 @@ export class TripDetailsComponent implements OnInit {
     });
 
     this.tripsummary.behaviourSubject.subscribe(data => {
-      console.log("Fetching summary ------->", data);
+      // console.log("Fetching summary ------->", data);
 
       data.forEach((d) => {
-        console.log("In loop ---->", d)
+        // console.log("In loop ---->", d);
         d.distanceSummary.forEach(summary => {
           this.distanceCover.push(summary);
         });
@@ -130,6 +130,7 @@ export class TripDetailsComponent implements OnInit {
         });
 
 
+        // distance
         this.single1 = [
           {
             name: this.algorithm[0],
@@ -158,6 +159,7 @@ export class TripDetailsComponent implements OnInit {
             value: this.distanceCover[5]
           }
         ];
+        // time
         this.single2 = [
           {
             name: this.algorithm[0],
@@ -186,6 +188,7 @@ export class TripDetailsComponent implements OnInit {
         ];
         console.log('Showing graph results -----> ', this.single2);
 
+        // total expense
         this.single3 = [
           {
             name: this.algorithm[0],

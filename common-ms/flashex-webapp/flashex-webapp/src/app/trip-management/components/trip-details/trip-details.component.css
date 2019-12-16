@@ -75,30 +75,46 @@ mat-card {
 
 .graph1 {
     width: 50%;
-    height: 35vh;
+    height: 45vh;
     text-align: center;
-    background: red;
+    background: rgb(215, 247, 229);
+    padding-bottom: 20px;
 }
 .graph2 {
     width: 50%;
-    height: 35vh;
+    height: 45vh;
     text-align: center;
-    background: cadetblue;
+    background: rgb(215, 247, 229);
+    padding-bottom: 20px;
+    
 }
 .graph3 {
     width: 50%;
-    height: 35vh;
+    height: 45vh;
     text-align: center;
-    background: yellow;
+    background: rgb(215, 247, 229);
+    padding-bottom: 20px;
 }
 .graph4 {
     width: 50%;
-    height: 35vh;
+    height: 45vh;
     text-align: center;
-    background: blue;
+    background: rgb(215, 247, 229);
+    padding-bottom: 20px;
 }
 .legend{
     height: 7vh;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-size: 24px;
+    letter-spacing: 3px;
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    /* font-weight: bold; */
 }
 
 

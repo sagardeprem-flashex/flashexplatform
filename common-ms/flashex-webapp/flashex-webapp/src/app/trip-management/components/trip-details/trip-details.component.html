@@ -4,51 +4,70 @@
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
     </div>
 
+    <mat-card>
+        <h3>Comparison of various trip planning algorithms</h3>
 
     <div class="graphsandlegend">
-            <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
-                <div fxLayout="row">
-                        <div style="background: red; color: red;">.....</div>
-                        <div>VRP with capacity constraint</div>
-                </div>
-                <div fxLayout="row">
-                        <div style="background: blue; color: blue;">.....</div>
-                        <div>VRP with Dropping Visits</div>
-                </div>
-                <div fxLayout="row">
-                        <div style="background: green; color: green;">.....</div>
-                        <div>Time Window Delivery</div>
-                </div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column" >
                 <div class="graph1">
                     <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
                         [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel1" (select)="onSelect($event)">
                     </ngx-charts-bar-vertical>
+                    Algorithm
                 </div>
                 <div class="graph2">
                     <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single2" [gradient]="gradient"
                         [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel2" (select)="onSelect($event)">
                     </ngx-charts-bar-vertical>
+                    Algorithm
                 </div>
-            </div>
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
                 <div class="graph3">
                     <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient"
                         [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel3" (select)="onSelect($event)">
                     </ngx-charts-bar-vertical>
+                    Algorithm
                 </div>
                 <div class="graph4">
                     <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single4" [gradient]="gradient"
                         [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
                         [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel4" (select)="onSelect($event)">
                     </ngx-charts-bar-vertical>
+                    Algorithm
                 </div>
             </div>
+            <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                    <div fxLayout="row">
+                            <div style="background: rgb(90, 164, 84); color: rgb(90, 164, 84);">.....</div>
+                            <div>VRP with Time Window Delivery</div>
+                    </div>
+                    <div fxLayout="row">
+                            <div style="background: rgb(199, 180, 44); color: rgb(199, 180, 44);">.....</div>
+                            <div>VRP with Capacity Constraint</div>
+                    </div>
+                    <div fxLayout="row">
+                            <div style="background: rgb(0, 150, 136); color: rgb(0, 150, 136);">.....</div>
+                            <div>VRP with Dropping Visits</div>
+                    </div>
+                </div>
+                <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                        <div fxLayout="row">
+                                <div style="background: rgb(161, 10, 40); color: rgb(161, 10, 40);">.....</div>
+                                <div>VRP with Time Window Delivery using Bing</div>
+                        </div>
+                        <div fxLayout="row">
+                                <div style="background: rgb(170, 170, 170); color: rgb(170, 170, 170);">.....</div>
+                                <div>VRP with Capacity Constraint using Bing</div>
+                        </div>
+                        <div fxLayout="row">
+                                <div style="background: rgb(105, 240, 174); color: rgb(105, 240, 174);">.....</div>
+                                <div>VRP with Dropping Visits using Bing</div>
+                        </div>
+                    </div>
         </div>
+    </mat-card>    
 
     <div fxLayout="row" fxLayoutAlign="end center">
         <div style="margin-right: 5%;">
