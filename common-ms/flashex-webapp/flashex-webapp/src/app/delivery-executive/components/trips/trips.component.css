@@ -134,7 +134,7 @@ img {
 
 #map {
     height: 64vh;
-    width: 98%;
+    width: auto;
 }
 
 
