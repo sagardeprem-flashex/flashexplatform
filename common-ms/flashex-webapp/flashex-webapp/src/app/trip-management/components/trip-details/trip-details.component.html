@@ -4,15 +4,67 @@
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
     </div>
 
+    <div fxLayout="row" fxLayoutAlign="space-evenly">
+
     <div fxLayout="row" fxLayoutAlign="center">
-        <mat-card >
-            <mat-card-title>Distance Providers</mat-card-title>
-            <mat-radio-group aria-label="Select an option" >
-                <mat-radio-button (click)='Option1()' value="1" style="padding-right: 6px;">Bing</mat-radio-button>
-                <mat-radio-button (click)='openSnackBar()' value="2" style="padding-right: 6px;">Google</mat-radio-button>
-                <mat-radio-button (click)='Option3()' value="3" style="padding-right: 6px;">Default</mat-radio-button>
-            </mat-radio-group>
-        </mat-card>
+            <mat-card >
+                <mat-card-title style="text-align: center;">Distance Providers</mat-card-title>
+                <mat-radio-group aria-label="Select an option" >
+                    <mat-radio-button (click)='Option1()' value="1" style="padding-right: 6px;">Bing</mat-radio-button>
+                    <mat-radio-button (click)='openSnackBar()' value="2" style="padding-right: 6px;">Google</mat-radio-button>
+                    <mat-radio-button (click)='Option3()' value="3" style="padding-right: 6px;">Default</mat-radio-button>
+                </mat-radio-group>
+            </mat-card>
+        </div>
+    
+        <div *ngIf="Bing" fxLayout="row" fxLayoutAlign="space-evenly">
+                <mat-card >
+                        <mat-card-title style="text-align: center;">Select Strategy</mat-card-title>
+                        <mat-radio-group aria-label="Select an option" >
+                            <mat-radio-button value="{{Bingalgorithm[0]}}" style="padding-right: 6px;" (click)='changeAlgo(Bingalgorithm[0])'>Vehicle Capacity Constraint</mat-radio-button>
+                            <mat-radio-button  value="{{Bingalgorithm[1]}}" style="padding-right: 6px;"(click)='changeAlgo(Bingalgorithm[1])'>Priortity delivery</mat-radio-button>
+                            <mat-radio-button value="{{Bingalgorithm[2]}}" style="padding-right: 6px;" (click)='changeAlgo(Bingalgorithm[2])'>Time window</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card>
+            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
+    
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
+    
+                    <mat-option *ngFor='let algo of Bingalgorithm' [value]='algo' (click)='changeAlgo(algo)'
+                        style="color: black;">
+                        {{algo}}
+                    </mat-option>
+    
+                 
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+    
+        <div *ngIf="!Bing" fxLayout="row" fxLayoutAlign="end center" >
+                <mat-card >
+                        <mat-card-title style="text-align: center;">Select Strategy</mat-card-title>
+                        <mat-radio-group aria-label="Select an option" >
+                            <mat-radio-button value="{{algorithms[0]}}" style="padding-right: 6px;" (click)="changeAlgo(algorithms[0])">Vehicle Capacity Constraint</mat-radio-button>
+                            <mat-radio-button  value="{{algorithms[1]}}" style="padding-right: 6px;" (click)='changeAlgo(algorithms[1])'>Priortity delivery</mat-radio-button>
+                            <mat-radio-button value="{{algorithms[2]}}" style="padding-right: 6px;" (click)='changeAlgo(algorithms[2])'>Time window</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card>
+            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
+    
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
+    
+                    <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)'
+                        style="color: black;">
+                        {{algo}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+        <div>
+            <button mat-raised-button fxLayout="row" fxLayoutAlign="center" color="accent"
+            style="height: inherit; margin-top: 3.5vh;" (click)='sendSelectedProperties()'>Save</button>
+        </div>
+    </div>
     </div>
 
     <mat-card>
@@ -78,50 +130,7 @@
             <!-- <mat-slide-toggle [checked]='Bing' (change)="toggle($event)"><span title="Uses Microsoft Bing for Distance Matrix calculation">Bing</span></mat-slide-toggle> -->
         </div>
        
-        <div *ngIf="Bing" style="width: 30%;" >
-                <mat-card >
-                        <mat-card-title>Select Strategy</mat-card-title>
-                        <mat-radio-group aria-label="Select an option" >
-                            <mat-radio-button value="1" style="padding-right: 6px;">Vehicle Capacity Constraint</mat-radio-button>
-                            <mat-radio-button  value="2" style="padding-right: 6px;">+ Priortity delivery</mat-radio-button>
-                            <mat-radio-button value="3" style="padding-right: 6px;">+ Time window</mat-radio-button>
-                        </mat-radio-group>
-                    </mat-card>
-            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
-
-                <mat-select placeholder='Select algorithm for trip tracking to consider'>
-
-                    <mat-option *ngFor='let algo of Bingalgorithm' [value]='algo' (click)='changeAlgo(algo)'
-                        style="color: black;">
-                        {{algo}}
-                    </mat-option>
-
-                 
-                </mat-select>
-            </mat-form-field> -->
-        </div>
-
-        <div *ngIf="!Bing" style="width: 30%;" >
-                <mat-card >
-                        <mat-card-title>Select Strategy</mat-card-title>
-                        <mat-radio-group aria-label="Select an option" >
-                            <mat-radio-button value="1" style="padding-right: 6px;">Vehicle Capacity Constraint</mat-radio-button>
-                            <mat-radio-button  value="2" style="padding-right: 6px;">+ Priortity delivery</mat-radio-button>
-                            <mat-radio-button value="3" style="padding-right: 6px;">+ Time window</mat-radio-button>
-                        </mat-radio-group>
-                    </mat-card>
-            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
-
-                <mat-select placeholder='Select algorithm for trip tracking to consider'>
-
-                    <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)'
-                        style="color: black;">
-                        {{algo}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field> -->
-        </div>
-    </div>
+        
 
     <div *ngIf="Bing">
         <mat-tab-group>

@@ -27,7 +27,11 @@ export class TripDetailsComponent implements OnInit {
   public orders;
   public userName;
   public tripsDate = new Date().toDateString();
-  public properties: ITripProperties;
+  public properties = {
+    propertiesId: '1',
+    algorithmSelected: 'Vrp with Capacity Constraint using Bing',
+    lastUpdated: new Date()
+  };
   public algorithms = ['Vrp with Capacity Constraint', 'Vrp with Dropping Visit', 'Vrp with Time Window Delivery'];
   public Bingalgorithm = ['Vrp with Capacity Constraint using Bing',
     'Vrp with Dropping Visit using Bing',
@@ -304,12 +308,22 @@ export class TripDetailsComponent implements OnInit {
   }
 
   changeAlgo(algo: string) {
-    this.selectedAlgo = algo;
-    this.tripService.selectedAlgo = this.selectedAlgo;
-    this.tripService.planningProperties.algorithmSelected = algo;
-    this.tripService.planningProperties.lastUpdated = new Date();
-    this.tripService.updateOptimizationProperties(this.tripService.selectedAlgo);
-    // console.log(this.selectedAlgo);
+    console.log("------------: ",algo);
+    let selectedAlgo = {
+      propertiesId: '1',
+      algorithmSelected: algo,
+      lastUpdated: new Date()
+    }
+    // this.properties.algorithmSelected = algo;
+    this.properties = Object.assign({},selectedAlgo);
+
+    // console.log("-----------sdfsdaf: ",this.tripService.planningProperties.algorithmSelected);
+  }
+
+  sendSelectedProperties() {
+    this.properties.lastUpdated = new Date();
+    this.tripService.updateOptimizationProperties(this.properties);
+    console.log("------------------>", this.properties);
   }
 
   // openPropertiesDialog(): void {
