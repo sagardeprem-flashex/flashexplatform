@@ -23,16 +23,16 @@ export class TripSummaryService {
     })
   };
 
-  // private tripSummaryUrl = 'tripplanning-microservice-webservice/api/v1/generate-summary';
-  private tripSummaryUrl = 'http://localhost:6900/summary'
+  private tripSummaryUrl = 'tripplanning-microservice-webservice/api/v1/generate-summary';
+  // private tripSummaryUrl = 'http://localhost:6900/summary'
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<Itripsummary[]>(this.dataSource);
 
   // get trip itinerary details
 
   loadSummary() {
-    this.http.get<Itripsummary[]>(this.tripSummaryUrl).subscribe(data => {
-    // this.http.get<Itripsummary[]>(this.tripSummaryUrl + '?date=' + this.date).subscribe(data => {
+    // this.http.get<Itripsummary[]>(this.tripSummaryUrl).subscribe(data => {
+    this.http.get<Itripsummary[]>(this.tripSummaryUrl + '?date=' + this.date).subscribe(data => {
       // console.log(data);
       this.dataSource = data;
       this.behaviourSubject.next(this.dataSource);
