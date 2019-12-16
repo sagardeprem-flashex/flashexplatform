@@ -28,13 +28,12 @@ export class TripDetailsComponent implements OnInit {
   public userName;
   public tripsDate = new Date().toDateString();
   public properties: ITripProperties;
-  public algorithms = ['VRP with Capacity Constraint', 'VRP with Dropping Visit', 'Time Window Delivery'];
-  public Bingalgorithm = ['VRP with Capacity Constraint using Bing',
-    'VRP with Dropping Visit using Bing',
-    'Time Window Delivery using Bing'
+  public algorithms = ['Vrp with Capacity Constraint', 'Vrp with Dropping Visit', 'Vrp with Time Window Delivery'];
+  public Bingalgorithm = ['Vrp with Capacity Constraint using Bing',
+    'Vrp with Dropping Visit using Bing',
+    'Vrp with Time Window Delivery using Bing'
   ];
   Bing = true;
-  public tripDate = new Date().toDateString; // trip ititnerary pipe
 
   single1: any[];
   single2: any[];
