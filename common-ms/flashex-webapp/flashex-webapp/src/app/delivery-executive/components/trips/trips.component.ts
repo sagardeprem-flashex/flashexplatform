@@ -8,6 +8,8 @@ import { TriplogService } from '../../../trip-management/services/triplog.servic
 import { ITripLog, TripLog } from '../../../trip-management/interfaces/triplog';
 import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { WebSocketService } from '../../services/websocket.service';
+import * as lodash from 'lodash';
 
 declare let L;
 declare let tomtom: any;
@@ -35,15 +37,20 @@ export class TripsComponent implements OnInit {
   public userName;
   public scheduledDate = new Date();
   public intialData;
+  public tripId;
+  public start = false;
+  public end = false;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+              private webSocketService: WebSocketService,
               private tripService: TriplogService, private tokenStorage: TokenStorageService,
               private router: Router) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+                this.mobileQuery = media.matchMedia('(max-width: 600px)');
+                this.mobileQueryListener = () => changeDetectorRef.detectChanges();
     // tslint:disable-next-line: deprecation
-    this.mobileQuery.addListener(this.mobileQueryListener);
-  }
+                this.mobileQuery.addListener(this.mobileQueryListener);
+                this.webSocketService.initializeWebSocketConnection();
+              }
 
   private mobileQueryListener: () => void;
   ngOnInit() {
@@ -68,7 +75,8 @@ export class TripsComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
-    this.userName = this.tokenStorage.getUsername();
+    // this.userName = this.tokenStorage.getUsername();
+    this.userName = 'anurag123';
     this.tripService.behaviourSubject.subscribe(data => {
       if (data && data.length > 0) {
         if (this.userName === 'anurag123') {
@@ -83,7 +91,35 @@ export class TripsComponent implements OnInit {
       }
       this.trips(0);
     });
+
+    if(this.dataSource){
+      this.webSocketService.realtimeSubject.subscribe(d => {
+        // let store = JSON.parse(d);
+        if(typeof d == "string"){
+          let st = JSON.parse(d);
+          console.log("tripId: ",typeof d)
+          let temp = lodash.find(this.dataSource, ['tripItineraryId',st.tripId]);
+          console.log("temp: ",temp);
+          if(st.startTime){
+            temp.tripStart = new Date();
+            this.start = true;
+          }
+          if(st.endTime){
+            console.log("fasfsdfdf-----")
+            temp.tripEnd = new Date();
+            this.end = true;
+          }
+          console.log("data::: ")
+          let ans = this.dataSource.indexOf(temp);
+          this.dataSource[ans] = temp;
+          this.dataSource = this.dataSource;
+        }
+
+      });
+    }
+
   }
+
   trips(value) {
     // console.log('vali', value);
     this.details = this.dataSource[value];
@@ -94,7 +130,6 @@ export class TripsComponent implements OnInit {
       // console.log('lis', this.listofOrders);
     }
     // toggle();
-
   }
   getTripLogById(id: string) {
     this.tripService.getTripLog(id).subscribe(
@@ -105,20 +140,59 @@ export class TripsComponent implements OnInit {
     );
   }
   // update trip start time for particular trip with its id being fetched from UI
-  updateTripStart(tripId) {
+  updateTripStart(details, tripId) {
     this.trip = new TripLog();
     this.trip.tripStart = new Date();
+    this.tripLog = details;
+    this.tripLog.tripStart = new Date();
+    this.tripId = tripId;
+    let store = {
+      'tripId': tripId,
+      'startTime': true,
+      'endTime': false
+    }
+    this.webSocketService.sendDataForStartTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
     });
+
+
   }
+
+
   // update trip end time for particular trip with its id being fetched from UI
-  updateTripEnd(tripId) {
+  updateTripEnd(details, tripId) {
+    this.trip = new TripLog();
     this.trip.tripEnd = new Date();
+    this.tripLog = details;
+    this.tripLog.tripEnd = new Date();
+    this.tripId = tripId;
+    console.log("enddate:: ",this.tripLog);
+
+    let store = {
+      'tripId': tripId,
+      'startTime': false,
+      'endTime': true
+    }
+    this.webSocketService.sendDataForEndTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
+      this.tripLog = details;
+
     });
   }
+
+
+  // updateTripEnd(details, tripId) {
+  //   this.trip.tripEnd = new Date();
+  //   this.tripLog = details;
+  //   // console.log('bef so', this.tripLog)
+  //   this.tripLog.tripEnd= new Date();
+  //   // this.messsageService.initializeWebSocketConnectionEndTrip();
+  //   this.messsageService.sendDataToConnectionEndTrip("gggggg");
+  //   // this.tripServTice.updateTripLog(tripId, this.trip).subscribe(data => {
+  //   //   this.tripLog = data;
+  //   // });
+  // }
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
@@ -128,6 +202,21 @@ export class TripsComponent implements OnInit {
     } else {
       /* tslint:disable:no-string-literal */
       this.trip['packetLogs'] = [{ packetStatus: 'Delivered' }];
+    }
+    this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
+      data => {
+        this.tripLog = data;
+      }
+    );
+  }
+  // update packet status of particular packet id inside a particular trip itinerary
+   updatePacketUndelivered(tripId, tripPacketId) {
+    console.log('tr', tripId, ' pacl', tripPacketId);
+    if (this.trip && this.trip.packetLogs && this.trip.packetLogs.packetStatus) {
+      this.trip.packetLogs = [{ packetStatus: 'Undelivered' }];
+    } else {
+      /* tslint:disable:no-string-literal */
+      this.trip['packetLogs'] = [{ packetStatus: 'Undelivered' }];
     }
     this.tripService.updatePacketLog(tripId, this.trip, tripPacketId).subscribe(
       data => {

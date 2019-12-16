@@ -47,6 +47,7 @@ export class LiveTrackingComponent implements OnInit {
   ngOnInit() {
     this.tripService.behaviourSubject.subscribe(data => {
       this.dataSource = data;
+
       this.getRandomColor();
     });
 
