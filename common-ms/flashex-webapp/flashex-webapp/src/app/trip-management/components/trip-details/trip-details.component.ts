@@ -34,7 +34,6 @@ export class TripDetailsComponent implements OnInit {
     'Time Window Delivery using Bing'
   ];
   Bing = true;
-  public tripDate = new Date().toDateString; // trip ititnerary pipe
 
   single1: any[];
   single2: any[];

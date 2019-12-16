@@ -107,7 +107,7 @@
                     <mat-expansion-panel *ngFor="let trip of vrpWithCCTripsUsingBing; let i = index">
                         <mat-expansion-panel-header>
                             <mat-panel-title>{{tripsDate | slice:0:3 | uppercase}}{{trip.tripItineraryId | slice:-6}}
-                                {{tripDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice: -6}}
+                                {{tripsDate | slice: 0:3 | uppercase}}{{trip.tripItineraryId | slice: -6}}
                             </mat-panel-title>
                             <!-- added pipe to show trip ititnerary -->
                             <mat-panel-description>{{trip.planGeneratedTime | date:'short'}} </mat-panel-description>
