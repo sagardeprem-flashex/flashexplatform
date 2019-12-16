@@ -11,6 +11,8 @@ import { Inject } from '@angular/core';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { OrderDeliveryListComponent } from '../order-delivery-list/order-delivery-list.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { WebSocketService } from '../../services/websocket.service';
+import * as lodash from 'lodash';
 
 declare let L;
 declare let tomtom: any;
@@ -38,7 +40,10 @@ export class TripsComponent implements OnInit {
   public userName;
   public scheduledDate = new Date();
   public intialData;
-  public tripDate = new Date().toDateString();
+  public tripId;
+  public start = false;
+  public end = false;
+  // public tripDate = new Date().toDateString();
   public warehouse;
   public centerMap;
   public marks = [];
@@ -65,12 +70,14 @@ export class TripsComponent implements OnInit {
 
 
   constructor(changeDetectorRef: ChangeDetectorRef,
+              private webSocketService: WebSocketService,
               media: MediaMatcher, private tripService: TriplogService,
               private tokenStorage: TokenStorageService, private router: Router, private snackBar: MatSnackBar) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
-    // tslint:disable-next-line: deprecation
-    this.mobileQuery.addListener(this.mobileQueryListener);
+              this.mobileQuery = media.matchMedia('(max-width: 600px)');
+              this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+              // tslint:disable-next-line: deprecation
+              this.mobileQuery.addListener(this.mobileQueryListener);
+              this.webSocketService.initializeWebSocketConnection();
   }
 
   openSnackBar() {
@@ -80,7 +87,7 @@ export class TripsComponent implements OnInit {
   }
 
   startSnackBar() {
-    this.snackBar.openFromComponent( OrderDeliveryListComponent, {
+    this.snackBar.openFromComponent(OrderDeliveryListComponent, {
       duration: 3000
     });
   }
@@ -98,7 +105,8 @@ export class TripsComponent implements OnInit {
     // tslint:disable-next-line: deprecation
     this.mobileQuery.removeListener(this.mobileQueryListener);
 
-    this.userName = this.tokenStorage.getUsername();
+    // this.userName = this.tokenStorage.getUsername();
+    this.userName = 'anurag123';
     this.tripService.behaviourSubject.subscribe(data => {
       if (data && data.length > 0) {
         if (this.userName === 'anurag123') {
@@ -113,7 +121,35 @@ export class TripsComponent implements OnInit {
       }
       this.trips(0);
     });
+
+    if (this.dataSource) {
+      this.webSocketService.realtimeSubject.subscribe(d => {
+        // let store = JSON.parse(d);
+        if (typeof d === 'string') {
+          const st = JSON.parse(d);
+          console.log('tripId:', typeof d);
+          const temp = lodash.find(this.dataSource, ['tripItineraryId', st.tripId]);
+          // console.log("temp: ",temp);
+          if (st.startTime) {
+            temp.tripStart = new Date();
+            this.start = true;
+          }
+          if (st.endTime) {
+            // console.log('fasfsdfdf-----');
+            temp.tripEnd = new Date();
+            this.end = true;
+          }
+          // console.log("data::: ")
+          const ans = this.dataSource.indexOf(temp);
+          this.dataSource[ans] = temp;
+          this.dataSource = this.dataSource;
+        }
+
+      });
+    }
+
   }
+
   trips(value) {
     // console.log('vali', value);
     this.details = this.dataSource[value];
@@ -124,7 +160,6 @@ export class TripsComponent implements OnInit {
       // console.log('lis', this.listofOrders);
     }
     // toggle();
-
   }
   getTripLogById(id: string) {
     this.tripService.getTripLog(id).subscribe(
@@ -135,20 +170,61 @@ export class TripsComponent implements OnInit {
     );
   }
   // update trip start time for particular trip with its id being fetched from UI
-  updateTripStart(tripId) {
+  updateTripStart(details, tripId) {
     this.trip = new TripLog();
     this.trip.tripStart = new Date();
+    this.tripLog = details;
+    this.tripLog.tripStart = new Date();
+    this.tripId = tripId;
+    const store = {
+      /* tslint:enable:no-string-literal */
+      tripId,
+      startTime: true,
+      endTime: false
+    };
+    this.webSocketService.sendDataForStartTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
       this.tripLog = data;
     });
+
+
   }
+
+
   // update trip end time for particular trip with its id being fetched from UI
-  updateTripEnd(tripId) {
+  updateTripEnd(details, tripId) {
+    this.trip = new TripLog();
     this.trip.tripEnd = new Date();
+    this.tripLog = details;
+    this.tripLog.tripEnd = new Date();
+    this.tripId = tripId;
+    // console.log('enddate::',this.tripLog);
+
+    const store = {
+      /* tslint:disable:no-string-literal */
+      tripId,
+      startTime: false,
+      endTime: true
+    };
+    this.webSocketService.sendDataForEndTrip(JSON.stringify(store));
     this.tripService.updateTripLog(tripId, this.trip).subscribe(data => {
-      this.tripLog = data;
+      this.tripLog = details;
+
     });
   }
+
+
+  // updateTripEnd(details, tripId) {
+  //   this.trip.tripEnd = new Date();
+  //   this.tripLog = details;
+  //   // console.log('bef so', this.tripLog)
+  //   this.tripLog.tripEnd= new Date();
+  //   // this.messsageService.initializeWebSocketConnectionEndTrip();
+  //   this.messsageService.sendDataToConnectionEndTrip("gggggg");
+  //   // this.tripServTice.updateTripLog(tripId, this.trip).subscribe(data => {
+  //   //   this.tripLog = data;
+  //   // });
+  // }
 
   // update packet status of particular packet id inside a particular trip itinerary
   updatePacketLog(tripId, tripPacketId) {
@@ -269,7 +345,6 @@ export class TripsComponent implements OnInit {
   }
 
 }
-
 
 
 

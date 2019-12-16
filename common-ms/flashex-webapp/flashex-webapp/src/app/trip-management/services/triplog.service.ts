@@ -13,8 +13,8 @@ export class TriplogService {
     this.load();
   }
 
-  private url = 'triptracking-microservice-webservice/api/v1/triplogs';
-  // private url = '../../../assets/tripsListFormat1.json';
+  // private url = 'triptracking-microservice-webservice/api/v1/triplogs';
+  private url = '../../../assets/tripsListFormat1.json';
 
   private dataSource = [];
   public behaviourSubject = new BehaviorSubject<ITripLog[]>(this.dataSource);
