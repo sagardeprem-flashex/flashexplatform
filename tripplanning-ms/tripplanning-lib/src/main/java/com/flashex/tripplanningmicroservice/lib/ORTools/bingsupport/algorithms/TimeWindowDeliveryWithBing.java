@@ -147,7 +147,7 @@ public class TimeWindowDeliveryWithBing {
 
 
             totalTime += solution.min(timeVar);
-            tripItinerary.setPlannedTotalDistance(avgVechiclespeed*totalTime); // set route distance
+            tripItinerary.setPlannedTotalDistance((avgVechiclespeed*totalTime)/60); // set route distance
 
 
 //                logger.info("Array of lat & long" + latlongarr);

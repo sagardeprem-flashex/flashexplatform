@@ -24,6 +24,52 @@
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
     </div>
 
+
+    <div class="graphsandlegend">
+            <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center">
+                <div fxLayout="row">
+                        <div style="background: red; color: red;">.....</div>
+                        <div>VRP with capacity constraint</div>
+                </div>
+                <div fxLayout="row">
+                        <div style="background: blue; color: blue;">.....</div>
+                        <div>VRP with Dropping Visits</div>
+                </div>
+                <div fxLayout="row">
+                        <div style="background: green; color: green;">.....</div>
+                        <div>Time Window Delivery</div>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                <div class="graph1">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel1" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+                <div class="graph2">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single2" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel2" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+                <div class="graph3">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel3" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+                <div class="graph4">
+                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single4" [gradient]="gradient"
+                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
+                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel4" (select)="onSelect($event)">
+                    </ngx-charts-bar-vertical>
+                </div>
+            </div>
+        </div>
+
     <div fxLayout="row" fxLayoutAlign="end center">
         <div style="margin-right: 5%;">
             <mat-slide-toggle [checked]='Bing' (change)="toggle($event)"><span title="Uses Microsoft Bing for Distance Matrix calculation">Bing</span></mat-slide-toggle>
@@ -32,7 +78,7 @@
         <div *ngIf="Bing" style="width: 30%;" >
             <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
-                <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
                     <mat-option *ngFor='let algo of Bingalgorithm' [value]='algo' (click)='changeAlgo(algo)'
                         style="color: black;">
@@ -51,7 +97,7 @@
         <div *ngIf="!Bing" style="width: 30%;" >
             <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
-                <mat-select disableOptionCentering placeholder='Select algorithm for trip tracking to consider'>
+                <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
                     <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)'
                         style="color: black;">
@@ -144,7 +190,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -253,7 +299,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -362,7 +408,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -453,7 +499,7 @@
                         </mat-tab>
                         <mat-tab label='Orders'>
                             <mat-vertical-stepper>
-                                <mat-step *ngFor="let packet of trip.packets" label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                <mat-step *ngFor="let packet of trip.packets" label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                     <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                     <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span> {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
                                     <br><br>
@@ -561,7 +607,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -671,7 +717,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -780,7 +826,7 @@
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
                                             <mat-step *ngFor="let packet of trip.packets"
-                                                label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                                label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span>
                                                     {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> <span title="Order  Type"><mat-icon>category</mat-icon></span> {{packet.packetType}}</p>
@@ -871,7 +917,7 @@
                                     </mat-tab>
                                     <mat-tab label='Orders'>
                                         <mat-vertical-stepper>
-                                            <mat-step *ngFor="let packet of trip.packets" label="address :  {{packet.deliveryaddress.addressline1}}"  {{packet.deliveryAddress.addressLine1}}" state="edit">
+                                            <mat-step *ngFor="let packet of trip.packets" label="Address : {{packet.deliveryaddress.addressline1}}" state="edit">
                                                 <p class='mat-subheading-2'><span title="Packet ID"><strong>#</strong></span> {{packet.packetId}}</p><br>
                                                 <p class='mat-body-1'><span title="city"><mat-icon>location_city</mat-icon></span> {{packet.deliveryAddress.city}}<br> <span title="Weight"><mat-icon>fitness_center</mat-icon></span> {{packet.weight}} kg<br> <span title="Priority"><mat-icon>star</mat-icon></span> {{packet.priority}}<br> Packet Type: {{packet.packetType}}</p>
                                                 <br><br>
