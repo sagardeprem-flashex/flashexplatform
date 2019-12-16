@@ -51,7 +51,7 @@ export class OrderDetailsComponent implements OnInit {
   public dateList = [];
   activeDate = Date.now();
   rowState = false;
-  activeLink = this.dateList[0];
+  activeLink = this.dateList[this.dateList.indexOf(moment(this.activeDate).format('MM/DD/YYYY a'))];
   datepicked = '';
 
   // tslint:disable-next-line: max-line-length
@@ -63,13 +63,14 @@ export class OrderDetailsComponent implements OnInit {
     this.packetService.behaviourSubject.subscribe(data => {
       let temp: IPacket;
       let dateValue;
+
       data.forEach(d => {
         temp = d;
         // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment(d.receivedDate).format('MM/DD/YYYY hh:mm:ss a');
+        temp.receivedDate = moment(d.statusList[0].timeStamp).format('MM/DD/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
 
-        dateValue = moment(d.receivedDate).format('MM/DD/YYYY');
+        dateValue = moment(temp.receivedDate).format('MM/DD/YYYY');
         this.dateList.push(dateValue);
         // console.log(temp.currentStatus);
 
@@ -99,14 +100,15 @@ export class OrderDetailsComponent implements OnInit {
       // console.log(this.packetList);
     //  console.log('date chya values ' + this.dateList);
       this.dateList = [... new Set(this.dateList)];
-      // console.log('date chya values ' + this.dateList);
+     // console.log('date chya values ' + this.dateList);
+
 
 
     });
   }
   applyDateFilter(filterValue: string) {
 
-  //  console.log(filterValue);
+   // console.log(filterValue);
     this.dataSource.filter = this.datepipe.transform(filterValue, 'MM/dd/yyyy');
 
 //    console.log(this.datepipe.transform(filterValue, 'MM/dd/yyyy'));
@@ -199,6 +201,7 @@ export class OrderDetailsComponent implements OnInit {
     });
     // console.log(statusList);
   }
+
 
 }
 

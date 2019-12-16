@@ -13,28 +13,68 @@
       </button>
     </div>
   </mat-toolbar>
+
+
   <!-- <mat-form-field style="width: 50| slice:-6 |uppercase%; font:bolder; padding-top: 2em; padding-left: 2em; margin-top: 10vh">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search"
       >
   </mat-form-field> -->
-<!--
-  <mat-tab-group>
-      <mat-tab *ngFor="let link of dateList" label={{link}}></mat-tab>
-  </mat-tab-group> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <mat-form-field style="width: 35%;padding-left: 1em">
+    <mat-form-field style="width: 50%;padding-left: 1em">
       <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Search" style="color: black">
     </mat-form-field>
-    <mat-form-field  style="width: 22%;padding-left: 1em">
+
+    <!-- <mat-form-field  style="width: 20%;padding-left: 1em">
         <input  [(ngModel)]="datepicked" matInput [matDatepicker]="dp3" (dateChange)="applyDateFilter($event.value)" placeholder="Choose a Date (MM/DD/YYYY)"  disabled>
         <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
         <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-      </mat-form-field>
-      <button mat-button (click)="resetForm()"  matTooltip="Reset Date">
+      </mat-form-field> -->
+
+      <button mat-button (click)="tabGroup.selectedIndex = 0; resetForm()"  matTooltip="Reset Date">
           <mat-icon >refresh</mat-icon>
       </button>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50, 100]" showFirstLastButtons style="width: 60%;padding-left: 1em">
     </mat-paginator>
+  </div>
+  <div>
+      <mat-tab-group #tabGroup>
+          <!-- <mat-tab *ngFor="let link of dateList" label={{link}} (focusChange)="applyDateFilter($event.value)"></mat-tab> -->
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <span (click)="resetForm()">
+                    All Orders
+                  </span>
+                </ng-template>
+
+
+          </mat-tab>
+          <mat-tab *ngFor="let link of dateList">
+            <ng-template mat-tab-label class="activeMat">
+              <span (click)="applyDateFilter(link)">
+                {{link}}
+              </span>
+            </ng-template>
+          </mat-tab>
+
+
+        </mat-tab-group>
   </div>
   <table mat-table matSort [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="packetId">
@@ -43,7 +83,7 @@
     </ng-container>
     <ng-container matColumnDef="receivedDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Received Date </th>
-      <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element.receivedDate | date: 'short'}} </td>
+      <td mat-cell *matCellDef="let element" style="cursor: pointer;"> {{element.statusList[0].timeStamp| date: 'short'}} </td>
     </ng-container>
     <ng-container matColumnDef="packetType">
       <th mat-header-cell *matHeaderCellDef mat-sort-header style="font-size: 1em;"> Type
@@ -185,3 +225,13 @@
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
 </div>
+
+
+
+
+
+
+
+
+
+
