@@ -3,8 +3,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatRippleModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
-
-
 import {
   MatSidenavModule,
   MatProgressBarModule,
@@ -26,7 +24,8 @@ import {
   MatRadioModule,
   MatSlideToggleModule,
   MatSliderModule,
-  MatIconModule
+  MatIconModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
@@ -62,7 +61,8 @@ const MaterialComponents = [
   MatSlideToggleModule,
   MatSliderModule,
   MatRadioModule,
-  MatIconModule
+  MatIconModule,
+  MatSnackBarModule
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SettingsComponent } from './components/settings/settings.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { GoogleNotAvailableComponent } from './components/trip-details/trip-details.component'
 
 
 
@@ -39,7 +40,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LiveTrackingGoogleComponent,
     SettingsComponent,
     StepperDialogComponent,
-    StatusDialogComponent
+    StatusDialogComponent,
+    GoogleNotAvailableComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +60,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   entryComponents: [
     TripPlanningPropertiesComponent,
     SettingsComponent,
-    StatusDialogComponent
+    StatusDialogComponent,
+    GoogleNotAvailableComponent
   ],
   exports: [
     HomeComponent,
@@ -67,9 +70,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LiveTrackingComponent,
     VehicleDetailsComponent,
     TripPlanningPropertiesComponent,
-    SettingsComponent
+    SettingsComponent,
+    GoogleNotAvailableComponent
   ],
-  providers: [TripItineraryService],
+  
+  providers: [
+    TripItineraryService,
+    GoogleNotAvailableComponent
+  ],
 
 })
 export class TripManagementModule { }

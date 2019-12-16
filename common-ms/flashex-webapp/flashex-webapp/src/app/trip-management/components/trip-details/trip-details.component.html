@@ -1,15 +1,16 @@
 <div class="trips-container">
     <div class="toolbar">
-        <mat-toolbar class="toolbar-title">Trip Strategy Stting</mat-toolbar>
+        <mat-toolbar class="toolbar-title">Trip Strategy Setting</mat-toolbar>
         <!-- <button id="setPropertiesButton" color='primary' mat-flat-button (click)="openPropertiesDialog()">Set Properties</button> -->
     </div>
 
-    <div>
-        <mat-card>
-            <mat-radio-group aria-label="Select an option">
-                <mat-radio-button (click)='Option1()' value="1">Bing</mat-radio-button>
-                <mat-radio-button (click)='Option2()' value="2">Google</mat-radio-button>
-                <mat-radio-button (click)='Option3()' value="3">Default</mat-radio-button>
+    <div fxLayout="row" fxLayoutAlign="center">
+        <mat-card >
+            <mat-card-title>Distance Providers</mat-card-title>
+            <mat-radio-group aria-label="Select an option" >
+                <mat-radio-button (click)='Option1()' value="1" style="padding-right: 6px;">Bing</mat-radio-button>
+                <mat-radio-button (click)='openSnackBar()' value="2" style="padding-right: 6px;">Google</mat-radio-button>
+                <mat-radio-button (click)='Option3()' value="3" style="padding-right: 6px;">Default</mat-radio-button>
             </mat-radio-group>
         </mat-card>
     </div>
@@ -18,7 +19,7 @@
         <h3>Comparison of various trip planning algorithms</h3>
 
         <div>
-            <div *ngIf="!Bing">
+            <div *ngIf="!Bing" fxLayout="row" fxLayoutAlign="center center">
                 <ngx-charts-bar-vertical-2d
                     [view]="view"
                     [scheme]="colorScheme"
@@ -26,7 +27,6 @@
                     [gradient]="gradient"
                     [xAxis]="showXAxis"
                     [yAxis]="showYAxis"
-                    [legend]="showLegend"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
                     [xAxisLabel]="xAxisLabel"
@@ -34,7 +34,7 @@
                     (select)="onSelect($event)">
                 </ngx-charts-bar-vertical-2d>
             </div>
-            <div *ngIf="Bing">
+            <div *ngIf="Bing" fxLayout="row" fxLayoutAlign="center center"fxLayout="row" fxLayoutAlign="center center">
                 <ngx-charts-bar-vertical-2d
                     [view]="view"
                     [scheme]="colorScheme"
@@ -42,7 +42,6 @@
                     [gradient]="gradient"
                     [xAxis]="showXAxis"
                     [yAxis]="showYAxis"
-                    [legend]="showLegend"
                     [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel"
                     [xAxisLabel]="xAxisLabel"
@@ -51,38 +50,14 @@
                 </ngx-charts-bar-vertical-2d>
             </div>
         </div>
-    <!-- <div class="graphsandlegend">
-            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column" >
-                <div class="graph1">
-                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single1" [gradient]="gradient"
-                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel1" (select)="onSelect($event)">
-                    </ngx-charts-bar-vertical>
-                    Algorithm
-                </div>
-                <div class="graph2">
-                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single2" [gradient]="gradient"
-                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel2" (select)="onSelect($event)">
-                    </ngx-charts-bar-vertical>
-                    Algorithm
-                </div>
-                <div class="graph3">
-                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single3" [gradient]="gradient"
-                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel3" (select)="onSelect($event)">
-                    </ngx-charts-bar-vertical>
-                    Algorithm
-                </div>
-                <div class="graph4">
-                    <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [results]="single4" [gradient]="gradient"
-                        [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel"
-                        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel4" (select)="onSelect($event)">
-                    </ngx-charts-bar-vertical>
-                    Algorithm
-                </div>
-            </div>
-            <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
+
+        <!-- <div>
+            <mat-card>
+            </mat-card-subtitle>Optimization strategies</mat-card-subtitle>
+
+            </mat-card> -->
+        <!-- </div> -->
+               <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
                     <div fxLayout="row">
                             <div style="background: rgb(90, 164, 84); color: rgb(90, 164, 84);">.....</div>
                             <div>VRP with Time Window Delivery</div>
@@ -96,21 +71,6 @@
                             <div>VRP with Dropping Visits</div>
                     </div>
                 </div>
-                <div class="legend" fxLayout="row" fxLayoutAlign="space-evenly center" fxLayout.xs="column">
-                        <div fxLayout="row">
-                                <div style="background: rgb(161, 10, 40); color: rgb(161, 10, 40);">.....</div>
-                                <div>VRP with Time Window Delivery using Bing</div>
-                        </div>
-                        <div fxLayout="row">
-                                <div style="background: rgb(170, 170, 170); color: rgb(170, 170, 170);">.....</div>
-                                <div>VRP with Capacity Constraint using Bing</div>
-                        </div>
-                        <div fxLayout="row">
-                                <div style="background: rgb(105, 240, 174); color: rgb(105, 240, 174);">.....</div>
-                                <div>VRP with Dropping Visits using Bing</div>
-                        </div>
-                    </div>
-        </div> -->
     </mat-card>    
 
     <div fxLayout="row" fxLayoutAlign="end center">
@@ -119,7 +79,15 @@
         </div>
        
         <div *ngIf="Bing" style="width: 30%;" >
-            <mat-form-field class="dropdown" style="width: 90%; margin: auto">
+                <mat-card >
+                        <mat-card-title>Select Strategy</mat-card-title>
+                        <mat-radio-group aria-label="Select an option" >
+                            <mat-radio-button value="1" style="padding-right: 6px;">Vehicle Capacity Constraint</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 6px;">+ Priortity delivery</mat-radio-button>
+                            <mat-radio-button value="3" style="padding-right: 6px;">+ Time window</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card>
+            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
                 <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
@@ -128,17 +96,21 @@
                         {{algo}}
                     </mat-option>
 
-                    <!-- <ng-template #elseblock>
-                                <mat-option *ngFor='let algo of algorithms' [value]='algo' (click)='changeAlgo(algo)' style="color: black;">
-                                        {{algo}}
-                                    </mat-option>
-                            </ng-template> -->
+                 
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
 
         <div *ngIf="!Bing" style="width: 30%;" >
-            <mat-form-field class="dropdown" style="width: 90%; margin: auto">
+                <mat-card >
+                        <mat-card-title>Select Strategy</mat-card-title>
+                        <mat-radio-group aria-label="Select an option" >
+                            <mat-radio-button value="1" style="padding-right: 6px;">Vehicle Capacity Constraint</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 6px;">+ Priortity delivery</mat-radio-button>
+                            <mat-radio-button value="3" style="padding-right: 6px;">+ Time window</mat-radio-button>
+                        </mat-radio-group>
+                    </mat-card>
+            <!-- <mat-form-field class="dropdown" style="width: 90%; margin: auto">
 
                 <mat-select placeholder='Select algorithm for trip tracking to consider'>
 
@@ -147,7 +119,7 @@
                         {{algo}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
+            </mat-form-field> -->
         </div>
     </div>
 

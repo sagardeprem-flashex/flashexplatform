@@ -3,10 +3,10 @@ import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { MatDialog } from '@angular/material';
 import { TripPlanningPropertiesComponent } from '../trip-planning-properties/trip-planning-properties.component';
 import { ITripProperties } from '../../interfaces/trip-planning-properties';
-import { IItinerary } from '../../interfaces/trip-itinerary';
 import { TripSummaryService } from '../../services/trip-summary.service';
 import { Itripsummary } from '../../interfaces/trip-summary';
-import { MatSlideToggleChange } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-trip-details',
@@ -55,7 +55,7 @@ export class TripDetailsComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  yAxisLabel1 = 'units/day';
+  yAxisLabel = 'units/day';
   xAxisLabel = 'Algorithm';
 
 
@@ -63,7 +63,9 @@ export class TripDetailsComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C'] // , '#AAAAAA', '#009688', '#69F0AE'
   };
 
-  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
+  durationInSeconds = 5;
+
+  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
@@ -281,8 +283,10 @@ export class TripDetailsComponent implements OnInit {
     this.Bing =!temp;
   };
 
-  Option2(){
-    alert('service not avaliable');
+  openSnackBar(){
+    this._snackBar.openFromComponent(GoogleNotAvailableComponent, {
+      duration: 3 * 1000,
+    });
   };
 
   Option3(){
@@ -321,3 +325,10 @@ export class TripDetailsComponent implements OnInit {
   // }
 
 }
+
+@Component({
+  selector: 'snack-bar-component-snack',
+  templateUrl: 'snack-bar-component-snack.html',
+  styles: [`{}`],
+})
+export class GoogleNotAvailableComponent {}

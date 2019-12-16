@@ -9,7 +9,6 @@ import { AuthguardService } from '../shared/services/authguard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 
-
 const tripRoutes: Routes = [
   {
     path: 'admin',
