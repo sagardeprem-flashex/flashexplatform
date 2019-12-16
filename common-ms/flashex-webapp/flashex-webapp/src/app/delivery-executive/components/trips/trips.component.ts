@@ -73,13 +73,13 @@ export class TripsComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.openFromComponent(NavigationComponent, {
+      this._snackBar.openFromComponent(NavigationComponent, {
       duration: 3 * 1000
     });
   }
 
   startSnackBar() {
-    this._snackBar.openFromComponent(OrderDeliveryListComponent,{
+      this._snackBar.openFromComponent(OrderDeliveryListComponent,{
       duration: 3000
     })
   }
