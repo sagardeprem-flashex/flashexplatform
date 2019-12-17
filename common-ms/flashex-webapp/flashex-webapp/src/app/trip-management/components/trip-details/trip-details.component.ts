@@ -3,10 +3,13 @@ import { TripItineraryService } from '../../services/trip-itinerary.service';
 import { MatDialog } from '@angular/material';
 import { TripPlanningPropertiesComponent } from '../trip-planning-properties/trip-planning-properties.component';
 import { ITripProperties } from '../../interfaces/trip-planning-properties';
-import { IItinerary } from '../../interfaces/trip-itinerary';
 import { TripSummaryService } from '../../services/trip-summary.service';
 import { Itripsummary } from '../../interfaces/trip-summary';
+import { MatSnackBar } from '@angular/material';
+import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
 
 @Component({
   selector: 'app-trip-details',
@@ -26,28 +29,32 @@ export class TripDetailsComponent implements OnInit {
   public selectedAlgo;
   public orders;
   public userName;
+  datepicked = new FormControl(new Date());
   public tripsDate = new Date().toDateString();
-  public properties: ITripProperties;
+  public properties = {
+    propertiesId: '1',
+    algorithmSelected: 'Vrp with Capacity Constraint using Bing',
+    lastUpdated: new Date()
+  };
   public algorithms = ['Vrp with Capacity Constraint', 'Vrp with Dropping Visit', 'Vrp with Time Window Delivery'];
   public Bingalgorithm = ['Vrp with Capacity Constraint using Bing',
     'Vrp with Dropping Visit using Bing',
     'Vrp with Time Window Delivery using Bing'
   ];
-  Bing = true;
+  Bing = false;
+  Default;
 
-  single1: any[];
-  single2: any[];
-  single3: any[];
-  single4: any[];
+  multi1: any[];
+  multi2: any[];
 
   summary: Itripsummary;
   public distanceCover = [];
-  public totaltTime = [];
+  public totalTime = [];
   public totalExpense = [];
   public nTrips = [];
   public algorithm = [];
 
-  view: any[] = [300, 300];
+  view: any[] = [700, 400];
 
   // options
   showXAxis = true;
@@ -56,21 +63,23 @@ export class TripDetailsComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  yAxisLabel1 = 'Total Distance';
+  yAxisLabel = 'Z-Score';
   xAxisLabel = 'Algorithm';
-  yAxisLabel2 = 'Total Time';
-  yAxisLabel3 = 'Total Expense';
-  yAxisLabel4 = 'Total Trips';
+
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#009688', '#69F0AE']
+    domain: ['#5AA454', '#A10A28', '#C7B42C'] // , '#AAAAAA', '#009688', '#69F0AE'
   };
 
-  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog) { }
+  durationInSeconds = 5;
+
+  constructor(private tripService: TripItineraryService,
+              private tripsummary: TripSummaryService,
+              private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
-    this.properties = this.tripService.planningProperties;
+    // this.properties = this.tripService.planningProperties;
     // console.log('Trip planning properties inside trip-details component-----> ');
     // console.log(this.properties);
     this.tripService.behaviourSubject.subscribe(data => {
@@ -114,7 +123,7 @@ export class TripDetailsComponent implements OnInit {
         });
 
         d.timeSummary.forEach(summary => {
-          this.totaltTime.push(summary);
+          this.totalTime.push(summary);
         });
 
         d.costSummary.forEach(summary => {
@@ -129,127 +138,199 @@ export class TripDetailsComponent implements OnInit {
           this.algorithm.push(summary);
         });
 
+        // console.log("values---->", this.distanceCover);
+        // console.log("mean ---->",this.mean(this.distanceCover));
+        // console.log("STD----->", this.standardDev(this.distanceCover));
 
-        // distance
-        this.single1 = [
+        this.multi1 = [
           {
-            name: this.algorithm[0],
-            value: this.distanceCover[0]
-
+            name: 'Distance',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.distanceCover[2] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.distanceCover[0] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.distanceCover[4] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              }
+            ]
           },
           {
-            name: this.algorithm[1],
-            value: this.distanceCover[1]
-
+            name: 'Time',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.totalTime[2] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.totalTime[0] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.totalTime[4] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              }
+            ]
           },
           {
-            name: this.algorithm[2],
-            value: this.distanceCover[2]
+            name: 'Trips',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.nTrips[2] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.nTrips[0] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.nTrips[4] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              }
+            ]
           },
           {
-            name: this.algorithm[3],
-            value: this.distanceCover[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.distanceCover[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.distanceCover[5]
-          }
-        ];
-        // time
-        this.single2 = [
-          {
-            name: this.algorithm[0],
-            value: this.totaltTime[0]
-          },
-          {
-            name: this.algorithm[1],
-            value: this.totaltTime[1]
-          },
-          {
-            name: this.algorithm[2],
-            value: this.totaltTime[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.totaltTime[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.totaltTime[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.totaltTime[5]
-          }
-        ];
-        // console.log('Showing graph results -----> ', this.single2);
-
-        // total expense
-        this.single3 = [
-          {
-            name: this.algorithm[0],
-            value: this.totalExpense[0]
-          },
-          {
-            name: this.algorithm[1],
-            value: this.totalExpense[1]
-          },
-          {
-            name: this.algorithm[2],
-            value: this.totalExpense[2]
-          },
-          {
-            name: this.algorithm[3],
-            value: this.totalExpense[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.totalExpense[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.totalExpense[5]
+            name: 'Fuel Cost',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.totalExpense[2] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.totalExpense[0] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.totalExpense[4] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              }
+            ]
           }
         ];
 
-        this.single4 = [
+        this.multi2 = [
           {
-            name: this.algorithm[0],
-            value: this.nTrips[0]
+            name: 'Distance',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.distanceCover[3] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.distanceCover[1] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.distanceCover[5] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              }
+            ]
           },
           {
-            name: this.algorithm[1],
-            value: this.nTrips[1]
+            name: 'Time',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.totalTime[3] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.totalTime[1] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.totalTime[5] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              }
+            ]
           },
           {
-            name: this.algorithm[2],
-            value: this.nTrips[2]
+            name: 'Trips',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.nTrips[3] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.nTrips[1] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.nTrips[5] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              }
+            ]
           },
           {
-            name: this.algorithm[3],
-            value: this.nTrips[3]
-          },
-          {
-            name: this.algorithm[4],
-            value: this.nTrips[4]
-          },
-          {
-            name: this.algorithm[5],
-            value: this.nTrips[5]
+            name: 'Fuel Cost',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.totalExpense[3] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.totalExpense[1] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.totalExpense[5] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              }
+            ]
           }
         ];
+
       });
     });
 
   }
 
-  public toggle(event: MatSlideToggleChange) {
-    // console.log('toggle', event.checked);
-    this.Bing = event.checked;
+  Option1() {
+    const temp = this.Bing;
+    this.Bing = !temp;
+  }
+
+  openSnackBar() {
+    // tslint:disable-next-line: no-use-before-declare
+    this.snackBar.openFromComponent( GoogleNotAvailableComponent , {
+      duration: 3 * 1000,
+    });
+  }
+
+  Option3() {
+    const temp = this.Bing;
+    this.Bing = !temp;
+  }
+
+  // public toggle(event: MatSlideToggleChange) {
+  //   console.log('toggle', event.checked);
+  //   this.Bing = event.checked;
+  // }
+
+  mean(a: number[]) {
+    const n = a.length;
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      sum = sum + a[k];
+    }
+    return sum / n;
+  }
+
+  // Function for calculating variance
+  standardDev(a: number[]) {
+    const n = a.length;
+    const mean = this.mean(a);
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      sum = sum + Math.pow(a[k] - mean, 2);
+    }
+    sum = sum / n;
+
+    return Math.sqrt(sum);
   }
 
   onSelect(event) {
@@ -257,24 +338,48 @@ export class TripDetailsComponent implements OnInit {
   }
 
   changeAlgo(algo: string) {
-    this.selectedAlgo = algo;
-    this.tripService.selectedAlgo = this.selectedAlgo;
-    this.tripService.planningProperties.algorithmSelected = algo;
-    this.tripService.planningProperties.lastUpdated = new Date();
-    this.tripService.updateOptimizationProperties(this.tripService.planningProperties);
-    // console.log(this.selectedAlgo);
+    const selectedAlgo = {
+      propertiesId: '1',
+      algorithmSelected: algo,
+      lastUpdated: new Date()
+    };
+    // console.log("------------: ", selectedAlgo.algorithmSelected);
+    // this.properties.algorithmSelected = algo;
+    this.properties = Object.assign({}, selectedAlgo);
+
+    // console.log("-----------sdfsdaf: ",this.tripService.planningProperties.algorithmSelected);
   }
 
-  // openPropertiesDialog(): void {
-  //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
-  //     width: '65%',
-  //     data: {userName: this.userName, properties: this.properties}
-  //   });
+  sendSelectedProperties() {
+    this.properties.lastUpdated = new Date();
+    this.tripService.updateOptimizationProperties(this.properties);
+    // console.log("------------------>", this.properties);
+  }
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.properties = this.tripService.planningProperties;
-  //     // console.log(this.tripService.planningProperties, this.properties);
-  //   });
-  // }
+  openPropertiesDialog(): void {
+    const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
+      width: '80%',
+      data: { userName: this.userName, properties: this.properties }
+    });
+  }
 
+  fetchSummary(selectedDate: string) {
+    const date = new Date(selectedDate);
+    let month = date.getMonth();
+    month = month + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const dateString = day + '-' + month + '-' + year;
+    // console.log(selectedDate, month, day, year);
+    // this.tripsummary.loadSummary(dateString);
+    // this.loadChartData();
+    // console.log(this.single1);
+  }
 }
+
+@Component({
+  selector: 'app-snack-bar-component-snack',
+  templateUrl: 'snack-bar-component-snack.html',
+  styles: [`{}`],
+})
+export class GoogleNotAvailableComponent { }

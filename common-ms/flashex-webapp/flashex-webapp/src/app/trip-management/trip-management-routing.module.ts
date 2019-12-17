@@ -9,31 +9,30 @@ import { AuthguardService } from '../shared/services/authguard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LiveTrackingGoogleComponent } from './components/live-tracking-google/live-tracking-google.component';
 
-
 const tripRoutes: Routes = [
   {
     path: 'admin',
     component: HomeComponent,
-    // canActivate: [AuthguardService],
-    // data: {
-    //   expectedRole: 'ROLE_ADMIN'
-    // },
+    canActivate: [AuthguardService],
+    data: {
+      expectedRole: 'ROLE_ADMIN'
+    },
     children: [
       {
         path: 'tripitinerary',
         component: TripDetailsComponent,
-        // canActivate: [AuthguardService],
-        // data: {
-        //   expectedRole: 'ROLE_ADMIN'
-        // }
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
       },
       {
         path: 'triptrack',
         component: LiveTrackingComponent,
-        // canActivate: [AuthguardService],
-        // data: {
-        //   expectedRole: 'ROLE_ADMIN'
-        // }
+        canActivate: [AuthguardService],
+        data: {
+          expectedRole: 'ROLE_ADMIN'
+        }
       },
       {
         path: 'orderdetail',

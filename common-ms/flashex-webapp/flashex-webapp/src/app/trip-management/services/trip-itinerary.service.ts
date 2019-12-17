@@ -13,7 +13,11 @@ import { IVehicle } from '../interfaces/vehicle';
 export class TripItineraryService {
 
   public location;
-  public planningProperties: ITripProperties;
+  private planningProperties: {
+    propertiesId: '1',
+    algorithmSelected: 'Vrp with Capacity Constraint using Bing',
+    lastUpdated: Date
+  };
   public selectedAlgo;
   public handleError = [];
   public date: Date;

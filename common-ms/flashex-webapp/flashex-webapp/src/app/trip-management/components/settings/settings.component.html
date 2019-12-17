@@ -51,7 +51,7 @@
       <table>
         <tr fxLayout="row" fxLayoutAlign="space-around center">
           <td>
-            Maximum Shipment Size
+            Maximum Units in Shipment <span title="This cannot exceed 15 for Google Distance Matrix"><mat-icon color="primary">info</mat-icon></span>
           </td>
           <td>
             <mat-slider class="example-margin" [disabled]="false" [invert]="false" [max]="max" [min]="min"
@@ -61,7 +61,7 @@
         </tr>
         <tr fxLayout="row" fxLayoutAlign="space-around center" *ngIf="priorityChecked">
           <td>
-            Priority Relaxation
+            Priority Factor
             <button mat-icon-button color="primary" aria-label="information icon">
                 <span title="Controls processing time. A value of 1.0 is equivalent to an Ordinary order">
                   <mat-icon>info</mat-icon>

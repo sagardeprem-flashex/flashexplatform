@@ -24,8 +24,8 @@ import {
   MatSlideToggleModule,
   MatSliderModule,
   MatIconModule,
+  MatSnackBarModule,
   MatDatepickerModule,
-  MatSnackBarModule
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -60,9 +60,9 @@ const MaterialComponents = [
   MatSliderModule,
   MatRadioModule,
   MatIconModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDatepickerModule,        // <----- import(must)
+  MatNativeDateModule
 ];
 @NgModule({
   imports: [MaterialComponents
