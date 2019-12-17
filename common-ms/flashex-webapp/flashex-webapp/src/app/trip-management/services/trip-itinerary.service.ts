@@ -35,7 +35,7 @@ export class TripItineraryService {
   // private tripItineraryUrl = 'http://localhost:3000/tripItinerary';
 
   // private vehiclesListUrl = 'https://vehicle-json-server:3000/vehicles';
-  private vehiclesListUrl = 'https://flashex-dev.stackroute.io:3000/vehicles';
+  private vehiclesListUrl = 'http://flashex-dev.stackroute.io:3000/vehicles';
 
   private optimizationPropertiesUrl = 'tripplanning-microservice-webservice/api/v1/optprops';
 
