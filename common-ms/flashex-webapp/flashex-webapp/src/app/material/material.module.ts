@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatRippleModule} from '@angular/material/core';
+import {MatRippleModule, MatNativeDateModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
 import {
@@ -25,7 +25,8 @@ import {
   MatSlideToggleModule,
   MatSliderModule,
   MatIconModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDatepickerModule,
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
 
@@ -62,7 +63,9 @@ const MaterialComponents = [
   MatSliderModule,
   MatRadioModule,
   MatIconModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatDatepickerModule,        // <----- import(must)
+  MatNativeDateModule
 ];
 
 @NgModule({

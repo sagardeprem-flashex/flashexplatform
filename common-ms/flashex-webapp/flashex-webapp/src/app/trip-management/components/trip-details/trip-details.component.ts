@@ -6,6 +6,9 @@ import { ITripProperties } from '../../interfaces/trip-planning-properties';
 import { TripSummaryService } from '../../services/trip-summary.service';
 import { Itripsummary } from '../../interfaces/trip-summary';
 import { MatSnackBar } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @Component({
@@ -26,6 +29,7 @@ export class TripDetailsComponent implements OnInit {
   public selectedAlgo;
   public orders;
   public userName;
+  datepicked = new FormControl(new Date());
   public tripsDate = new Date().toDateString();
   public properties = {
     propertiesId: '1',
@@ -40,8 +44,8 @@ export class TripDetailsComponent implements OnInit {
   Bing = false;
   Default;
 
-  multi1 : any[];
-  multi2 : any[];
+  multi1: any[];
+  multi2: any[];
 
   summary: Itripsummary;
   public distanceCover = [];
@@ -59,7 +63,7 @@ export class TripDetailsComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   showYAxisLabel = true;
-  yAxisLabel = 'units/day';
+  yAxisLabel = 'Z-Score';
   xAxisLabel = 'Algorithm';
 
 
@@ -69,11 +73,13 @@ export class TripDetailsComponent implements OnInit {
 
   durationInSeconds = 5;
 
-  constructor(private tripService: TripItineraryService, private tripsummary: TripSummaryService, private dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(private tripService: TripItineraryService,
+              private tripsummary: TripSummaryService,
+              private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
 
   ngOnInit() {
-    this.properties = this.tripService.planningProperties;
+    // this.properties = this.tripService.planningProperties;
     // console.log('Trip planning properties inside trip-details component-----> ');
     // console.log(this.properties);
     this.tripService.behaviourSubject.subscribe(data => {
@@ -132,190 +138,214 @@ export class TripDetailsComponent implements OnInit {
           this.algorithm.push(summary);
         });
 
+        // console.log("values---->", this.distanceCover);
+        // console.log("mean ---->",this.mean(this.distanceCover));
+        // console.log("STD----->", this.standardDev(this.distanceCover));
 
         this.multi1 = [
-        {
-          name: 'Distance',
-          series: [
-            {
-              name: this.algorithm[2],
-              value: this.distanceCover[2]
-            },
-            {
-              name: this.algorithm[0],
-              value: this.distanceCover[0]
-            },
-            {
-              name: this.algorithm[4],
-              value: this.distanceCover[4]
-            }
-          ]
-        },
-      
-        {
-          name: 'Time',
-          series: [
-            {
-              name: this.algorithm[2],
-              value: this.totalTime[2]
-            },
-            {
-              name: this.algorithm[0],
-              value: this.totalTime[0]
-            },
-            {
-              name: this.algorithm[4],
-              value: this.totalTime[4]
-            }
-          ]
-        },
-        {
-          name: 'Trips',
-          series: [
-            {
-              name: this.algorithm[2],
-              value: this.nTrips[2]
-            },
-            {
-              name: this.algorithm[0],
-              value: this.nTrips[0]
-            },
-            {
-              name: this.algorithm[4],
-              value: this.nTrips[4]
-            }
-          ]
-        },
-        {
-          name: 'Fuel Cost',
-          series: [
-            {
-              name: this.algorithm[2],
-              value: this.totalExpense[2]
-            },
-            {
-              name: this.algorithm[0],
-              value: this.totalExpense[0]
-            },
-            {
-              name: this.algorithm[4],
-              value: this.totalExpense[4]
-            }
-          ]
-        }
-      ];
+          {
+            name: 'Distance',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.distanceCover[2] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.distanceCover[0] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.distanceCover[4] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              }
+            ]
+          },
+          {
+            name: 'Time',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.totalTime[2] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.totalTime[0] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.totalTime[4] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              }
+            ]
+          },
+          {
+            name: 'Trips',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.nTrips[2] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.nTrips[0] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.nTrips[4] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              }
+            ]
+          },
+          {
+            name: 'Fuel Cost',
+            series: [
+              {
+                name: this.algorithm[2],
+                value: Math.abs((this.totalExpense[2] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[0],
+                value: Math.abs((this.totalExpense[0] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[4],
+                value: Math.abs((this.totalExpense[4] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              }
+            ]
+          }
+        ];
 
-      this.multi2 = [
-        {
-          name: 'Distance',
-          series: [
-            {
-              name: this.algorithm[3],
-              value: this.distanceCover[3]
-            },
-            {
-              name: this.algorithm[1],
-              value: this.distanceCover[1]
-            },
-            {
-              name: this.algorithm[5],
-              value: this.distanceCover[5]
-            }
-          ]
-        },
-      
-        {
-          name: 'Time',
-          series: [
-            {
-              name: this.algorithm[3],
-              value: this.totalTime[3]
-            },
-            {
-              name: this.algorithm[1],
-              value: this.totalTime[1]
-            },
-            {
-              name: this.algorithm[5],
-              value: this.totalTime[5]
-            }
-          ]
-        },
-        {
-          name: 'Trips',
-          series: [
-            {
-              name: this.algorithm[3],
-              value: this.nTrips[3]
-            },
-            {
-              name: this.algorithm[1],
-              value: this.nTrips[1]
-            },
-            {
-              name: this.algorithm[5],
-              value: this.nTrips[5]
-            }
-          ]
-        },
-        {
-          name: 'Fuel Cost',
-          series: [
-            {
-              name: this.algorithm[3],
-              value: this.totalExpense[3]
-            },
-            {
-              name: this.algorithm[1],
-              value: this.totalExpense[1]
-            },
-            {
-              name: this.algorithm[5],
-              value: this.totalExpense[5]
-            }
-          ]
-        }
-      ];
-      
+        this.multi2 = [
+          {
+            name: 'Distance',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.distanceCover[3] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.distanceCover[1] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.distanceCover[5] - this.mean(this.distanceCover))) / this.standardDev(this.distanceCover)
+              }
+            ]
+          },
+          {
+            name: 'Time',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.totalTime[3] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.totalTime[1] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.totalTime[5] - this.mean(this.totalTime))) / this.standardDev(this.totalTime)
+              }
+            ]
+          },
+          {
+            name: 'Trips',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.nTrips[3] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.nTrips[1] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.nTrips[5] - this.mean(this.nTrips))) / this.standardDev(this.nTrips)
+              }
+            ]
+          },
+          {
+            name: 'Fuel Cost',
+            series: [
+              {
+                name: this.algorithm[3],
+                value: Math.abs((this.totalExpense[3] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[1],
+                value: Math.abs((this.totalExpense[1] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              },
+              {
+                name: this.algorithm[5],
+                value: Math.abs((this.totalExpense[5] - this.mean(this.totalExpense))) / this.standardDev(this.totalExpense)
+              }
+            ]
+          }
+        ];
+
       });
     });
 
   }
 
-  Option1(){
-    let temp = this.Bing;
-    this.Bing =!temp;
-  };
+  Option1() {
+    const temp = this.Bing;
+    this.Bing = !temp;
+  }
 
-  openSnackBar(){
-    this._snackBar.openFromComponent(GoogleNotAvailableComponent, {
+  openSnackBar() {
+    // tslint:disable-next-line: no-use-before-declare
+    this.snackBar.openFromComponent( GoogleNotAvailableComponent , {
       duration: 3 * 1000,
     });
-  };
+  }
 
-  Option3(){
-    let temp = this.Bing;
-    this.Bing =!temp;
-  };
+  Option3() {
+    const temp = this.Bing;
+    this.Bing = !temp;
+  }
 
   // public toggle(event: MatSlideToggleChange) {
   //   console.log('toggle', event.checked);
   //   this.Bing = event.checked;
   // }
 
+  mean(a: number[]) {
+    const n = a.length;
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      sum = sum + a[k];
+    }
+    return sum / n;
+  }
+
+  // Function for calculating variance
+  standardDev(a: number[]) {
+    const n = a.length;
+    const mean = this.mean(a);
+    let sum = 0;
+    for (let k = 0; k < n; k++) {
+      sum = sum + Math.pow(a[k] - mean, 2);
+    }
+    sum = sum / n;
+
+    return Math.sqrt(sum);
+  }
+
   onSelect(event) {
     console.log(event);
   }
 
   changeAlgo(algo: string) {
-    console.log("------------: ",algo);
-    let selectedAlgo = {
+    const selectedAlgo = {
       propertiesId: '1',
       algorithmSelected: algo,
       lastUpdated: new Date()
-    }
+    };
+    // console.log("------------: ", selectedAlgo.algorithmSelected);
     // this.properties.algorithmSelected = algo;
-    this.properties = Object.assign({},selectedAlgo);
+    this.properties = Object.assign({}, selectedAlgo);
 
     // console.log("-----------sdfsdaf: ",this.tripService.planningProperties.algorithmSelected);
   }
@@ -323,26 +353,33 @@ export class TripDetailsComponent implements OnInit {
   sendSelectedProperties() {
     this.properties.lastUpdated = new Date();
     this.tripService.updateOptimizationProperties(this.properties);
-    console.log("------------------>", this.properties);
+    // console.log("------------------>", this.properties);
   }
 
-  // openPropertiesDialog(): void {
-  //   const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
-  //     width: '65%',
-  //     data: {userName: this.userName, properties: this.properties}
-  //   });
+  openPropertiesDialog(): void {
+    const dialogRef = this.dialog.open(TripPlanningPropertiesComponent, {
+      width: '80%',
+      data: { userName: this.userName, properties: this.properties }
+    });
+  }
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.properties = this.tripService.planningProperties;
-  //     // console.log(this.tripService.planningProperties, this.properties);
-  //   });
-  // }
-
+  fetchSummary(selectedDate: string) {
+    const date = new Date(selectedDate);
+    let month = date.getMonth();
+    month = month + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    const dateString = day + '-' + month + '-' + year;
+    // console.log(selectedDate, month, day, year);
+    // this.tripsummary.loadSummary(dateString);
+    // this.loadChartData();
+    // console.log(this.single1);
+  }
 }
 
 @Component({
-  selector: 'snack-bar-component-snack',
+  selector: 'app-snack-bar-component-snack',
   templateUrl: 'snack-bar-component-snack.html',
   styles: [`{}`],
 })
-export class GoogleNotAvailableComponent {}
+export class GoogleNotAvailableComponent { }

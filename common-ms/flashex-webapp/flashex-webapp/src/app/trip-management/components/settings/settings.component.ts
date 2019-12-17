@@ -25,14 +25,14 @@ export class SettingsComponent implements OnInit {
   updatedConfig: IShipmentConfig;
   checked = false;
   disabled = false;
-  max = 20;
+  max = 40;
   min = 5;
   steps = 1;
   stepsRelax = 0.01;
   changeOfConfig = false;
   tickInterval = 1;
   tickIntervalRelax = 1;
-  maxShipmentSize = 15;
+  maxShipmentSize = 20;
   relaxation = 1.0;
   color = 'accent';
   pincodeChecked = true;

@@ -13,30 +13,9 @@ import { Router } from '@angular/router';
 export class TripPlanningPropertiesComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<TripPlanningPropertiesComponent>,
-              private fb: FormBuilder, private tripService: TripItineraryService,
-              private router: Router) { dialogRef.disableClose = true; }
-
-  public algorithms = ['Time Window Delivery', 'VRP with Capacity constraint', 'VRP with Dropping Visit'];
-  public addProperties = this.fb.group({
-    algorithmSelected: ['', Validators.required],
-    maxElementsForDistanceMatrix: [''],
-    noOfDepot: [''],
-    solverTimeLimit: [''],
-    distancePenalty: [''],
-    durationPenalty: ['']
-  });
+              private router: Router) { dialogRef.disableClose = false; }
 
   ngOnInit() {
-  }
-
-  onSubmit() {
-    // console.log(`From trip planning component -->`);
-    // console.log(this.addProperties.value, this.addProperties.valid);
-    this.tripService.planningProperties = this.addProperties.value;
-    // console.log(this.tripService.planningProperties);
-    // this.router.navigate(['trips']);
-    this.tripService.updateOptimizationProperties(this.tripService.planningProperties);
-    this.dialogRef.close();
   }
 
   onNoClick(): void {

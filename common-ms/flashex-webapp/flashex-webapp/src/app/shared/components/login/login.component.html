@@ -27,7 +27,7 @@
                     <div>
                         <mat-form-field appearance="outline" class="validation">
                             <mat-label>Username</mat-label>
-                            <input matInput placeholder="Username" type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+                            <input matInput type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel" required />
                         </mat-form-field>
                         <div *ngIf="f.submitted && username.invalid">
                             <div *ngIf="username.errors.required">
@@ -38,7 +38,7 @@
                     <div>
                         <mat-form-field appearance="outline" class="validation">
                             <mat-label>Password</mat-label>
-                            <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+                            <input matInput type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
                         </mat-form-field>
                     </div>
                     <div *ngIf="f.submitted && password.invalid">

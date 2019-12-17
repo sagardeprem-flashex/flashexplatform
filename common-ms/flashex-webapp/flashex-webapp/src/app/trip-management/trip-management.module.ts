@@ -23,7 +23,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SettingsComponent } from './components/settings/settings.component';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { GoogleNotAvailableComponent } from './components/trip-details/trip-details.component'
+import { GoogleNotAvailableComponent } from './components/trip-details/trip-details.component';
 
 
 
@@ -73,7 +73,6 @@ import { GoogleNotAvailableComponent } from './components/trip-details/trip-deta
     SettingsComponent,
     GoogleNotAvailableComponent
   ],
-  
   providers: [
     TripItineraryService,
     GoogleNotAvailableComponent
