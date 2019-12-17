@@ -3,7 +3,7 @@
     {
       "vehicleId": 1,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Marci Butler",
       "vehicleImage": ""
@@ -11,7 +11,7 @@
     {
       "vehicleId": 2,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Hoover Pruitt",
       "vehicleImage": ""
@@ -19,7 +19,7 @@
     {
       "vehicleId": 3,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Leona Whitaker",
       "vehicleImage": ""
@@ -27,7 +27,7 @@
     {
       "vehicleId": 4,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Alvarez Chase",
       "vehicleImage": ""
@@ -35,7 +35,7 @@
     {
       "vehicleId": 5,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Rasmussen Stewart",
       "vehicleImage": ""
@@ -43,7 +43,7 @@
     {
       "vehicleId": 6,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Leblanc Todd",
       "vehicleImage": ""
@@ -51,7 +51,7 @@
     {
       "vehicleId": 7,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Bryant Cobb",
       "vehicleImage": ""
@@ -59,7 +59,7 @@
     {
       "vehicleId": 8,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Vance Frank",
       "vehicleImage": ""
@@ -67,7 +67,7 @@
     {
       "vehicleId": 9,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Hooper Kirk",
       "vehicleImage": ""
@@ -75,7 +75,7 @@
     {
       "vehicleId": 10,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Tracy Vaughan",
       "vehicleImage": ""
@@ -83,7 +83,7 @@
     {
       "vehicleId": 11,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Daphne Luna",
       "vehicleImage": ""
@@ -91,7 +91,7 @@
     {
       "vehicleId": 12,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Aurora Beck",
       "vehicleImage": ""
@@ -99,7 +99,7 @@
     {
       "vehicleId": 13,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Goff Mcneil",
       "vehicleImage": ""
@@ -107,7 +107,7 @@
     {
       "vehicleId": 14,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Alison Evans",
       "vehicleImage": ""
@@ -115,7 +115,7 @@
     {
       "vehicleId": 15,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Elsa Serrafalse",
       "vehicleImage": ""
@@ -123,7 +123,7 @@
     {
       "vehicleId": 16,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Heather Savage",
       "vehicleImage": ""
@@ -131,7 +131,7 @@
     {
       "vehicleId": 17,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Jami Lancaster",
       "vehicleImage": ""
@@ -139,7 +139,7 @@
     {
       "vehicleId": 18,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Luann Fowler",
       "vehicleImage": ""
@@ -147,7 +147,7 @@
     {
       "vehicleId": 19,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Hickman Castaneda",
       "vehicleImage": ""
@@ -155,7 +155,7 @@
     {
       "vehicleId": 20,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Peterson Roberts",
       "vehicleImage": ""
@@ -163,7 +163,7 @@
     {
       "vehicleId": 21,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Sophia Burke",
       "vehicleImage": ""
@@ -171,7 +171,7 @@
     {
       "vehicleId": 22,
       "vehicleType": "Jeep",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Woods Benson",
       "vehicleImage": ""
@@ -179,7 +179,7 @@
     {
       "vehicleId": 23,
       "vehicleType": "Box Truck",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Thompson Dixon",
       "vehicleImage": ""
@@ -187,7 +187,7 @@
     {
       "vehicleId": 24,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Powers Kline",
       "vehicleImage": ""
@@ -195,7 +195,7 @@
     {
       "vehicleId": 25,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Martinez Parker",
       "vehicleImage": ""
@@ -203,7 +203,7 @@
     {
       "vehicleId": 26,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Helga Meyers",
       "vehicleImage": ""
@@ -211,7 +211,7 @@
     {
       "vehicleId": 27,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Jolene Burnett",
       "vehicleImage": ""
@@ -219,7 +219,7 @@
     {
       "vehicleId": 28,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": false,
       "vehicleCrew": "Haley Watson",
       "vehicleImage": ""
@@ -227,7 +227,7 @@
     {
       "vehicleId": 29,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Boone Guerra",
       "vehicleImage": ""
@@ -235,7 +235,7 @@
     {
       "vehicleId": 30,
       "vehicleType": "Cargo Van",
-      "vehicleVolume": 1500000,
+      "vehicleVolume": 2000000,
       "availability": true,
       "vehicleCrew": "Christi Contreras",
       "vehicleImage": ""
