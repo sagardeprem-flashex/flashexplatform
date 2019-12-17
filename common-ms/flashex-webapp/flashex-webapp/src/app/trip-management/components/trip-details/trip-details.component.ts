@@ -334,7 +334,7 @@ export class TripDetailsComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   changeAlgo(algo: string) {

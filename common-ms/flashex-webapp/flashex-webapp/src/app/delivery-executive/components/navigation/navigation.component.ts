@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { TripLog } from '../../../trip-management/interfaces/triplog';
+
+declare let L;
+declare let tomtom: any;
 
 @Component({
   selector: 'app-navigation',
@@ -7,9 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+                }
 
   ngOnInit() {
   }
-
 }

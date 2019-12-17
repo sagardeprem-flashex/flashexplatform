@@ -23,6 +23,7 @@ export class SettingsComponent implements OnInit {
 
   shipmentConfig: IShipmentConfig;
   updatedConfig: IShipmentConfig;
+  errormsg: string[];
   checked = false;
   disabled = false;
   max = 40;
@@ -87,6 +88,7 @@ export class SettingsComponent implements OnInit {
       },
       error => {
         // console.log(error);
+        this.errormsg.push(error);
       }
     );
 

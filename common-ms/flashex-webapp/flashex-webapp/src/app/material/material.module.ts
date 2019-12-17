@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatRippleModule, MatNativeDateModule} from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-
 import {
   MatSidenavModule,
   MatProgressBarModule,
@@ -29,10 +28,8 @@ import {
   MatDatepickerModule,
 } from '@angular/material';
 import { MatCardModule } from '@angular/material';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
-
 const MaterialComponents = [
   MatToolbarModule,
   MatButtonModule,
@@ -67,7 +64,6 @@ const MaterialComponents = [
   MatDatepickerModule,        // <----- import(must)
   MatNativeDateModule
 ];
-
 @NgModule({
   imports: [MaterialComponents
   ],

@@ -24,7 +24,7 @@ export class ShipmentManagementService {
   }
 
    private url = 'shipment-microservice-webservice/api/v1/packets';
-  //  private url = '  http://localhost:3000/packet';
+   // private url = '  http://localhost:3000/packet';
    private configUrl = 'shipment-microservice-webservice/api/v1/binner-config';
 
   private dataSource = [];

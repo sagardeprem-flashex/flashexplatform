@@ -1,13 +1,18 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ShipmentManagementService } from '../../services/shipment-management.service';
 import { transition, animate, trigger, state, style } from '@angular/animations';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+// tslint:disable-next-line: max-line-length
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDatepickerModule, MatInput } from '@angular/material';
 import * as moment from 'moment';
+import 'moment-timezone';
+
 import { IPacket } from '../../interfaces/Packet';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { StatusDialogComponent } from '../status-dialog/status-dialog.component';
 import { SettingsComponent } from '../settings/settings.component';
-import { distinct } from 'rxjs/operators';
+import { DatePipe, DeprecatedDatePipe } from '@angular/common';
+
+
 
 // import { timingSafeEqual } from 'crypto';
 
@@ -25,8 +30,9 @@ import { distinct } from 'rxjs/operators';
   ],
   providers: [{
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
-  }]
+  }, DatePipe, DeprecatedDatePipe]
 })
+
 
 
 export class OrderDetailsComponent implements OnInit {
@@ -36,73 +42,35 @@ export class OrderDetailsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  displayedColumns: string[] = [ 'packetId', 'receivedDate', 'packetType', 'priority', 'currentStatus'];
+  displayedColumns: string[] = ['packetId', 'receivedDate', 'packetType', 'priority', 'currentStatus'];
   public packetList = [];
   public mydata = [];
   public transformedData = [];
   public expandedElement: any;
   public expandedDetail: any;
   public dateList = [];
+  activeDate = Date.now();
+  rowState = false;
+  activeLink = this.dateList[this.dateList.indexOf(moment(this.activeDate).format('MM/DD/YYYY a'))];
+  datepicked = '';
 
-
-
-  constructor(private packetService: ShipmentManagementService, public dialog: MatDialog, public configDialog: MatDialog) {
+  // tslint:disable-next-line: max-line-length
+  constructor(private packetService: ShipmentManagementService, public dialog: MatDialog, public configDialog: MatDialog, public datepipe: DeprecatedDatePipe) {
 
   }
   // tslint:disable-next-line: use-lifecycle-interface
-  // ngOnInit() {
-  //   this.packetService.behaviourSubject.subscribe(data => {
-  //     let temp: IPacket;
-  //     data.forEach(d => {
-  //       temp = d;
-  //       // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-  //       // this.receivedDate = moment(temp.statusList[0].timeStamp).format('MMMM Do YYYY, h:mm:ss a');
-  //       const date = temp.statusList[0].timeStamp;
-  //       const tranformedDate = date.split("+")[0].concat("+0530");
-  //       // console.log(tranformedDate);
-  //       temp.receivedDate = moment(tranformedDate).fromNow();
-  //       // console.log("received Date: ", this.receivedDate);
-  //       // temp.receivedDate = moment().format('M/D/YYYY hh:mm:ss a');
-  //       temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
-  //       // temp.currentStatus = temp.statusList.timeStamp;
-  //       // console.log(temp.currentStatus);
-  //       // console.log(moment().format('LLLL'));
-  //       this.mydata.push(temp);
-  //     });
-  //     // console.log("received Date: ", this.receivedDate);
-
-  //     // this.mydata.forEach(dt => {
-  //     //   const updatedList = [];
-  //     //   dt.statusList.forEach(d => {
-  //     //     const obj = {
-  //     //       statusValue : d.statusValue,
-  //     //       timeStamp : moment(d.timeStamp, 'YYYYMMDD').fromNow()
-  //     //     };
-  //     //     updatedList.push(obj);
-  //     //   });
-  //     //   dt.statusList = updatedList;
-  //     // });
-
-  //     this.dataSource = new MatTableDataSource(this.mydata);
-  //     this.dataSource.sort = this.sort;
-  //     this.dataSource.paginator = this.paginator;
-  //     this.packetList = data;
-  //     console.log(this.packetList);
-
-  //   });
-  // }
-
   ngOnInit() {
     this.packetService.behaviourSubject.subscribe(data => {
       let temp: IPacket;
       let dateValue;
+
       data.forEach(d => {
         temp = d;
         // temp.receivedDate = moment(d.receivedDate, 'YYYYMMDD').fromNow();
-        temp.receivedDate = moment(d.receivedDate).format('M/D/YYYY hh:mm:ss a');
+        temp.receivedDate = moment(d.statusList[0].timeStamp).format('MM/DD/YYYY hh:mm:ss a');
         temp.currentStatus = temp.statusList[temp.statusList.length - 1].statusValue;
 
-        dateValue = moment(d.receivedDate).format('M/D/YYYY');
+        dateValue = moment(temp.receivedDate).format('MM/DD/YYYY');
         this.dateList.push(dateValue);
         // console.log(temp.currentStatus);
 
@@ -111,28 +79,16 @@ export class OrderDetailsComponent implements OnInit {
 
       this.mydata.forEach(dt => {
         const updatedList = [];
-        dt.statusList.forEach((statusIterator, i) => {
-          const tranformedDate = statusIterator.timeStamp.split('+')[0].concat('+0530');
-          const now = new Date(tranformedDate);
-          const now1 = moment(now).fromNow();
-          // console.log("date:", now1);
+        dt.statusList.forEach(d => {
           const obj = {
-            statusValue : dt.statusValue,
-            timeStamp : moment(dt.timeStamp).format('M/D/YYYY hh:mm:ss a')
+            statusValue: d.statusValue,
+          //  timeStamp: moment(d.timeStamp).format('MM/DD/YYYY hh:mm:ss a')
+            timeStamp: moment.tz(d.timeStamp, 'Asia/Kolkata').format('MM/DD/YYYY hh:mm:ss a')
           };
+         // console.log("***************"+ obj.timeStamp);
           updatedList.push(obj);
-          if (i === dt.statusList.length - 1) {
-            dt.statusList = [].concat(updatedList);
-            this.mydata.push(dt);
-          }
         });
-        // if (j === data.length - 1) {
-        //   this.dataSource = new MatTableDataSource(this.mydata);
-        //   this.dataSource.sort = this.sort;
-        //   this.dataSource.paginator = this.paginator;
-        //   this.packetList = data;
-        //   // console.log("hello---------> ", this.packetList);
-        // }
+        dt.statusList = updatedList;
       });
 
 
@@ -142,19 +98,33 @@ export class OrderDetailsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.packetList = data;
       // console.log(this.packetList);
-      console.log('date chya values ' + this.dateList);
+    //  console.log('date chya values ' + this.dateList);
       this.dateList = [... new Set(this.dateList)];
-      console.log('date chya values ' + this.dateList);
+     // console.log('date chya values ' + this.dateList);
+
 
 
     });
   }
+  applyDateFilter(filterValue: string) {
 
+   // console.log(filterValue);
+    this.dataSource.filter = this.datepipe.transform(filterValue, 'MM/dd/yyyy');
+
+//    console.log(this.datepipe.transform(filterValue, 'MM/dd/yyyy'));
+
+
+  }
   applyFilter(filterValue: string) {
+    this.datepicked = undefined;
     this.dataSource.filter = filterValue.trim();
+   // this.resetForm();
   }
 
-
+  resetForm() {
+    this.datepicked = undefined;
+    this.applyFilter('');
+  }
 
   funColor(priority) {
 
@@ -179,12 +149,12 @@ export class OrderDetailsComponent implements OnInit {
   statusColor(currentStatus) {
     switch (currentStatus) {
       case 'RECEIVED': {
-          return{
-            color: 'blue'
-          };
-          break;
-        }
-      case 'PROCESSING' : {
+        return {
+          color: 'blue'
+        };
+        break;
+      }
+      case 'PROCESSING': {
         return {
           color: 'orange'
         };
@@ -225,14 +195,18 @@ export class OrderDetailsComponent implements OnInit {
 
 
   openDialog(statusList, packetId): void {
-    const dialogRef = this.dialog.open(StatusDialogComponent, { width: '30em',
-       data: {status: statusList, packet: packetId}
+    const dialogRef = this.dialog.open(StatusDialogComponent, {
+      width: '30em',
+      data: { status: statusList, packet: packetId }
     });
-   // console.log(statusList);
+    // console.log(statusList);
   }
+
+
 }
 
 export interface Status {
   statusValue: string;
   timeStamp: Date;
 }
+

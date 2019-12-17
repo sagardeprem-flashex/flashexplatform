@@ -37,6 +37,7 @@ command="ls -ltr && \
  echo 'Deploying the Application' && ls && \
  docker-compose down && \
  docker-compose -f docker-compose.yml up --build -d --remove-orphans && \
+ docker-compose up -d && \
  echo 'DONE DEPLOYING'"
 
 # command="ls -ltr && \
