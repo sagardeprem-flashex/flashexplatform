@@ -40,9 +40,9 @@ public class TripLogService {
         TripLog tripLog1 = tripLogRepository.findById(id).orElse(null);
         // triplog1 - from db -
         
-        if (tripLog1.getTripStart() == null && tripLog1.getTripEnd()== null){
-            orderStatusService.dispatchedOrder(tripLog1.getPacketLogs());
-        }
+//        if (tripLog1.getTripStart() == null && tripLog1.getTripEnd()== null){
+//            orderStatusService.dispatchedOrder(tripLog1.getPacketLogs());
+//        }
 
         tripLog1.setTripStart(tripLog.getTripStart());
         tripLog1.setTripEnd(tripLog.getTripEnd());

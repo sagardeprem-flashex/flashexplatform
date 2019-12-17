@@ -9,7 +9,8 @@ import { TripLog } from '../interfaces/triplog';
   providedIn: 'root'
 })
 export class WebSocketService {
-  private serverUrl = 'http://localhost:6030/socket';
+  // private serverUrl = 'http://localhost:6030/socket';
+  private serverUrl = 'https://flashex-dev.stackroute.io/socket';
   public stompClient;
   // public realtimeSubject: BehaviorSubject<any> = new BehaviorSubject('');
   public realtimeSubject = new Subject();
